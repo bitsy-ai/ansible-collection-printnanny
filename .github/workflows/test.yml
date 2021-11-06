@@ -16,7 +16,7 @@ jobs:
           with:
             path: "${{ github.repository }}"
         - name: Perform sanity testing with ansible-test
-          uses: ansible-community/ansible-test-gh-action/release/v1
+          uses: ansible-community/ansible-test-gh-action@release/v1
           with:
             ansible-core-version: devel
             python-version: 3.8
@@ -29,7 +29,7 @@ jobs:
           with:
             path: "${{ github.repository }}"
         - name: Perform integration testing with ansible-test
-          uses: ansible-community/ansible-test-gh-action/release/v1
+          uses: ansible-community/ansible-test-gh-action@release/v1
           with:
             ansible-core-version: stable-2.11
             pre-test-cmd: echo This runs before the ansible-test invocation
