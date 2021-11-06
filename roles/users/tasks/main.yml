@@ -16,12 +16,10 @@
     exclusive: true
   loop: "{{ users }}"
 
-
 - name: Configure sudoers
-  ansible.builtin.lineinfile:
-    dest: /etc/sudoers
-    state: present
-    regexp: "{{ item.regexp }}"
-    line: "%{{ item.line }}"
+  ansible.builtin.copy:
+    dest: "{{ item.file }}"
+    content: "{{ item.content }}"
     validate: visudo -cf %s
-  with_items: "{{ sudoers_lines }}"
+    mode: "0644"
+  with_items: "{{ sudoers_files }}"

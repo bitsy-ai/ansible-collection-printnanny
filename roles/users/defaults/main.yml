@@ -1,6 +1,6 @@
 ---
 # defaults file for users
 users: []
-sudoers_lines:
-    - regexp: "^%wheel"
-      line: "%wheel  ALL=(ALL)  ALL"
+sudoers_files:
+    - content: "%wheel  ALL=(ALL)  ALL"
+      file: "/etc/sudoers.d/00-wheel.conf"
