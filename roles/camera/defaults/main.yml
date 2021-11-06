@@ -1,5 +1,6 @@
 ---
 # defaults file for libcamera
+camera_enabled: true
 libcamera_apps_user: pi
 libcamera_apps_group: pi
 

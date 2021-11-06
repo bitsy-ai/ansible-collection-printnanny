@@ -1,2 +1,4 @@
 - import_tasks: gstreamer.yml
+  when: camera_enabled
 - import_tasks: libcamera.yml
+  when: camera_enabled
