@@ -1,0 +1,17 @@
+[Unit]
+Description=Gstreamer RTP Camera Sink
+After=network.online.target
+Wants=network.online.target
+
+[Service]
+Environment="HOST=127.0.0.1"
+Environment="PORT=5000"
+Type=simple
+User="{{ rtp_sink_user }}"
+ExecStart=gst-launch-1.0 v4l2src num-buffers=24 \
+    ! h264parse \
+    ! rtph264pay config-interval=1 pt=96 \
+    ! udpsink host={{ rtp_sink_host }} port={{ rtp_sink_port }}
+
+[Install]
+WantedBy=multi-user.target

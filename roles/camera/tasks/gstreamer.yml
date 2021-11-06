@@ -1,0 +1,24 @@
+- name: Install gstreamer dependencies
+  become: true
+  ansible.builtin.apt:
+    name:
+      - gstreamer1.0-plugins-*
+      - gstreamer1.0-tools
+      - gstreamer1.0-vaapi
+      - gstreamer1.0-x
+      - libgstreamer-plugins-base1.0-dev
+      - libgstreamer1.0-dev
+- name: Create gstreamer.service unit
+  become: true
+  ansible.builtin.template:
+    mode: 0664
+    src: gstreamer-rtp.service.j2
+    dest: /etc/systemd/system/gstreamer-rtp.service
+
+- name: Enable gstreamer-rtp service
+  ansible.builtin.systemd:
+    name: gstreamer-rtp
+    daemon_reload: true
+    state: started
+    enabled: true
+  when: rtp_sink_enabled
