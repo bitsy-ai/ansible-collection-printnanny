@@ -20,7 +20,7 @@
   command: sudo su
   register: become_su
   loop: "{{ users }}"
-  when: !item.groups.contains('wheel')
+  when: not item.groups.contains('wheel')
 
 - name: Assert users in wheel group cannot become superuser
   assert:
