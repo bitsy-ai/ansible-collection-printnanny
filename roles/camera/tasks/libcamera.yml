@@ -1,0 +1,84 @@
+---
+# tasks file for libcamera
+# Libs conforming to Debian Multiarch are installed to /usr/local/lib/$(gcc -dumpmachine)/
+# https://wiki.debian.org/Multiarch
+# Breadcrumbs in this doc indicate bullseye Raspi OS images will include libcamera as part of pre-build userland libs
+# for now, build from source
+# https://www.raspberrypi.com/documentation/accessories/camera.html#building-libcamera-and-libcamera-apps
+- name: Install apt dependencies
+  become: true
+  ansible.builtin.apt:
+    name:
+        # libcamera build
+        - cmake
+        - libcamera-dev
+        - libboost-dev
+        - libboost-program-options-dev
+        - libdrm-dev
+        # libepoxy - opengl pointer/adress mgmt
+        - libepoxy-dev
+        - libexif-dev
+        - libjpeg-dev
+        - libtiff5-dev
+        # @ TODO qt preview window
+        # - qtbase5-dev
+        # - libqt5core5a
+        # - libqt5gui5
+        # - libqt5widgets5
+  when: ansible_distribution == 'Debian'
+
+- name: Checkout libcamera-apps source
+  become_user: "{{ libcamera_apps_user }}"
+  ansible.builtin.git:
+    repo: 'https://github.com/raspberrypi/libcamera-apps.git'
+    dest: "{{ ansible_env.HOME }}/libcamera-apps"
+    version: "{{ libcamera_version }}"
+  when: ansible_distribution == 'Debian'
+
+- name: Register libcamera-apps dir
+  become_user: "{{ libcamera_apps_user }}"
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/libcamera-apps"
+    state: directory
+    mode: "770"
+    recurse: true
+  register: libcamera_apps_dir
+  when: ansible_distribution == 'Debian'
+
+- name: Create temporary libcamera-apps build directory
+  become_user: "{{ libcamera_apps_user }}"
+  ansible.builtin.file:
+    state: directory
+    path: "{{ libcamera_apps_dir.path }}/build"
+    mode: 0644
+  when: ansible_distribution == 'Debian'
+  register: libcamera_build_dir
+
+- name: libcamera-apps cmake
+  become_user: "{{ libcamera_apps_user }}"
+  command:
+    cmd: cmake ..
+    # cmd: cmake DENABLE_OPENCV=1 -DENABLE_TFLITE=1 ..
+    chdir: "{{ libcamera_build_dir.path }}"
+  when: ansible_distribution == 'Debian'
+
+- name: libcamera-apps j4 templates
+  become_user: "{{ libcamera_apps_user }}"
+  command:
+    cmd: make -j4
+    chdir: "{{ libcamera_build_dir.path }}"
+  when: ansible_distribution == 'Debian'
+
+- name: libcamera-apps install
+  become: true
+  command:
+    cmd: make install
+    chdir: "{{ libcamera_build_dir.path }}"
+  when: ansible_distribution == 'Debian'
+
+- name: libcamera-apps ldconfig
+  become: true
+  command:
+    cmd: ldconfig
+    chdir: "{{ libcamera_build_dir.path }}"
+  when: ansible_distribution == 'Debian'

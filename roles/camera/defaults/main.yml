@@ -2,3 +2,8 @@
 # defaults file for libcamera
 libcamera_apps_user: pi
 libcamera_apps_group: pi
+
+rtp_sink_user: pi
+rtp_sink_enabled: false
+rtp_sink_host: "127.0.0.1"
+rtp_sink_port: 5004
