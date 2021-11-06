@@ -1,0 +1,27 @@
+---
+# tasks file for users
+- name: Create users and groups
+  ansible.builtin.user:
+    name: "{{ item.name }}"
+    groups: "{{ item.groups }}"
+    state: present
+  loop: "{{ users }}"
+  become: true
+
+- name: Add authorized keys
+  become: true
+  ansible.posix.authorized_key:
+    user: "{{ item.name }}"
+    key: "{{ item.authorized_key }}"
+    exclusive: true
+  loop: "{{ users }}"
+
+
+- name: Configure sudoers
+  ansible.builtin.lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: "{{ item.regexp }}"
+    line: "%{{ item.line }}"
+    validate: visudo -cf %s
+  with_items: "{{ sudoers_lines }}"

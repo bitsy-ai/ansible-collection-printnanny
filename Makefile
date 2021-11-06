@@ -20,13 +20,16 @@ clean:
 	find . -name '*.egg-info' -exec rm -fr {} +
 	find . -name '*.egg' -exec rm -rf {} +
 
-sanity-test:
+ansible-requirements:
+	ansible-galaxy install -r requirements.yml
+
+sanity-test: ansible-requirements
 	ansible-test sanity --docker default --python $(PYTHON_VERSION)
 
-unit-test:
+unit-test: ansible-requirements
 	ansible-test units --docker $(TARGET_IMAGE) --python $(PYTHON_VERSION)
 
-integration-test:
+integration-test: ansible-requirements
 	ANSIBLE_KEEP_REMOTE_FILES=1 ansible-test integration --docker $(TARGET_IMAGE) --python $(PYTHON_VERSION) --allow-destructive
 
 test: sanity-test integration-test
