@@ -1,0 +1,21 @@
+- name: 'Configure input group'
+  ansible.builtin.group:
+    name: input
+- name: 'Configure netdev group'
+  ansible.builtin.group:
+    name: netdev
+- name: 'Configure spi group'
+  ansible.builtin.group:
+    name: spi
+- name: 'Configure i2c group'
+  ansible.builtin.group:
+    name: i2c
+- name: 'Configure gpio group'
+  ansible.builtin.group:
+    name: gpio
+- name: 'Configure plugdev group'
+  ansible.builtin.group:
+    name: plugdev
+- import_role:
+    name: bitsyai.printnanny.rpi
+    tasks_from: setup

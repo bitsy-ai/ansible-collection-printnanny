@@ -1,0 +1,50 @@
+name: Ansible Tests
+on:
+  push:
+    branches:
+      - main
+      - devel
+  pull_request:
+    branches:
+      - main
+      - devel
+jobs:
+    sanity:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v2
+          with:
+            path: "${{ github.repository }}"
+        - name: Perform sanity testing with ansible-test
+          uses: ansible-community/ansible-test-gh-action
+          with:
+            ansible-core-version: devel
+            python-version: 3.8
+            target-python-version: 3.8
+            testing-type: sanity
+    integration:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v2
+          with:
+            path: "${{ github.repository }}"
+        - name: Perform integration testing with ansible-test
+          uses: ansible-community/ansible-test-gh-action
+          with:
+            ansible-core-version: stable-2.11
+            pre-test-cmd: echo This runs before the ansible-test invocation
+            python-version: 3.8
+            target-python-version: 3.8
+            testing-type: integration
+
+    # units:
+    #   runs-on: ubuntu-latest
+    #   steps:
+    #     - uses: actions/checkout@v2
+    #       with:
+    #         path: "${{ github.repository }}"
+    #     - name: Perform sanity testing with ansible-test
+    #       uses: ansible-community/ansible-test-gh-action@release/v1
+    #       with:
+    #         ansible-core-version: stable-2.11
+    #         testing-type: units

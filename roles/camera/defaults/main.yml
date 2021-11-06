@@ -1,0 +1,4 @@
+---
+# defaults file for libcamera
+libcamera_apps_user: pi
+libcamera_apps_group: pi
