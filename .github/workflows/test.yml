@@ -36,6 +36,7 @@ jobs:
             python-version: 3.8
             target-python-version: 3.8
             testing-type: integration
+            test-deps: ansible.posix
 
     # units:
     #   runs-on: ubuntu-latest
