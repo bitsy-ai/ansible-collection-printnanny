@@ -16,6 +16,11 @@
     exclusive: true
   loop: "{{ users }}"
 
+- name: Install sudo pkg
+  become: true
+  ansible.builtin.apt:
+    name:
+      - sudo
 - name: Configure sudoers
   ansible.builtin.copy:
     dest: "{{ item.file }}"
