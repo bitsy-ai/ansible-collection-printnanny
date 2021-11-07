@@ -13,7 +13,7 @@
       - setuptools
       - wheel
       - pexpect
-    executable: /usr/bin/pip
+    executable: pip3
     state: latest
 - name: Update firmware
   become: true
