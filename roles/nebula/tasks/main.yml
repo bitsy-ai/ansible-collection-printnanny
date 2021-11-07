@@ -1,5 +1,14 @@
 ---
 # tasks file for nebula
+- name: Install systemd
+  become: true
+  update: true
+  apt:
+    name:
+      - libsystemd-dev
+      - systemd 
+      - systemd-cron
+    state: present
 - name: Create /etc/nebula/
   become: true
   ansible.builtin.file:
