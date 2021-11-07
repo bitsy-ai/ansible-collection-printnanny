@@ -2,54 +2,69 @@
   ansible.builtin.user:
     name: "{{ ansible_pull_user }}"
     state: present
+    shell: /sbin/nologin
+    comment: "Ansible service user"
   become: true
 
 - name: Configure ansible sudoers
+  become: true
   ansible.builtin.copy:
     dest: "/etc/sudoers.d/00_ansible_pwdless.conf"
     content: "{{ ansible_pull_user }} ALL=(ALL) NOPASSWD: ALL"
     validate: visudo -cf %s
     mode: "0644"
 
-- name: 'Create {{ ansible_env.HOME }}/venv/ansible'
-  become_user: '{{ ansible_user }}'
+- name: Install apt dependencies
+  become: true
+  ansible.builtin.apt:
+    name:
+        - pkg-config 
+        - python3-dev
+        - python3-pip
+        - python3-venv
+        # required by ansible.builtin.package_facts
+        - python3-apt
+
+- name: 'Create ansible virtual env'
+  become_user: '{{ ansible_pull_user }}'
   pip:
     name: 
       - 'pip>21,<22'
       - setuptools
       - wheel
     virtualenv_command: /usr/bin/python3 -m venv
-    virtualenv: '{{ ansible_env.HOME }}/venv/ansible'
+    virtualenv: '{{ ansible_pull_venv }}'
     extra_args: '--no-cache-dir'
 
 - name: Install ansible into the specified (virtualenv)
-  become_user: '{{ ansible_user }}'
+  become_user: '{{ ansible_pull_user }}'
   pip:
-    name: '{{ printnanny_ansible_version }}'
+    name: '{{ ansible_pull_version }}'
     virtualenv_command: /usr/bin/python3 -m venv
-    virtualenv: '{{ ansible_env.HOME }}/venv/ansible'
+    virtualenv: '{{ ansible_pull_venv }}'
     extra_args: '--no-cache-dir'
 
-- name: copy sudoers_ansible
+- name: Setup passwordless sudo for ansible user
   become: true
   ansible.builtin.copy: 
-    src: files/sudoers_ansible 
+    content: '%{{ ansible_pull_user }} ALL=(ALL) NOPASSWD: ALL }}'
     dest: /etc/sudoers.d/00_ansible_pwdless.conf
     owner: root 
     group: root 
     mode: 0440
 
 - name: Create ansible.cfg
+  become: true
   ansible.builtin.template:
     mode: 0664
     src: ansible.cfg.j2
-    dest: "{{ ansible_env.HOME }}/.ansible.cfg"
+    dest: "/etc/ansible/ansible.cfg"
 
 
-- name: Create '{{ ansible_user }}'/.ansible/hosts
-  become_user: '{{ ansible_user }}'
+- name: Create /etc/ansible/hosts
+  become_user: true
   ansible.builtin.copy: 
     src: files/hosts
-    dest: '{{ ansible_env.HOME }}/.ansible/hosts'
+    dest: '/etc/ansible/hosts'
     mode: 0660
 

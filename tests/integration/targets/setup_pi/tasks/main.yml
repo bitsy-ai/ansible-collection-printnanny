@@ -19,6 +19,3 @@
 - name: 'Configure pi group'
   ansible.builtin.group:
     name: pi
-- import_role:
-    name: bitsyai.rpi.setup
-    tasks_from: users

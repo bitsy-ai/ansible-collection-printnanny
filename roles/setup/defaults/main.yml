@@ -8,7 +8,11 @@ sudoers_files:
 rpi_firmware_version: 992de83e0ea01a9765196349abb386c5c8ea8944
 packer_provisioner_run: false
 
-ansible_user: ansible
+ansible_pull_user: ansible
+ansible_pull_version: 'ansible>4,<5'
+ansible_pull_home: "/home/{{ ansible_pull_user }}"
+ansible_pull_venv: "/home/{{ ansible_pull_user }}/venv"
+
 ansible_pulls:
   - name: 'bitsyai.rpi.playbooks.automatic_updates'
     url: 'https://github.com/bitsy-ai/ansible-collection-rpi'
