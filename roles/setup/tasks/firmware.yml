@@ -1,19 +1,13 @@
-- name: Install apt dependencies
-  become: true
+- name: Install pip
   ansible.builtin.apt:
-    pkg:
-      - python-pexpect
+    update_cache: true
+    name:
+      - python3-pip
 
-# - name: 'Upgrade system pip and pexpect'
-#   become: true
-#   ansible.builtin.pip:
-#     name: 
-#       - pip
-#       - setuptools
-#       - wheel
-#       - pexpect
-#     executable: pip3
-#     state: latest
+- name: Install pexpect
+  ansible.builtin.pip:
+    name: pexpect
+
 - name: Update firmware
   become: true
   ansible.builtin.expect:
@@ -22,7 +16,10 @@
     responses:
       Question:
         - Would you like to proceed? (y/N): y
+  when: ansible_distribution == 'Debian'
+
 - name: Reboot to apply firmware updates
   become: true
   ansible.builtin.reboot:
     reboot_timeout: 360
+  when: ansible_distribution == 'Debian'
