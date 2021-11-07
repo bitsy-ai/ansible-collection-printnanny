@@ -6,6 +6,12 @@
     comment: "Ansible service user"
   become: true
 
+- name: Install sudo pkg
+  become: true
+  ansible.builtin.apt:
+    name:
+      - sudo
+
 - name: Configure ansible sudoers
   become: true
   ansible.builtin.copy:
