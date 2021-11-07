@@ -1,0 +1,13 @@
+{{ ansible_managed }}
+[Unit]
+Description=Nebula Network Overlay
+After=network.online.target
+Wants=network.online.target
+
+[Service]
+Type=simple
+User="root"
+ExecStart=./nebula -config {{ nebula_config_file }}
+
+[Install]
+WantedBy=multi-user.target

@@ -1,2 +1,6 @@
 ---
 # handlers file for nebula
+- name: reload nebula systemd unit
+  ansible.builtin.systemd:
+    name: nebula
+    daemon_reload: true

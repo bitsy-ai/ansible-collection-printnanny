@@ -8,6 +8,7 @@ nebula_binary_url: 'https://github.com/slackhq/nebula/releases/download/{{ nebul
 nebula_static_host_map:
   "192.168.100.1": ["100.64.22.11:4242"]
 
+nebula_config_file: /etc/nebula/config.yaml
 nebula_config:
   pki:
     ca: /etc/nebula/ca.crt

@@ -1,2 +1,35 @@
 ---
 # tasks file for nebula
+- name: Create Nebula config
+  ansible.builtin.template:
+    src: nebula.config.j2
+    dest: "{{ nebula_config_file }}"
+    mode: "0644"
+
+- name: Create nebula systemd unit
+  ansible.builtin.template:
+    src: nebula.service.j2
+    dest: /etc/sytemd/system/nebula.service
+  notify:
+    - reload nebula systemd unit
+
+- name: Check nebula pki ca
+  ansible.builtin.stat:
+    path: "{{ nebula_config.pki.ca }}"
+  register: nebula_ca_file
+
+- name: Check nebula pki cert
+  ansible.builtin.stat:
+    path: "{{ nebula_config.pki.cert }}"
+  register: nebula_cert_file
+
+- name: Check nebula pki key
+  ansible.builtin.stat:
+    path: "{{ nebula_config.pki.key }}"
+  register: nebula_key_file
+
+- name: Enable nebula service if pki provisioned
+  ansible.builtin.systemd:
+    name: nebula
+    enabled: true
+    state: started
