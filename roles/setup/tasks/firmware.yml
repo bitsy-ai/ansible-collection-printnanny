@@ -1,21 +1,8 @@
-- name: Install pip
-  ansible.builtin.apt:
-    update_cache: true
-    name:
-      - python3-pip
-
-- name: Install pexpect
-  ansible.builtin.pip:
-    name: pexpect
-
 - name: Update firmware
   become: true
-  ansible.builtin.expect:
-    command: "rpi-update {{ rpi_firmware_version }}"
+  ansible.builtin.shell:
+    command: "yes | rpi-update {{ rpi_firmware_version }}"
     creates: /boot/.firmware_revision
-    responses:
-      Question:
-        - Would you like to proceed? (y/N): y
   when: ansible_distribution == 'Debian'
 
 - name: Reboot to apply firmware updates
