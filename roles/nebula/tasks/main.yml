@@ -9,6 +9,7 @@
       - systemd 
       - systemd-cron
     state: present
+
 - name: Create /etc/nebula/
   become: true
   ansible.builtin.file:
@@ -26,7 +27,7 @@
   become: true
   ansible.builtin.template:
     src: nebula.service.j2
-    dest: /etc/sytemd/system/nebula.service
+    dest: /etc/systemd/system/nebula.service
   notify:
     - reload nebula systemd unit
 
