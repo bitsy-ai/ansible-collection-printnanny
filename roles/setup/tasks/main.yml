@@ -1,0 +1,5 @@
+---
+- name: Firmware setup
+  import_tasks: firmware.yml
+- name: User setup
+  import_tasks: users.yml

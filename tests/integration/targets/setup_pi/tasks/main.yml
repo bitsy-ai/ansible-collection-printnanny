@@ -16,6 +16,9 @@
 - name: 'Configure plugdev group'
   ansible.builtin.group:
     name: plugdev
+- name: 'Configure pi group'
+  ansible.builtin.group:
+    name: pi
 - import_role:
-    name: bitsyai.printnanny.rpi
-    tasks_from: setup
+    name: bitsyai.rpi.setup
+    tasks_from: users

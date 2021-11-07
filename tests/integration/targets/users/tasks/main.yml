@@ -1,28 +1,15 @@
 ---
 - name: Import users role
   import_role:
-    name: bitsyai.rpi.users
+    name: bitsyai.rpi.setup
+    tasks_from: users
 
 - name: Become superuser should succeed for wheel group
-  become: "{{ item.user }}"
+  become_user: "{{ users[0].name }}"
   command: sudo su
   register: become_su
-  loop: "{{ users }}"
-  when: item.groups.contains('wheel')
 
 - name: Assert users in wheel group can become superuser
   assert:
     that:
       - become_su.rc == 0
-
-- name: Become superuser should fail if not in wheel group
-  become: "{{ item.user }}"
-  command: sudo su
-  register: become_su
-  loop: "{{ users }}"
-  when: not item.groups.contains('wheel')
-
-- name: Assert users in wheel group cannot become superuser
-  assert:
-    that:
-      - become_su.rc == 1
