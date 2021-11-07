@@ -3,7 +3,7 @@
 - name: Install systemd
   become: true
   apt:
-    update: true
+    update_cache: true
     name:
       - libsystemd-dev
       - systemd 
