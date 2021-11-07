@@ -61,4 +61,4 @@
     name: nebula
     enabled: true
     state: started
-  when: nebula_ca_file and nebula_key_file and nebula_cert_file
+  when: nebula_ca_file.exists and nebula_key_file.exists and nebula_cert_file.exists
