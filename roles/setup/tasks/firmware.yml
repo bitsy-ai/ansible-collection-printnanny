@@ -1,7 +1,7 @@
 - name: Update firmware
   become: true
   ansible.builtin.shell:
-    command: "yes | rpi-update {{ rpi_firmware_version }}"
+    cmd: "yes | rpi-update {{ rpi_firmware_version }}"
     creates: /boot/.firmware_revision
   when: ansible_distribution == 'Debian'
 
