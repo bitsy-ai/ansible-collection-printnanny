@@ -24,6 +24,7 @@
   ansible.builtin.apt:
     name:
       - sudo
+
 - name: Configure sudoers
   ansible.builtin.copy:
     dest: "{{ item.file }}"

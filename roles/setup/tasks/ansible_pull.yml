@@ -1,3 +1,16 @@
+- name: Create ansible-pull user
+  ansible.builtin.user:
+    name: "{{ ansible_pull_user }}"
+    state: present
+  become: true
+
+- name: Configure ansible sudoers
+  ansible.builtin.copy:
+    dest: "/etc/sudoers.d/00_ansible_pwdless.conf"
+    content: "{{ ansible_pull_user }} ALL=(ALL) NOPASSWD: ALL"
+    validate: visudo -cf %s
+    mode: "0644"
+
 - name: 'Create {{ ansible_env.HOME }}/venv/ansible'
   become_user: '{{ ansible_user }}'
   pip:
