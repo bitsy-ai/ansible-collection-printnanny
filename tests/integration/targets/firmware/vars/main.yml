@@ -1,7 +1,7 @@
 ---
 users:
   - name: leigh
-    authorized_keys https://github.com/leigh-johnson.keys
+    authorized_key: https://github.com/leigh-johnson.keys
     groups:
       - adm
       - audio
