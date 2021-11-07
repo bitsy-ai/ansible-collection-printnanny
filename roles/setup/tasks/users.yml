@@ -1,4 +1,7 @@
 ---
+- name: 'Configure wheel group'
+  ansible.builtin.group:
+    name: wheel
 # tasks file for users
 - name: Create users and groups
   ansible.builtin.user:
