@@ -2,8 +2,8 @@
 # tasks file for nebula
 - name: Install systemd
   become: true
-  update: true
   apt:
+    update: true
     name:
       - libsystemd-dev
       - systemd 
