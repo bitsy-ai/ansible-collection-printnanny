@@ -2,19 +2,18 @@
   become: true
   ansible.builtin.apt:
     pkg:
-      - python3-dev
-      - python3-pip
+      - python-pexpect
 
-- name: 'Upgrade system pip and pexpect'
-  become: true
-  ansible.builtin.pip:
-    name: 
-      - pip
-      - setuptools
-      - wheel
-      - pexpect
-    executable: pip3
-    state: latest
+# - name: 'Upgrade system pip and pexpect'
+#   become: true
+#   ansible.builtin.pip:
+#     name: 
+#       - pip
+#       - setuptools
+#       - wheel
+#       - pexpect
+#     executable: pip3
+#     state: latest
 - name: Update firmware
   become: true
   ansible.builtin.expect:
