@@ -10,6 +10,12 @@
       - systemd-cron
     state: present
 
+- name: Download Nebula binary
+  ansible.builtin.unarchive:
+    src: '{{ nebula_binary_url }}'
+    dest: /usr/local/bin
+    remote_src: true
+
 - name: Create /etc/nebula/
   become: true
   ansible.builtin.file:

@@ -7,7 +7,7 @@ Wants=network.online.target
 [Service]
 Type=simple
 User="root"
-ExecStart=./nebula -config {{ nebula_config_file }}
+ExecStart=/usr/local/bin/nebula -config {{ nebula_config_file }}
 
 [Install]
 WantedBy=multi-user.target
