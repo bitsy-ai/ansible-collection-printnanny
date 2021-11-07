@@ -6,3 +6,4 @@ sudoers_files:
       file: "/etc/sudoers.d/00-wheel.conf"
 
 rpi_firmware_version: 992de83e0ea01a9765196349abb386c5c8ea8944
+packer_provisioner_run: false

@@ -8,5 +8,5 @@
 - name: Reboot to apply firmware updates
   become: true
   ansible.builtin.reboot:
-    reboot_timeout: 360
-  when: ansible_distribution == 'Debian'
+    reboot_timeout: 480
+  when: ansible_distribution == 'Debian' and packer_provisioner_run
