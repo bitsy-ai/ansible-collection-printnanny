@@ -1,0 +1,64 @@
+---
+# tasks file for nebula
+- name: Download Nebula binary
+  ansible.builtin.unarchive:
+    src: '{{ nebula_binary_url }}'
+    dest: /usr/local/bin
+    remote_src: true
+
+- name: Install systemd
+  become: true
+  apt:
+    update_cache: true
+    name:
+      - libsystemd-dev
+      - systemd 
+      - systemd-cron
+    state: present
+
+- name: Create /etc/nebula/
+  become: true
+  ansible.builtin.file:
+    path: /etc/nebula
+    state: directory
+  
+- name: Create Nebula config
+  become: true
+  ansible.builtin.template:
+    src: nebula.config.j2
+    dest: "{{ nebula_config_file }}"
+    mode: "0644"
+
+- name: Create nebula systemd unit
+  become: true
+  ansible.builtin.template:
+    src: nebula.service.j2
+    dest: /etc/systemd/system/nebula.service
+  notify:
+    - reload nebula systemd unit
+
+- name: Check nebula pki ca
+  become: true
+  ansible.builtin.stat:
+    path: "{{ nebula_config.pki.ca }}"
+  register: nebula_ca_file
+
+- name: Check nebula pki cert
+  become: true
+  ansible.builtin.stat:
+    path: "{{ nebula_config.pki.cert }}"
+  register: nebula_cert_file
+
+- name: Check nebula pki key
+  become: true
+  ansible.builtin.stat:
+    path: "{{ nebula_config.pki.key }}"
+  register: nebula_key_file
+
+- name: Enable nebula service if pki provisioned
+  become: true
+  ansible.builtin.systemd:
+    name: nebula
+    enabled: true
+    state: started
+  when: nebula_ca_file.stat.exists and nebula_key_file.stat.exists and nebula_cert_file.stat.exists
