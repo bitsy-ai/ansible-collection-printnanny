@@ -1,0 +1,7 @@
+[Unit]
+Description=Ansible Pull resource slice
+DefaultDependencies=no
+Before=slices.target
+[Slice]
+CPUQuota=40%
+MemoryLimit=1G

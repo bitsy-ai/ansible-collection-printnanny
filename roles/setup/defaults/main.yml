@@ -1,5 +1,5 @@
 ---
-# defaults file for users
+# defaults file for setup role
 users: []
 sudoers_files:
     - content: "%wheel  ALL=(ALL)  ALL"
@@ -7,3 +7,13 @@ sudoers_files:
 
 rpi_firmware_version: 992de83e0ea01a9765196349abb386c5c8ea8944
 packer_provisioner_run: false
+
+ansible_user: ansible
+ansible_pulls:
+  - name: 'bitsyai.rpi.playbooks.automatic_updates'
+    url: 'https://github.com/bitsy-ai/ansible-collection-rpi'
+    checkout: 'main'
+    only_if_changed: true
+    extra_vars: {}
+    playbook: automatic_updates.yml
+
