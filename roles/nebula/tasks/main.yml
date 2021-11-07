@@ -7,12 +7,14 @@
     state: directory
   
 - name: Create Nebula config
+  become: true
   ansible.builtin.template:
     src: nebula.config.j2
     dest: "{{ nebula_config_file }}"
     mode: "0644"
 
 - name: Create nebula systemd unit
+  become: true
   ansible.builtin.template:
     src: nebula.service.j2
     dest: /etc/sytemd/system/nebula.service
@@ -20,21 +22,25 @@
     - reload nebula systemd unit
 
 - name: Check nebula pki ca
+  become: true
   ansible.builtin.stat:
     path: "{{ nebula_config.pki.ca }}"
   register: nebula_ca_file
 
 - name: Check nebula pki cert
+  become: true
   ansible.builtin.stat:
     path: "{{ nebula_config.pki.cert }}"
   register: nebula_cert_file
 
 - name: Check nebula pki key
+  become: true
   ansible.builtin.stat:
     path: "{{ nebula_config.pki.key }}"
   register: nebula_key_file
 
 - name: Enable nebula service if pki provisioned
+  become: true
   ansible.builtin.systemd:
     name: nebula
     enabled: true
