@@ -13,13 +13,3 @@
   assert:
     that:
       - become_su.rc == 0
-
-- name: Become superuser should fail if not in wheel group
-  become_user: "{{ users[1].name }}"
-  command: sudo su
-  register: become_su
-
-- name: Assert users in wheel group cannot become superuser
-  assert:
-    that:
-      - become_su.rc == 1
