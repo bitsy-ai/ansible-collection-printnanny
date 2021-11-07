@@ -20,4 +20,3 @@ ansible_pulls:
     only_if_changed: true
     extra_vars: {}
     playbook: automatic_updates.yml
-
