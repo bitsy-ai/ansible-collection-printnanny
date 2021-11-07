@@ -5,7 +5,7 @@
     tasks_from: users
 
 - name: Become superuser should succeed for wheel group
-  become: "{{ users[0].name }}"
+  become_user: "{{ users[0].name }}"
   command: sudo su
   register: become_su
 
@@ -15,7 +15,7 @@
       - become_su.rc == 0
 
 - name: Become superuser should fail if not in wheel group
-  become: "{{ users[1].name }}"
+  become_user: "{{ users[1].name }}"
   command: sudo su
   register: become_su
 
