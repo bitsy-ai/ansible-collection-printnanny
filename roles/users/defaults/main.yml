@@ -1,0 +1,6 @@
+---
+# defaults file for users
+users: []
+sudoers_files:
+    - content: "%wheel  ALL=(ALL)  ALL"
+      file: "/etc/sudoers.d/00-wheel.conf"
