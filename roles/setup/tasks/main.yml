@@ -1,30 +1,5 @@
 ---
-# tasks file for users
-- name: Create users and groups
-  ansible.builtin.user:
-    name: "{{ item.name }}"
-    groups: "{{ item.groups }}"
-    state: present
-  loop: "{{ users }}"
-  become: true
-
-- name: Add authorized keys
-  become: true
-  ansible.posix.authorized_key:
-    user: "{{ item.name }}"
-    key: "{{ item.authorized_key }}"
-    exclusive: true
-  loop: "{{ users }}"
-
-- name: Install sudo pkg
-  become: true
-  ansible.builtin.apt:
-    name:
-      - sudo
-- name: Configure sudoers
-  ansible.builtin.copy:
-    dest: "{{ item.file }}"
-    content: "{{ item.content }}"
-    validate: visudo -cf %s
-    mode: "0644"
-  with_items: "{{ sudoers_files }}"
+- name: Firmware setup
+  import_tasks: firmware.yml
+- name: User setup
+  import_tasks: users.yml

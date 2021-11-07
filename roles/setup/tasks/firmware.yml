@@ -1,0 +1,22 @@
+- name: 'Upgrade system pip and pexpect'
+  become: true
+  ansible.builtin.pip:
+    name: 
+        - pip
+        - setuptools
+        - wheel
+        - pexpect
+    executable: /usr/bin/pip
+    state: latest
+- name: Update firmware
+  become: true
+  ansible.builtin.expect:
+    command: "rpi-update {{ rpi_firmware_version }}"
+    creates: /boot/.firmware_revision
+    responses:
+      Question:
+        - Would you like to proceed? (y/N): y
+- name: Reboot to apply firmware updates
+  become: true
+  ansible.builtin.reboot:
+    reboot_timeout: 360

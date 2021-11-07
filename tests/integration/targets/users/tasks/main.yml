@@ -1,7 +1,8 @@
 ---
 - name: Import users role
   import_role:
-    name: bitsyai.rpi.users
+    name: bitsyai.rpi.setup
+    tasks_from: users
 
 - name: Become superuser should succeed for wheel group
   become: "{{ item.user }}"
