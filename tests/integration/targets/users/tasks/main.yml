@@ -9,7 +9,7 @@
   command: sudo su
   register: become_su
   loop: "{{ users }}"
-  when: item.groups.contains('wheel')
+  when: "wheel" in item.groups
 
 - name: Assert users in wheel group can become superuser
   assert:
@@ -21,7 +21,7 @@
   command: sudo su
   register: become_su
   loop: "{{ users }}"
-  when: not item.groups.contains('wheel')
+  when: "wheel" not in item.groups
 
 - name: Assert users in wheel group cannot become superuser
   assert:
