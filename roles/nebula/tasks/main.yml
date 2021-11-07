@@ -1,5 +1,11 @@
 ---
 # tasks file for nebula
+- name: Create /etc/nebula/
+  become: true
+  ansible.builtin.file:
+    path: /etc/nebula
+    state: directory
+  
 - name: Create Nebula config
   ansible.builtin.template:
     src: nebula.config.j2
