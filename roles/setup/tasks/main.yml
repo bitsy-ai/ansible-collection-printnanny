@@ -3,6 +3,5 @@
   import_tasks: firmware.yml
 - name: User setup
   import_tasks: users.yml
-- name: Ansible pull setup 
+- name: Ansible pull setup
   import_tasks: ansible_pull.yml
-
