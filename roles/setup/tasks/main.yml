@@ -1,5 +1,7 @@
 ---
 - name: Firmware setup
   import_tasks: firmware.yml
+- name: Slim packages
+  import_tasks: slim.yml
 - name: User setup
   import_tasks: users.yml
