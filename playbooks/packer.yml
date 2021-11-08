@@ -2,6 +2,12 @@
 - hosts: default
   gather_facts: true
   tasks:
+    - name: Setup (generic)
+      import_role:
+        name: bitsyai.rpi.setup
+    - name: Setup (generic)
+      import_role:
+        name: bitsyai.rpi.nebula
     - name: Setup camera module
       import_role:
         name: bitsyai.rpi.camera
