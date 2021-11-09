@@ -2,6 +2,11 @@
 - hosts: default
   gather_facts: true
   tasks:
+    - name: Update apt cache
+      become: true
+      ansible.builtin.apt:
+        update_cache: true
+        upgrade: dist
     - name: Setup (generic)
       import_role:
         name: bitsyai.rpi.setup
@@ -11,3 +16,6 @@
     - name: Setup camera module
       import_role:
         name: bitsyai.rpi.camera
+    - name: Clean apt cache
+      become: true
+      ansible.builtin.command: apt clean
