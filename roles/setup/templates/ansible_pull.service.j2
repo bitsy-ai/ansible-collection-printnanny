@@ -4,7 +4,6 @@ Description=Ansible Pull for {{ item.name }}
 Wants={{ item.name }}.timer
 
 [Service]
-
 ExecStart={{ ansible_env.HOME }}/venv/ansible/bin/ansible-pull \
     -i {{ ansible_env.HOME }}/.ansible/hosts \
     {% if item.only_if_changed %} --only-if-changed \ {% endif %} \

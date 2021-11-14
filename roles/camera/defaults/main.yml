@@ -1,6 +1,7 @@
 ---
 # defaults file for libcamera
 camera_enabled: true
+build_libcamera_apps: true
 libcamera_apps_user: pi
 libcamera_apps_group: pi
 libcamera_version: 'fd875c9016638b2cdb89c7fb17e2ddcf90817d35'

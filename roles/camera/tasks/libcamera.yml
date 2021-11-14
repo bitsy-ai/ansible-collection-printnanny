@@ -33,7 +33,7 @@
     repo: 'https://github.com/raspberrypi/libcamera-apps.git'
     dest: "{{ ansible_env.HOME }}/libcamera-apps"
     version: "{{ libcamera_version }}"
-  when: ansible_distribution == 'Debian'
+  when: ansible_distribution == 'Debian' and build_libcamera_apps
 
 - name: Register libcamera-apps dir
   become_user: "{{ libcamera_apps_user }}"
@@ -43,7 +43,7 @@
     mode: "770"
     recurse: true
   register: libcamera_apps_dir
-  when: ansible_distribution == 'Debian'
+  when: ansible_distribution == 'Debian' and build_libcamera_apps
 
 - name: Create temporary libcamera-apps build directory
   become_user: "{{ libcamera_apps_user }}"
@@ -60,25 +60,25 @@
     cmd: cmake ..
     # cmd: cmake DENABLE_OPENCV=1 -DENABLE_TFLITE=1 ..
     chdir: "{{ libcamera_build_dir.path }}"
-  when: ansible_distribution == 'Debian'
+  when: ansible_distribution == 'Debian' and build_libcamera_apps
 
 - name: libcamera-apps j4 templates
   become_user: "{{ libcamera_apps_user }}"
   command:
     cmd: make -j4
     chdir: "{{ libcamera_build_dir.path }}"
-  when: ansible_distribution == 'Debian'
+  when: ansible_distribution == 'Debian' and build_libcamera_apps
 
 - name: libcamera-apps install
   become: true
   command:
     cmd: make install
     chdir: "{{ libcamera_build_dir.path }}"
-  when: ansible_distribution == 'Debian'
+  when: ansible_distribution == 'Debian' and build_libcamera_apps
 
 - name: libcamera-apps ldconfig
   become: true
   command:
     cmd: ldconfig
     chdir: "{{ libcamera_build_dir.path }}"
-  when: ansible_distribution == 'Debian'
+  when: ansible_distribution == 'Debian' and build_libcamera_apps
