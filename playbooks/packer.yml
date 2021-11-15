@@ -6,7 +6,6 @@
       become: true
       ansible.builtin.apt:
         update_cache: true
-        upgrade: full
     - name: Setup (generic)
       import_role:
         name: bitsyai.rpi.setup
