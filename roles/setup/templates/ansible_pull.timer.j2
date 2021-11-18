@@ -1,11 +1,18 @@
 # {{ ansible_managed }}
 [Unit]
-Description=Run ansible-pull every 30-60 minutes
+Description=Run ansible-pull against {{ item.src }}
 Requires={{ item.name }}.service
 [Timer]
 Unit={{ item.name }}.service
-OnUnitInactiveSec={{ item.OnUnitInactiveSec }}
-RandomizedDelaySec={{ item.RandomizedDelaySec }}
+{% if item.timer.OnStartupSec %} 
+OnStartupSec={{ item.timer.OnStartupSec }}
+{% endif %}
+{% if item.timer.RandomizedDelaySec %}
+RandomizedDelaySec={{ item.timer.RandomizedDelaySec }}
+{% endif %}
+{% if item.timer.OnUnitInactiveSec %}
+OnUnitInactiveSec={{ item.timer.OnUnitInactiveSec }}
+{% endif %}
 AccuracySec=1s
 [Install]
 WantedBy=timers.target

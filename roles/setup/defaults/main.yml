@@ -13,10 +13,13 @@ ansible_pull_version: 'ansible>4,<5'
 ansible_pull_home: "/home/{{ ansible_pull_user }}"
 ansible_pull_venv: "/home/{{ ansible_pull_user }}/venv"
 
-ansible_pulls:
-  - name: 'bitsyai.rpi.playbooks.automatic_updates'
+ansible_pull_items:
+  - name: 'automatic-updates-rpi'
+    src: 'bitsyai.rpi.playbooks.automatic_updates'
     url: 'https://github.com/bitsy-ai/ansible-collection-rpi'
     checkout: 'main'
-    only_if_changed: true
-    extra_vars: {}
     playbook: automatic_updates.yml
+    timer:
+      OnUnitInactiveSec: 3600 # update every hour
+      RandomizedDelaySec: 60 # offset by 60 seconds of jitter
+      OnStartupSec: 120 # always update 2 minutes after booting
