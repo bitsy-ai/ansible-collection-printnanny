@@ -6,12 +6,9 @@ Wants={{ item.name }}.timer
 [Service]
 ExecStart={{ ansible_env.HOME }}/venv/ansible/bin/ansible-pull \
     -i {{ ansible_env.HOME }}/.ansible/hosts \
-    {% if item.only_if_changed %} --only-if-changed \ {% endif %} \
-    --extra-vars {{ item.extra_vars }} \
     -C {{ item.checkout }} \
     -U {{ item.url }} \
     {{ item.playbook }}
-
 
 Slice=ansible_pull.slice
 
