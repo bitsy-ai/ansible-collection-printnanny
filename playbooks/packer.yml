@@ -16,17 +16,7 @@
     - name: Setup camera module
       import_role:
         name: bitsyai.rpi.camera
-    - name: Clean apt cache
-      become: true
-      ansible.builtin.command: apt clean
-    - name: Ensure machine-id uninitialized
-      become: true
-      ansible.builtin.copy:
-        content: "uninitialized\n"
-        mode: '0444'
-        dest: /etc/machine-id
-    - name: Remove dbus machine-id
-      become: true
-      ansible.builtin.file:
-        state: absent
-        path: /var/lib/dbus/machine-id
+    - name: Clean up caches and machine-id
+      import_role:
+        name: bitsyai.rpi.setup
+        tasks_from: clean_image
