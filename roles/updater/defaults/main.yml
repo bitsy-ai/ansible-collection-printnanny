@@ -10,7 +10,7 @@ updater:
   ansible_hosts_file: /etc/ansible/hosts
 
 updater_ansible_config:
-  collection_path: "{{ bitsy_path}}/ansible/collections"
+  collections_path: "{{ bitsy_path}}/ansible/collections"
   fact_caching_timeout: 86400
   fact_caching: jsonfile
   fact_caching_connection: /etc/ansible/facts.json

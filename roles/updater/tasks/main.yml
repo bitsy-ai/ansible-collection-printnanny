@@ -1,6 +1,6 @@
 - name: Create bitsy updater user
   ansible.builtin.user:
-    name: "{{ ansible_user }}"
+    name: "{{ updater.user }}"
     state: present
     shell: /sbin/nologin
     comment: "Ansible service user"
@@ -16,7 +16,7 @@
   become: true
   ansible.builtin.copy:
     dest: "/etc/sudoers.d/00_ansible_pwdless.conf"
-    content: "{{ ansible_user }} ALL=(ALL) NOPASSWD: ALL"
+    content: "{{ updater.user }} ALL=(ALL) NOPASSWD: ALL"
     validate: visudo -cf %s
     mode: "0644"
 
@@ -40,28 +40,28 @@
     state: directory
 
 - name: 'Create ansible virtual env'
-  become_user: '{{ ansible_user }}'
+  become_user: '{{ updater.user }}'
   pip:
     name:
       - 'pip>21,<22'
       - setuptools
       - wheel
     virtualenv_command: /usr/bin/python3 -m venv
-    virtualenv: '{{ updater_ansible_venv }}'
+    virtualenv: '{{ updater.ansible_venv }}'
     extra_args: '--no-cache-dir'
 
 - name: Install ansible into the specified (virtualenv)
-  become_user: '{{ ansible_user }}'
+  become_user: '{{ updater.user }}'
   pip:
-    name: '{{ updater_ansible_version }}'
+    name: '{{ updater.ansible_version }}'
     virtualenv_command: /usr/bin/python3 -m venv
-    virtualenv: '{{ updater_ansible_venv }}'
+    virtualenv: '{{ updater.ansible_venv }}'
     extra_args: '--no-cache-dir'
 
 - name: Setup passwordless sudo for ansible user
   become: true
   ansible.builtin.copy:
-    content: '%{{ ansible_user }} ALL=(ALL) NOPASSWD: ALL }}'
+    content: '%{{ updater.user }} ALL=(ALL) NOPASSWD: ALL }}'
     dest: /etc/sudoers.d/00_ansible_pwdless.conf
     owner: root
     group: root
@@ -78,7 +78,7 @@
   become: true
   ansible.builtin.copy:
     src: files/hosts
-    dest: '{{ ansible_hosts_file }}'
+    dest: '{{ updater.ansible_hosts_file }}'
     mode: 0660
 
 - name: Create bitsy updater systemd slice
@@ -94,7 +94,7 @@
     mode: 0664
     src: bitsy_updater.timer.j2
     dest: '/etc/systemd/system/{{ item.name }}.timer'
-  with_items: '{{ ansible_pull_items }}'
+  with_items: '{{ updater_collections }}'
 
 - name: Create bitsy updater systemd units
   become: true
@@ -102,7 +102,7 @@
     mode: 0664
     src: bitsy_updater.service.j2
     dest: '/etc/systemd/system/{{ item.name }}.service'
-  with_items: '{{ ansible_pull_items }}'
+  with_items: '{{ updater_collections }}'
 
 - name: Enable units
   become: true
@@ -111,4 +111,4 @@
     state: started
     enabled: true
     daemon_reload: true
-  with_items: '{{ ansible_pull_items }}'
+  with_items: '{{ updater_collections }}'
