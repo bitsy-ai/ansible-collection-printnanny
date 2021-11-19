@@ -16,6 +16,9 @@
     - name: Setup camera module
       import_role:
         name: bitsyai.rpi.camera
+    - name: Setup ansible pull
+      import_role:
+        name: bitsyai.rpi.ansible_pull
     - name: Clean up caches and machine-id
       import_role:
         name: bitsyai.rpi.setup

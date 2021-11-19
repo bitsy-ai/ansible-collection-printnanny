@@ -38,6 +38,7 @@
   file:
     path: /etc/ansible
     state: directory
+    
 - name: 'Create ansible virtual env'
   become_user: '{{ ansible_pull_user }}'
   pip:
@@ -79,6 +80,13 @@
     src: files/hosts
     dest: '/etc/ansible/hosts'
     mode: 0660
+
+- name: Create ansible-pull systemd slice
+  become: true
+  ansible.builtin.template:
+    mode: 0664
+    src: ansible_pull.slice.j2
+    dest: '/etc/systemd/system/ansible_pull.slice'
 
 - name: Create ansible-pull systemd timers
   become: true

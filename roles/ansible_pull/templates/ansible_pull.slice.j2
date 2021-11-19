@@ -4,4 +4,4 @@ DefaultDependencies=no
 Before=slices.target
 [Slice]
 CPUQuota=40%
-MemoryLimit=1G
+MemoryLimit={{ ansible_memtotal_mb * 0.3|int }}
