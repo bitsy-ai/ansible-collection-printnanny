@@ -7,19 +7,3 @@ sudoers_files:
 
 rpi_firmware_version: 992de83e0ea01a9765196349abb386c5c8ea8944
 packer_provisioner_run: false
-
-ansible_pull_user: ansible
-ansible_pull_version: 'ansible>4,<5'
-ansible_pull_home: "/home/{{ ansible_pull_user }}"
-ansible_pull_venv: "/home/{{ ansible_pull_user }}/venv"
-
-ansible_pull_items:
-  - name: 'automatic-updates-rpi'
-    src: 'bitsyai.rpi.playbooks.automatic_updates'
-    url: 'https://github.com/bitsy-ai/ansible-collection-rpi'
-    checkout: 'main'
-    playbook: automatic_updates.yml
-    timer:
-      OnUnitInactiveSec: 3600 # update every hour
-      RandomizedDelaySec: 60 # offset by 60 seconds of jitter
-      OnStartupSec: 120 # always update 2 minutes after booting

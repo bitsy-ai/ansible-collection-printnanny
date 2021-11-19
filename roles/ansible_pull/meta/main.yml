@@ -1,6 +1,6 @@
 galaxy_info:
   author: Leigh Johnson
-  description: Setup user accounts
+  description: Manage ansible pull updates with systemd & systemd-cron
   company: Bitsy AI Labs
 
   # If the issue tracker for your role is not on github, uncomment the
@@ -27,4 +27,3 @@ galaxy_info:
 
   galaxy_tags:
     - system
-    - raspberrypi

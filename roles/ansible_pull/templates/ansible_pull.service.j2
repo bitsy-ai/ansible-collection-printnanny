@@ -4,8 +4,8 @@ Description=Ansible Pull for {{ item.name }}
 Wants={{ item.name }}.timer
 
 [Service]
-ExecStart={{ ansible_env.HOME }}/venv/ansible/bin/ansible-pull \
-    -i {{ ansible_env.HOME }}/.ansible/hosts \
+ExecStart={{ ansible_pull_venv }}/bin/ansible-pull \
+    -i {{ ansible_pull_hosts }} \
     -C {{ item.checkout }} \
     -U {{ item.url }} \
     {{ item.playbook }}

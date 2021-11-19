@@ -1,0 +1,10 @@
+# {{ ansible_managed }}
+[default]
+gathering=smart
+fact_caching={{ ansible_pull_fact_caching }}
+fact_caching_connection={{ ansible_pull_fact_caching_connection }}
+fact_caching_timeout={{ ansible_pull_fact_caching_timeout }}
+no_target_syslog=False
+ansible_user={{ ansible_pull_user }}
+ansible_connection=local
+ansible_python_intepreter={{ ansible_pull_venv }}/bin/python
