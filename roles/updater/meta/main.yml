@@ -1,6 +1,6 @@
 galaxy_info:
   author: Leigh Johnson
-  description: Manage ansible pull updates with systemd & systemd-cron
+  description: Manage ansible collection updates with systemd & systemd-cron
   company: Bitsy AI Labs
 
   # If the issue tracker for your role is not on github, uncomment the

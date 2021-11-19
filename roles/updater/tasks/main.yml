@@ -1,6 +1,6 @@
 - name: Create ansible-pull user
   ansible.builtin.user:
-    name: "{{ ansible_pull_user }}"
+    name: "{{ ansible_user }}"
     state: present
     shell: /sbin/nologin
     comment: "Ansible service user"
@@ -16,7 +16,7 @@
   become: true
   ansible.builtin.copy:
     dest: "/etc/sudoers.d/00_ansible_pwdless.conf"
-    content: "{{ ansible_pull_user }} ALL=(ALL) NOPASSWD: ALL"
+    content: "{{ ansible_user }} ALL=(ALL) NOPASSWD: ALL"
     validate: visudo -cf %s
     mode: "0644"
 
@@ -40,28 +40,28 @@
     state: directory
 
 - name: 'Create ansible virtual env'
-  become_user: '{{ ansible_pull_user }}'
+  become_user: '{{ ansible_user }}'
   pip:
     name:
       - 'pip>21,<22'
       - setuptools
       - wheel
     virtualenv_command: /usr/bin/python3 -m venv
-    virtualenv: '{{ ansible_pull_venv }}'
+    virtualenv: '{{ updater_ansible_venv }}'
     extra_args: '--no-cache-dir'
 
 - name: Install ansible into the specified (virtualenv)
-  become_user: '{{ ansible_pull_user }}'
+  become_user: '{{ ansible_user }}'
   pip:
-    name: '{{ ansible_pull_version }}'
+    name: '{{ updater_ansible_version }}'
     virtualenv_command: /usr/bin/python3 -m venv
-    virtualenv: '{{ ansible_pull_venv }}'
+    virtualenv: '{{ updater_ansible_venv }}'
     extra_args: '--no-cache-dir'
 
 - name: Setup passwordless sudo for ansible user
   become: true
   ansible.builtin.copy:
-    content: '%{{ ansible_pull_user }} ALL=(ALL) NOPASSWD: ALL }}'
+    content: '%{{ ansible_user }} ALL=(ALL) NOPASSWD: ALL }}'
     dest: /etc/sudoers.d/00_ansible_pwdless.conf
     owner: root
     group: root
@@ -78,7 +78,7 @@
   become: true
   ansible.builtin.copy:
     src: files/hosts
-    dest: '{{ ansible_pull_hosts }}'
+    dest: '{{ ansible_hosts_file }}'
     mode: 0660
 
 - name: Create ansible-pull systemd slice

@@ -1,5 +1,5 @@
 ---
-- hosts: default
+- hosts: all
   gather_facts: true
   tasks:
     - name: Update apt cache
