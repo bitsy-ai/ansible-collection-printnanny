@@ -38,7 +38,7 @@
   file:
     path: /etc/ansible
     state: directory
-    
+
 - name: 'Create ansible virtual env'
   become_user: '{{ ansible_pull_user }}'
   pip:
@@ -74,11 +74,11 @@
     src: ansible.cfg.j2
     dest: "/etc/ansible/ansible.cfg"
 
-- name: Create /etc/ansible/hosts
+- name: Create ansible pull hosts
   become: true
   ansible.builtin.copy:
     src: files/hosts
-    dest: '/etc/ansible/hosts'
+    dest: '{{ ansible_pull_hosts }}'
     mode: 0660
 
 - name: Create ansible-pull systemd slice

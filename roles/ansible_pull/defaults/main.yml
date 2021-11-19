@@ -4,8 +4,8 @@
 bitsyai_path: /opt/bitsy-ai
 ansible_pull_user: ansible
 ansible_pull_version: 'ansible>4,<5'
-ansible_pull_venv: "/home/{{ ansible_pull_user }}/ansible/venv"
-
+ansible_pull_venv: "{{ bitsyai_path }}/ansible/venv"
+ansible_pull_hosts: /etc/ansible/hosts
 ansible_pull_items:
   - name: 'bitsy-update-rpi'
     src: 'bitsyai.rpi.playbooks.automatic_updates'
