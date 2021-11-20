@@ -1,0 +1,25 @@
+# {{ ansible_managed }}
+[Unit]
+Description=Manually run all Bitsy software updaters
+
+[Service]
+Type=oneshot
+{% for item in updater_collections %}
+ExecStartPre=/bin/bash -xc '/usr/bin/systemctl is-active --quiet {{ item.name }}.service && (echo "Updater {{ conflict }} already running, exiting now"; exit 1) || exit 0'
+{% endfor %}
+
+{% for item in updater_collections %}
+ExecStartPre={{ updater.ansible_venv }}/bin/ansible-galaxy \
+    -p {{ updater_ansible_config.collections_path }}
+    collection install {{ item.url }}
+{% endfor %}
+
+{% for item in updater_collections %}
+ExecStart={{ updater.ansible_venv }}/bin/ansible-playbook \
+    {{ item.src }}
+{% endfor %}
+
+Slice=updater.slice
+
+[Install]
+WantedBy=multi-user.target

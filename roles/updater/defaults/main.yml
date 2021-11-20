@@ -1,0 +1,25 @@
+---
+# defaults file for ansible_pull
+
+bitsy_path: /opt/bitsy
+
+updater:
+  user: ansible
+  ansible_version: 'ansible>4,<5'
+  ansible_venv: "{{ bitsy_path }}/ansible/venv"
+  ansible_hosts_file: /etc/ansible/hosts
+
+updater_ansible_config:
+  collections_path: "{{ bitsy_path}}/ansible/collections"
+  fact_caching_timeout: 86400
+  fact_caching: jsonfile
+  fact_caching_connection: /etc/ansible/facts.json
+
+updater_collections:
+  - name: 'bitsy-updater-rpi'
+    src: 'bitsyai.rpi.automatic_updates'
+    url: 'git+https://github.com/bitsy-ai/ansible-collection-rpi.git,main'
+    timer:
+      OnUnitInactiveSec: 3600 # update every hour
+      RandomizedDelaySec: 60 # offset by 60 seconds of jitter
+      OnStartupSec: 120 # always update 2 minutes after booting

@@ -1,6 +1,6 @@
 # {{ ansible_managed }}
 [Unit]
-Description=Run ansible-pull against {{ item.src }}
+Description=Execite ansible from {{ item.src }}
 Requires={{ item.name }}.service
 [Timer]
 Unit={{ item.name }}.service

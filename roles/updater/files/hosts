@@ -1,0 +1,2 @@
+[automatic_updates]
+localhost ansible_connection=local

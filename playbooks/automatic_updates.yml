@@ -1,0 +1,7 @@
+---
+- hosts: automatic_updates
+  gather_facts: true
+  tasks:
+    - name: Setup bitsy updater
+      import_role:
+        name: bitsyai.rpi.updater

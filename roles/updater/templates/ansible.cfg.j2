@@ -1,0 +1,14 @@
+# {{ ansible_managed }}
+[defaults]
+ansible_connection=local
+ansible_python_intepreter={{ updater.ansible_venv }}/bin/python
+ansible_user={{ updater.user }}
+collections_path=~/.ansible/collections:/usr/share/ansible/collections:{{ updater_ansible_config.collections_path }}
+fact_caching_connection={{ updater_ansible_config.fact_caching_connection }}
+fact_caching_timeout={{ updater_ansible_config.fact_caching_timeout }}
+fact_caching={{ updater_ansible_config.fact_caching }}
+gathering=smart
+no_target_syslog=False
+
+[inventory]
+enable_plugins = yaml, ini
