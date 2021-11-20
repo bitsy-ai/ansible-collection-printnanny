@@ -3,7 +3,7 @@
 FILES=("galaxy.yml")
 
 old_tag="$(echo $1 | sed 's/v//g')"
-new_tag"$(echo $2 | sed 's/v//g')"
+new_tag="$(echo $2 | sed 's/v//g')"
 for f in "${FILES[@]}"
 do
    :
