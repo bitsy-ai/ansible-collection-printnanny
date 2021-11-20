@@ -16,7 +16,7 @@ jobs:
       uses: bitsy-ai/github-tag-action@1.37.0
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        WITH_V: false
+        WITH_V: true
         DRY_RUN: true
         RELEASE_BRANCHES: "main"
         PRERELEASE_SUFFIX: "nightly"

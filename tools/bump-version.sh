@@ -2,10 +2,12 @@
 
 FILES=("galaxy.yml")
 
+old_tag="$(echo $1 | sed 's/v//g')"
+new_tag"$(echo $2 | sed 's/v//g')"
 for f in "${FILES[@]}"
 do
-   : 
-   sed -i "s/$1/$2/g" $f
+   :
+   sed -i "s/$old_tag/$new_tag/g" $f
 done
 
 git add -A
