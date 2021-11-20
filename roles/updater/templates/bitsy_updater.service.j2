@@ -6,8 +6,8 @@ Wants={{ item.name }}.timer
 [Service]
 ExecStartPre={{ updater.ansible_venv }}/bin/ansible-galaxy \
     collection install \
-    -p {{ updater_ansible_config.collections_path }}
-    collection install {{ item.url }}
+    -p {{ updater_ansible_config.collections_path }} \
+    {{ item.url }}
 
 ExecStart={{ updater.ansible_venv }}/bin/ansible-playbook \
     {{ item.src }}
