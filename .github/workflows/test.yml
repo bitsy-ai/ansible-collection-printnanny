@@ -16,7 +16,7 @@ jobs:
           with:
             path: "${{ github.repository }}"
         - name: Perform sanity testing with ansible-test
-          uses: ansible-community/ansible-test-gh-action@release/v1
+          uses: leigh-johnson/ansible-test-gh-action@ljohnson-loglevel
           with:
             ansible-core-version: devel
             python-version: 3.8
@@ -29,14 +29,16 @@ jobs:
           with:
             path: "${{ github.repository }}"
         - name: Perform integration testing with ansible-test
-          uses: ansible-community/ansible-test-gh-action@release/v1
+          uses: leigh-johnson/ansible-test-gh-action@ljohnson-loglevel
           with:
             ansible-core-version: stable-2.11
+            docker-image: ubuntu2004
             pre-test-cmd: echo This runs before the ansible-test invocation
             python-version: 3.8
             target-python-version: 3.8
             testing-type: integration
             test-deps: ansible.posix
+            verbosity: -vvv
 
     # units:
     #   runs-on: ubuntu-latest
@@ -45,7 +47,7 @@ jobs:
     #       with:
     #         path: "${{ github.repository }}"
     #     - name: Perform sanity testing with ansible-test
-    #       uses: ansible-community/ansible-test-gh-action@release/v1
+    #       uses: leigh-johnson/ansible-test-gh-action@ljohnson-loglevel
     #       with:
     #         ansible-core-version: stable-2.11
     #         testing-type: units
