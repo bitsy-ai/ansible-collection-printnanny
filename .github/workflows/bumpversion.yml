@@ -13,7 +13,7 @@ jobs:
         fetch-depth: '0'
     - name: Bump version (dry run)
       id: tags
-      uses: anothrNick/github-tag-action@1.36.0
+      uses: bitsy-ai/github-tag-action@1.37.0
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         WITH_V: false
@@ -22,13 +22,13 @@ jobs:
         PRERELEASE_SUFFIX: "nightly"
     - name: Commit version bump message
       run: |
-        ./tools/bump-version.sh ${{ steps.tags.outputs.tag }} ${{ steps.tags.outputs.new_tag }}
+        ./tools/bump-version.sh ${{ steps.tags.outputs.old_tag }} ${{ steps.tags.outputs.new_tag }}
         git add -A
         git config --global user.email "releases@bitsy.ai"
         git config --global user.name "Release Automation"
         git commit -m "🚀 Bump version: ${{ steps.tags.outputs.tag }} -> ${{ steps.tags.outputs.new_tag }}"
     - name: Bump version and push tag
-      uses: anothrNick/github-tag-action@1.36.0
+      uses: bitsy-ai/github-tag-action@1.37.0
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         WITH_V: false
