@@ -69,6 +69,10 @@
     group: root
     mode: 0440
 
+- name: Get ara plugin configs
+  command: "{{ ansible_venv }} -m ara.setup.env"
+  register: ara_plugin_config
+
 - name: Create ansible.cfg
   become: true
   ansible.builtin.template:

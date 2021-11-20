@@ -3,6 +3,8 @@
 
 bitsy_path: /opt/bitsy
 
+ara_enabled: true
+
 updater:
   user: ansible
   ansible_version: 'ansible>4,<5'
