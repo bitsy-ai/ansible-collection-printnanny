@@ -9,3 +9,6 @@ fact_caching_timeout={{ updater_ansible_config.fact_caching_timeout }}
 fact_caching={{ updater_ansible_config.fact_caching }}
 gathering=smart
 no_target_syslog=False
+
+[inventory]
+enable_plugins = yaml, ini
