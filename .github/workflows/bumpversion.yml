@@ -23,10 +23,6 @@ jobs:
     - name: Commit version bump message
       run: |
         ./tools/bump-version.sh ${{ steps.tags.outputs.old_tag }} ${{ steps.tags.outputs.new_tag }}
-        git add -A
-        git config --global user.email "releases@bitsy.ai"
-        git config --global user.name "Release Automation"
-        git commit -m "🚀 Bump version: ${{ steps.tags.outputs.tag }} -> ${{ steps.tags.outputs.new_tag }}"
     - name: Bump version and push tag
       uses: bitsy-ai/github-tag-action@1.37.0
       env:
