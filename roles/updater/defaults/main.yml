@@ -8,6 +8,7 @@ updater:
   ansible_version: 'ansible>4,<5'
   ansible_venv: "{{ bitsy_path }}/ansible/venv"
   ansible_hosts_file: /etc/ansible/hosts
+  ara_version: 'ara>1.5,<1.6'
 
 updater_ansible_config:
   collections_path: "{{ bitsy_path}}/ansible/collections"

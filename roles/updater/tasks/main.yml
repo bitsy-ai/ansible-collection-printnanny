@@ -53,7 +53,9 @@
 - name: Install ansible into the specified (virtualenv)
   become: true
   pip:
-    name: '{{ updater.ansible_version }}'
+    name:
+      - '{{ updater.ansible_version }}'
+      - '{{ updater.ara_version }}'
     virtualenv_command: /usr/bin/python3 -m venv
     virtualenv: '{{ updater.ansible_venv }}'
     extra_args: '--no-cache-dir'
