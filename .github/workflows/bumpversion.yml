@@ -1,0 +1,37 @@
+name: Bump stable version
+on:
+  push:
+    branches:
+      - main
+      - devel
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: '0'
+    - name: Bump version (dry run)
+      id: tags
+      uses: anothrNick/github-tag-action@1.36.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        WITH_V: false
+        DRY_RUN: false
+        RELEASE_BRANCHES: "main"
+        PRERELEASE_SUFFIX: "nightly"
+    - name: Commit version bump message
+      run: |
+        ./tools/bump-version.sh ${{ steps.tags.outputs.tag }} ${{ steps.tags.outputs.new_tag }}
+        git add -A
+        git config user.email "releases@bitsy.ai"
+        git commit -m "🚀 Bump version: ${{ steps.tags.outputs.tag }} -> ${{ steps.tags.outputs.new_tag }}"
+    - name: Bump version and push tag
+      id: tags
+      uses: anothrNick/github-tag-action@1.36.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        WITH_V: false
+        DRY_RUN: false
+        RELEASE_BRANCHES: "main"
+        PRERELEASE_SUFFIX: "nightly"
