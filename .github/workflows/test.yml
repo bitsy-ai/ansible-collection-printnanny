@@ -32,6 +32,7 @@ jobs:
           uses: ansible-community/ansible-test-gh-action@release/v1
           with:
             ansible-core-version: stable-2.11
+            docker-image: ubuntu2004
             pre-test-cmd: echo This runs before the ansible-test invocation
             python-version: 3.8
             target-python-version: 3.8
