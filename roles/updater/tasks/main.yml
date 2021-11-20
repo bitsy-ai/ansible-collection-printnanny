@@ -108,7 +108,6 @@
   become: true
   ansible.builtin.systemd:
     name: '{{ item.name }}'
-    state: started
     enabled: true
     daemon_reload: true
   with_items: '{{ updater_collections }}'
