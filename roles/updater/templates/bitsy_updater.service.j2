@@ -4,6 +4,7 @@ Description=Bitsy Updater {{ item.src }}
 Wants={{ item.name }}.timer
 
 [Service]
+Environment="PATH={{ updater.ansible_venv }}/bin:{{ ansible_env.PATH }}"
 ExecStartPre={{ updater.ansible_venv }}/bin/ansible-galaxy \
     collection install \
     {{ item.url }}
