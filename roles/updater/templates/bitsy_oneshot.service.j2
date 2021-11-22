@@ -10,7 +10,6 @@ ExecStartPre=/bin/bash -xc '/usr/bin/systemctl is-active --quiet {{ item.name }}
 
 {% for item in updater_collections %}
 ExecStartPre={{ updater.ansible_venv }}/bin/ansible-galaxy \
-    -p {{ updater_ansible_config.collections_path }}
     collection install {{ item.url }}
 {% endfor %}
 
