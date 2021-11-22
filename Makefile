@@ -30,7 +30,11 @@ unit-test: ansible-requirements
 	ansible-test units --docker $(TARGET_IMAGE) --python $(PYTHON_VERSION)
 
 integration-test: ansible-requirements
-	ANSIBLE_KEEP_REMOTE_FILES=1 ansible-test integration --docker $(TARGET_IMAGE) --python $(PYTHON_VERSION) --allow-destructive
+	ANSIBLE_KEEP_REMOTE_FILES=1 ansible-test integration \
+		--docker $(TARGET_IMAGE) \
+		--python $(PYTHON_VERSION) \
+		--allow-destructive \
+		--docker-terminate never
 
 test: sanity-test integration-test
 
