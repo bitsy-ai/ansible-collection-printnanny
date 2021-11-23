@@ -3,7 +3,7 @@
 Description=Bitsy Automatic Updater
 Wants=network-online.target
 After=network-online.target
-Wants={{ item.name }}.timer
+Wants={{ updater.name }}.timer
 
 [Service]
 Type=oneshot
