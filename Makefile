@@ -34,7 +34,7 @@ integration-test: ansible-requirements
 		--docker $(TARGET_IMAGE) \
 		--python $(PYTHON_VERSION) \
 		--allow-destructive \
-		--docker-terminate never
+		--docker-terminate success
 
 test: sanity-test integration-test
 
