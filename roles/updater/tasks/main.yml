@@ -35,13 +35,14 @@
 
 - name: Create /etc/ansible
   become: true
-  file:
+  ansible.builtin.file:
     path: /etc/ansible
     state: directory
+    mode: 0664
 
 - name: 'Create ansible virtual env'
   become: true
-  pip:
+  ansible.builtin.pip:
     name:
       - 'pip>21,<22'
       - setuptools
@@ -52,7 +53,7 @@
 
 - name: Install ansible into the specified (virtualenv)
   become: true
-  pip:
+  ansible.builtin.pip:
     name: '{{ updater.ansible_version }}'
     virtualenv_command: /usr/bin/python3 -m venv
     virtualenv: '{{ updater.ansible_venv }}'
@@ -81,33 +82,30 @@
     dest: '{{ updater.ansible_hosts_file }}'
     mode: 0664
 
-- name: Create bitsy updater systemd slice
+- name: Create updater systemd slice
   become: true
   ansible.builtin.template:
     mode: 0664
-    src: bitsy_updater.slice.j2
-    dest: '/etc/systemd/system/bitsy_updater.slice'
+    src: bitsy-updater.slice.j2
+    dest: '/etc/systemd/system/{{ updater.name }}.slice'
 
-- name: Create bitsy updater systemd timers
+- name: Create updater systemd timers
   become: true
   ansible.builtin.template:
     mode: 0664
-    src: bitsy_updater.timer.j2
-    dest: '/etc/systemd/system/{{ item.name }}.timer'
-  with_items: '{{ updater_collections }}'
+    src: bitsy-updater.timer.j2
+    dest: '/etc/systemd/system/{{ updater.name }}.timer'
 
-- name: Create bitsy updater systemd units
+- name: Create updater systemd service unit
   become: true
   ansible.builtin.template:
     mode: 0664
-    src: bitsy_updater.service.j2
-    dest: '/etc/systemd/system/{{ item.name }}.service'
-  with_items: '{{ updater_collections }}'
+    src: bitsy-updater.service.j2
+    dest: '/etc/systemd/system/{{ updater.name }}.service'
 
-- name: Enable units
+- name: Enable unit
   become: true
   ansible.builtin.systemd:
-    name: '{{ item.name }}'
+    name: '{{ updater.name }}'
     enabled: true
     daemon_reload: true
-  with_items: '{{ updater_collections }}'
