@@ -82,31 +82,30 @@
     dest: '{{ updater.ansible_hosts_file }}'
     mode: 0664
 
-- name: Create bitsy updater systemd slice
+- name: Create updater systemd slice
   become: true
   ansible.builtin.template:
     mode: 0664
-    src: bitsy_updater.slice.j2
-    dest: '/etc/systemd/system/bitsy-updater.slice'
+    src: bitsy-updater.slice.j2
+    dest: '/etc/systemd/system/{{ updater.name }}.slice'
 
-- name: Create bitsy updater systemd timers
+- name: Create updater systemd timers
   become: true
   ansible.builtin.template:
     mode: 0664
-    src: bitsy_updater.timer.j2
-    dest: '/etc/systemd/system/bitsy-updater.timer'
+    src: bitsy-updater.timer.j2
+    dest: '/etc/systemd/system/{{ updater.name }}.timer'
 
-- name: Create individual bitsy updater systemd units
+- name: Create updater systemd service unit
   become: true
   ansible.builtin.template:
     mode: 0664
-    src: bitsy_updater.service.j2
-    dest: '/etc/systemd/system/bitsy-updater.service'
+    src: bitsy-updater.service.j2
+    dest: '/etc/systemd/system/{{ updater.name }}.service'
 
-- name: Enable units
+- name: Enable unit
   become: true
   ansible.builtin.systemd:
-    name: '{{ item.name }}'
+    name: '{{ updater.name }}'
     enabled: true
     daemon_reload: true
-  with_items: '{{ updater_collections }}'

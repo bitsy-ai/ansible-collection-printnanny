@@ -1,6 +1,6 @@
 # {{ ansible_managed }}
 [Unit]
-Description=Execite ansible from {{ updater.src }}
+Description={{ updater.name }} timer
 Requires={{ updater.name }}.service
 [Timer]
 Unit={{ updater.name }}.service
