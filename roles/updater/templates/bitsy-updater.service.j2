@@ -1,18 +1,26 @@
 # {{ ansible_managed }}
 [Unit]
-Description=Bitsy Updater {{ item.src }}
+Description=Bitsy Automatic Updater
+Wants=network-online.target
+After=network-online.target
 Wants={{ item.name }}.timer
 
 [Service]
+Type=oneshot
 Environment="PATH={{ updater.ansible_venv }}/bin:{{ ansible_env.PATH }}"
+{% for item in updater.collections %}
 ExecStartPre={{ updater.ansible_venv }}/bin/ansible-galaxy \
-    collection install \
-    {{ item.url }}
+    collection install {{ item.url }}
+{% endfor %}
 
+{% for item in updater.collections %}
 ExecStart={{ updater.ansible_venv }}/bin/ansible-playbook \
     {{ item.src }}
+{% endfor %}
 
-Slice=updater.slice
+Restart=on-failure
+
+Slice={{ updater.name }}.slice
 
 [Install]
 WantedBy=multi-user.target

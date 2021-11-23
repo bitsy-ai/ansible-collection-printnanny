@@ -87,35 +87,21 @@
   ansible.builtin.template:
     mode: 0664
     src: bitsy_updater.slice.j2
-    dest: '/etc/systemd/system/bitsy_updater.slice'
+    dest: '/etc/systemd/system/bitsy-updater.slice'
 
 - name: Create bitsy updater systemd timers
   become: true
   ansible.builtin.template:
     mode: 0664
     src: bitsy_updater.timer.j2
-    dest: '/etc/systemd/system/{{ item.name }}.timer'
-  with_items: '{{ updater_collections }}'
+    dest: '/etc/systemd/system/bitsy-updater.timer'
 
 - name: Create individual bitsy updater systemd units
   become: true
   ansible.builtin.template:
     mode: 0664
     src: bitsy_updater.service.j2
-    dest: '/etc/systemd/system/{{ item.name }}.service'
-  with_items: '{{ updater_collections }}'
-
-- name: Create manual oneshot updater service
-  become: true
-  ansible.builtin.template:
-    mode: 0664
-    src: bitsy_oneshot.service.j2
-    dest: /etc/systemd/system/bitsy-updater.service
-
-- name: Reload manual oneshot unit
-  ansible.builtin.systemd:
-    name: 'bitsy-updater'
-    state: reloaded
+    dest: '/etc/systemd/system/bitsy-updater.service'
 
 - name: Enable units
   become: true

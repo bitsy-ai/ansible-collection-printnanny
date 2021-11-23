@@ -3,9 +3,9 @@
 ansible_connection=local
 ansible_python_intepreter={{ updater.ansible_venv }}/bin/python
 ansible_user={{ updater.user }}
-fact_caching_connection={{ updater_ansible_config.fact_caching_connection }}
-fact_caching_timeout={{ updater_ansible_config.fact_caching_timeout }}
-fact_caching={{ updater_ansible_config.fact_caching }}
+fact_caching_connection={{ updater.ansible_config.fact_caching_connection }}
+fact_caching_timeout={{ updater.ansible_config.fact_caching_timeout }}
+fact_caching={{ updater.ansible_config.fact_caching }}
 gathering=smart
 no_target_syslog=False
 
