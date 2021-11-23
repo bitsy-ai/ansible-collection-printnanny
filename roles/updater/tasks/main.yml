@@ -110,11 +110,11 @@
   ansible.builtin.template:
     mode: 0664
     src: bitsy_oneshot.service.j2
-    dest: /etc/systemd/system/bitsy-update
+    dest: /etc/systemd/system/bitsy-updater.service
 
 - name: Reload manual oneshot unit
   ansible.builtin.systemd:
-    name: 'bitsy-update'
+    name: 'bitsy-updater'
     state: 'reloaded'
 
 - name: Enable units
