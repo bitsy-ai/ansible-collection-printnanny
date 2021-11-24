@@ -108,4 +108,3 @@
   ansible.builtin.systemd:
     name: '{{ updater.name }}'
     enabled: true
-    daemon_reload: true
