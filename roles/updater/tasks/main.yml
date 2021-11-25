@@ -1,4 +1,4 @@
-- name: Create bitsy updater user
+- name: Create rpi-updater updater user
   ansible.builtin.user:
     name: "{{ updater.user }}"
     state: present
@@ -37,6 +37,13 @@
   become: true
   ansible.builtin.file:
     path: /etc/ansible
+    state: directory
+    mode: 0664
+
+- name: Create /var/run/ansible
+  become: true
+  ansible.builtin.file:
+    path: /var/run/ansible
     state: directory
     mode: 0664
 
@@ -86,21 +93,21 @@
   become: true
   ansible.builtin.template:
     mode: 0664
-    src: bitsy-updater.slice.j2
+    src: rpi-updater.slice.j2
     dest: '/etc/systemd/system/{{ updater.name }}.slice'
 
 - name: Create updater systemd timers
   become: true
   ansible.builtin.template:
     mode: 0664
-    src: bitsy-updater.timer.j2
+    src: rpi-updater.timer.j2
     dest: '/etc/systemd/system/{{ updater.name }}.timer'
 
 - name: Create updater systemd service unit
   become: true
   ansible.builtin.template:
     mode: 0664
-    src: bitsy-updater.service.j2
+    src: rpi-updater.service.j2
     dest: '/etc/systemd/system/{{ updater.name }}.service'
 
 - name: Enable unit

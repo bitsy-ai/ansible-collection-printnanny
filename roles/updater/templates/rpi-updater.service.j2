@@ -6,7 +6,7 @@ After=network-online.target
 Wants={{ updater.name }}.timer
 
 [Service]
-Type=oneshot
+Type=simple
 Environment="PATH={{ updater.ansible_venv }}/bin:{{ ansible_env.PATH }}"
 {% for item in updater.collections %}
 ExecStartPre={{ updater.ansible_venv }}/bin/ansible-galaxy \
@@ -14,9 +14,13 @@ ExecStartPre={{ updater.ansible_venv }}/bin/ansible-galaxy \
 {% endfor %}
 
 {% for item in updater.collections %}
-ExecStart={{ updater.ansible_venv }}/bin/ansible-playbook \
+ExecStart=/usr/bin/flock -F {{ updater.ansible_lockfile }} \
+    {{ updater.ansible_venv }}/bin/ansible-playbook \
     {{ item.src }}
 {% endfor %}
+
+ExecStartPost=-/usr/bin/flock -F /path/to/lock.file \
+    /usr/bin/rm {{ updater.ansible_lockfile }}
 
 Restart=on-failure
 
