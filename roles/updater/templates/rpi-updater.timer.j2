@@ -3,6 +3,7 @@
 Description={{ updater.name }} timer
 Requires={{ updater.name }}.service
 [Timer]
+Persistent=true
 Unit={{ updater.name }}.service
 {% if updater.timer.OnStartupSec %} 
 OnStartupSec={{ updater.timer.OnStartupSec }}
