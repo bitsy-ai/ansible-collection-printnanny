@@ -8,16 +8,12 @@ Wants={{ updater.name }}.timer
 [Service]
 Type=simple
 Environment="PATH={{ updater.ansible_venv }}/bin:{{ ansible_env.PATH }}"
-{% for item in updater.collections %}
 ExecStartPre={{ updater.ansible_venv }}/bin/ansible-galaxy \
-    collection install {{ item.url }}
-{% endfor %}
+    collection install {{ updater_collection.url }}
 
-{% for item in updater.collections %}
 ExecStart=/usr/bin/flock -F {{ updater.ansible_lockfile }} \
     {{ updater.ansible_venv }}/bin/ansible-playbook \
-    {{ item.src }}
-{% endfor %}
+    {{ updater_collection.src }}
 
 ExecStartPost=-/usr/bin/flock -F /path/to/lock.file \
     /usr/bin/rm {{ updater.ansible_lockfile }}

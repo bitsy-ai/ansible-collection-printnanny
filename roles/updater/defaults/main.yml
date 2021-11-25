@@ -14,12 +14,13 @@ updater:
     OnUnitInactiveSec: 3600 # update every hour
     RandomizedDelaySec: 60 # offset by 60 seconds of jitter
     OnStartupSec: 120 # always update 2 minutes after booting
-  collections:
-    - name: 'rpi-updater'
-      src: 'bitsyai.rpi.automatic_updates'
-      url: 'git+https://github.com/bitsy-ai/ansible-collection-rpi.git,main'
 
   ansible_config:
     fact_caching_timeout: 86400
     fact_caching: jsonfile
     fact_caching_connection: /etc/ansible/facts.json
+
+updater_collection:
+  name: 'rpi-updater'
+  src: 'bitsyai.rpi.automatic_updates'
+  url: 'git+https://github.com/bitsy-ai/ansible-collection-rpi.git,main'
