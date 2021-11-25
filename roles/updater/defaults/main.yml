@@ -4,7 +4,7 @@
 app_path: /opt/bitsy
 
 updater:
-  name: 'bitsy-updater'
+  name: 'rpi-updater'
   user: ansible
   ansible_version: 'ansible>4,<5'
   ansible_venv: "{{ app_path }}/ansible/venv"
@@ -15,7 +15,7 @@ updater:
     RandomizedDelaySec: 60 # offset by 60 seconds of jitter
     OnStartupSec: 120 # always update 2 minutes after booting
   collections:
-    - name: 'bitsy-updater-rpi'
+    - name: 'rpi-updater'
       src: 'bitsyai.rpi.automatic_updates'
       url: 'git+https://github.com/bitsy-ai/ansible-collection-rpi.git,main'
 
