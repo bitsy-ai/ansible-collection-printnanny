@@ -1,3 +1,8 @@
+- name: Update pkg cache
+  become: true
+  ansible.builtin.apt:
+    update_cache: true
+
 - name: Remove extra pkgs if building from full Raspi OS img
   become: true
   ansible.builtin.apt:
