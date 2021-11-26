@@ -6,7 +6,7 @@ After=network-online.target
 Wants={{ updater.name }}.timer
 
 [Service]
-Type=simple
+Type=oneshot
 ExecStartPre=mkdir -p {{ updater.ansible_tmpfs }}
 Environment="PATH={{ updater.ansible_venv }}/bin:{{ ansible_env.PATH }}"
 ExecStartPre={{ updater.ansible_venv }}/bin/ansible-galaxy \
