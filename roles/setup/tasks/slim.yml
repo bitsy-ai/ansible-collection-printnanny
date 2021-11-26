@@ -5,14 +5,14 @@
       - alacarte
       - arandr
       - bluej
-      - colord
-      - colord-data
       - chromium-browser
       - chromium-browser-l10n
       - chromium-codecs-ffmpeg-extra
-      - dictionaries-common
-      - desktop-file-utils
+      - colord
+      - colord-data
       - desktop-base
+      - desktop-file-utils
+      - dictionaries-common
       - emacsen-common
       - fonts-cantarell
       - fonts-dejavu-core
@@ -27,20 +27,20 @@
       - galculator
       - geany
       - ghostscript
-      - gpicview
-      - gsettings-desktop-schema
-      - greenfoot
-      - gnome-icon-theme
-      - gnome-themes-standard
       - gnome-desktop3-data
+      - gnome-icon-theme
       - gnome-settings-daemon-common
       - gnome-themes-extra
       - gnome-themes-extra-data
+      - gnome-themes-standard
+      - gpicview
+      - greenfoot
+      - gsettings-desktop-schema
       - gtk-update-icon-cache
+      - gtk2-engines
       - gtk2-engines-clearlookspix
       - gtk2-engines-pixbuf
       - gtk2-engines-pixflat
-      - gtk2-engines
       - gui-pkinst
       - hicolor-icon-theme
       - hunspell-en-gb
@@ -48,18 +48,18 @@
       - javascript-common
       - libgnome-desktop-3-19
       - libgnome-menu-3-0
-      - libsoup-gnome
+      - libgtk2.0-common
+      - libgtk3-common
       - libjavascriptcoregtk-4.0-18
       - libreoffice-common
       - libreoffice-core
+      - libsoup-gnome
       - libwebkit2gtk-4.0-37
-      - libgtk2.0-common
-      - libgtk3-common
       - minecraft-pi
       - nodered
       - oracle-java8-jdk
-      - pixflat-icons
       - pi-greeter
+      - pixflat-icons
       - pocketsphinx-en-us
       - python-minecraftpi
       - python3-mypy
@@ -68,10 +68,24 @@
       - scratch
       - sonic-pi
       - squeak-plugins-scratch
-      - system-config-printer-common
       - squeak-vm
+      - system-config-printer-common
       - vim-runtime
       - wolfram-engine
       - zenity
+      - xserver-common
+      - xserver-xorg-core
+      - xserver-xorg-input-all
+      - xserver-xorg-input-libinput
+      - xserver-xorg-video-all
+      - xserver-xorg-video-amdgpu
+      - xserver-xorg-video-ati
+      - xserver-xorg-video-fbdev
+      - xserver-xorg-video-fbturbo
+      - xserver-xorg-video-nouveau
+      - xserver-xorg-video-radeon
+      - xserver-xorg-video-vesa
+      - xserver-xorg
+
     state: absent
     autoremove: true
