@@ -6,6 +6,13 @@
     comment: "Ansible service user"
   become: true
 
+- name: Create ansible dir
+  become: true
+  ansible.builtin.file:
+    path: '{{ updater.ansible_base_path }}'
+    state: directory
+    mode: 0664
+
 - name: Install sudo pkg
   become: true
   ansible.builtin.apt:
@@ -39,6 +46,13 @@
     path: /etc/ansible
     state: directory
     mode: 0664
+
+- name: Render requirements.yml
+  become: true
+  ansible.builtin.template:
+    mode: 0664
+    src: "{{ updater.ansible_requirements_template }}"
+    dest: "{{ updater.ansible_requirements }}"
 
 - name: Create /var/run/ansible
   become: true
@@ -82,13 +96,6 @@
     src: ansible.cfg.j2
     dest: "/etc/ansible/ansible.cfg"
 
-- name: Create ansible pull hosts
-  become: true
-  ansible.builtin.copy:
-    src: files/hosts
-    dest: '{{ updater.ansible_hosts_file }}'
-    mode: 0664
-
 - name: Create updater systemd slice
   become: true
   ansible.builtin.template:
@@ -115,3 +122,10 @@
   ansible.builtin.systemd:
     name: '{{ updater.name }}'
     enabled: true
+
+- name: Create ansible pull hosts
+  become: true
+  ansible.builtin.copy:
+    src: files/hosts
+    dest: '{{ updater.ansible_hosts_file }}'
+    mode: 0664
