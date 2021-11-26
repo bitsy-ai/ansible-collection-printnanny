@@ -15,6 +15,7 @@
       - desktop-file-utils
       - dictionaries-common
       - emacsen-common
+      - fontconfig-config
       - fonts-cantarell
       - fonts-dejavu-core
       - fonts-droid-fallback
