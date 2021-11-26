@@ -9,7 +9,7 @@
     name: '{{ item }}'
     state: absent
     purge: true
-  loop: rpi_slim_pkgs
+  loop: '{{ rpi_slim_pkgs }}'
 
 - name: Remove dependencies that are no longer required
   ansible.builtin.apt:
