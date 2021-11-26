@@ -6,6 +6,13 @@
     comment: "Ansible service user"
   become: true
 
+- name: Create ansible dir
+  become: true
+  ansible.builtin.file:
+    path: '{{ updater.base_path }}'
+    state: directory
+    mode: 0664
+
 - name: Install sudo pkg
   become: true
   ansible.builtin.apt:
