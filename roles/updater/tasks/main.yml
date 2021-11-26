@@ -104,7 +104,8 @@
     mode: 0664
 
 - name: Pre-install Ansible Collection
-  ansible.builtin.command: 
+  become: true
+  ansible.builtin.command:
     argv:
       - '{{ updater.ansible_venv }}/bin/ansible-galaxy'
       - collection
