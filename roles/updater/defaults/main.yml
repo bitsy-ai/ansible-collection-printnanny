@@ -9,6 +9,7 @@ updater:
   ansible_version: 'ansible>4,<5'
   ansible_venv: "{{ app_path }}/ansible/venv"
   ansible_hosts_file: /etc/ansible/hosts
+  ansible_tmpfs: /var/run/ansible
   ansible_lockfile: /var/run/ansible/ansible.lock
   timer:
     OnUnitInactiveSec: 3600 # update every hour

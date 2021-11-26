@@ -7,6 +7,7 @@ Wants={{ updater.name }}.timer
 
 [Service]
 Type=simple
+ExecStartPre=mkdir -p {{ updater.ansible_tmpfs }}
 Environment="PATH={{ updater.ansible_venv }}/bin:{{ ansible_env.PATH }}"
 ExecStartPre={{ updater.ansible_venv }}/bin/ansible-galaxy \
     collection install {{ updater_collection.url }}
@@ -19,7 +20,7 @@ ExecStartPost=-/usr/bin/flock -F /path/to/lock.file \
     /usr/bin/rm {{ updater.ansible_lockfile }}
 
 Restart=on-failure
-
+RestartSec=600
 Slice={{ updater.name }}.slice
 
 [Install]
