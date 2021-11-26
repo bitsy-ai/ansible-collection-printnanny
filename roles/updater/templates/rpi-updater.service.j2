@@ -10,7 +10,7 @@ Type=simple
 ExecStartPre=mkdir -p {{ updater.ansible_tmpfs }}
 Environment="PATH={{ updater.ansible_venv }}/bin:{{ ansible_env.PATH }}"
 ExecStartPre={{ updater.ansible_venv }}/bin/ansible-galaxy \
-    collection install {{ updater_collection.url }}
+    collection install -r {{ updater.ansible_requirements }}
 
 ExecStart=/usr/bin/flock -F {{ updater.ansible_lockfile }} \
     {{ updater.ansible_venv }}/bin/ansible-playbook \

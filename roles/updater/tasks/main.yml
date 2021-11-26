@@ -40,6 +40,13 @@
     state: directory
     mode: 0664
 
+- name: Render requirements.yml
+  become: true
+  ansible.builtin.template:
+    mode: 0664
+    src: requirements.yml.j2
+    dest: "{{ updater.ansible_requirements }}"
+
 - name: Create /var/run/ansible
   become: true
   ansible.builtin.file:
@@ -88,6 +95,14 @@
     src: files/hosts
     dest: '{{ updater.ansible_hosts_file }}'
     mode: 0664
+
+- name: Pre-install Ansible Collection
+  ansible.builtin.command: 
+    argv:
+      - '{{ updater.ansible_venv }}/bin/ansible-galaxy'
+      - collection
+      - install
+      - '{{ updater_collection.url }}'
 
 - name: Create updater systemd slice
   become: true
