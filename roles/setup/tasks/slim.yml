@@ -101,12 +101,15 @@
       - zenity
 
     state: absent
+    purge: true
 
-- name: Run apt autoremove and autoclean
+- name: Remove dependencies that are no longer required
+  ansible.builtin.apt:
+    autoremove: true
+
+- name: Remove useless packages from apt cache
   become: true
   ansible.builtin.apt:
-
-    autoremove: true
     autoclean: true
 
 - name: Remove /home/pi/Bookshelf
