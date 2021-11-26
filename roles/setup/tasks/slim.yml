@@ -6,7 +6,8 @@
       - squeak-vm
       - wolfram-engine
       - python-minecraftpi
-      - minecraft-pi sonic-pi
+      - minecraft-pi
+      - sonic-pi
       - oracle-java8-jdk
       - bluej
       - libreoffice-common
