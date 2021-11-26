@@ -1,4 +1,5 @@
 - name: Remove extra pkgs if building from full Raspi OS img
+  become: true
   ansible.builtin.apt:
     name:
       - adwaita-icon-theme
@@ -88,5 +89,10 @@
       - xserver-xorg
 
     state: absent
+
+- name: Run apt autoremove and autoclean
+  become: true
+  ansible.builtin.apt:
+
     autoremove: true
     autoclean: true
