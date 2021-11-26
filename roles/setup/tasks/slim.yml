@@ -89,3 +89,4 @@
 
     state: absent
     autoremove: true
+    autoclean: true
