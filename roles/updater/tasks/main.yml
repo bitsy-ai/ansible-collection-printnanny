@@ -52,7 +52,7 @@
   ansible.builtin.template:
     mode: 0664
     src: "{{ updater.ansible_requirements_template }}"
-    dest: "{{ updater.ansible_requirements }}"
+    dest: "{{ updater.ansible_requirements_file }}"
 
 - name: Create /var/run/ansible
   become: true

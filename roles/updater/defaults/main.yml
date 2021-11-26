@@ -2,12 +2,19 @@
 # defaults file for ansible_pull
 
 app_path: /opt/bitsy/rpi
+
+updater_collection:
+  name: 'rpi-updater'
+  src: 'bitsyai.rpi.automatic_updates'
+  url: 'git+https://github.com/bitsy-ai/ansible-collection-rpi.git'
+  version: main
+
 updater:
   name: 'rpi-updater'
   user: ansible
   ansible_base_path: '{{ app_path }}/ansible'
   ansible_requirements_template: rpi-requirements.yml.j2
-  ansible_requirements: "{{ app_path }}/ansible/requirements.yml"
+  ansible_requirements_file: "{{ app_path }}/ansible/requirements.yml"
   ansible_version: 'ansible>4,<5'
   ansible_venv: "{{ app_path }}/ansible/venv"
   ansible_hosts_file: /etc/ansible/hosts
@@ -22,9 +29,9 @@ updater:
     fact_caching_timeout: 86400
     fact_caching: jsonfile
     fact_caching_connection: /etc/ansible/facts.json
-
-updater_collection:
-  name: 'rpi-updater'
-  src: 'bitsyai.rpi.automatic_updates'
-  url: 'git+https://github.com/bitsy-ai/ansible-collection-rpi.git'
-  version: main
+  
+  ansible_requirements:
+    - name: '{{ updater_collection.url }}'
+      type: git
+      version: '{{ updater_collection.version }}'
+    - name: ansible.posix
