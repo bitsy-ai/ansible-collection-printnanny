@@ -9,7 +9,7 @@
 - name: Create ansible dir
   become: true
   ansible.builtin.file:
-    path: '{{ updater.base_path }}'
+    path: '{{ updater.ansible_base_path }}'
     state: directory
     mode: 0664
 
