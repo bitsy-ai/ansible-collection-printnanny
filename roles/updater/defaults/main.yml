@@ -5,6 +5,7 @@ app_path: /opt/bitsy/rpi
 updater:
   name: 'rpi-updater'
   user: ansible
+  ansible_requirements_template: rpi-requirements.yml.j2
   ansible_requirements: "{{ app_path }}/ansible/requirements.yml"
   ansible_version: 'ansible>4,<5'
   ansible_venv: "{{ app_path }}/ansible/venv"
