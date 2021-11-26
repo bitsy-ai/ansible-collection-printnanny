@@ -1,19 +1,77 @@
 - name: Remove extra pkgs if building from full Raspi OS img
   ansible.builtin.apt:
     name:
-      - scratch
-      - squeak-plugins-scratch
-      - squeak-vm
-      - wolfram-engine
-      - python-minecraftpi
-      - minecraft-pi
-      - sonic-pi
-      - oracle-java8-jdk
+      - adwaita-icon-theme
+      - alacarte
+      - arandr
       - bluej
+      - colord
+      - colord-data
+      - chromium-browser
+      - chromium-browser-l10n
+      - chromium-codecs-ffmpeg-extra
+      - dictionaries-common
+      - desktop-file-utils
+      - desktop-base
+      - emacsen-common
+      - fonts-cantarell
+      - fonts-dejavu-core
+      - fonts-droid-fallback
+      - fonts-freefont-ttf
+      - fonts-liberation2
+      - fonts-noto-mono
+      - fonts-piboto
+      - fonts-quicksand
+      - fonts-urw-base35
+      - freepats
+      - galculator
+      - geany
+      - ghostscript
+      - gpicview
+      - gsettings-desktop-schema
+      - greenfoot
+      - gnome-icon-theme
+      - gnome-themes-standard
+      - gnome-desktop3-data
+      - gnome-settings-daemon-common
+      - gnome-themes-extra
+      - gnome-themes-extra-data
+      - gtk-update-icon-cache
+      - gtk2-engines-clearlookspix
+      - gtk2-engines-pixbuf
+      - gtk2-engines-pixflat
+      - gtk2-engines
+      - gui-pkinst
+      - hicolor-icon-theme
+      - hunspell-en-gb
+      - hunspell-en-us
+      - javascript-common
+      - libgnome-desktop-3-19
+      - libgnome-menu-3-0
+      - libsoup-gnome
+      - libjavascriptcoregtk-4.0-18
       - libreoffice-common
       - libreoffice-core
-      - freepats
-      - greenfoot
+      - libwebkit2gtk-4.0-37
+      - libgtk2.0-common
+      - libgtk3-common
+      - minecraft-pi
       - nodered
+      - oracle-java8-jdk
+      - pixflat-icons
+      - pi-greeter
+      - pocketsphinx-en-us
+      - python-minecraftpi
+      - python3-mypy
+      - realvnc-vnc-server
+      - rpd-wallpaper
+      - scratch
+      - sonic-pi
+      - squeak-plugins-scratch
+      - system-config-printer-common
+      - squeak-vm
+      - vim-runtime
+      - wolfram-engine
+      - zenity
     state: absent
     autoremove: true
