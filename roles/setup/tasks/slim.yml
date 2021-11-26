@@ -112,4 +112,5 @@
 - name: Remove /home/pi/Bookshelf
   become: true
   ansible.builtin.file:
+    path: /home/pi/Bookshelf
     state: absent
