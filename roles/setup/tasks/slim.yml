@@ -2,7 +2,6 @@
   become: true
   ansible.builtin.apt:
     name:
-      - adwaita-icon-theme
       - alacarte
       - arandr
       - bluej
@@ -15,16 +14,6 @@
       - desktop-file-utils
       - dictionaries-common
       - emacsen-common
-      - fontconfig-config
-      - fonts-cantarell
-      - fonts-dejavu-core
-      - fonts-droid-fallback
-      - fonts-freefont-ttf
-      - fonts-liberation2
-      - fonts-noto-mono
-      - fonts-piboto
-      - fonts-quicksand
-      - fonts-urw-base35
       - freepats
       - galculator
       - geany
@@ -48,22 +37,6 @@
       - hunspell-en-gb
       - hunspell-en-us
       - javascript-common
-      - libgnome-desktop-3-19
-      - libgnome-menu-3-0
-      - libgtk2.0-common
-      - libgtk3-common
-      - libjavascriptcoregtk-4.0-18
-      - libqt5core5a
-      - libqt5dbus5
-      - libqt5gui5
-      - libqt5network5
-      - libqt5svg5
-      - libqt5widgets5
-      - libqt5x11extras5
-      - libreoffice-common
-      - libreoffice-core
-      - libsoup-gnome
-      - libwebkit2gtk-4.0-37
       - minecraft-pi
       - nodered
       - oracle-java8-jdk
