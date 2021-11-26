@@ -96,3 +96,8 @@
 
     autoremove: true
     autoclean: true
+
+- name: Remove /home/pi/Bookshelf
+  become: true
+  ansible.builtin.file:
+    state: absent
