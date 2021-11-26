@@ -2,5 +2,5 @@
 - hosts: all
   tasks:
     - include_role:
-        name: bitsyai.printnanny.setup
+        name: bitsyai.rpi.setup
         tasks_from: slim
