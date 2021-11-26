@@ -1,18 +1,116 @@
 - name: Remove extra pkgs if building from full Raspi OS img
+  become: true
   ansible.builtin.apt:
     name:
-      - scratch
-      - squeak-plugins-scratch
-      - squeak-vm
-      - wolfram-engine
-      - python-minecraftpi
-      - minecraft-pi sonic-pi
-      - oracle-java8-jdk
+      - adwaita-icon-theme
+      - alacarte
+      - arandr
       - bluej
+      - chromium-browser
+      - chromium-browser-l10n
+      - chromium-codecs-ffmpeg-extra
+      - colord
+      - colord-data
+      - desktop-base
+      - desktop-file-utils
+      - dictionaries-common
+      - emacsen-common
+      - fonts-cantarell
+      - fonts-dejavu-core
+      - fonts-droid-fallback
+      - fonts-freefont-ttf
+      - fonts-liberation2
+      - fonts-noto-mono
+      - fonts-piboto
+      - fonts-quicksand
+      - fonts-urw-base35
+      - freepats
+      - galculator
+      - geany
+      - ghostscript
+      - gnome-desktop3-data
+      - gnome-icon-theme
+      - gnome-settings-daemon-common
+      - gnome-themes-extra
+      - gnome-themes-extra-data
+      - gnome-themes-standard
+      - gpicview
+      - greenfoot
+      - gsettings-desktop-schema
+      - gtk-update-icon-cache
+      - gtk2-engines
+      - gtk2-engines-clearlookspix
+      - gtk2-engines-pixbuf
+      - gtk2-engines-pixflat
+      - gui-pkinst
+      - hicolor-icon-theme
+      - hunspell-en-gb
+      - hunspell-en-us
+      - javascript-common
+      - libgnome-desktop-3-19
+      - libgnome-menu-3-0
+      - libgtk2.0-common
+      - libgtk3-common
+      - libjavascriptcoregtk-4.0-18
+      - libqt5core5a
+      - libqt5dbus5
+      - libqt5gui5
+      - libqt5network5
+      - libqt5svg5
+      - libqt5widgets5
+      - libqt5x11extras5
       - libreoffice-common
       - libreoffice-core
-      - freepats
-      - greenfoot
+      - libsoup-gnome
+      - libwebkit2gtk-4.0-37
+      - minecraft-pi
       - nodered
+      - oracle-java8-jdk
+      - pi-greeter
+      - pixflat-icons
+      - pocketsphinx-en-us
+      - python-minecraftpi
+      - python3-mypy
+      - qt5-style-plugin-cleanlooks
+      - qt5-style-plugin-motif
+      - qt5-style-plugin-plastique
+      - qttranslations5-l10n
+      - realvnc-vnc-server
+      - rpd-wallpaper
+      - scratch
+      - sonic-pi
+      - squeak-plugins-scratch
+      - squeak-vm
+      - system-config-printer-common
+      - vim-runtime
+      - vlc-plugin-qt/
+      - wolfram-engine
+      - xserver-common
+      - xserver-xorg
+      - xserver-xorg-core
+      - xserver-xorg-input-all
+      - xserver-xorg-input-libinput
+      - xserver-xorg-video-all
+      - xserver-xorg-video-amdgpu
+      - xserver-xorg-video-ati
+      - xserver-xorg-video-fbdev
+      - xserver-xorg-video-fbturbo
+      - xserver-xorg-video-nouveau
+      - xserver-xorg-video-radeon
+      - xserver-xorg-video-vesa
+      - zenity
+
     state: absent
+
+- name: Run apt autoremove and autoclean
+  become: true
+  ansible.builtin.apt:
+
     autoremove: true
+    autoclean: true
+
+- name: Remove /home/pi/Bookshelf
+  become: true
+  ansible.builtin.file:
+    path: /home/pi/Bookshelf
+    state: absent
