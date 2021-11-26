@@ -52,6 +52,13 @@
       - libgtk2.0-common
       - libgtk3-common
       - libjavascriptcoregtk-4.0-18
+      - libqt5core5a
+      - libqt5dbus5
+      - libqt5gui5
+      - libqt5network5
+      - libqt5svg5
+      - libqt5widgets5
+      - libqt5x11extras5
       - libreoffice-common
       - libreoffice-core
       - libsoup-gnome
@@ -64,6 +71,10 @@
       - pocketsphinx-en-us
       - python-minecraftpi
       - python3-mypy
+      - qt5-style-plugin-cleanlooks
+      - qt5-style-plugin-motif
+      - qt5-style-plugin-plastique
+      - qttranslations5-l10n
       - realvnc-vnc-server
       - rpd-wallpaper
       - scratch
@@ -72,9 +83,10 @@
       - squeak-vm
       - system-config-printer-common
       - vim-runtime
+      - vlc-plugin-qt/
       - wolfram-engine
-      - zenity
       - xserver-common
+      - xserver-xorg
       - xserver-xorg-core
       - xserver-xorg-input-all
       - xserver-xorg-input-libinput
@@ -86,7 +98,7 @@
       - xserver-xorg-video-nouveau
       - xserver-xorg-video-radeon
       - xserver-xorg-video-vesa
-      - xserver-xorg
+      - zenity
 
     state: absent
 
