@@ -55,7 +55,6 @@
       {{ janus_build_extras.systemd | ternary('--enable-systemd-sockets', '') }} \
       {{ janus_build_extras.recordplay | ternary('', '--disable-plugin-recordplay') }} \
       {{ janus_build_extras.sip | ternary('', '--disable-plugin-sip') }}"
-      
     chdir: "{{ janus_build_dir.path }}/build"
   when: janus_upgrade_available
 
@@ -80,4 +79,4 @@
     janus_usrsctp_version: "{{ janus_usrsctp_version }}"
     janus_libsrtp_version: "{{ janus_libsrtp_version }}"
     janus_libwebsockets_version: "{{ janus_libwebsockets_version }}"
-    cacheable: yes
+    cacheable: true
