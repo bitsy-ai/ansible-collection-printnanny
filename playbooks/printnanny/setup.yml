@@ -1,5 +1,15 @@
 ---
-- hosts: octoprint
+- hosts: all
   tasks:
-    - import_role:
+    - name: Common Raspberry Pi setup
+      import_role:
+        name: bitsyai.rpi.setup
+    - name: Camera setup
+      import_role:
+        name: bitsyai.rpi.camera
+    - name: Print Nanny setup
+      import_role:
         name: bitsyai.rpi.printnanny
+    - name: Janus Gateway setup
+      import_role:
+        name: bitsyai.rpi.janus
