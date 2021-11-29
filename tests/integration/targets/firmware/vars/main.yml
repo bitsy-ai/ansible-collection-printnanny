@@ -19,7 +19,6 @@ users:
       - tty
       - users
       - video
-      - wheel
   - name: jason
     authorized_key: https://github.com/perfinion.keys
     groups:

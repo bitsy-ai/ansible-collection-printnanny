@@ -1,0 +1,19 @@
+# {{ ansible_managed }}
+[Unit]
+Description={{ auto_upgrade_service }} timer
+Requires={{ auto_upgrade_service }}.service
+[Timer]
+Persistent=true
+Unit={{ auto_upgrade_service }}.service
+{% if updater_timer.OnStartupSec %} 
+OnStartupSec={{ updater_timer.OnStartupSec }}
+{% endif %}
+{% if updater_timer.RandomizedDelaySec %}
+RandomizedDelaySec={{ updater_timer.RandomizedDelaySec }}
+{% endif %}
+{% if updater_timer.OnUnitInactiveSec %}
+OnUnitInactiveSec={{ updater_timer.OnUnitInactiveSec }}
+{% endif %}
+AccuracySec=1s
+[Install]
+WantedBy=timers.target

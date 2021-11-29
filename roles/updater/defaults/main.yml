@@ -1,33 +1,28 @@
 ---
 # defaults file for ansible_pull
 
-app_path: /opt/bitsy/rpi
+auto_upgrade_playbook: bitsyai.rpi.auto_upgrade
+auto_upgrade_service: bitsy-updater
+ansible_update_service: ansible-updater
 
-updater:
-  playbook: bitsyai.rpi.automatic_updates
-  service_name: 'rpi-updater'
-  requirements_service: 'rpi-requirements'
-  user: ansible
-  ansible_base_path: '{{ app_path }}/ansible'
-  ansible_requirements_template: rpi-requirements.yml.j2
-  ansible_requirements_file: "{{ app_path }}/ansible/requirements.yml"
-  ansible_version: 'ansible>4,<5'
-  ansible_venv: "{{ app_path }}/ansible/venv"
-  ansible_hosts_file: /etc/ansible/hosts
-  ansible_tmpfs: /var/run/ansible
-  ansible_lockfile: /var/run/ansible/ansible.lock
-  timer:
-    OnUnitInactiveSec: 3600 # update every hour
-    RandomizedDelaySec: 60 # offset by 60 seconds of jitter
-    OnStartupSec: 120 # always update 2 minutes after booting
+updater_collection: bitsyai.rpi
+updater_user: ansible
+updater_venv: '/home/{{ updater_user }}/venv'
+updater_ansible_version: 'ansible>4,<5'
 
-  ansible_config:
-    fact_caching_timeout: 86400
-    fact_caching: jsonfile
-    fact_caching_connection: /etc/ansible/facts.json
+ansible_hosts_file: /etc/ansible/hosts
+ansible_tmpfs: /var/run/ansible
+ansible_lockfile: /var/run/ansible/ansible.lock
 
-  ansible_requirements:
-    - name: 'git+https://github.com/bitsy-ai/ansible-collection-rpi.git'
-      type: git
-      version: main
-    - name: ansible.posix
+ansible_config:
+  fact_caching_timeout: 86400
+  fact_caching: jsonfile
+  fact_caching_connection: /etc/ansible/facts.json
+
+updater_timer:
+  # update every hour
+  OnUnitInactiveSec: 3600
+  # offset by 60 seconds of jitter
+  RandomizedDelaySec: 60
+  # always update 2 minutes after booting
+  OnStartupSec: 120

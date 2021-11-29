@@ -1,21 +1,3 @@
-- name: Create rpi-updater updater user
-  ansible.builtin.user:
-    name: "{{ updater.user }}"
-    state: present
-    shell: /sbin/nologin
-    comment: "Ansible service user"
-  become: true
-  tags:
-    - setup
-
-- name: Create ansible dir
-  become: true
-  ansible.builtin.file:
-    path: '{{ updater.ansible_base_path }}'
-    state: directory
-    mode: 0664
-  tags:
-    - setup
 - name: Install sudo pkg
   become: true
   ansible.builtin.apt:
@@ -24,11 +6,25 @@
   tags:
     - setup
 
+- name: Create updater user
+  become: true
+  ansible.builtin.user:
+    name: "{{ updater_user }}"
+    state: present
+    shell: /sbin/nologin
+    comment: "Ansible service user"
+    groups:
+      - adm
+      - netdev
+      - sudo
+  tags:
+    - setup
+
 - name: Configure ansible sudoers
   become: true
   ansible.builtin.copy:
     dest: "/etc/sudoers.d/00_ansible_pwdless.conf"
-    content: "{{ updater.user }} ALL=(ALL) NOPASSWD: ALL"
+    content: "{{ updater_user }} ALL=(ALL) NOPASSWD: ALL"
     validate: visudo -cf %s
     mode: "0644"
   tags:
@@ -58,25 +54,25 @@
   tags:
     - setup
 
-- name: 'Create ansible virtual env'
-  become: true
+- name: 'Update updater user-level site packages'
+  become_user: '{{ updater_user }}'
   ansible.builtin.pip:
     name:
       - 'pip>21,<22'
       - setuptools
       - wheel
     virtualenv_command: /usr/bin/python3 -m venv
-    virtualenv: '{{ updater.ansible_venv }}'
+    virtualenv: '{{ updater_venv }}'
     extra_args: '--no-cache-dir'
   tags:
     - setup
 
-- name: Install ansible into the specified (virtualenv)
-  become: true
+- name: Install ansible into user site packages
+  become_user: '{{ updater_user }}'
   ansible.builtin.pip:
-    name: '{{ updater.ansible_version }}'
+    name: '{{ updater_ansible_version }}'
     virtualenv_command: /usr/bin/python3 -m venv
-    virtualenv: '{{ updater.ansible_venv }}'
+    virtualenv: '{{ updater_venv }}'
     extra_args: '--no-cache-dir'
   tags:
     - setup
@@ -85,7 +81,7 @@
 - name: Setup passwordless sudo for ansible user
   become: true
   ansible.builtin.copy:
-    content: '%{{ updater.user }} ALL=(ALL) NOPASSWD: ALL }}'
+    content: '%{{ updater_user }} ALL=(ALL) NOPASSWD: ALL }}'
     dest: /etc/sudoers.d/00_ansible_pwdless.conf
     owner: root
     group: root
@@ -102,30 +98,12 @@
   tags:
     - setup
 
-- name: Create updater systemd slice
-  become: true
-  ansible.builtin.template:
-    mode: 0664
-    src: rpi-updater.slice.j2
-    dest: '/etc/systemd/system/{{ updater.service_name }}.slice'
-  tags:
-    - setup
-
 - name: Create updater systemd timers
   become: true
   ansible.builtin.template:
     mode: 0664
-    src: rpi-updater.timer.j2
-    dest: '/etc/systemd/system/{{ updater.service_name }}.timer'
-  tags:
-    - setup
-
-- name: Create updater requirements service
-  become: true
-  ansible.builtin.template:
-    mode: 0664
-    src: rpi-requirements.service.j2
-    dest: '/etc/systemd/system/{{ updater.requirements_service }}.service'
+    src: auto-upgrader.timer.j2
+    dest: '/etc/systemd/system/{{ auto_upgrade_service }}.timer'
   tags:
     - setup
 
@@ -133,15 +111,32 @@
   become: true
   ansible.builtin.template:
     mode: 0664
-    src: rpi-updater.service.j2
-    dest: '/etc/systemd/system/{{ updater.service_name }}.service'
+    src: auto-upgrader.service.j2
+    dest: '/etc/systemd/system/{{ auto_upgrade_service }}.service'
   tags:
     - setup
 
-- name: Enable unit
+- name: Create ansible-updater service
+  become: true
+  ansible.builtin.template:
+    mode: 0664
+    src: ansible-updater.service.j2
+    dest: '/etc/systemd/system/{{ ansible_update_service }}.service'
+  tags:
+    - setup
+
+- name: Enable ansible update service
   become: true
   ansible.builtin.systemd:
-    name: '{{ updater.service_name }}'
+    name: '{{ ansible_update_service }}'
+    enabled: true
+  tags:
+    - setup
+
+- name: Enable auto upgrade service
+  become: true
+  ansible.builtin.systemd:
+    name: '{{ auto_upgrade_service }}'
     enabled: true
   tags:
     - setup
@@ -150,7 +145,7 @@
   become: true
   ansible.builtin.copy:
     src: files/hosts
-    dest: '{{ updater.ansible_hosts_file }}'
+    dest: '{{ ansible_hosts_file }}'
     mode: 0664
   tags:
     - setup

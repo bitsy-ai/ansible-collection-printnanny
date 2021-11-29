@@ -1,5 +1,5 @@
 ---
-- hosts: automatic_updates
+- hosts: all
   gather_facts: true
   tasks:
     - name: Setup bitsy updater
