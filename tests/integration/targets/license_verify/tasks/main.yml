@@ -17,7 +17,7 @@
 # ignore failing printnanny verify command for now
 - name: License install tasks
   include_role:
-    name: bitsyai.printnanny.setup
+    name: bitsyai.rpi.printnanny
     tasks_from: verify_license
 
 - name: Stat extracted license.txt

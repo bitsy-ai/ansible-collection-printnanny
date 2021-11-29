@@ -1,0 +1,5 @@
+---
+- hosts: camera
+  tasks:
+    - import_role:
+        name: bitsyai.rpi.camera

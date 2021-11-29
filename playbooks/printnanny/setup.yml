@@ -1,0 +1,5 @@
+---
+- hosts: octoprint
+  tasks:
+    - import_role:
+        name: bitsyai.rpi.printnanny
