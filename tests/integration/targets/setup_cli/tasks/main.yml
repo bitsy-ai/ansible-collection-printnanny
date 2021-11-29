@@ -1,0 +1,4 @@
+---
+- import_role:
+    name: bitsyai.printnanny.setup
+    tasks_from: cli
