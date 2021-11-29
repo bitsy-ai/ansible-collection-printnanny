@@ -61,7 +61,9 @@
       - 'pip>21,<22'
       - setuptools
       - wheel
-    extra_args: '--no-cache-dir --user'
+    virtualenv_command: /usr/bin/python3 -m venv
+    virtualenv: '{{ updater_venv }}'
+    extra_args: '--no-cache-dir'
   tags:
     - setup
 
@@ -69,7 +71,9 @@
   become_user: '{{ updater_user }}'
   ansible.builtin.pip:
     name: '{{ updater_ansible_version }}'
-    extra_args: '--no-cache-dir --user'
+    virtualenv_command: /usr/bin/python3 -m venv
+    virtualenv: '{{ updater_venv }}'
+    extra_args: '--no-cache-dir'
   tags:
     - setup
     - requirements
@@ -112,7 +116,7 @@
   tags:
     - setup
 
-- name: Create updater requirements service
+- name: Create ansible-updater service
   become: true
   ansible.builtin.template:
     mode: 0664

@@ -8,9 +8,9 @@ After=network-online.target
 Type=oneshot
 RuntimeDirectory={{ updater_user }}
 User={{ updater_user }}
-ExecStart=ansible-galaxy \
-    ansible-galaxy collection install {{ updater_collection }} --upgrade
-Restart=on-failure
+ExecStart={{ updater_venv }}/bin/ansible-galaxy \
+    collection install {{ updater_collection }} --upgrade
+Restart=always
 RestartSec=20
 
 [Install]

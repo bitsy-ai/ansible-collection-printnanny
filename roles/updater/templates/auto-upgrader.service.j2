@@ -12,13 +12,13 @@ Type=oneshot
 RuntimeDirectory={{ updater_user }}
 User={{ updater_user }}
 ExecStart=/usr/bin/flock -F {{ ansible_lockfile }} \
-    ansible-playbook \
-    automatic_update_playbook --tags "auto_upgrade"
+    {{ updater_venv }}/bin/ansible-playbook \
+    {{ auto_upgrade_playbook }} --tags "auto_upgrade"
 
 ExecStartPost=-/usr/bin/flock -F {{ ansible_lockfile }} \
     /usr/bin/rm {{ ansible_lockfile }}
 
-Restart=on-failure
+Restart=always
 RestartSec=600
 
 [Install]

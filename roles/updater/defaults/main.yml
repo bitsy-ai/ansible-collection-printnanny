@@ -1,13 +1,13 @@
 ---
 # defaults file for ansible_pull
 
-automatic_update_playbook: bitsyai.rpi.upgrade
-
+auto_upgrade_playbook: bitsyai.rpi.auto_upgrade
 auto_upgrade_service: bitsy-updater
 ansible_update_service: ansible-updater
 
 updater_collection: bitsyai.rpi
 updater_user: ansible
+updater_venv: 'home/{{ updater_user }}/venv'
 updater_ansible_version: 'ansible>4,<5'
 
 ansible_hosts_file: /etc/ansible/hosts
