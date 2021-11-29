@@ -1,4 +1,5 @@
 ---
+ansible_updater_service: ansible-updater
 auto_update_playbook: bitsyai.rpi.printnanny.auto_update
 updater_app_name: printnanny
 updater_user: ansible
