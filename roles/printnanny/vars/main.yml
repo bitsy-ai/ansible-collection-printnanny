@@ -1,8 +1,2 @@
 ---
 # vars file for setup
-
-printnanny_install_dir: /opt/bitsy/printnanny
-printnanny_license_dir: '{{ printnanny_install_dir }}/license'
-printnanny_ansible_dir: '{{ printnanny_install_dir }}/ansible'
-
-auto_upgrade_playbook: bitsyai.rpi.printnanny.auto_upgrade
