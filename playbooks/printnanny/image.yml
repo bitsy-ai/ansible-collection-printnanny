@@ -3,6 +3,6 @@
   import_playbook: setup.yml
 - name: Clean up caches and machine-id
   tasks:
-    - import_role:
+    - include_role:
         name: bitsyai.rpi.setup
         tasks_from: clean_image
