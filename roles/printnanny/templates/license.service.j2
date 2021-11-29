@@ -14,11 +14,11 @@ ConfigurationDirectory={{ updater_app_name }}
 User={{ updater_user }}
 
 ExecStart=/usr/bin/flock -F {{ ansible_lockfile }} \
-    {{ updater.ansible_venv }}/bin/ansible-playbook \
+    {{ updater_venv }}/bin/ansible-playbook \
     bitsyai.printnanny.license_verify
 
 ExecStart=/usr/bin/flock -F {{ ansible_lockfile }} \
-    {{ updater.ansible_venv }}/bin/ansible \
+    {{ updater_venv }}/bin/ansible \
     localhost \
     -m include_role -a "name=bitsyai.rpi.janus tasks_from=systemd"
 

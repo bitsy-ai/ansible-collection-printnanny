@@ -1,3 +1,5 @@
 ---
-updater_app_name: printnanny
 auto_update_playbook: bitsyai.rpi.printnanny.auto_update
+updater_app_name: printnanny
+updater_user: ansible
+updater_venv: '/home/{{ updater_user }}/venv'
