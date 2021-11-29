@@ -2,7 +2,7 @@
 [defaults]
 ansible_connection=local
 ansible_python_intepreter={{ updater.ansible_venv }}/bin/python
-ansible_user={{ updater.user }}
+ansible_user={{ updater_user }}
 fact_caching_connection={{ updater.ansible_config.fact_caching_connection }}
 fact_caching_timeout={{ updater.ansible_config.fact_caching_timeout }}
 fact_caching={{ updater.ansible_config.fact_caching }}

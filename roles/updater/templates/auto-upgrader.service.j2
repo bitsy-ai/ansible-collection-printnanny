@@ -1,25 +1,25 @@
 # {{ ansible_managed }}
 [Unit]
-Description=Bitsy Requirements Updater
+Description=Bitsy Automatic Updater
+After={{ ansible_update_service }}.service
+Requires={{ ansible_update_service }}.service
 Wants=network-online.target
 After=network-online.target
+Wants={{ updater.service_name }}.timer
 
 [Service]
 Type=oneshot
-ExecStartPre=mkdir -p {{ updater.ansible_tmpfs }}
-Environment="PATH={{ updater.ansible_venv }}/bin:{{ ansible_env.PATH }}"
-ExecStart={{ updater.ansible_venv }}/bin/ansible-galaxy \
-    collection install -r {{ updater.ansible_requirements_file }}
-
+RuntimeDirectory={{ updater_user }}
+User={{ updater_user }}
 ExecStart=/usr/bin/flock -F {{ updater.ansible_lockfile }} \
     {{ updater.ansible_venv }}/bin/ansible-playbook \
-    {{ updater.playbook }} --tags "requirements"
+    {{ updater.playbook }} --tags "auto_upgrade"
 
 ExecStartPost=-/usr/bin/flock -F {{ updater.ansible_lockfile }} \
     /usr/bin/rm {{ updater.ansible_lockfile }}
 
 Restart=on-failure
-RestartSec=10
+RestartSec=600
 
 [Install]
 WantedBy=multi-user.target

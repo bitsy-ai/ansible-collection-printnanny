@@ -1,7 +1,0 @@
-[Unit]
-Description=Bitsy Updater resource slice
-DefaultDependencies=no
-Before=slices.target
-[Slice]
-CPUQuota=40%
-MemoryLimit={{ ansible_memtotal_mb * 0.3|int }}
