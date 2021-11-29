@@ -24,6 +24,15 @@ jobs:
             testing-type: sanity
     integration:
       runs-on: ubuntu-latest
+      strategy:
+        fail-fast: false
+        matrix:
+          group:
+            - group1
+            - group2
+            - group3
+            - group4
+            - group5
       steps:
         - uses: actions/checkout@v2
           with:
@@ -36,8 +45,9 @@ jobs:
             pre-test-cmd: echo This runs before the ansible-test invocation
             python-version: 3.8
             target-python-version: 3.8
+            target: "${{ matrix.group }}"
             testing-type: integration
-            test-deps: 
-              - ansible.posix
-              - community.general
+            test-deps: >-
+              ansible.posix
+              community.general
             verbosity: -vvv
