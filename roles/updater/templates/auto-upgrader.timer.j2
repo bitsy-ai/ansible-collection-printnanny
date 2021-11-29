@@ -1,15 +1,15 @@
 # {{ ansible_managed }}
 [Unit]
-Description={{ updater.service_name }} timer
-Requires={{ updater.service_name }}.service
+Description={{ auto_upgrade_service }} timer
+Requires={{ auto_upgrade_service }}.service
 [Timer]
 Persistent=true
-Unit={{ updater.service_name }}.service
+Unit={{ auto_upgrade_service }}.service
 {% if updater.timer.OnStartupSec %} 
 OnStartupSec={{ updater.timer.OnStartupSec }}
 {% endif %}
-{% if updater.timer.RandomizedDelaySec %}
-RandomizedDelaySec={{ updater.timer.RandomizedDelaySec }}
+{% if updater_timer.RandomizedDelaySec %}
+RandomizedDelaySec={{ updater_timer.RandomizedDelaySec }}
 {% endif %}
 {% if updater.timer.OnUnitInactiveSec %}
 OnUnitInactiveSec={{ updater.timer.OnUnitInactiveSec }}

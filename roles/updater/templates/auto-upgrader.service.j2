@@ -11,12 +11,12 @@ Wants={{ updater.service_name }}.timer
 Type=oneshot
 RuntimeDirectory={{ updater_user }}
 User={{ updater_user }}
-ExecStart=/usr/bin/flock -F {{ updater.ansible_lockfile }} \
+ExecStart=/usr/bin/flock -F {{ ansible_lockfile }} \
     {{ updater.ansible_venv }}/bin/ansible-playbook \
     {{ updater.playbook }} --tags "auto_upgrade"
 
-ExecStartPost=-/usr/bin/flock -F {{ updater.ansible_lockfile }} \
-    /usr/bin/rm {{ updater.ansible_lockfile }}
+ExecStartPost=-/usr/bin/flock -F {{ ansible_lockfile }} \
+    /usr/bin/rm {{ ansible_lockfile }}
 
 Restart=on-failure
 RestartSec=600

@@ -98,16 +98,16 @@
   become: true
   ansible.builtin.template:
     mode: 0664
-    src: rpi-updater.timer.j2
+    src: auto-upgrader.timer.j2
     dest: '/etc/systemd/system/{{ auto_upgrade_service }}.timer'
   tags:
     - setup
-  
+
 - name: Create updater service
   become: true
   ansible.builtin.template:
     mode: 0664
-    src: rpi-updater.service.j2
+    src: auto-upgrader.service.j2
     dest: '/etc/systemd/system/{{ auto_upgrade_service }}.service'
   tags:
     - setup
