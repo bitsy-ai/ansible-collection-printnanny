@@ -2,7 +2,7 @@
 - hosts: default
   tasks:
     - name: Include roles/printnanny/vars
-      include_vars: ./roles/printnanny/vars
+      include_vars: bitsyai.printnanny.vars
     - name: Common Raspberry Pi setup
       include_role:
         name: bitsyai.rpi.setup
