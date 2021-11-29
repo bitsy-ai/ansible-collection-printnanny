@@ -17,13 +17,13 @@
     url: "{{ honeytail_url }}"
     dest: "/tmp/{{ honeytail_pkg_name }}"
   when: '"honeytail" not in ansible_facts.packages or \
-    ("honeytail" in ansible_facts.packages and all(x["version"] != honeytail_version for x in ansible_facts.packages["honeytail"])'
+    ("honeytail" in ansible_facts.packages and honeytail_version not in [x["version"] for x in ansible_facts.packages["honeytail"]])'
 - name: Install honeytail package
   become: true
   ansible.builtin.apt:
     deb: "/tmp/{{ honeytail_pkg_name }}"
   when: '"honeytail" not in ansible_facts.packages or \
-    ("honeytail" in ansible_facts.packages and all(x["version"] != honeytail_version for x in ansible_facts.packages["honeytail"])'
+    ("honeytail" in ansible_facts.packages and honeytail_version not in [x["version"] for x in ansible_facts.packages["honeytail"]])'
 
 - name: Clean up honeytail package
   ansible.builtin.file:
