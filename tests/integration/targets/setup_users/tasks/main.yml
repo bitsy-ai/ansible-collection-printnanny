@@ -1,3 +1,6 @@
 - import_role:
     name: bitsyai.rpi.setup
     tasks_from: users
+- import_role:
+    name: bitsyai.rpi.printnanny
+    tasks_from: users
