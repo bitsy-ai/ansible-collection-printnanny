@@ -1,2 +1,3 @@
 integration_tests_dependencies:
   - ansible.posix
+  - community.general

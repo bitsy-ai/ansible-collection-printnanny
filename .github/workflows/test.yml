@@ -37,5 +37,7 @@ jobs:
             python-version: 3.8
             target-python-version: 3.8
             testing-type: integration
-            test-deps: ansible.posix
+            test-deps: 
+              - ansible.posix
+              - community.general
             verbosity: -vvv
