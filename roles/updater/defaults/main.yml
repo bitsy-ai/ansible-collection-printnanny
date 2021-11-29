@@ -7,7 +7,7 @@ ansible_update_service: ansible-updater
 
 updater_collection: bitsyai.rpi
 updater_user: ansible
-updater_venv: 'home/{{ updater_user }}/venv'
+updater_venv: '/home/{{ updater_user }}/venv'
 updater_ansible_version: 'ansible>4,<5'
 
 ansible_hosts_file: /etc/ansible/hosts
