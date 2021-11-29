@@ -97,13 +97,13 @@
 ParserName = syslog
 
 ; Team write key
-WriteKey = {{ printnanny_device.credentials.honeycomb_api_key }}
+WriteKey = {{ honeycomb_api_key }}
 
 ; Log file(s) to parse. Use '-' for STDIN, use this flag multiple times to tail multiple files, or use a glob (/path/to/foo-*.log)
 LogFiles =/var/log/syslog
 
 ; Name of the dataset
-Dataset = {{ printnanny_device.credentials.honeycomb_dataset }}
+Dataset = {{ honeycomb_dataset }}
 
 [Other Modes]
 ; Show this help message

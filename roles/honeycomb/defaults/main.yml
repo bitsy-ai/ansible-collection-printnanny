@@ -1,14 +1,8 @@
 ---
 # defaults file for monitoring
-
-printnanny_install_dir: /opt/bitsy/printnanny
-printnanny_license_dir: '{{ printnanny_install_dir }}/license'
-
 honeytail_version: '1.6.0'
 honeytail_arch: '{% if ansible_architecture == "x86_64" %}amd64{% else %}arm64{% endif %}'
 honeytail_pkg_name: 'honeytail_{{ honeytail_version }}_{{ honeytail_arch }}.deb'
 honeytail_url: 'https://honeycomb.io/download/honeytail/v{{ honeytail_version }}/{{ honeytail_pkg_name }}'
 honeytail_api_key: null
 honeytail_dataset: null
-
-printnanny_device: null

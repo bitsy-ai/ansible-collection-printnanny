@@ -34,11 +34,11 @@
     src: honeytail.conf.j2
     dest: /etc/honeytail/honeytail.conf
     mode: 0664
-  when: printnanny_device.credentials is defined
+  when: honeytail_api_key is defined
 
 - name: Enable honeytail service
   ansible.builtin.systemd:
     name: honeytail
     enabled: true
     state: started
-  when: printnanny_device.credentials is defined
+  when: honeytail_api_key is defined
