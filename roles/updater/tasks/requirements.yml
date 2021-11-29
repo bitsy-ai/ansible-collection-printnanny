@@ -1,0 +1,9 @@
+- name: Render requirements.yml
+  become: true
+  ansible.builtin.template:
+    mode: 0664
+    src: "{{ updater.ansible_requirements_template }}"
+    dest: "{{ updater.ansible_requirements_file }}"
+  tags:
+    - requirements
+    - ansible_requirements
