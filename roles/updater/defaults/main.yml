@@ -3,14 +3,10 @@
 
 app_path: /opt/bitsy/rpi
 
-updater_collection:
-  name: 'rpi-updater'
-  src: 'bitsyai.rpi.automatic_updates'
-  url: 'git+https://github.com/bitsy-ai/ansible-collection-rpi.git'
-  version: main
-
 updater:
-  name: 'rpi-updater'
+  playbook: bitsyai.rpi.automatic_updates
+  service_name: 'rpi-updater'
+  requirements_service: 'rpi-requirements'
   user: ansible
   ansible_base_path: '{{ app_path }}/ansible'
   ansible_requirements_template: rpi-requirements.yml.j2
@@ -29,9 +25,9 @@ updater:
     fact_caching_timeout: 86400
     fact_caching: jsonfile
     fact_caching_connection: /etc/ansible/facts.json
-  
+
   ansible_requirements:
-    - name: '{{ updater_collection.url }}'
+    - name: 'git+https://github.com/bitsy-ai/ansible-collection-rpi.git'
       type: git
-      version: '{{ updater_collection.version }}'
+      version: main
     - name: ansible.posix
