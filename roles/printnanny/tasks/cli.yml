@@ -1,0 +1,31 @@
+- name: Get installed version of printnanny
+  ansible.builtin.command: printnanny --version
+  ignore_errors: true
+  register: installed_printnanny_cli_version
+  tags:
+    - auto_upgrade
+
+- name: Download Print Nanny CLI
+  ansible.builtin.unarchive:
+    src: '{{ printnanny_cli_url }}'
+    dest: /usr/local/bin
+    remote_src: true
+  when: installed_printnanny_cli_version != printnanny_cli_version
+  tags:
+    - auto_upgrade
+
+- name: Create print nanny data dir
+  ansible.builtin.file:
+    path: "{{ printnanny_data_dir }}"
+    state: directory
+    owner: "{{ printnanny_user }}"
+    group: "{{ printnanny_group }}"
+    mode: 0644
+
+- name: Create print nanny backups dir
+  ansible.builtin.file:
+    path: "{{ printnanny_backups_dir }}"
+    state: directory
+    owner: "{{ printnanny_user }}"
+    group: "{{ printnanny_group }}"
+    mode: 0644

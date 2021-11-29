@@ -1,0 +1,27 @@
+- name: Create mqtt.service unit
+  become: true
+  ansible.builtin.template:
+    mode: 0664
+    src: mqtt.service.j2
+    dest: /etc/systemd/system/mqtt.service
+
+- name: Check if device PKI exists
+  stat: 
+    path: "{{ printnanny_data_dir }}/id_dsa.pub"
+  register: device_pki
+
+- name: Enable mqtt service
+  ansible.builtin.systemd:
+    name: mqtt
+    daemon_reload: yes
+    state: started
+    enabled: true
+  when: device_pki.stat.exists
+
+- name: Disable mqtt service
+  ansible.builtin.systemd:
+    name: mqtt
+    daemon_reload: yes
+    state: stopped
+    enabled: false
+  when: not device_pki.stat.exists

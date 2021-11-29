@@ -1,0 +1,22 @@
+---
+# defaults file for setup
+# defaults file for ansible-role-print-nanny
+tflite_version: v2.5.1
+
+printnanny_install_dir: /opt/printnanny
+printnanny_license_dir: '{{ printnanny_install_dir }}/license'
+printnanny_license_zip: /boot/printnanny_license.zip
+printnanny_device_json_file: '{{ printnanny_license_dir }}/printnanny_device.json'
+printnanny_device_factsd: /etc/ansible/facts.d/printnanny_device.fact
+printnanny_ansible_collection: git+https://github.com/bitsy-ai/ansible-collection-printnanny.git,main
+
+
+printnanny_cli_version: 0.4.2
+printnanny_cli_url: 'https://github.com/bitsy-ai/printnanny-cli/releases/download/v{{ printnanny_cli_version }}/printnanny-{{ ansible_architecture }}-unknown-linux-gnu.tar.gz'
+printnanny_ansible_version: 'ansible>4,<5'
+printnanny_update_schedule: '*/15 * * * *'
+printnanny_user: printnanny
+printnanny_group: printnanny
+
+printnanny_data_dir: "{{ printnanny_install_dir }}/data"
+printnanny_backups_dir: "{{ printnanny_install_dir }}/backups"

@@ -1,0 +1,36 @@
+# {{ ansible_managed }}
+[Unit]
+Description=Print Nanny License installer
+ConditionPathExists={{ printnanny_license_zip }}
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStartPre=mkdir -p {{ updater.ansible_tmpfs }}
+ExecStartPre={{ updater.ansible_venv }}/bin/ansible-galaxy \
+    collection install -r {{ updater.ansible_requirements_file }}
+ExecStartPre=printnanny --version
+
+ExecStart=/usr/bin/flock -F {{ updater.ansible_lockfile }} \
+    {{ updater.ansible_venv }}/bin/ansible-playbook \
+    bitsyai.printnanny.license_verify
+
+ExecStart=/usr/bin/flock -F {{ updater.ansible_lockfile }} \
+    {{ updater.ansible_venv }}/bin/ansible \
+    localhost \
+    -m include_role -a "name=bitsyai.printnanny.janus_gateway tasks_from=systemd"
+
+
+ExecStartPost=-/usr/bin/flock -F {{ updater.ansible_lockfile }} \
+    /usr/bin/rm {{ updater.ansible_lockfile }}
+ExecStartPost=/bin/systemctl enable janus
+ExecStartPost=/bin/systemctl start janus
+
+RemainAfterExit=yes
+Slice=ansible_pull.slice
+Restart=on-failure
+RestartSec=600
+
+[Install]
+WantedBy=multi-user.target

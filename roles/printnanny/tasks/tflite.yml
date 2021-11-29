@@ -1,0 +1,13 @@
+- name: Download file with checksum url (sha256)
+  become: true
+  ansible.builtin.get_url:
+    url: "https://cdn.print-nanny.com/tensorflow/{{ tflite_version }}/elinux_aarch64/libtensorflowlite.so"
+    dest: /usr/local/include/libtensorflowlite.so
+    checksum: "sha256:https://cdn.print-nanny.com/tensorflow/{{ tflite_version }}/elinux_aarch64/sha256sum.txt"
+  
+- name: Download file with checksum url (sha256)
+  become: true
+  get_url:
+    url: "https://cdn.print-nanny.com/tensorflow/{{ tflite_version }}/elinux_aarch64/libtensorflowlite_c.so"
+    dest: /usr/local/include/libtensorflowlite_c.so
+    checksum: "sha256:https://cdn.print-nanny.com/tensorflow/{{ tflite_version }}/elinux_aarch64/sha256sum.txt"

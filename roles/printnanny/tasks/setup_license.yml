@@ -1,0 +1,20 @@
+---
+# tasks file for license
+- name: Render license.service from template
+  become: true
+  ansible.builtin.template:
+    mode: 0664
+    src: license.service.j2
+    dest: /etc/systemd/system/printnanny-license.service
+
+- name: Create license dir
+  ansible.builtin.file:
+    path: '{{ printnanny_license_dir }}'
+    state: directory
+    mode: 0664
+
+- name: Enable printnany-license.service unit
+  become: true
+  ansible.builtin.systemd:
+    name: printnanny-license
+    enabled: true

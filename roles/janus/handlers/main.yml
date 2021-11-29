@@ -1,0 +1,9 @@
+---
+# handlers file for ansible-role-janus-gateway
+
+- name: restart janus service
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: yes
+    name: janus
+    state: restarted

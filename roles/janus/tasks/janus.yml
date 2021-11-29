@@ -1,0 +1,83 @@
+# tasks file for ansible-role-janus-gateway
+- name: Install platform dependencies
+  import_tasks: dependencies.yml
+  tags:
+    janus-gateway
+
+- name: Create workspace
+  ansible.builtin.file:
+    path: "{{ janus_build_dir.path }}"
+    state: directory
+    mode: "770"
+    recurse: true
+    
+- name: Install libnice
+  import_tasks: libnice.yml
+  tags:
+    janus-gateway
+
+# - name: Install usrsctp
+#   import_tasks: usrsctp.yml
+#   tags:
+#     janus-gateway
+
+- name: Install libwebsockets
+  import_tasks: libwebsockets.yml
+  tags:
+    janus-gateway
+
+- name: Install libsrtp
+  import_tasks: libsrtp.yml
+  tags:
+    janus-gateway
+
+# Build janus-gateway
+- name: Clone janus-gateway
+  git:
+    repo: "{{ janus_repo }}"
+    dest: "{{ janus_build_dir.path }}/build"
+    version: "{{ janus_version }}"
+
+- name: Run janus-gateway config autogen
+  command:
+    cmd: sh autogen.sh
+    chdir: "{{ janus_build_dir.path }}/build"
+  when: janus_upgrade_available
+
+- name: Configure janus-gateway build
+  command:
+    cmd: "./configure \
+      --prefix={{ janus_install_dir }} \
+      {{ janus_build_extras.rabbitmq | ternary('', '--disable-rabbitmq') }} \
+      {{ janus_build_extras.mqtt | ternary('', '--disable-mqtt') }} \
+      {{ janus_build_extras.websockets | ternary('', '--disable-websockets') }} \
+      {{ janus_build_extras.nanomsg | ternary('', '--disable-nanomsg') }} \
+      {{ janus_build_extras.systemd | ternary('--enable-systemd-sockets', '') }} \
+      {{ janus_build_extras.recordplay | ternary('', '--disable-plugin-recordplay') }} \
+      {{ janus_build_extras.sip | ternary('', '--disable-plugin-sip') }}"
+      
+    chdir: "{{ janus_build_dir.path }}/build"
+  when: janus_upgrade_available
+
+- name: Build janus-gateway
+  become: true
+  command:
+    cmd: make
+    chdir: "{{ janus_build_dir.path }}/build"
+  when: janus_upgrade_available
+
+- name: Install janus-gateway
+  become: true
+  command:
+    cmd: make install
+    chdir: "{{ janus_build_dir.path }}/build"
+  when: janus_upgrade_available
+
+- name: Set installed version facts
+  ansible.builtin.set_fact:
+    janus_version: "{{ janus_version }}"
+    janus_libnice_version: "{{ janus_libnice_version }}"
+    janus_usrsctp_version: "{{ janus_usrsctp_version }}"
+    janus_libsrtp_version: "{{ janus_libsrtp_version }}"
+    janus_libwebsockets_version: "{{ janus_libwebsockets_version }}"
+    cacheable: yes

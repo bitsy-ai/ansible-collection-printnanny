@@ -1,0 +1,20 @@
+- name: 'Configure {{ printnanny_user }} user/groups'
+  ansible.builtin.user:
+    name: '{{ printnanny_user }}'
+    groups:
+      - adm
+      - audio
+      - cdrom
+      - dialout
+      - games
+      - gpio
+      - i2c
+      - input
+      - netdev
+      - pi
+      - plugdev
+      - spi
+      - sudo
+      - tty
+      - users
+      - video
