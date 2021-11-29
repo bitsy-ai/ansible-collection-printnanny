@@ -5,7 +5,7 @@
     src: "{{ item.value }}"
     dest: "{{ janus_conf_dir }}/{{ item.value }}"
   with_dict: "{{ janus_conf_template }}"
-  when: printnanny_device is defined
+  when: janus_auth.api_secret is defined
 
 - name: Render janus-gateway systemd unit
   become: true
