@@ -5,15 +5,15 @@ After={{ ansible_update_service }}.service
 Requires={{ ansible_update_service }}.service
 Wants=network-online.target
 After=network-online.target
-Wants={{ updater.service_name }}.timer
+Wants={{ auto_upgrade_service }}.timer
 
 [Service]
 Type=oneshot
 RuntimeDirectory={{ updater_user }}
 User={{ updater_user }}
 ExecStart=/usr/bin/flock -F {{ ansible_lockfile }} \
-    {{ updater.ansible_venv }}/bin/ansible-playbook \
-    {{ updater.playbook }} --tags "auto_upgrade"
+    ansible-playbook \
+    automatic_update_playbook --tags "auto_upgrade"
 
 ExecStartPost=-/usr/bin/flock -F {{ ansible_lockfile }} \
     /usr/bin/rm {{ ansible_lockfile }}
