@@ -13,7 +13,10 @@ ExecStart={{ updater.ansible_venv }}/bin/ansible-galaxy \
 
 ExecStart=/usr/bin/flock -F {{ updater.ansible_lockfile }} \
     {{ updater.ansible_venv }}/bin/ansible-playbook \
-    {{ updater.playbook }}
+    {{ updater.playbook }} --tags "requirements"
+
+ExecStartPost=-/usr/bin/flock -F {{ updater.ansible_lockfile }} \
+    /usr/bin/rm {{ updater.ansible_lockfile }}
 
 Restart=on-failure
 RestartSec=10
