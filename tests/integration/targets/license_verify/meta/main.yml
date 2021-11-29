@@ -1,5 +1,4 @@
 dependencies:
-  - setup_pi
   - setup_users
   - setup_cli
   - setup_license
