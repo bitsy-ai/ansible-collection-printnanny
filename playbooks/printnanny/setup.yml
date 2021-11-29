@@ -1,5 +1,5 @@
 ---
-- hosts: printnanny
+- hosts: default
   tasks:
     - name: Include roles/printnanny/vars
       include_vars: roles/printnanny/vars
