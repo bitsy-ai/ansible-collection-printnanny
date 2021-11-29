@@ -9,25 +9,21 @@ After=network-online.target
 
 [Service]
 Type=oneshot
-RuntimeDirectory={{ updater_user }}
-ConfigurationDirectory={{ update_conf_dir }}
+RuntimeDirectory={{ updater_app_name }}
+ConfigurationDirectory={{ updater_app_name }}
 User={{ updater_user }}
-ExecStartPre={{ updater.ansible_venv }}/bin/ansible-galaxy \
-    collection install -r {{ updater.ansible_requirements_file }}
-ExecStartPre=printnanny --version
 
-ExecStart=/usr/bin/flock -F {{ updater.ansible_lockfile }} \
+ExecStart=/usr/bin/flock -F {{ ansible_lockfile }} \
     {{ updater.ansible_venv }}/bin/ansible-playbook \
     bitsyai.printnanny.license_verify
 
-ExecStart=/usr/bin/flock -F {{ updater.ansible_lockfile }} \
+ExecStart=/usr/bin/flock -F {{ ansible_lockfile }} \
     {{ updater.ansible_venv }}/bin/ansible \
     localhost \
-    -m include_role -a "name=bitsyai.printnanny.janus_gateway tasks_from=systemd"
+    -m include_role -a "name=bitsyai.rpi.janus tasks_from=systemd"
 
-
-ExecStartPost=-/usr/bin/flock -F {{ updater.ansible_lockfile }} \
-    /usr/bin/rm {{ updater.ansible_lockfile }}
+ExecStartPost=-/usr/bin/flock -F {{ ansible_lockfile }} \
+    /usr/bin/rm {{ ansible_lockfile }}
 ExecStartPost=/bin/systemctl enable janus
 ExecStartPost=/bin/systemctl start janus
 
