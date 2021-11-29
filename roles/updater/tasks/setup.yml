@@ -107,7 +107,7 @@
   ansible.builtin.template:
     mode: 0664
     src: rpi-updater.slice.j2
-    dest: '/etc/systemd/system/{{ updater.name }}.slice'
+    dest: '/etc/systemd/system/{{ updater.service_name }}.slice'
   tags:
     - setup
 
@@ -116,23 +116,32 @@
   ansible.builtin.template:
     mode: 0664
     src: rpi-updater.timer.j2
-    dest: '/etc/systemd/system/{{ updater.name }}.timer'
+    dest: '/etc/systemd/system/{{ updater.service_name }}.timer'
   tags:
     - setup
 
-- name: Create updater systemd service unit
+- name: Create updater requirements service
+  become: true
+  ansible.builtin.template:
+    mode: 0664
+    src: rpi-requirements.service.j2
+    dest: '/etc/systemd/system/{{ updater.requirements_service }}.service'
+  tags:
+    - setup
+
+- name: Create updater service
   become: true
   ansible.builtin.template:
     mode: 0664
     src: rpi-updater.service.j2
-    dest: '/etc/systemd/system/{{ updater.name }}.service'
+    dest: '/etc/systemd/system/{{ updater.service_name }}.service'
   tags:
     - setup
 
 - name: Enable unit
   become: true
   ansible.builtin.systemd:
-    name: '{{ updater.name }}'
+    name: '{{ updater.service_name }}'
     enabled: true
   tags:
     - setup
