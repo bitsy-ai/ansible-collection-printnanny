@@ -5,4 +5,4 @@ honeytail_arch: '{% if ansible_architecture == "x86_64" %}amd64{% else %}arm64{%
 honeytail_pkg_name: 'honeytail_{{ honeytail_version }}_{{ honeytail_arch }}.deb'
 honeytail_url: 'https://honeycomb.io/download/honeytail/v{{ honeytail_version }}/{{ honeytail_pkg_name }}'
 honeycomb_api_key: null
-honeycomb_api_key: null
+honeycomb_dataset: null
