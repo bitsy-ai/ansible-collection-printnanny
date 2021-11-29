@@ -2,12 +2,16 @@
 [Unit]
 Description=Print Nanny License installer
 ConditionPathExists={{ printnanny_license_zip }}
+After={{ ansible_updater_service }}.service
+Requires={{ ansible_updater_service }}.service
 Wants=network-online.target
 After=network-online.target
 
 [Service]
 Type=oneshot
-ExecStartPre=mkdir -p {{ updater.ansible_tmpfs }}
+RuntimeDirectory={{ updater_user }}
+ConfigurationDirectory={{ update_conf_dir }}
+User={{ updater_user }}
 ExecStartPre={{ updater.ansible_venv }}/bin/ansible-galaxy \
     collection install -r {{ updater.ansible_requirements_file }}
 ExecStartPre=printnanny --version

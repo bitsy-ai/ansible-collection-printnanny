@@ -1,19 +1,20 @@
 # {{ ansible_managed }}
 [Unit]
 Description=Bitsy Automatic Updater
-After={{ ansible_update_service }}.service
-Requires={{ ansible_update_service }}.service
+After={{ ansible_updater_service }}.service
+Requires={{ ansible_updater_service }}.service
 Wants=network-online.target
 After=network-online.target
-Wants={{ auto_upgrade_service }}.timer
+Wants={{ auto_update_service }}.timer
 
 [Service]
 Type=oneshot
-RuntimeDirectory={{ updater_user }}
+RuntimeDirectory={{ updater_app_name }}
+ConfigurationDirectory={{ updater_app_name }}
 User={{ updater_user }}
 ExecStart=/usr/bin/flock -F {{ ansible_lockfile }} \
     {{ updater_venv }}/bin/ansible-playbook \
-    {{ auto_upgrade_playbook }} --tags "auto_upgrade"
+    {{ auto_update_playbook }} --tags "auto_update"
 
 ExecStartPost=-/usr/bin/flock -F {{ ansible_lockfile }} \
     /usr/bin/rm {{ ansible_lockfile }}

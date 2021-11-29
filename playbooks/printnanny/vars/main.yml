@@ -1,2 +1,3 @@
 ---
-auto_upgrade_playbook: bitsyai.rpi.printnanny.auto_upgrade
+updater_app_name: printnanny
+auto_update_playbook: bitsyai.rpi.printnanny.auto_update

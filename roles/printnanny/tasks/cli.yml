@@ -3,7 +3,7 @@
   ignore_errors: true
   register: installed_printnanny_cli_version
   tags:
-    - auto_upgrade
+    - auto_update
 
 - name: Download Print Nanny CLI
   ansible.builtin.unarchive:
@@ -12,7 +12,7 @@
     remote_src: true
   when: installed_printnanny_cli_version != printnanny_cli_version
   tags:
-    - auto_upgrade
+    - auto_update
 
 - name: Create print nanny data dir
   ansible.builtin.file:
