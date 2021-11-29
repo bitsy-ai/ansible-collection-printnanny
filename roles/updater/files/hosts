@@ -1,4 +1,4 @@
-[upgrade]
+[auto_upgrade]
 localhost ansible_connection=local
 
 [default]
