@@ -7,7 +7,8 @@ gstreamer_num_buffers: 1
 gstreamer_config_interval: 1
 gstreamer_video_src: 'v4l2src'
 
-rtp_sink_user: pi
-rtp_sink_enabled: false
+rpi_camera_user: 'gstreamer'
+rpi_camera_group: 'gstreamer'
+
 rtp_sink_host: "127.0.0.1"
 rtp_sink_port: 5004

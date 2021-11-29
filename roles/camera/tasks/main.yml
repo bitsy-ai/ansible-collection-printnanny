@@ -1,2 +1,2 @@
+- import_tasks: users.yml
 - import_tasks: gstreamer.yml
-  when: rpi_camera_enabled
