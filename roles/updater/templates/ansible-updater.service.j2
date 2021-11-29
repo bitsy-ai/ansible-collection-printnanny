@@ -10,7 +10,7 @@ RuntimeDirectory={{ updater_user }}
 User={{ updater_user }}
 ExecStart={{ updater_venv }}/bin/ansible-galaxy \
     collection install {{ updater_collection }} --upgrade
-Restart=always
+Restart=on-failure
 RestartSec=20
 
 [Install]

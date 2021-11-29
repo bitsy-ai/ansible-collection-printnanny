@@ -18,7 +18,7 @@ ExecStart=/usr/bin/flock -F {{ ansible_lockfile }} \
 ExecStartPost=-/usr/bin/flock -F {{ ansible_lockfile }} \
     /usr/bin/rm {{ ansible_lockfile }}
 
-Restart=always
+Restart=on-failure
 RestartSec=600
 
 [Install]
