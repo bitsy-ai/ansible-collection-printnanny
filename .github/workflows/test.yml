@@ -45,7 +45,7 @@ jobs:
             pre-test-cmd: echo This runs before the ansible-test invocation
             python-version: 3.8
             target-python-version: 3.8
-            target: "${{ matrix.group }}"
+            target: "${{ matrix.group }}/"
             testing-type: integration
             test-deps: >-
               ansible.posix
