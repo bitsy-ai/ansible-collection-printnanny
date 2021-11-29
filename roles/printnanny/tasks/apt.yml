@@ -20,7 +20,7 @@
         # required by ansible.builtin.package_facts
         - python3-apt
   tags:
-    - auto_upgrade
+    - auto_update
 # tracking https://github.com/ansible/ansible/issues/38920
 # clear apt cache if packer build run (reduce img size)
 - name: Clean apt cache

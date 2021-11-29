@@ -1,6 +1,8 @@
 ---
 # defaults file for ansible-role-janus-gateway
 
+janus_auth: {}
+
 janus_build_extras:
   audiobridge: false
   mqtt: false

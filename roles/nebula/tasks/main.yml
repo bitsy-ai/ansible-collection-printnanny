@@ -12,7 +12,7 @@
     update_cache: true
     name:
       - libsystemd-dev
-      - systemd 
+      - systemd
       - systemd-cron
     state: present
 

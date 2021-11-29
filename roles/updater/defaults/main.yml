@@ -1,19 +1,22 @@
 ---
 # defaults file for ansible_pull
 
-auto_upgrade_playbook: bitsyai.rpi.auto_upgrade
-auto_upgrade_service: bitsy-updater
-ansible_update_service: ansible-updater
-
+auto_update_playbook: bitsyai.rpi.auto_update
 updater_collection: bitsyai.rpi
+updater_app_name: bitsy
+
+auto_update_service: '{{ updater_app_name }}-updater'
+
 updater_user: ansible
 updater_venv: '/home/{{ updater_user }}/venv'
-updater_ansible_version: 'ansible>4,<5'
+
+ansible_updater_version: 'ansible>4,<5'
+ansible_updater_service: ansible-updater
+
+updater_tmpfs: '/var/run/{{ updater_app_name }}'
+ansible_lockfile: '/var/run/{{ updater_app_name }}/ansible.lock'
 
 ansible_hosts_file: /etc/ansible/hosts
-ansible_tmpfs: /var/run/ansible
-ansible_lockfile: /var/run/ansible/ansible.lock
-
 ansible_config:
   fact_caching_timeout: 86400
   fact_caching: jsonfile

@@ -69,7 +69,7 @@
 - name: Install ansible into user site packages
   become_user: '{{ updater_user }}'
   ansible.builtin.pip:
-    name: '{{ updater_ansible_version }}'
+    name: '{{ ansible_updater_version }}'
     virtualenv_command: /usr/bin/python3 -m venv
     virtualenv: '{{ updater_venv }}'
     extra_args: '--no-cache-dir'
@@ -102,7 +102,7 @@
   ansible.builtin.template:
     mode: 0664
     src: auto-upgrader.timer.j2
-    dest: '/etc/systemd/system/{{ auto_upgrade_service }}.timer'
+    dest: '/etc/systemd/system/{{ auto_update_service }}.timer'
   tags:
     - setup
 
@@ -111,7 +111,7 @@
   ansible.builtin.template:
     mode: 0664
     src: auto-upgrader.service.j2
-    dest: '/etc/systemd/system/{{ auto_upgrade_service }}.service'
+    dest: '/etc/systemd/system/{{ auto_update_service }}.service'
   tags:
     - setup
 
@@ -120,14 +120,14 @@
   ansible.builtin.template:
     mode: 0664
     src: ansible-updater.service.j2
-    dest: '/etc/systemd/system/{{ ansible_update_service }}.service'
+    dest: '/etc/systemd/system/{{ ansible_updater_service }}.service'
   tags:
     - setup
 
 - name: Enable ansible update service
   become: true
   ansible.builtin.systemd:
-    name: '{{ ansible_update_service }}'
+    name: '{{ ansible_updater_service }}'
     enabled: true
   tags:
     - setup
@@ -135,7 +135,7 @@
 - name: Enable auto upgrade service
   become: true
   ansible.builtin.systemd:
-    name: '{{ auto_upgrade_service }}'
+    name: '{{ auto_update_service }}'
     enabled: true
   tags:
     - setup

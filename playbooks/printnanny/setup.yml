@@ -1,5 +1,17 @@
 ---
-- hosts: octoprint
+- hosts: default
   tasks:
-    - import_role:
+    - name: Include roles/printnanny/vars
+      include_vars: vars/main.yml
+    - name: Common Raspberry Pi setup
+      include_role:
+        name: bitsyai.rpi.setup
+    - name: Camera setup
+      include_role:
+        name: bitsyai.rpi.camera
+    - name: Print Nanny setup
+      include_role:
         name: bitsyai.rpi.printnanny
+    - name: Janus Gateway setup
+      include_role:
+        name: bitsyai.rpi.janus
