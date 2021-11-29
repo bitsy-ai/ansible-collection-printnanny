@@ -1,0 +1,4 @@
+---
+- import_role:
+    name: bitsyai.rpi.printnanny
+    tasks_from: tflite

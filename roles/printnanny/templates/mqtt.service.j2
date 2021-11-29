@@ -1,0 +1,11 @@
+[Unit]
+Description=Print Nanny MQTT Client
+Requires=network.target
+After=syslog.target network.target
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/printnanny mqtt
+User={{ printnanny_user }}
+
+[Install]
+WantedBy=multi-user.target

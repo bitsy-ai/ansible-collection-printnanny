@@ -1,0 +1,4 @@
+dependencies:
+  - setup_users
+  - setup_cli
+  - setup_license

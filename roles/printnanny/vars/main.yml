@@ -1,0 +1,38 @@
+---
+# vars file for setup
+
+printnanny_install_dir: /opt/bitsy/printnanny
+printnanny_license_dir: '{{ printnanny_install_dir }}/license'
+printnanny_ansible_dir: '{{ printnanny_install_dir }}/ansible'
+
+updater:
+  service_name: 'printnanny-updater'
+  requirements_service: 'printnanny-requirements'
+  playbook: bitsyai.printnanny.upgrade
+  user: ansible
+  ansible_base_path: '{{ printnanny_ansible_dir }}'
+  ansible_requirements_template: rpi-requirements.yml.j2
+  ansible_requirements_file: "{{ printnanny_install_dir }}/ansible/requirements.yml"
+  ansible_version: 'ansible>4,<5'
+  ansible_venv: "{{ printnanny_install_dir }}/ansible/venv"
+  ansible_hosts_file: /etc/ansible/hosts
+  ansible_tmpfs: /var/run/ansible
+  ansible_lockfile: /var/run/ansible/ansible.lock
+  timer:
+    OnUnitInactiveSec: 3600 # update every hour
+    RandomizedDelaySec: 60 # offset by 60 seconds of jitter
+    OnStartupSec: 120 # always update 2 minutes after booting
+
+  ansible_config:
+    fact_caching_timeout: 86400
+    fact_caching: jsonfile
+    fact_caching_connection: /etc/ansible/facts.json
+
+  ansible_requirements:
+    - name: 'git+https://github.com/bitsy-ai/ansible-collection-printnanny.git'
+      type: git
+      version: 'main'
+    - name: ansible.posix
+    - name: 'git+https://github.com/bitsy-ai/ansible-collection-rpi.git'
+      type: git
+      version: main

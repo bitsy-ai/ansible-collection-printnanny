@@ -1,0 +1,45 @@
+---
+- name: Install apt dependencies
+  become: true
+  ansible.builtin.apt:
+    name:
+      - python3-dev
+      - python3-pip
+      - python3-venv
+      # required by ansible.builtin.package_facts
+      - python3-apt
+- name: Gather package facts
+  package_facts:
+    manager: apt
+
+- name: Download honeytail package
+  ansible.builtin.get_url:
+    url: "{{ honeytail_url }}"
+    dest: "/tmp/{{ honeytail_pkg_name }}"
+  when: (ansible_facts.packages.honeytail is not defined) or
+    (ansible_facts.packages.honeytail[0].version != honeytail_version)
+- name: Install honeytail package
+  become: true
+  ansible.builtin.apt:
+    deb: "/tmp/{{ honeytail_pkg_name }}"
+  when: (ansible_facts.packages.honeytail is not defined) or
+      (ansible_facts.packages.honeytail[0].version != honeytail_version)
+
+- name: Clean up honeytail package
+  ansible.builtin.file:
+    name: "/tmp/{{ honeytail_pkg_name }}"
+    state: absent
+
+- name: Render Honeytail conf file
+  ansible.builtin.template:
+    src: honeytail.conf.j2
+    dest: /etc/honeytail/honeytail.conf
+    mode: 0664
+  when: honeycomb_api_key != None
+
+- name: Enable honeytail service
+  ansible.builtin.systemd:
+    name: honeytail
+    enabled: true
+    state: started
+  when: honeycomb_api_key != None

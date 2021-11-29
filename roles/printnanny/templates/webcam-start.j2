@@ -1,0 +1,5 @@
+#!/bin/sh
+gst-launch-1.0 {{ gstreamer_video_src }} num-buffers={{ gstreamer_num_buffers }} \
+! h264parse \
+! rtph264pay config-interval={{ gstreamer_config_interval }} pt=96 \
+! udpsink host={{ janus_gateway_host }} port={{ janus_gateway_videoport }}

@@ -1,0 +1,8 @@
+- name: Create ansible.cfg
+  become: true
+  ansible.builtin.copy: 
+    src: files/rsyslog.conf
+    dest: /etc/rsyslog.conf
+    owner: root 
+    group: root 
+    mode: 0644
