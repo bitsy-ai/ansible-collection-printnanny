@@ -2,7 +2,6 @@
 Description=Janus Gateway
 Requires=network.target
 After=syslog.target network.target network-online.target
-ConditionPathExists={{ printnanny_device_factsd }}
 
 [Service]
 Type=simple
