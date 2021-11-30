@@ -181,6 +181,19 @@ file-ondemand-sample: {
 # example of how to create a simple H.264 mountpoint: you can feed it via
 # an x264enc+rtph264pay pipeline in gstreamer, an ffmpeg script or other.
 #
+
+h264-video: {
+        type = "rtp"
+        id = 10
+        description = "H.264 live stream coming from gstreamer"
+        audio = false
+        video = true
+        videoport = {{ gstreamer_rtp_port }}
+        videopt = 96
+        videortpmap = "H264/90000"
+        videofmtp = "profile-level-id=42e028;packetization-mode=1"
+}
+
 #h264-sample: {
 	#type = "rtp"
 	#id = 10

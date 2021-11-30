@@ -1,8 +1,6 @@
-# tasks file for ansible-role-janus-gateway
+# tasks file for ansible-role-- janus
 - name: Install platform dependencies
   import_tasks: dependencies.yml
-  tags:
-    janus-gateway
 
 - name: Create workspace
   ansible.builtin.file:
@@ -10,41 +8,42 @@
     state: directory
     mode: "770"
     recurse: true
-    
+  tags:
+    - janus
+    - setup
+
 - name: Install libnice
   import_tasks: libnice.yml
-  tags:
-    janus-gateway
 
+# used for data channels
 # - name: Install usrsctp
 #   import_tasks: usrsctp.yml
 #   tags:
-#     janus-gateway
+#     - janus
 
 - name: Install libwebsockets
   import_tasks: libwebsockets.yml
-  tags:
-    janus-gateway
+
 
 - name: Install libsrtp
   import_tasks: libsrtp.yml
   tags:
-    janus-gateway
+    - janus
 
-# Build janus-gateway
-- name: Clone janus-gateway
+# Build - janus
+- name: Clone - janus
   git:
     repo: "{{ janus_repo }}"
     dest: "{{ janus_build_dir.path }}/build"
     version: "{{ janus_version }}"
 
-- name: Run janus-gateway config autogen
+- name: Run - janus config autogen
   command:
     cmd: sh autogen.sh
     chdir: "{{ janus_build_dir.path }}/build"
   when: janus_upgrade_available
 
-- name: Configure janus-gateway build
+- name: Configure - janus build
   command:
     cmd: "./configure \
       --prefix={{ janus_install_dir }} \
@@ -58,14 +57,14 @@
     chdir: "{{ janus_build_dir.path }}/build"
   when: janus_upgrade_available
 
-- name: Build janus-gateway
+- name: Build - janus
   become: true
   command:
     cmd: make
     chdir: "{{ janus_build_dir.path }}/build"
   when: janus_upgrade_available
 
-- name: Install janus-gateway
+- name: Install - janus
   become: true
   command:
     cmd: make install
