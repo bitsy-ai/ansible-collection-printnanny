@@ -1,6 +1,5 @@
 ---
 # defaults file for libcamera
-rpi_camera_enabled: true
 rpi_build_libcamera_apps: true
 
 gstreamer_num_buffers: 3
