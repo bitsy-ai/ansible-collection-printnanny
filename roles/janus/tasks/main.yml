@@ -38,10 +38,10 @@
     name: "{{ janus_user }}"
     shell: /bin/bash
     groups: video
-    append: yes
+    append: true
 
 - name: Build janus-gateway from source
-  import_tasks: janus.yml
+  import_tasks: build.yml
   when: janus_upgrade_available
 
 - name: Janus systemd unit

@@ -2,27 +2,38 @@
 # Build libnice
 - name: 'Create {{ janus_build_dir.path }}/venv'
   ansible.builtin.pip:
-    name: 
-        - 'pip>21,<22'
-        - setuptools
-        - wheel
+    name:
+      - 'pip>21,<22'
+      - setuptools
+      - wheel
     virtualenv_command: /usr/bin/python3 -m venv
     virtualenv: '{{ janus_build_dir.path }}/venv'
     extra_args: '--no-cache-dir'
-
+  tags:
+    - janus
+    - setup
+    - auto_update
 - name: Install meson and ninja build systems
   ansible.builtin.pip:
     name:
-      - meson 
+      - meson
     virtualenv: "{{ janus_build_dir.path }}/venv"
     virtualenv_command: /usr/bin/python3 -m venv
     extra_args: '--no-cache-dir'
+  tags:
+    - janus
+    - setup
+    - auto_update
 
 - name: Clone libnice
   git:
     repo: "{{ janus_libnice_repo }}"
     dest: "{{ janus_libnice_build_dir.path }}"
     version: "{{ janus_libnice_version }}"
+  tags:
+    - janus
+    - setup
+    - auto_update
 
 - name: Run libnice meson build
   command:
@@ -31,6 +42,10 @@
   when: janus_upgrade_available
   environment:
     PATH: "{{ janus_build_dir.path }}/venv/bin:{{ ansible_env.PATH }}"
+  tags:
+    - janus
+    - setup
+    - auto_update
 
 - name: Configure libnice ninja build
   command:
@@ -39,6 +54,10 @@
   when: janus_upgrade_available
   environment:
     PATH: "{{ janus_build_dir.path }}/venv/bin:{{ ansible_env.PATH }}"
+  tags:
+    - janus
+    - setup
+    - auto_update
 
 - name: Install libnice
   become: true
@@ -48,3 +67,7 @@
   when: janus_upgrade_available
   environment:
     PATH: "{{ janus_build_dir.path }}/venv/bin:{{ ansible_env.PATH }}"
+  tags:
+    - janus
+    - setup
+    - auto_update

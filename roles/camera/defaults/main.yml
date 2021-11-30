@@ -1,14 +1,13 @@
 ---
 # defaults file for libcamera
-rpi_camera_enabled: true
 rpi_build_libcamera_apps: true
 
-gstreamer_num_buffers: 1
+gstreamer_num_buffers: 3
 gstreamer_config_interval: 1
 gstreamer_video_src: 'v4l2src'
 
-rpi_camera_user: 'gstreamer'
-rpi_camera_group: 'gstreamer'
+gstreamer_user: 'gstreamer'
+gstreamer_group: 'gstreamer'
 
-rtp_sink_host: "127.0.0.1"
-rtp_sink_port: 5004
+gstreamer_rtp_host: "127.0.0.1"
+gstreamer_rtp_port: 5004

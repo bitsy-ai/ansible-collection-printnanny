@@ -5,10 +5,10 @@ Wants=network.online.target
 
 [Service]
 Type=simple
-User={{ rpi_camera_user }}
-ExecStart=gst-launch-1.0 v4l2src num-buffers=24 \
+User={{ gstreamer_user }}
+ExecStart=gst-launch-1.0 v4l2src num-buffers={{ gstreamer_num_buffers }} \
     ! h264parse \
-    ! rtph264pay config-interval=1 pt=96 \
-    ! udpsink host={{ rtp_sink_host }} port={{ rtp_sink_port }}
+    ! rtph264pay config-interval={{ gstreamer_config_interval }} pt=96 \
+    ! udpsink host={{ gstreamer_rtp_host }} port={{ gstreamer_rtp_port }}
 [Install]
 WantedBy=multi-user.target
