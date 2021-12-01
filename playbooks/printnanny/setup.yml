@@ -15,3 +15,6 @@
     - name: Janus Gateway setup
       include_role:
         name: bitsyai.rpi.janus
+    - name: Automatic software update setup
+      include_role:
+        name: bitsyai.rpi.updater
