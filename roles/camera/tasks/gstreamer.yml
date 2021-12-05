@@ -12,6 +12,8 @@
       - libcamera-dev
   tags:
     - setup
+  when: ansible_distribution == 'Debian'
+
 - name: Create video-rtp.service unit
   become: true
   ansible.builtin.template:
