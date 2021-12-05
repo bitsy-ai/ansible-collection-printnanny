@@ -9,7 +9,7 @@ Type=oneshot
 RuntimeDirectory={{ updater_user }}
 User={{ updater_user }}
 ExecStart={{ updater_venv }}/bin/ansible-galaxy \
-    collection install {{ updater_collection }} --upgrade
+    collection install --upgrade {{ updater_collection_url }}
 Restart=on-failure
 RestartSec=20
 

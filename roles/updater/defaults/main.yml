@@ -2,6 +2,8 @@
 # defaults file for ansible_pull
 
 auto_update_playbook: bitsyai.rpi.auto_update
+updater_collection_url: git+https://github.com/bitsy-ai/ansible-collection-rpi.git,main
+
 updater_collection: bitsyai.rpi
 updater_app_name: bitsy
 

@@ -8,7 +8,6 @@ printnanny_license_dir: '{{ printnanny_install_dir }}/license'
 printnanny_license_zip: /boot/printnanny_license.zip
 printnanny_device_json_file: '{{ printnanny_license_dir }}/printnanny_device.json'
 printnanny_device_factsd: /etc/ansible/facts.d/printnanny_device.fact
-printnanny_ansible_collection: git+https://github.com/bitsy-ai/ansible-collection-printnanny.git,main
 
 
 printnanny_cli_version: 0.4.3
