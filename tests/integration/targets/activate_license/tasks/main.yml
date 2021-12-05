@@ -18,7 +18,7 @@
 - name: License install tasks
   include_role:
     name: bitsyai.rpi.printnanny
-    tasks_from: verify_license
+    tasks_from: activate_license
 
 - name: Stat extracted license.txt
   ansible.builtin.stat:

@@ -9,5 +9,7 @@ gstreamer_video_src: 'v4l2src'
 gstreamer_user: 'gstreamer'
 gstreamer_group: 'gstreamer'
 
+gstreamer_video_w: 1280
+gstreamer_video_h: 720
 gstreamer_rtp_host: "127.0.0.1"
 gstreamer_rtp_port: 5004
