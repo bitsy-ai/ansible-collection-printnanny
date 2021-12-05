@@ -1,0 +1,7 @@
+---
+- hosts: default
+  tasks:
+  - name: License install tasks
+    import_role:
+      name: bitsyai.rpi.printnanny
+      tasks_from: activate_license

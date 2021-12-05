@@ -8,9 +8,9 @@
     path: '{{ printnanny_device_json_file }}'
   register: check_printnanny_device_json_file
 
-- name: Verify license
+- name: activate license
   ansible.builtin.command:
-    cmd: printnanny verify
+    cmd: printnanny activate
     creates: '{{ printnanny_license_dir }}/printnanny_device_info.json'
   when: check_printnanny_device_json_file.stat.exists
 

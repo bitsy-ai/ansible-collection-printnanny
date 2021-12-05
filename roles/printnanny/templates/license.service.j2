@@ -15,7 +15,7 @@ User={{ updater_user }}
 
 ExecStart=/usr/bin/flock -F {{ ansible_lockfile }} \
     {{ updater_venv }}/bin/ansible-playbook \
-    bitsyai.printnanny.license_verify
+    bitsyai.printnanny.license_activate
 
 ExecStart=/usr/bin/flock -F {{ ansible_lockfile }} \
     {{ updater_venv }}/bin/ansible \
