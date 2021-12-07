@@ -22,7 +22,7 @@
 
 - name: Stat extracted license.txt
   ansible.builtin.stat:
-    path: '{{ printnanny_license_dir }}/license.txt'
+    path: '{{ printnanny_data_dir }}/license.txt'
   register: license
 
 - name: Assert license.txt in expected path

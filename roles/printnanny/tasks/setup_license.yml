@@ -9,7 +9,7 @@
 
 - name: Create license dir
   ansible.builtin.file:
-    path: '{{ printnanny_license_dir }}'
+    path: '{{ printnanny_data_dir }}'
     state: directory
     mode: 0664
 

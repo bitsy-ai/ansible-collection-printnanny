@@ -1,7 +1,7 @@
 - name: Extract license archive
   ansible.builtin.unarchive:
     src: '{{ printnanny_license_zip }}'
-    dest: '{{ printnanny_license_dir }}'
+    dest: '{{ printnanny_data_dir }}'
 
 - name: Check if device.json exists
   ansible.builtin.stat:
@@ -11,7 +11,7 @@
 - name: activate license
   ansible.builtin.command:
     cmd: printnanny activate
-    creates: '{{ printnanny_license_dir }}/printnanny_device_info.json'
+    creates: '{{ printnanny_data_dir }}/printnanny_device_info.json'
   when: check_printnanny_device_json_file.stat.exists
 
 - name: Create Read printnanny_device.json into Ansible var
