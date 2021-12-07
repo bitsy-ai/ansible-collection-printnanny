@@ -11,7 +11,7 @@ printnanny_device_json_file: '{{ printnanny_data_dir }}/printnanny_device.json'
 printnanny_device_factsd: /etc/ansible/facts.d/printnanny_device.fact
 
 
-printnanny_cli_version: 0.4.3
+printnanny_cli_version: 0.4.4
 printnanny_cli_url: 'https://github.com/bitsy-ai/printnanny-cli/releases/download/v{{ printnanny_cli_version }}/printnanny-{{ ansible_architecture }}-unknown-linux-gnu.tar.gz'
 printnanny_ansible_version: 'ansible>4,<5'
 printnanny_update_schedule: '*/15 * * * *'
