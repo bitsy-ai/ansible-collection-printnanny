@@ -5,7 +5,7 @@
     src: "{{ item.value }}"
     dest: "{{ janus_conf_dir }}/{{ item.value }}"
   with_dict: "{{ janus_conf_template }}"
-  when: janus_auth.api_secret is defined
+  when: ansible_local.janus.api_secret is defined
 
 - name: Render janus-gateway systemd unit
   become: true
@@ -20,4 +20,5 @@
   become: true
   ansible.builtin.systemd:
     name: janus
-    enabled: '{{ printnanny_device is defined }}'
+    enabled: '{{ ansible_local.janus.api_secret is defined }}'
+    state: started

@@ -24,8 +24,6 @@ ExecStart=/usr/bin/flock -F {{ ansible_lockfile }} \
 
 ExecStartPost=-/usr/bin/flock -F {{ ansible_lockfile }} \
     /usr/bin/rm {{ ansible_lockfile }}
-ExecStartPost=/bin/systemctl enable janus
-ExecStartPost=/bin/systemctl start janus
 
 RemainAfterExit=yes
 Slice=ansible_pull.slice
