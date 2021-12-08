@@ -70,7 +70,7 @@
 - name: Setup passwordless sudo for ansible user
   become: true
   ansible.builtin.copy:
-    content: '%{{ updater_user }} ALL=(ALL) NOPASSWD: ALL'
+    content: '{{ updater_user }} ALL=(ALL) NOPASSWD: ALL'
     dest: /etc/sudoers.d/00_ansible_pwdless.conf
     owner: root
     group: root
