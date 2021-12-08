@@ -19,16 +19,6 @@
   tags:
     - setup
 
-- name: Configure ansible sudoers
-  become: true
-  ansible.builtin.copy:
-    dest: "/etc/sudoers.d/00_ansible_pwdless.conf"
-    content: "{{ updater_user }} ALL=(ALL) NOPASSWD: ALL"
-    validate: visudo -cf %s
-    mode: "0644"
-  tags:
-    - setup
-
 - name: Install apt dependencies
   become: true
   ansible.builtin.apt:
@@ -80,11 +70,12 @@
 - name: Setup passwordless sudo for ansible user
   become: true
   ansible.builtin.copy:
-    content: '%{{ updater_user }} ALL=(ALL) NOPASSWD: ALL }}'
+    content: '%{{ updater_user }} ALL=(ALL) NOPASSWD: ALL'
     dest: /etc/sudoers.d/00_ansible_pwdless.conf
     owner: root
     group: root
     mode: 0440
+    validate: visudo -cf /etc/sudoers.d/00_ansible_pwdless.conf
   tags:
     - setup
 
