@@ -1,0 +1,19 @@
+- name: Create /opt/printnanny/facts.d/
+  become: true
+  ansible.builtin.file:
+    path: '{{ ansible_facts_path }}'
+    state: directory
+    mode: 0664
+
+- name: Render /etc/ansible/facts.d/device.fact
+  become: true
+  ansible.builtin.copy:
+    src: facts.d/device.fact
+    dest: '{{ printnanny_device_fact }}'
+    mode: 0755
+
+- name: Render /etc/ansible/facts.d/license.fact
+  ansible.builtin.copy:
+    src: facts.d/license.fact
+    path: '{{ printnanny_license_fact }}'
+    mode: 0755

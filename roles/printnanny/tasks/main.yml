@@ -7,3 +7,4 @@
 - import_tasks: log.yml
 - import_tasks: cli.yml
 - import_tasks: setup_license.yml
+- import_tasks: factsd.yml

@@ -19,23 +19,3 @@
     file: '{{ printnanny_device_json_file }}'
     name: printnanny_device_json
   when: check_printnanny_device_json_file.stat.exists
-
-- name: Create /etc/ansible/facts.d
-  become: true
-  ansible.builtin.file:
-    path: /etc/ansible/facts.d
-    state: directory
-    mode: 0664
-
-- name: Render /etc/ansible/facts.d/printnanny.fact from vars
-  become: true
-  ansible.builtin.template:
-    src: 'ansible_factsd.json.j2'
-    dest: '{{ printnanny_device_factsd }}'
-    mode: 0664
-  when: printnanny_device_json is defined
-
-- name: Delete license archive
-  ansible.builtin.file:
-    state: absent
-    path: '{{ printnanny_license_zip }}'
