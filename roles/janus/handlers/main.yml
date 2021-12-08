@@ -4,6 +4,6 @@
 - name: restart janus service
   become: true
   ansible.builtin.systemd:
-    daemon_reload: yes
+    daemon_reload: true
     name: janus
     state: restarted

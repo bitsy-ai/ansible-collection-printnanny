@@ -33,7 +33,7 @@ general: {
 	# started, and to destroy at shutdown
 
 	# There are different ways you can authenticate the Janus and Admin APIs
-	api_secret = "{{ ansible_local.janus.api_secret }}"
+	# api_secret = ""
                                     # String that all Janus requests must contain
 									# to be accepted/authorized by the Janus core.
 									# Useful if you're wrapping all Janus API requests
@@ -52,7 +52,7 @@ general: {
 									# without this, the Admin API MUST
 									# be enabled, as tokens are added and removed
 									# through messages sent there.
-	admin_secret = "{{ ansible_local.janus.admin_secret }}"	
+	admin_secret = "{{ ansible_local.license.janus_admin_secret }}"	
                                     # String that all Janus requests must contain
 									# to be accepted/authorized by the admin/monitor.
 									# only needed if you enabled the admin API
@@ -60,7 +60,7 @@ general: {
 
 	# Generic settings
 	#interface = "1.2.3.4"			# Interface to use (will be used in SDP)
-	# server_name = "servername"
+	server_name = "{{ inventory_hostname }}"
                                     # Public name of this Janus instance
 									# as it will appear in an info request
 	session_timeout = {{ janus_conf['janus']['session_timeout'] }}			# How long (in seconds) we should wait before

@@ -13,3 +13,6 @@
     cmd: printnanny activate
     creates: '{{ printnanny_data_dir }}/printnanny_device_info.json'
   when: licence.stat.exists
+  notify:
+    - render janus configs
+    - restart janus service

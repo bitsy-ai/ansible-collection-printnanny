@@ -1,2 +1,15 @@
 ---
 # handlers file for setup
+
+- name: render janus configs
+  become: true
+  ansible.builtin.import_role:
+    name: bitsyai.rpi.janus
+    tasks_from: systemd
+
+- name: restart janus service
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: janus
+    state: restarted
