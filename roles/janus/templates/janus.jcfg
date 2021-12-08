@@ -33,7 +33,7 @@ general: {
 	# started, and to destroy at shutdown
 
 	# There are different ways you can authenticate the Janus and Admin APIs
-	api_secret = "{{ printnanny_device.credentials.printnanny_api_token }}"
+	api_secret = "{{ ansible_local.janus.api_secret }}"
                                     # String that all Janus requests must contain
 									# to be accepted/authorized by the Janus core.
 									# Useful if you're wrapping all Janus API requests
@@ -41,7 +41,7 @@ general: {
 									# where you do the things your way) and you
 									# don't want other application to mess with
 									# this Janus instance.
-	# token_auth = true				
+	token_auth = true				
                                     # Enable a token based authentication
 									# mechanism to force users to always provide
 									# a valid token in all requests. Useful if
@@ -52,7 +52,7 @@ general: {
 									# without this, the Admin API MUST
 									# be enabled, as tokens are added and removed
 									# through messages sent there.
-	# admin_secret = "janusoverlord"	
+	admin_secret = "{{ ansible_local.janus.admin_secret }}"	
                                     # String that all Janus requests must contain
 									# to be accepted/authorized by the admin/monitor.
 									# only needed if you enabled the admin API

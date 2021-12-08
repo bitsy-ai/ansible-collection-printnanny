@@ -7,7 +7,7 @@ printnanny_install_dir: /opt/printnanny
 printnanny_data_dir: '{{ printnanny_install_dir }}/data'
 printnanny_backups_dir: "{{ printnanny_install_dir }}/backups"
 printnanny_license_zip: /boot/printnanny_license.zip
-printnanny_device_json_file: '{{ printnanny_data_dir }}/printnanny_device.json'
+printnanny_license_json_file: '{{ printnanny_data_dir }}/license.json'
 
 ansible_facts_path: /etc/ansible/facts.d
 printnanny_device_fact: /etc/ansible/facts.d/device.fact

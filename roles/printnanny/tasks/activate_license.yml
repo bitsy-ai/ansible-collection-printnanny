@@ -3,8 +3,13 @@
     src: '{{ printnanny_license_zip }}'
     dest: '{{ printnanny_data_dir }}'
 
+- name: Check if device.json exists
+  ansible.builtin.stat:
+    path: '{{ printnanny_license_json_file }}'
+  register: licence
+
 - name: activate license
   ansible.builtin.command:
     cmd: printnanny activate
-    creates: '{{ printnanny_data_dir }}/device_info.json'
-  when: check_printnanny_device_json_file.stat.exists
+    creates: '{{ printnanny_data_dir }}/printnanny_device_info.json'
+  when: licence.stat.exists
