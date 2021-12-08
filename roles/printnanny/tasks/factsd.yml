@@ -17,9 +17,3 @@
     src: facts.d/license.fact
     dest: '{{ printnanny_license_fact }}'
     mode: 0755
-
-- name: Render /etc/ansible/facts.d/janus.fact
-  ansible.builtin.copy:
-    src: facts.d/janus.fact
-    dest: '{{ printnanny_janus_fact }}'
-    mode: 0755
