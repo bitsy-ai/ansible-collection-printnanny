@@ -15,5 +15,5 @@
 - name: Render /etc/ansible/facts.d/license.fact
   ansible.builtin.copy:
     src: facts.d/license.fact
-    path: '{{ printnanny_license_fact }}'
+    dest: '{{ printnanny_license_fact }}'
     mode: 0755
