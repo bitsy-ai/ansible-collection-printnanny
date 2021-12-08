@@ -4,12 +4,12 @@
 tflite_version: v2.5.1
 
 printnanny_install_dir: /opt/printnanny
-printnanny_facts_path: '{{ printnanny_install_dir }}/facts.d'
 printnanny_data_dir: '{{ printnanny_install_dir }}/data'
 printnanny_backups_dir: "{{ printnanny_install_dir }}/backups"
 printnanny_license_zip: /boot/printnanny_license.zip
 printnanny_device_json_file: '{{ printnanny_data_dir }}/printnanny_device.json'
 
+ansible_facts_path: /etc/ansible/facts.d
 printnanny_device_fact: /etc/ansible/facts.d/device.fact
 printnanny_license_fact: /etc/ansible/facts.d/license.fact
 

@@ -1,7 +1,7 @@
 - name: Create /opt/printnanny/facts.d/
   become: true
   ansible.builtin.file:
-    path: '{{ printnanny_facts_path }}'
+    path: '{{ ansible_facts_path }}'
     state: directory
     mode: 0664
 
