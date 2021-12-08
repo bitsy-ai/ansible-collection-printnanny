@@ -13,7 +13,10 @@
     mode: 0755
 
 - name: Render /etc/ansible/facts.d/license.fact
+  become: true
   ansible.builtin.copy:
     src: facts.d/license.fact
     dest: '{{ printnanny_license_fact }}'
-    mode: 0755
+    mode: 0770
+    owner: ansible
+    group: ansible
