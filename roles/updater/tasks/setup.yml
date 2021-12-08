@@ -75,7 +75,7 @@
     owner: root
     group: root
     mode: 0440
-    validate: visudo -cf /etc/sudoers.d/010_ansible-no-passwd
+    validate: visudo -cf %s
   tags:
     - setup
 
