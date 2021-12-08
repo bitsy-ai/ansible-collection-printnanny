@@ -3,9 +3,12 @@
 
 - name: render janus configs
   become: true
-  ansible.builtin.import_role:
-    name: bitsyai.rpi.janus
-    tasks_from: systemd
+  ansible.builtin.template:
+    mode: 0660
+    src: "{{ item.value }}"
+    dest: "{{ janus_conf_dir }}/{{ item.value }}"
+  with_dict: "{{ janus_conf_template }}"
+  when: ansible_local.license.janus_admin_secret is defined
 
 - name: restart janus service
   become: true
