@@ -71,11 +71,11 @@
   become: true
   ansible.builtin.copy:
     content: '{{ updater_user }} ALL=(ALL) NOPASSWD: ALL'
-    dest: /etc/sudoers.d/00_ansible_pwdless.conf
+    dest: /etc/sudoers.d/010_ansible-no-passwd
     owner: root
     group: root
     mode: 0440
-    validate: visudo -cf /etc/sudoers.d/00_ansible_pwdless.conf
+    validate: visudo -cf /etc/sudoers.d/010_ansible-no-passwd
   tags:
     - setup
 
