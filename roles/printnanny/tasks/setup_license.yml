@@ -16,5 +16,5 @@
 - name: Enable printnany-license.service unit
   become: true
   ansible.builtin.systemd:
-    name: printnanny-license
+    name: license
     enabled: true
