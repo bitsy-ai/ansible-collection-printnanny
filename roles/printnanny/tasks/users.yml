@@ -31,7 +31,7 @@
     group: "{{ printnanny_group }}"
     mode: 0775
 
-- name: Create print nanny data dir
+- name: Create {{ printnanny_data_dir }}
   become: true
   ansible.builtin.file:
     path: "{{ printnanny_data_dir }}"
@@ -40,10 +40,19 @@
     group: "{{ printnanny_group }}"
     mode: 0775
 
-- name: Create print nanny backups dir
+- name: Create {{ printnanny_backups_dir }}
   become: true
   ansible.builtin.file:
     path: "{{ printnanny_backups_dir }}"
+    state: directory
+    owner: "{{ printnanny_user }}"
+    group: "{{ printnanny_group }}"
+    mode: 0775
+
+- name: Create {{ printnanny_ansible_dir }}
+  become: true
+  ansible.builtin.file:
+    path: "{{ printnanny_ansible_dir }}"
     state: directory
     owner: "{{ printnanny_user }}"
     group: "{{ printnanny_group }}"
