@@ -4,6 +4,7 @@
     mode: 0660
     src: "{{ item.value }}"
     dest: "{{ janus_conf_dir }}/{{ item.value }}"
+    owner: "{{ janus_user }}"
   with_dict: "{{ janus_conf_template }}"
   when: ansible_local.license.janus_admin_secret is defined
 
