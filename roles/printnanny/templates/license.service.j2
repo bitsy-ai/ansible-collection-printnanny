@@ -2,8 +2,6 @@
 [Unit]
 Description=Print Nanny License installer
 ConditionPathExists={{ printnanny_license_zip }}
-After={{ ansible_updater_service }}.service
-Requires={{ ansible_updater_service }}.service
 Wants=network-online.target
 After=network-online.target
 
@@ -16,11 +14,6 @@ User={{ updater_user }}
 ExecStart=/usr/bin/flock -F {{ ansible_lockfile }} \
     {{ updater_venv }}/bin/ansible-playbook \
     bitsyai.rpi.printnanny.activate_license
-
-ExecStart=/usr/bin/flock -F {{ ansible_lockfile }} \
-    {{ updater_venv }}/bin/ansible \
-    localhost \
-    -m include_role -a "name=bitsyai.rpi.janus tasks_from=systemd"
 
 ExecStartPost=-/usr/bin/flock -F {{ ansible_lockfile }} \
     /usr/bin/rm {{ ansible_lockfile }}

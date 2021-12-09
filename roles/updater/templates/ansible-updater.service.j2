@@ -3,6 +3,9 @@
 Description=Install latest {{ updater_collection }} Ansible Collection
 Wants=network-online.target
 After=network-online.target
+{% if updater_service_unit_extra is defined %}
+{{ updater_service_unit_extra }}
+{% endif %}
 
 [Service]
 Type=oneshot
