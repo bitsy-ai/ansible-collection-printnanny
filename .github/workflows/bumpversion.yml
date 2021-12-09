@@ -34,3 +34,12 @@ jobs:
         DRY_RUN: false
         RELEASE_BRANCHES: "main"
         PRERELEASE_SUFFIX: "nightly"
+    - name: Send Discord notification
+      env:
+        DISCORD_WEBHOOK: ${{ secrets.PRINT_NANNY_DISCORD_DEPLOY_WEBHOOK }}
+      uses: Ilshidur/action-discord@master
+      with:
+        args: |
+            🥧 **Hot & Fresh Configs** {{ EVENT_PAYLOAD.repository.full_name }}@{{ GITHUB_SHA }}
+            **Version**: `${{ steps.tags.outputs.new_tag }}`
+            **Channel**: `${{ steps.git.outputs.git_branch }}`
