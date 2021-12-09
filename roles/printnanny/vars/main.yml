@@ -60,7 +60,7 @@ printnanny_ansible_dir: "{{ printnanny_install_dir }}/ansible"
 ansible_config:
   fact_caching_timeout: 86400
   fact_caching: jsonfile
-  fact_caching_connection: '{{ printnanny_ansible_dir }}/ansible_facts.json'
+  fact_caching_connection: '/var/run/{{ updater_app_name }}/fact_cache'
 
 ansible_updater_service: ansible-updater
 auto_update_playbook: bitsyai.rpi.printnanny.auto_update
