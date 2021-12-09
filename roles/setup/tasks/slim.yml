@@ -39,6 +39,7 @@
     purge: true
 
 - name: Remove dependencies that are no longer required
+  become: true
   ansible.builtin.apt:
     autoremove: true
 
