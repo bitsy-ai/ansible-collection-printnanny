@@ -15,9 +15,25 @@
       - users
       - video
 
-- name: Add updater user '{{ updater_user }}' to group sudo
+- name: Add updater user '{{ updater_user }}' to printnanny group
   become: true
   ansible.builtin.user:
     name: '{{ updater_user }}'
     groups: '{{ printnanny_user }}'
     append: true
+
+- name: Create print nanny data dir
+  ansible.builtin.file:
+    path: "{{ printnanny_data_dir }}"
+    state: directory
+    owner: "{{ printnanny_user }}"
+    group: "{{ printnanny_group }}"
+    mode: 0770
+
+- name: Create print nanny backups dir
+  ansible.builtin.file:
+    path: "{{ printnanny_backups_dir }}"
+    state: directory
+    owner: "{{ printnanny_user }}"
+    group: "{{ printnanny_group }}"
+    mode: 0770
