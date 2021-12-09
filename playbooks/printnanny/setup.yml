@@ -6,15 +6,15 @@
     - name: Common Raspberry Pi setup
       include_role:
         name: bitsyai.rpi.setup
+    - name: Print Nanny setup
+      include_role:
+        name: bitsyai.rpi.printnanny
     - name: Automatic software update setup
       include_role:
         name: bitsyai.rpi.updater
     - name: Camera setup
       include_role:
         name: bitsyai.rpi.camera
-    - name: Print Nanny setup
-      include_role:
-        name: bitsyai.rpi.printnanny
     - name: Janus Gateway setup
       include_role:
         name: bitsyai.rpi.janus

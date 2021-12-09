@@ -6,14 +6,14 @@
     dest: /etc/systemd/system/mqtt.service
 
 - name: Check if device PKI exists
-  stat: 
-    path: "{{ printnanny_data_dir }}/id_dsa.pub"
+  ansible.builtin.stat:
+    path: "{{ printnanny_data_dir }}/ecdsa_public.pem"
   register: device_pki
 
 - name: Enable mqtt service
   ansible.builtin.systemd:
     name: mqtt
-    daemon_reload: yes
+    daemon_reload: true
     state: started
     enabled: true
   when: device_pki.stat.exists
@@ -21,7 +21,7 @@
 - name: Disable mqtt service
   ansible.builtin.systemd:
     name: mqtt
-    daemon_reload: yes
+    daemon_reload: true
     state: stopped
     enabled: false
   when: not device_pki.stat.exists
