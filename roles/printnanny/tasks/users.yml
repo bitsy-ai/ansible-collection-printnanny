@@ -23,6 +23,7 @@
     append: true
 
 - name: Create print nanny data dir
+  become: true
   ansible.builtin.file:
     path: "{{ printnanny_data_dir }}"
     state: directory
@@ -31,6 +32,7 @@
     mode: 0770
 
 - name: Create print nanny backups dir
+  become: true
   ansible.builtin.file:
     path: "{{ printnanny_backups_dir }}"
     state: directory
