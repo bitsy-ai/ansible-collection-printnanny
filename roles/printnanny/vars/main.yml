@@ -52,6 +52,9 @@ janus_conf_template:
   janus.transport.websockets.jcfg: janus.transport.websockets.jcfg
 
 # ansible / updater vars
+printnanny_install_dir: /opt/printnanny
+printnanny_data_dir: '{{ printnanny_install_dir }}/data'
+printnanny_backups_dir: "{{ printnanny_install_dir }}/backups"
 
 ansible_config:
   fact_caching_timeout: 86400

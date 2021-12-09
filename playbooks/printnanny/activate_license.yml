@@ -4,6 +4,6 @@
   - name: Include roles/printnanny/vars
     include_vars: ../../roles/printnanny/vars/main.yml
   - name: License install tasks
-    import_role:
+    include_role:
       name: bitsyai.rpi.printnanny
       tasks_from: activate_license
