@@ -39,7 +39,7 @@
   ansible.builtin.file:
     path: /etc/ansible
     state: directory
-    mode: 0664
+    mode: 0755
   tags:
     - setup
 
@@ -82,7 +82,7 @@
 - name: Create ansible.cfg
   become: true
   ansible.builtin.template:
-    mode: 0664
+    mode: 0755
     src: ansible.cfg.j2
     dest: "/etc/ansible/ansible.cfg"
   tags:
@@ -91,7 +91,7 @@
 - name: Create updater systemd timers
   become: true
   ansible.builtin.template:
-    mode: 0664
+    mode: 0755
     src: auto-upgrader.timer.j2
     dest: '/etc/systemd/system/{{ auto_update_service }}.timer'
   tags:
@@ -100,7 +100,7 @@
 - name: Create updater service
   become: true
   ansible.builtin.template:
-    mode: 0664
+    mode: 0755
     src: auto-upgrader.service.j2
     dest: '/etc/systemd/system/{{ auto_update_service }}.service'
   tags:
@@ -109,7 +109,7 @@
 - name: Create ansible-updater service
   become: true
   ansible.builtin.template:
-    mode: 0664
+    mode: 0755
     src: ansible-updater.service.j2
     dest: '/etc/systemd/system/{{ ansible_updater_service }}.service'
   tags:
@@ -136,6 +136,6 @@
   ansible.builtin.copy:
     src: files/hosts
     dest: '{{ ansible_hosts_file }}'
-    mode: 0664
+    mode: 0755
   tags:
     - setup

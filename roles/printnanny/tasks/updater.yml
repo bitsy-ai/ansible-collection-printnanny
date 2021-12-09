@@ -1,4 +1,4 @@
 ---
-  - name: Install Updater service (bitsyai.printnanny)
-    import_role:
-      name: bitsyai.rpi.updater
+- name: Install Updater service (bitsyai.printnanny)
+  import_role:
+    name: bitsyai.rpi.updater
