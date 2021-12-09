@@ -3,18 +3,19 @@
     name: '{{ printnanny_user }}'
     groups:
       - adm
-      - audio
-      - cdrom
-      - dialout
-      - games
       - gpio
       - i2c
       - input
       - netdev
-      - pi
       - plugdev
       - spi
       - sudo
       - tty
       - users
       - video
+
+- name: Add updater user '{{ updater_user }}' to group sudo
+  user:
+    name: '{{ updater_user }}'
+    groups: '{{ printnanny_user }}'
+    append: true
