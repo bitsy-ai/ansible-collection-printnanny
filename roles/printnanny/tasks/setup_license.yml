@@ -7,11 +7,18 @@
     src: license.service.j2
     dest: /etc/systemd/system/license.service
 
-- name: Create license dir
+- name: Create '{{ printnanny_data_dir }}'
   ansible.builtin.file:
     path: '{{ printnanny_data_dir }}'
     state: directory
-    mode: 0664
+    mode: 0770
+
+- name: Create '{{ printnanny_backups_dir }}'
+  ansible.builtin.file:
+    path: '{{ printnanny_backups_dir }}'
+    state: directory
+    mode: 0770
+
 
 - name: Enable printnany-license.service unit
   become: true

@@ -2,6 +2,8 @@
 - hosts: all
   gather_facts: true
   tasks:
+    - name: Include roles/printnanny/vars
+      include_vars: ../../roles/printnanny/vars/main.yml
     - name: Update Print Nanny CLI
       import_role:
         name: bitsyai.rpi.printnanny

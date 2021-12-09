@@ -1,6 +1,9 @@
 ---
 # vars file for setup
 
+
+# janus vars
+
 janus_install_dir: /opt/janus
 janus_conf_dir: "{{ janus_install_dir }}/etc/janus"
 janus_conf:
@@ -47,3 +50,18 @@ janus_conf_template:
   janus.transport.http.jcfg: janus.transport.http.jcfg
   janus.transport.pfunix.jcfg: janus.transport.pfunix.jcfg
   janus.transport.websockets.jcfg: janus.transport.websockets.jcfg
+
+# ansible / updater vars
+
+ansible_config:
+  fact_caching_timeout: 86400
+  fact_caching: jsonfile
+  fact_caching_connection: '{{ printnanny_data_dir }}/ansible_facts.json'
+
+ansible_updater_service: ansible-updater
+auto_update_playbook: bitsyai.rpi.printnanny.auto_update
+updater_app_name: printnanny
+updater_tmpfs: '/var/run/{{ updater_app_name }}'
+ansible_lockfile: '/var/run/{{ updater_app_name }}/ansible.lock'
+updater_user: ansible
+updater_venv: '/home/{{ updater_user }}/venv'
