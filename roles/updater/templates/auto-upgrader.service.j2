@@ -6,6 +6,9 @@ Requires={{ ansible_updater_service }}.service
 Wants=network-online.target
 After=network-online.target
 Wants={{ auto_update_service }}.timer
+{% if updater_service_unit_extra is defined %}
+{{ updater_service_unit_extra }}
+{% endif %}
 
 [Service]
 Type=oneshot

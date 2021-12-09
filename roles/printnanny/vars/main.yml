@@ -71,4 +71,4 @@ updater_user: printnanny
 updater_venv: '{{ printnanny_ansible_dir }}/venv'
 updater_service_unit_extra: |
   After={{ updater_app_name }}-license.service
-  Requires={{ ansible_updater_service }}-license.service
+  Requires={{ updater_app_name }}-license.service
