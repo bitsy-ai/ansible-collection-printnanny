@@ -4,21 +4,20 @@
   ansible.builtin.apt:
     update_cache: true
     name:
-        # general
-        - cron
-        - git
-        - libssl-dev
-        - nano
-        - openssh-server
-        - pkg-config 
-        - python3-dev
-        - python3-pip
-        - python3-venv
-        - rustc
-        - sudo
-        - vim
-        # required by ansible.builtin.package_facts
-        - python3-apt
+      - cron
+      - git
+      - libssl-dev
+      - nano
+      - openssh-server
+      - pkg-config
+      - python3-dev
+      - python3-pip
+      - python3-venv
+      - rustc
+      - sudo
+      - vim
+      # required by ansible.builtin.package_facts
+      - python3-apt
   tags:
     - auto_update
 # tracking https://github.com/ansible/ansible/issues/38920
