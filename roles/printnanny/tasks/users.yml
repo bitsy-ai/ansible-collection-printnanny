@@ -1,4 +1,5 @@
 - name: 'Configure {{ printnanny_user }} user/groups'
+  become: true
   ansible.builtin.user:
     name: '{{ printnanny_user }}'
     groups:
@@ -15,7 +16,8 @@
       - video
 
 - name: Add updater user '{{ updater_user }}' to group sudo
-  user:
+  become: true
+  ansible.builtin.user:
     name: '{{ updater_user }}'
     groups: '{{ printnanny_user }}'
     append: true
