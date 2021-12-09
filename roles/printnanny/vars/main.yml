@@ -55,16 +55,17 @@ janus_conf_template:
 printnanny_install_dir: /opt/printnanny
 printnanny_data_dir: '{{ printnanny_install_dir }}/data'
 printnanny_backups_dir: "{{ printnanny_install_dir }}/backups"
+printnanny_ansible_dir: "{{ printnanny_install_dir }}/ansible"
 
 ansible_config:
   fact_caching_timeout: 86400
   fact_caching: jsonfile
-  fact_caching_connection: '{{ printnanny_data_dir }}/ansible_facts.json'
+  fact_caching_connection: '{{ printnanny_ansible_dir }}/ansible_facts.json'
 
 ansible_updater_service: ansible-updater
 auto_update_playbook: bitsyai.rpi.printnanny.auto_update
 updater_app_name: printnanny
 updater_tmpfs: '/var/run/{{ updater_app_name }}'
 ansible_lockfile: '/var/run/{{ updater_app_name }}/ansible.lock'
-updater_user: ansible
-updater_venv: '/home/{{ updater_user }}/venv'
+updater_user: printnanny
+updater_venv: '{{ printnanny_ansible_dir }}/venv'
