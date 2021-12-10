@@ -2,8 +2,14 @@
 # vars file for setup
 
 
-# janus vars
-
+# begin janus vars
+janus_exec_start_post: [
+  'printnanny janus add-token'
+]
+janus_user: janus
+janus_groups:
+  - printnanny
+  - video
 janus_install_dir: /opt/janus
 janus_conf_dir: "{{ janus_install_dir }}/etc/janus"
 janus_conf:
@@ -50,6 +56,7 @@ janus_conf_template:
   janus.transport.http.jcfg: janus.transport.http.jcfg
   janus.transport.pfunix.jcfg: janus.transport.pfunix.jcfg
   janus.transport.websockets.jcfg: janus.transport.websockets.jcfg
+# end janus vars
 
 # ansible / updater vars
 printnanny_install_dir: /opt/printnanny
