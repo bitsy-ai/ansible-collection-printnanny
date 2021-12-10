@@ -82,3 +82,4 @@ janus_conf_template:
   janus.transport.websockets.jcfg: janus.transport.websockets.jcfg
 
 janus_upgrade_available: "{{ ansible_facts.get('janus_version') != janus_version }}"
+janus_exec_start_post: []

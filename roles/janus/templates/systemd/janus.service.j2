@@ -15,6 +15,10 @@ ExecStart={{ janus_install_dir }}/bin/janus \
     --cwd-path={{ janus_install_dir }} \
     --configs-folder={{ janus_conf_dir }} \
     --log-file={{ janus_log_file }}
+
+{% for cmd in janus_exec_start_post %}
+ExecStartPost={{ cmd }}
+{% endif %}
 Restart=on-failure
 LimitNOFILE=65536
 
