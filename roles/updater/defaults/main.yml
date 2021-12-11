@@ -13,7 +13,7 @@ updater_user: ansible
 updater_venv: '/home/{{ updater_user }}/venv'
 
 ansible_updater_version: 'ansible>4,<5'
-ansible_updater_service: ansible-updater
+ansible_collection_updater: ansible-updater
 
 updater_tmpfs: '/var/run/{{ updater_app_name }}'
 ansible_lockfile: '/var/run/{{ updater_app_name }}/ansible.lock'
