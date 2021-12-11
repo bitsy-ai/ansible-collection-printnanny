@@ -4,7 +4,7 @@
 
 # begin janus vars
 janus_exec_start_post: [
-  'printnanny janus add-token'
+  'printnanny janus-admin addtoken'
 ]
 janus_user: janus
 janus_groups:
