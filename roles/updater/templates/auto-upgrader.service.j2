@@ -1,8 +1,8 @@
 # {{ ansible_managed }}
 [Unit]
 Description=Bitsy Automatic Updater
-After={{ ansible_updater_service }}.service
-Requires={{ ansible_updater_service }}.service
+After={{ ansible_collection_updater }}.service
+Requires={{ ansible_collection_updater }}.service
 Wants=network-online.target
 After=network-online.target
 Wants={{ auto_update_service }}.timer
