@@ -1,11 +1,14 @@
 ---
 # vars file for setup
 
-
 # begin janus vars
 janus_exec_start_post: [
   'printnanny janus-admin addtoken'
 ]
+janus_service_unit_extra: |
+  After=video-rtp.service
+  Requires=video-rtp.service
+
 janus_user: janus
 janus_groups:
   - printnanny
