@@ -2,3 +2,18 @@
 - import_role:
     name: bitsyai.rpi.printnanny
     tasks_from: mqtt
+
+- name: Stat primary ca cert
+  ansible.builtin.stat:
+    path: '{{ printnanny_cacert_dir }}/{{ gcp_lts_ca_primary | basename }}'
+  register: primary_cacert
+
+- name: Stat secondary ca cert
+  ansible.builtin.stat:
+    path: '{{ printnanny_cacert_dir }}/{{ gcp_lts_ca_backup | basename }}'
+  register: secondary_cacert
+
+- name: Assert
+  assert:
+    that:
+      - secondary_cacert.stat.exists

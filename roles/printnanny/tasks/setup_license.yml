@@ -19,7 +19,6 @@
     state: directory
     mode: 0770
 
-
 - name: Enable printnany-license.service unit
   become: true
   ansible.builtin.systemd:
