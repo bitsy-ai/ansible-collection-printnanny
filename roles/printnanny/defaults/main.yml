@@ -4,11 +4,13 @@
 tflite_version: v2.5.1
 
 printnanny_install_dir: /opt/printnanny
+printnanny_cacert_dir: '{{ printnanny_install_dir }}/ca-certificates'
 printnanny_data_dir: '{{ printnanny_install_dir }}/data'
 printnanny_backups_dir: "{{ printnanny_install_dir }}/backups"
 printnanny_ansible_dir: "{{ printnanny_install_dir }}/ansible"
 printnanny_license_zip: /boot/printnanny_license.zip
 printnanny_license_json_file: '{{ printnanny_data_dir }}/license.json'
+printnanny_public_key: '{{ printnanny_data_dir }}/ecdsa_public.pem'
 
 ansible_facts_path: /etc/ansible/facts.d
 printnanny_device_fact: /etc/ansible/facts.d/device.fact
@@ -21,3 +23,6 @@ printnanny_ansible_version: 'ansible>4,<5'
 printnanny_update_schedule: '*/15 * * * *'
 printnanny_user: printnanny
 printnanny_group: printnanny
+
+gcp_lts_ca_primary: https://pki.goog/gtsltsr/gtsltsr.crt
+gcp_lts_ca_backup: https://pki.goog/gsr4/GSR4.crt

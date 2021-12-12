@@ -5,9 +5,27 @@
     src: mqtt.service.j2
     dest: /etc/systemd/system/mqtt.service
 
+- name: Create '{{ printnanny_cacerts_dir }}'
+  ansible.builtin.file:
+    path: '{{ printnanny_cacert_dir }}'
+    state: directory
+    mode: 0770
+
+- name: Download GCP LTS CA Certificate {{ gcp_lts_ca_primary }}
+  ansible.builtin.get_url:
+    url: '{{ gcp_lts_ca_primary }}'
+    dest: '{{ printnanny_cacert_dir }}/{{ gcp_lts_ca_primary | basename }}'
+    mode: '0755'
+
+- name: Download GCP LTS CA Certificate {{ gcp_lts_ca_backup }}
+  ansible.builtin.get_url:
+    url: '{{ gcp_lts_ca_primary }}'
+    dest: '{{ printnanny_cacert_dir }}/{{ gcp_lts_ca_backup | basename }}'
+    mode: '0755'
+
 - name: Check if device PKI exists
   ansible.builtin.stat:
-    path: "{{ printnanny_data_dir }}/ecdsa_public.pem"
+    path: '{{ printnanny_public_key }}'
   register: device_pki
 
 - name: Enable mqtt service
