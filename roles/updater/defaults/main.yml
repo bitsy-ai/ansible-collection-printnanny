@@ -31,3 +31,5 @@ updater_timer:
   RandomizedDelaySec: 60
   # always update 2 minutes after booting
   OnStartupSec: 120
+
+updater_service_unit_extra: null

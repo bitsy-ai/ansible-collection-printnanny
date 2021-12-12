@@ -2,6 +2,9 @@
 Description=Janus Gateway
 Requires=network.target
 After=syslog.target network.target network-online.target
+{% if janus_service_unit_extra is defined %}
+{{ janus_service_unit_extra }}
+{% endif %}
 
 [Service]
 Type=simple
