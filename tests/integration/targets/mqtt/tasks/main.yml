@@ -11,8 +11,7 @@
 - name: Assert primary cert exists
   assert:
     that:
-      - secondary_cacert.stat.exists
-
+      - primary_cacert.stat.exists
 
 - name: Stat secondary ca cert
   ansible.builtin.stat:
