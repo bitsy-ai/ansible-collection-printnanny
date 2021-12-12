@@ -14,11 +14,11 @@
     - setup
   when: ansible_distribution == 'Debian'
 
-- name: Create video-rtp.service unit
+- name: Create {{ gstreamer_service_name }} unit
   become: true
   ansible.builtin.template:
     mode: 0664
-    src: video-rtp.service.j2
-    dest: /etc/systemd/system/video-rtp.service
+    src: '{{ gstreamer_service_name }}.j2'
+    dest: '/etc/systemd/system/{{ gstreamer_service_name }}'
   tags:
     - setup

@@ -2,6 +2,7 @@
 # defaults file for libcamera
 rpi_build_libcamera_apps: true
 
+gstreamer_service_name: video-rtp.service
 gstreamer_num_buffers: 3
 gstreamer_config_interval: 1
 gstreamer_video_src: 'v4l2src'

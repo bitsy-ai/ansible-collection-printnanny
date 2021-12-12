@@ -1,0 +1,29 @@
+---
+- hosts: default
+  tasks:
+    - name: Include roles/printnanny/vars
+      include_vars: ../../roles/printnanny/vars/main.yml
+    - name: Enable {{ gstreamer_service_name }}
+      ansible.builtin.systemd:
+        name: '{{ gstreamer_service_name }}'
+        state: started
+        enabled: true
+      when: ansible_local.device.monitoring_active
+    - name: Enable {{ janus_service_name }}
+      ansible.builtin.systemd:
+        name: '{{ janus_service_name }}'
+        state: started
+        enabled: true
+      when: ansible_local.device.monitoring_active
+    - name: Stop & Disable {{ janus_service_name }}
+      ansible.builtin.systemd:
+        name: '{{ janus_service_name }}'
+        state: stopped
+        enabled: false
+      when: not ansible_local.device.monitoring_active
+    - name: Stop & Disable {{ gstreamer_service_name }}
+      ansible.builtin.systemd:
+        name: '{{ gstreamer_service_name }}'
+        state: stopped
+        enabled: false
+      when: not ansible_local.device.monitoring_active
