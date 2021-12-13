@@ -4,7 +4,6 @@
     path: '{{ ansible_facts_path }}'
     state: directory
     mode: 0755
-    owner: '{{ printnanny_user }}'
 
 - name: Render /etc/ansible/facts.d/device.fact
   become: true
@@ -12,7 +11,6 @@
     src: facts.d/device.fact
     dest: '{{ printnanny_device_fact }}'
     mode: 0755
-    owner: '{{ printnanny_user }}'
 
 - name: Render /etc/ansible/facts.d/license.fact
   become: true
@@ -20,4 +18,3 @@
     src: facts.d/license.fact
     dest: '{{ printnanny_license_fact }}'
     mode: 0755
-    owner: '{{ printnanny_user }}'

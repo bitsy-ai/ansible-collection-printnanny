@@ -1,5 +1,9 @@
 ---
 # tasks file for setup
+- name: ansible_local.device
+  ansible.builtin.debug:
+    msg: '{{ ansible_local.device }}'
+  when: ansible_local.device is defined
 - import_tasks: users.yml
 - import_tasks: boot_config.yml
 - import_tasks: apt.yml
