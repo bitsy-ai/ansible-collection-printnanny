@@ -1,5 +1,6 @@
 ---
 - hosts: default
+  gather_facts: true
   tasks:
     - name: Include roles/printnanny/vars
       include_vars: ../../roles/printnanny/vars/main.yml

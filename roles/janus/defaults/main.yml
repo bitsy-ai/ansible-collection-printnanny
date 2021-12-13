@@ -83,6 +83,9 @@ janus_conf_template:
   janus.transport.pfunix.jcfg: janus.transport.pfunix.jcfg
   janus.transport.websockets.jcfg: janus.transport.websockets.jcfg
 
-janus_upgrade_available: "{{ ansible_facts.get('janus_version') != janus_version }}"
+janus_upgrade_available: "{{ ansible_local.janus.version is not defined or ansible_local.janus.version != janus_version }}"
 janus_exec_start_post: []
 janus_service_unit_extra: null
+
+ansible_facts_path: /etc/ansible/facts.d
+janus_fact: /etc/ansible/facts.d/janus.fact

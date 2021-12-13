@@ -1,0 +1,13 @@
+- name: Create {{ ansible_facts_path }}
+  become: true
+  ansible.builtin.file:
+    path: '{{ ansible_facts_path }}'
+    state: directory
+    mode: 0755
+
+- name: Render {{ janus_fact }}
+  become: true
+  ansible.builtin.copy:
+    src: janus.fact
+    dest: '{{ janus_fact }}'
+    mode: 0755
