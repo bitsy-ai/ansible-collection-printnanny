@@ -11,6 +11,7 @@
   register: device_pki
 
 - name: Stop mqtt service before updating cli binary
+  become: true
   ansible.builtin.systemd:
     name: mqtt
     state: stopped
@@ -27,6 +28,7 @@
     - auto_update
 
 - name: Restart mqtt service
+  become: true
   ansible.builtin.systemd:
     name: mqtt
     state: stopped
