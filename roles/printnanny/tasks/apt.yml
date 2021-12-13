@@ -6,6 +6,7 @@
     name:
       - cron
       - git
+      - jq
       - libssl-dev
       - nano
       - openssh-server
