@@ -15,9 +15,12 @@ Type=oneshot
 RuntimeDirectory={{ updater_app_name }}
 ConfigurationDirectory={{ updater_app_name }}
 User={{ updater_user }}
+
+{% for playbook in auto_update_playbooks %}
 ExecStart=/usr/bin/flock -F {{ ansible_lockfile }} \
     {{ updater_venv }}/bin/ansible-playbook \
-    {{ auto_update_playbook }}
+    {{ playbook }}
+{% endfor %}
 
 ExecStartPost=-/usr/bin/flock -F {{ ansible_lockfile }} \
     /usr/bin/rm {{ ansible_lockfile }}

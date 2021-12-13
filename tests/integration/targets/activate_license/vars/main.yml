@@ -1,6 +1,7 @@
 ---
 ansible_collection_updater: ansible-updater
-auto_update_playbook: bitsyai.rpi.printnanny.auto_update
+auto_update_playbooks:
+    - bitsyai.rpi.printnanny.auto_update
 updater_app_name: printnanny
 updater_tmpfs: '/var/run/{{ updater_app_name }}'
 ansible_lockfile: '/var/run/{{ updater_app_name }}/ansible.lock'
