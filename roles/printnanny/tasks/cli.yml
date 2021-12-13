@@ -19,6 +19,7 @@
   when: device_pki.stat.exists
 
 - name: Download Print Nanny CLI
+  become: true
   ansible.builtin.unarchive:
     src: '{{ printnanny_cli_url }}'
     dest: /usr/local/bin
