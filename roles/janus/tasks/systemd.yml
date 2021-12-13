@@ -21,5 +21,6 @@
   become: true
   ansible.builtin.systemd:
     name: janus
-    enabled: '{{ ansible_local.license.janus_admin_secret is defined }}'
+    enabled: true
     state: started
+  when: ansible_local.license.janus_admin_secret is defined
