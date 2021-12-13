@@ -3,8 +3,8 @@
 - import_tasks: users.yml
 - import_tasks: boot_config.yml
 - import_tasks: apt.yml
-- import_tasks: mqtt.yml
 - import_tasks: log.yml
 - import_tasks: cli.yml
 - import_tasks: setup_license.yml
 - import_tasks: factsd.yml
+- import_tasks: mqtt.yml
