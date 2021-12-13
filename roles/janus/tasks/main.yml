@@ -2,6 +2,11 @@
 # Build notes
 # Libs conforming to Debian Multiarch are installed to /usr/local/lib/$(gcc -dumpmachine)/
 # https://wiki.debian.org/Multiarch
+- name: ansible_local.janus
+  ansible.builtin.debug:
+    msg: '{{ ansible_local.janus }}'
+  when: ansible_local.janus is defined
+
 - name: Create temporary janus build directory
   ansible.builtin.tempfile:
     state: directory
@@ -71,9 +76,3 @@
   ansible.builtin.file:
     path: "{{ janus_usrsctp_build_dir.path }}"
     state: absent
-
-# tracking https://github.com/ansible/ansible/issues/38920
-# clear apt cache if packer build run (reduce img size)
-- name: Clean apt cache
-  become: true
-  ansible.builtin.command: apt clean
