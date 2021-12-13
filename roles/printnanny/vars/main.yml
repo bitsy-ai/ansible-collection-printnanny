@@ -5,7 +5,7 @@ gstreamer_service_name: video-rtp.service
 # begin janus vars
 janus_service_name: janus.service
 janus_exec_start_post:
-  - printnanny janus-admin addtoken
+  - 'printnanny janus-admin addtoken'
 
 janus_service_unit_extra: |
   After={{ gstreamer_service_name }}

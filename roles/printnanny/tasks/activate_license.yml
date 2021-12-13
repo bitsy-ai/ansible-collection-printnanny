@@ -5,6 +5,30 @@
     creates: '{{ printnanny_data_dir }}/license.json'
     owner: '{{ printnanny_user }}'
 
+- name: Set read permissions on {{ printnanny_install_dir }}
+  ansible.builtin.file:
+    path: '{{ printnanny_install_dir }}'
+    recurse: true
+    mode: 0775
+    state: directory
+    owner: '{{ printnanny_user }}'
+
+- name: Set read permissions on license.json
+  ansible.builtin.file:
+    path: '{{ printnanny_data_dir }}/license.json'
+    recurse: true
+    mode: 0770
+    state: directory
+    owner: '{{ printnanny_user }}'
+
+- name: Set read permissions on priv key
+  ansible.builtin.file:
+    path: '{{ printnanny_data_dir }}/ecdsa256_pkcs8.pem'
+    recurse: true
+    mode: 0640
+    state: directory
+    owner: '{{ printnanny_user }}'
+
 - name: Check if {{ printnanny_license_json_file }} exists
   ansible.builtin.stat:
     path: '{{ printnanny_license_json_file }}'
