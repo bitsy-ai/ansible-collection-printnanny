@@ -16,6 +16,7 @@
 
 - name: Set read permissions on license.json
   become: true
+  ignore_errors: true
   ansible.builtin.file:
     path: '{{ printnanny_data_dir }}/license.json'
     mode: 0770
@@ -24,6 +25,7 @@
 
 - name: Set read permissions on priv key
   become: true
+  ignore_errors: true
   ansible.builtin.file:
     path: '{{ printnanny_data_dir }}/ecdsa256_pkcs8.pem'
     mode: 0640
