@@ -5,6 +5,18 @@
   tags:
     - auto_update
 
+- name: Check if device PKI exists
+  ansible.builtin.stat:
+    path: '{{ printnanny_public_key }}'
+  register: device_pki
+
+- name: Stop mqtt service before updating cli binary
+  ansible.builtin.systemd:
+    name: mqtt
+    state: stopped
+    enabled: true
+  when: device_pki.stat.exists
+
 - name: Download Print Nanny CLI
   ansible.builtin.unarchive:
     src: '{{ printnanny_cli_url }}'
@@ -13,6 +25,14 @@
     mode: 0755
     extra_opts:
       - --overwrite
+      - --unlink-first
   when: installed_printnanny_cli_version != printnanny_cli_version
   tags:
     - auto_update
+
+- name: Restart mqtt service
+  ansible.builtin.systemd:
+    name: mqtt
+    state: stopped
+    enabled: true
+  when: device_pki.stat.exists
