@@ -7,6 +7,8 @@
     msg: '{{ ansible_local.janus }}'
   when: ansible_local.janus is defined
 
+- import_tasks: factsd.yml
+
 - name: Create temporary janus build directory
   ansible.builtin.tempfile:
     state: directory
