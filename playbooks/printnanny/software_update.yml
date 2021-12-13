@@ -1,6 +1,6 @@
 ---
 - name: Run setup playbook
-- hosts: default
+  hosts: default
   gather_facts: true
   tasks:
     - name: Include roles/printnanny/vars
