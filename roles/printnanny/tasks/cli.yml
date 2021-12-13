@@ -22,10 +22,6 @@
     src: '{{ printnanny_cli_url }}'
     dest: /usr/local/bin
     remote_src: true
-    mode: 0755
-    extra_opts:
-      - --overwrite
-      - --unlink-first
   when: installed_printnanny_cli_version != printnanny_cli_version
   tags:
     - auto_update
