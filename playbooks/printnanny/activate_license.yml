@@ -16,7 +16,9 @@
       include_role:
         name: bitsyai.rpi.janus
         tasks_from: systemd
-    - name: Start MQTT service
-      include_role:
-        name: bitsyai.rpi.printnanny
-        tasks_from: mqtt
+    - name: Enable mqtt service
+      become: true
+      ansible.builtin.systemd:
+        name: mqtt
+        state: started
+        enabled: true

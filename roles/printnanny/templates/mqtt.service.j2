@@ -1,8 +1,7 @@
 [Unit]
 Description=Print Nanny MQTT Client
 Requires=network.target
-After=syslog.target network.target {{ updater_app_name }}-license.service
-Wants={{ updater_app_name }}-license.service
+After=syslog.target network.target
 [Service]
 Type=simple
 ExecStart=/usr/local/bin/printnanny mqtt

@@ -22,24 +22,3 @@
     url: '{{ gcp_lts_ca_primary }}'
     dest: '{{ printnanny_cacert_dir }}/{{ gcp_lts_ca_backup | basename }}'
     mode: 0770
-
-- name: Check if device PKI exists
-  ansible.builtin.stat:
-    path: '{{ printnanny_public_key }}'
-  register: device_pki
-
-- name: Enable mqtt service
-  become: true
-  ansible.builtin.systemd:
-    name: mqtt
-    state: started
-    enabled: true
-  when: device_pki.stat.exists
-
-- name: Disable mqtt service
-  become: true
-  ansible.builtin.systemd:
-    name: mqtt
-    state: stopped
-    enabled: false
-  when: not device_pki.stat.exists
