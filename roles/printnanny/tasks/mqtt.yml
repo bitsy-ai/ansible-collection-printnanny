@@ -32,7 +32,6 @@
   become: true
   ansible.builtin.systemd:
     name: mqtt
-    daemon_reload: true
     state: started
     enabled: true
   when: device_pki.stat.exists
@@ -41,7 +40,6 @@
   become: true
   ansible.builtin.systemd:
     name: mqtt
-    daemon_reload: true
     state: stopped
     enabled: false
   when: not device_pki.stat.exists
