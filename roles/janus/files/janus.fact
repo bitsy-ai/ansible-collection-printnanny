@@ -15,9 +15,9 @@ JANUS_COMMIT=$(/opt/janus/bin/janus --version | head -n 1 | cut -d' ' -f3)
 JANUS_BUILD_TIME=$(/opt/janus/bin/janus --version | head -n 2 | tail -n 1 | sed 's/Compiled on:  //g')
 
 JSON_STRING=$( jq -n \
-    --arg janus_version "$JANUS_VERSION" \
-    --arg janus_commit "$JANUS_COMMIT" \
-    --arg janus_build_time "$JANUS_BUILD_TIME" \
-    '{janus_version: $janus_version, janus_commit: $janus_commit, janus_build_time: $janus_build_time}' )
+    --arg v "$JANUS_VERSION" \
+    --arg c "$JANUS_COMMIT" \
+    --arg t "$JANUS_BUILD_TIME" \
+    '{ version: $v, commit $c, build_time: $t }' )
 
 echo "$JSON_STRING"
