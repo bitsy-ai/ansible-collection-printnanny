@@ -9,7 +9,8 @@
 
 - name: debug janus_upgrade_available={{ janus_upgrade_available }}
   ansible.builtin.debug:
-    msg: 'janus_version={{ janus_version }} ansible_local.janus.version={{ ansible_local.janus.version }}'
+    msg: 'janus_version={{ janus_version }} ansible_local.janus={{ ansible_local.janus }}'
+  when: ansible_local.janus is defined
 
 - import_tasks: factsd.yml
 
@@ -23,7 +24,7 @@
   ansible.builtin.tempfile:
     state: directory
     prefix: libwebsockets
-  register: janus_libwebsockets_build_dir
+  register: janus_libwebsockets_build_dirjanus_upgrade_available 
 
 - name: Create temporary libnice build directory
   ansible.builtin.tempfile:
