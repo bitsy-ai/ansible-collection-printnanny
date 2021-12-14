@@ -34,4 +34,5 @@
     name: mqtt
     state: started
     enabled: true
+    no_block: true
   when: device_pki.stat.exists

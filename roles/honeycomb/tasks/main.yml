@@ -42,4 +42,5 @@
     name: honeytail
     enabled: true
     state: started
+    no_block: true
   when: honeycomb_api_key != None

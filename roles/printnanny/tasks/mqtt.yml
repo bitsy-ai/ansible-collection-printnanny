@@ -28,3 +28,4 @@
   ansible.builtin.systemd:
     service: mqtt
     enabled: true
+    no_block: true
