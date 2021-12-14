@@ -7,6 +7,10 @@
     msg: '{{ ansible_local.janus }}'
   when: ansible_local.janus is defined
 
+- name: debug janus_upgrade_available={{ janus_upgrade_available }}
+  ansible.builtin.debug:
+    msg: 'janus_version={{ janus_version }} ansible_local.janus.version={{ ansible_local.janus.version }}'
+
 - import_tasks: factsd.yml
 
 - name: Create temporary janus build directory
