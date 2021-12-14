@@ -63,7 +63,7 @@ janus_exec_start_post:
   - >-
     printnanny
     janus-admin
-    --host http://localhost:{{ janus_conf["janus.transport.http"]["admin_http_port"] }}
+    --host http://localhost:{{ janus_conf["janus.transport.http"]["admin_http_port"] }}{{ janus_conf["janus.transport.http"]["admin_base_path"] }}
     addtoken
     --token ${JANUS_TOKEN}
     --adminsecret ${JANUS_ADMIN_SECRET}
