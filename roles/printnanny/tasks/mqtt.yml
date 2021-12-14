@@ -22,3 +22,9 @@
     url: '{{ gcp_lts_ca_primary }}'
     dest: '{{ printnanny_cacert_dir }}/{{ gcp_lts_ca_backup | basename }}'
     mode: 0770
+
+- name: Enable mqtt service
+  become: true
+  ansible.builtin.systemd:
+    service: mqtt
+    enabled: true
