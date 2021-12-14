@@ -1,7 +1,7 @@
 - name: Get installed version of printnanny
   ansible.builtin.command: printnanny --version
   ignore_errors: true
-  register: installed_printnanny_cli_version
+  register: installed_version
   tags:
     - auto_update
 
@@ -16,7 +16,7 @@
     name: mqtt
     state: stopped
     enabled: true
-  when: installed_printnanny_cli_version != printnanny_cli_version
+  when: installed_version.stdout != printnanny_cli_version and installed_version.rc == 0
 
 - name: Download Print Nanny CLI
   become: true
@@ -24,7 +24,7 @@
     src: '{{ printnanny_cli_url }}'
     dest: /usr/local/bin
     remote_src: true
-  when: installed_printnanny_cli_version != printnanny_cli_version
+  when: installed_version.stdout != printnanny_cli_version
   tags:
     - auto_update
 
