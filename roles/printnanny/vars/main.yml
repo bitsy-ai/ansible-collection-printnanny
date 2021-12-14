@@ -4,9 +4,6 @@ gstreamer_service_name: video-rtp.service
 
 # begin janus vars
 janus_service_name: janus.service
-janus_exec_start_post:
-  - 'printnanny janus-admin addtoken'
-
 janus_service_unit_extra: |
   After={{ gstreamer_service_name }}
   Requires={{ gstreamer_service_name }}
@@ -61,6 +58,16 @@ janus_conf_template:
   janus.transport.http.jcfg: janus.transport.http.jcfg
   janus.transport.pfunix.jcfg: janus.transport.pfunix.jcfg
   janus.transport.websockets.jcfg: janus.transport.websockets.jcfg
+
+janus_exec_start_post:
+  - >-
+    printnanny
+    janus-admin
+    --host http://localhost:{{ janus_conf["janus.transport.http"]["admin_http_port"] }}
+    addtoken
+    --token ${JANUS_TOKEN}
+    --adminsecret ${JANUS_ADMIN_SECRET}
+
 # end janus vars
 
 # ansible / updater vars
