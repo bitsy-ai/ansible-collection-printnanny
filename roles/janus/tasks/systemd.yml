@@ -15,5 +15,5 @@
     src: systemd/janus.service.j2
     dest: /etc/systemd/system/janus.service
   notify:
-    - restart janus service
+    - reload janus service
   when: ansible_local.license.janus_admin_secret is defined
