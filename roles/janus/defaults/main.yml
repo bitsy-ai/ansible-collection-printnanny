@@ -83,7 +83,8 @@ janus_conf_template:
   janus.transport.pfunix.jcfg: janus.transport.pfunix.jcfg
   janus.transport.websockets.jcfg: janus.transport.websockets.jcfg
 
-janus_upgrade_available: "{{ ansible_local.janus.version is not defined or ansible_local.janus.version != janus_version }}"
+janus_installed_version: "v{{ ansible_local.janus.version if ansible_local.janus.version is defined else None }}"
+janus_upgrade_available: "{{ ansible_local.janus.version is not defined or janus_installed_version != janus_version }}"
 janus_exec_start_post: []
 janus_service_unit_extra: null
 

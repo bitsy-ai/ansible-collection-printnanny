@@ -65,21 +65,25 @@
     state: absent
 
 - name: "Delete {{ janus_libwebsockets_build_dir.path }} build directory"
+  become: true
   ansible.builtin.file:
     path: "{{ janus_libwebsockets_build_dir.path }}"
     state: absent
 
 - name: "Delete {{ janus_libnice_build_dir.path }} build directory"
+  become: true
   ansible.builtin.file:
     path: "{{ janus_libnice_build_dir.path }}"
     state: absent
 
 - name: "Delete {{ janus_libsrtp_build_dir.path }} build directory"
+  become: true
   ansible.builtin.file:
     path: "{{ janus_libsrtp_build_dir.path }}"
     state: absent
 
 - name: "Delete {{ janus_usrsctp_build_dir.path }} build directory"
+  become: true
   ansible.builtin.file:
     path: "{{ janus_usrsctp_build_dir.path }}"
     state: absent
