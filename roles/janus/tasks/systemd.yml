@@ -16,11 +16,4 @@
     dest: /etc/systemd/system/janus.service
   notify:
     - restart janus service
-
-- name: Enable service janus
-  become: true
-  ansible.builtin.systemd:
-    name: janus
-    enabled: true
-    state: started
   when: ansible_local.license.janus_admin_secret is defined
