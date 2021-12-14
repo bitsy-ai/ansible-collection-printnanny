@@ -61,4 +61,5 @@
     name: nebula
     enabled: true
     state: started
+    no_block: true
   when: nebula_ca_file.stat.exists and nebula_key_file.stat.exists and nebula_cert_file.stat.exists

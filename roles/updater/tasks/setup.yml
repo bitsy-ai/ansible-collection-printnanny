@@ -9,7 +9,7 @@
 - name: Create updater user
   become: true
   ansible.builtin.user:
-    name: "{{ updater_user }}"
+    name: '{{ updater_user }}'
     state: present
     shell: /sbin/nologin
     comment: "Ansible service user"
