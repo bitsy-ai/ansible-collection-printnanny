@@ -24,7 +24,7 @@
   ansible.builtin.tempfile:
     state: directory
     prefix: libwebsockets
-  register: janus_libwebsockets_build_dirjanus_upgrade_available 
+  register: janus_libwebsockets_build_dir
 
 - name: Create temporary libnice build directory
   ansible.builtin.tempfile:
