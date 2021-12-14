@@ -32,6 +32,6 @@
   become: true
   ansible.builtin.systemd:
     name: mqtt
-    state: stopped
+    state: started
     enabled: true
   when: device_pki.stat.exists
