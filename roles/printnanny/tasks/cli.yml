@@ -16,7 +16,7 @@
     name: mqtt
     state: stopped
     enabled: true
-  when: device_pki.stat.exists
+  when: installed_printnanny_cli_version != printnanny_cli_version
 
 - name: Download Print Nanny CLI
   become: true
