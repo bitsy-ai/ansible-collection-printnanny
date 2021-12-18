@@ -40,6 +40,5 @@
 
 - name: activate license
   ansible.builtin.command:
-    cmd: printnanny activate
-    creates: '{{ printnanny_data_dir }}/device_info.json'
+    cmd: printnanny license activate
   when: licence.stat.exists
