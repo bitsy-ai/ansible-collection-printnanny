@@ -60,6 +60,7 @@
   import_tasks: systemd.yml
 
 - name: "Delete {{ janus_build_dir.path }} build directory"
+  become: true
   ansible.builtin.file:
     path: "{{ janus_build_dir.path }}"
     state: absent
