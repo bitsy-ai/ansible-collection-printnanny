@@ -14,3 +14,6 @@
   when: installed_version.stdout != printnanny_cli_version
   tags:
     - auto_update
+  notify:
+    - restart mqtt service
+    - restart printnanny-license service
