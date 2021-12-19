@@ -18,6 +18,6 @@ JSON_STRING=$( jq -n \
     --arg v "$JANUS_VERSION" \
     --arg c "$JANUS_COMMIT" \
     --arg t "$JANUS_BUILD_TIME" \
-    '{ version: $v, commit $c, build_time: $t }' )
+    '{ version: $v, commit: $c, build_time: $t }' )
 
 echo "$JSON_STRING"
