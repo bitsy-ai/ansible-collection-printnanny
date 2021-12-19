@@ -38,7 +38,7 @@
     path: '{{ printnanny_license_json_file }}'
   register: licence
 
-- name: activate license
+- name: Check & activate license
   ansible.builtin.command:
-    cmd: printnanny license activate
+    cmd: printnanny license check
   when: licence.stat.exists
