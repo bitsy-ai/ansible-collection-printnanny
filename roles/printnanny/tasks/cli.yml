@@ -14,10 +14,3 @@
   when: installed_version.stdout != printnanny_cli_version
   tags:
     - auto_update
-
-- name: Restart mqtt service
-  become: true
-  ansible.builtin.systemd:
-    name: mqtt
-    enabled: true
-    no_block: true
