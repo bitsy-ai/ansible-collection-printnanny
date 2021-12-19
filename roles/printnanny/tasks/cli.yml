@@ -19,6 +19,5 @@
   become: true
   ansible.builtin.systemd:
     name: mqtt
-    state: started
     enabled: true
     no_block: true
