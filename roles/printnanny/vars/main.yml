@@ -1,12 +1,17 @@
 ---
-# vars file for setup
-gstreamer_service_name: video-rtp.service
+printnanny_monitoring_service: printnanny-monitoring.service
+
+# begin gstreamer vars
+gstreamer_service_name: gstreamer.service
+gstreamer_service_unit_extra: |
+  PartOf={{ printnanny_monitoring_service }}
 
 # begin janus vars
 janus_service_name: janus.service
 janus_service_unit_extra: |
   After={{ gstreamer_service_name }}
   Requires={{ gstreamer_service_name }}
+  PartOf={{ printnanny_monitoring_service }}
 
 janus_user: janus
 janus_groups:

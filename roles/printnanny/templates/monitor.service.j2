@@ -1,7 +1,7 @@
 [Unit]
 Description=Print Nanny Monitoring Service
-Requires=network.target mqtt.service video-rtp.service
-After=syslog.target mqtt.service video-rtp.service
+Requires=network.target mqtt.service gstreamer.service janus.service
+After=syslog.target mqtt.service gstreamer.service janus.service
 
 [Service]
 Type=oneshot
@@ -10,7 +10,7 @@ User={{ printnanny_user }}
 ExecStartPost=/usr/local/bin/printnanny monitor stop
 Restart=on-failure
 RestartSec=600
-RemainAfterExit=true
+RemainAfterExit=yes
 
 [Install]
 WantedBy=multi-user.target

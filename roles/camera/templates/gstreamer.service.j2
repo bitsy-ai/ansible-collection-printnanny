@@ -2,6 +2,10 @@
 Description=Gstreamer RTP Camera Sink
 After=network.online.target
 Wants=network.online.target
+{% if gstreamer_service_unit_extra is defined %}
+{{ gstreamer_service_unit_extra }}
+{% endif %}
+
 
 [Service]
 Type=simple
