@@ -16,3 +16,15 @@
     daemon_reload: true
     name: janus
     state: restarted
+
+- name: restart mqtt service
+  become: true
+  ansible.builtin.systemd:
+    name: mqtt
+    state: restarted
+
+- name: restart printnanny-license service
+  become: true
+  ansible.builtin.systemd:
+    name: printnanny-license
+    state: restarted

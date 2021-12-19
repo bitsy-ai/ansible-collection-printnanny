@@ -1,12 +1,16 @@
 [Unit]
 Description=Print Nanny MQTT Client
 Requires=network.target
-After=syslog.target network.target printnanny-license.service
-Wants=syslog.target network.target printnanny-license.service
+After=syslog.target network.target
+Wants=syslog.target network.target
+ConditionPathExists={{ printnanny_public_key }}
 [Service]
 Type=simple
 ExecStart=/usr/local/bin/printnanny mqtt
 User={{ printnanny_user }}
+
+Restart=on-failure
+RestartSec=600
 
 [Install]
 WantedBy=multi-user.target
