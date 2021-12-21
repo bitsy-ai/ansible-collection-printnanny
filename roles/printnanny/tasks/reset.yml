@@ -1,0 +1,67 @@
+- name: Remove {{ printnanny_install_dir }}
+  become: true
+  ansible.builtin.file:
+    path: '{{ ansible_facts_path }}'
+    state: absent
+    mode: 0755
+  tags:
+    - reset
+    - printnanny
+
+- name: Remove {{ printnanny_license_zip }}
+  become: true
+  ansible.builtin.file:
+    path: '{{ ansible_facts_path }}'
+    state: absent
+    mode: 0755
+  tags:
+    - reset
+    - printnanny
+
+- name: Create {{ printnanny_install_dir }}
+  become: true
+  ansible.builtin.file:
+    path: "{{ printnanny_install_dir }}"
+    state: directory
+    owner: "{{ printnanny_user }}"
+    group: "{{ printnanny_group }}"
+    mode: 0775
+  tags:
+    - install
+    - printnanny
+
+- name: Create {{ printnanny_data_dir }}
+  become: true
+  ansible.builtin.file:
+    path: "{{ printnanny_data_dir }}"
+    state: directory
+    owner: "{{ printnanny_user }}"
+    group: "{{ printnanny_group }}"
+    mode: 0775
+  tags:
+    - printnanny
+    - install
+
+- name: Create {{ printnanny_backups_dir }}
+  become: true
+  ansible.builtin.file:
+    path: "{{ printnanny_backups_dir }}"
+    state: directory
+    owner: "{{ printnanny_user }}"
+    group: "{{ printnanny_group }}"
+    mode: 0775
+  tags:
+    - printnanny
+    - install
+
+- name: Create {{ printnanny_ansible_dir }}
+  become: true
+  ansible.builtin.file:
+    path: "{{ printnanny_ansible_dir }}"
+    state: directory
+    owner: "{{ printnanny_user }}"
+    group: "{{ printnanny_group }}"
+    mode: 0775
+  tags:
+    - printnanny
+    - install

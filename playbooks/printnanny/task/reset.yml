@@ -1,0 +1,10 @@
+---
+- hosts: default
+  gather_facts: true
+  tasks:
+    - name: Include roles/printnanny/vars
+      include_vars: ../../roles/printnanny/vars/main.yml
+    - name: Reset Device
+      include_role:
+        name: bitsyai.rpi.printnanny
+        tasks_from: reset
