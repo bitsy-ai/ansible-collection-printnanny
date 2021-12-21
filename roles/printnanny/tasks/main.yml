@@ -13,3 +13,4 @@
 - import_tasks: factsd.yml
 - import_tasks: mqtt.yml
 - import_tasks: monitor.yml
+- import_tasks: reset_service.yml

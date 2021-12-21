@@ -1,0 +1,30 @@
+# {{ ansible_managed }}
+[Unit]
+Description=Print Nanny Reset
+After={{ ansible_collection_updater }}.service
+Requires={{ ansible_collection_updater }}.service
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+RuntimeDirectory={{ updater_app_name }}
+ConfigurationDirectory={{ updater_app_name }}
+User={{ updater_user }}
+
+ExecStart=/usr/bin/flock -F {{ ansible_lockfile }} \
+    {{ updater_venv }}/bin/ansible-playbook \
+    bitsyai.rpi.printnanny.task.reset
+
+ExecStartPost=-/usr/bin/flock -F {{ ansible_lockfile }} \
+    /usr/bin/rm {{ ansible_lockfile }}
+StandardOutput=journal+console
+StandardError=journal+console
+SyslogIdentifier=printnanny-reset
+RemainAfterExit=yes
+Slice=ansible_pull.slice
+Restart=on-failure
+RestartSec=600
+
+[Install]
+WantedBy=multi-user.target

@@ -1,6 +1,6 @@
 - name: Create /boot/config.txt
   become: true
-  ansible.builtin.copy: 
+  ansible.builtin.copy:
     src: files/config.txt
     dest: '/boot/config.txt'
     mode: 0755
