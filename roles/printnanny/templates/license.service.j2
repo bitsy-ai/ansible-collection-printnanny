@@ -3,7 +3,7 @@
 Description=Print Nanny License installer
 ConditionPathExists={{ printnanny_license_zip }}
 After={{ ansible_collection_updater }}.service
-Requires={{ ansible_collection_updater }}.service
+Wants={{ ansible_collection_updater }}.service
 Wants=network-online.target
 After=network-online.target
 
@@ -12,7 +12,8 @@ Type=oneshot
 RuntimeDirectory={{ updater_app_name }}
 ConfigurationDirectory={{ updater_app_name }}
 User={{ updater_user }}
-
+StandardOutput=journal+console
+StandardError=journal+console
 ExecStart=/usr/bin/flock -F {{ ansible_lockfile }} \
     {{ updater_venv }}/bin/ansible-playbook \
     bitsyai.rpi.printnanny.activate_license
