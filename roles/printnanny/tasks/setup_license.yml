@@ -24,4 +24,4 @@
   ansible.builtin.systemd:
     name: printnanny-license
     enabled: true
-    started: true
+    state: started
