@@ -35,7 +35,12 @@
     src: honeytail.conf.j2
     dest: /etc/honeytail/honeytail.conf
     mode: 0664
+    force: true
+    backup: true
+    validate: systemd-analyze verify honeytail.service
   when: honeycomb_api_key != None
+  notify:
+    - systemctl daemon-reload
 
 - name: Enable honeytail service
   ansible.builtin.systemd:

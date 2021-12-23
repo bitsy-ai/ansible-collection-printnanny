@@ -4,6 +4,11 @@
     mode: 0664
     src: mqtt.service.j2
     dest: /etc/systemd/system/mqtt.service
+    force: true
+    backup: true
+    validate: systemd-analyze verify mqtt.service
+  notify:
+    - systemctl daemon-reload
 
 - name: Create '{{ printnanny_cacerts_dir }}'
   ansible.builtin.file:
