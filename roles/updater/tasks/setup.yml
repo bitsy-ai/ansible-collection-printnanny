@@ -107,7 +107,6 @@
     dest: '/etc/systemd/system/{{ auto_update_service }}.service'
     force: true
     backup: true
-    validate: systemd-analyze verify {{ auto_update_service }}.service
   tags:
     - setup
   notify:
@@ -121,7 +120,6 @@
     dest: '/etc/systemd/system/{{ ansible_collection_updater }}.service'
     force: true
     backup: true
-    validate: systemd-analyze verify {{ ansible_collection_updater }}.service
   tags:
     - setup
   notify:
