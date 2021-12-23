@@ -7,8 +7,8 @@ After=network-online.target
 [Service]
 Type=oneshot
 RuntimeDirectory={{ updater_user }}
-StandardOutput=journal+console
-StandardError=journal+console
+StandardOutput=journal+inherit
+StandardError=journal+inherit
 User={{ updater_user }}
 ExecStart={{ updater_venv }}/bin/ansible-galaxy \
     collection install --upgrade {{ updater_collection_url }}
