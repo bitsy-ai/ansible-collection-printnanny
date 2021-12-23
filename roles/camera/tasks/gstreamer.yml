@@ -14,16 +14,31 @@
     - setup
   when: ansible_distribution == 'Debian'
 
-- name: Create {{ gstreamer_service_name }} unit
-  become: true
-  ansible.builtin.template:
-    mode: 0664
-    src: '{{ gstreamer_service_name }}.j2'
-    dest: '/etc/systemd/system/{{ gstreamer_service_name }}'
-    backup: true
-    force: true
-    validate: systemd-analyze verify {{ gstreamer_service_name }}
-  tags:
-    - setup
+- name: Create {{ gstreamer_service_name }} from template and backout if validation fails
+  block:
+    - name: Update /etc/systemd/system/{{ gstreamer_service_name }}
+      ansible.builtin.template:
+        mode: 0664
+        src: '{{ gstreamer_service_name }}.j2'
+        dest: '/etc/systemd/system/{{ gstreamer_service_name }}'
+        backup: true
+        force: true
+      register: updated
+    - name: Run validation. We assume it returns an error when not passing, use `failed_when` if otherwise.
+      become: true
+      ansible.builtin.command: systemd-analyze verify {{ updated['dest'] }}
+
+  rescue:
+    - name: Restore backup file to original
+      ansible.builtin.copy:
+        remote_src: true
+        dest: '/etc/systemd/system/{{ gstreamer_service_name }}'
+        src: "{{ updated['src'] }}"
+        mode: 0664
+  always:
+    - name: We choose to always delete backup, but could copy or move, or only delete in rescue.
+      ansible.builtin.file:
+        path: "{{ updated['src'] }}"
+        state: absent
   notify:
     - systemctl daemon-reload

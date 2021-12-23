@@ -8,7 +8,7 @@
 
 - name: Render printnanny-license.service from template and backout if validation fails
   block:
-    - name: do the actual update, works with copy, lineinfile and any action that allows for `backup`.
+    - name: Update /etc/systemd/system/printnanny-license.service
       ansible.builtin.template:
         mode: 0664
         src: license.service.j2
