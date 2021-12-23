@@ -1,5 +1,9 @@
 ---
 # handlers file for setup
+- name: systemctl daemon-reload
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
 
 - name: render janus configs
   become: true
