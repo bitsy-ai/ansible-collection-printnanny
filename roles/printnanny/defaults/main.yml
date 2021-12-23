@@ -17,7 +17,7 @@ printnanny_device_fact: /etc/ansible/facts.d/device.fact
 printnanny_license_fact: /etc/ansible/facts.d/license.fact
 printnanny_janus_fact: /etc/ansible/facts.d/janus.fact
 
-printnanny_cli_version: 0.9.0
+printnanny_cli_version: 0.9.1
 printnanny_cli_url: 'https://github.com/bitsy-ai/printnanny-cli/releases/download/v{{ printnanny_cli_version }}/printnanny-{{ ansible_architecture }}-unknown-linux-gnu.tar.gz'
 printnanny_ansible_version: 'ansible>4,<5'
 printnanny_update_schedule: '*/15 * * * *'
