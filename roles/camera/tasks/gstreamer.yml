@@ -1,4 +1,4 @@
-- name: Install gstreamer dependencies
+- name: Install generic gstreamer dependencies
   become: true
   ansible.builtin.apt:
     name:
@@ -9,6 +9,13 @@
       - gstreamer1.0-libav
       - libx264-dev
       - libjpeg-dev
+  tags:
+    - setup
+
+- name: Install libcamera-dev
+  become: true
+  ansible.builtin.apt:
+    name:
       - libcamera-dev
   tags:
     - setup
@@ -33,12 +40,15 @@
       ansible.builtin.copy:
         remote_src: true
         dest: '/etc/systemd/system/{{ gstreamer_service_name }}'
-        src: "{{ updated['src'] }}"
+        src: "{{ updated.backup_file }}"
         mode: 0664
+      when: updated.backup_file is defined
   always:
     - name: We choose to always delete backup, but could copy or move, or only delete in rescue.
       ansible.builtin.file:
-        path: "{{ updated['src'] }}"
+        path: "{{ updated.backup_file }}"
         state: absent
+      when: updated.backup_file is defined
+
   notify:
     - systemctl daemon-reload

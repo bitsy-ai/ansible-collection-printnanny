@@ -25,13 +25,15 @@
       ansible.builtin.copy:
         remote_src: true
         dest: /etc/systemd/system/printnanny-license.service
-        src: "{{ updated['src'] }}"
+        src: "{{ updated.backup_file }}"
         mode: 0664
+      when: updated.backup_file is defined
   always:
     - name: We choose to always delete backup, but could copy or move, or only delete in rescue.
       ansible.builtin.file:
-        path: "{{ updated['src'] }}"
+        path: "{{ updated.backup_file }}"
         state: absent
+      when: updated.backup_file is defined
   notify:
     - systemctl daemon-reload
 # - name: Render printnanny-license.service from template

@@ -2,7 +2,7 @@ VENV ?= .venv
 TMP_DIR ?= $(HOME)/.tmp
 TARGET_IMAGE ?= ubuntu2004
 PYTHON_VERSION ?= 3.8
-
+DOCKER_TERMINATE ?= always
 .PHONY: setup
 
 $(VENV):
@@ -34,7 +34,7 @@ integration-test: ansible-requirements
 		--docker $(TARGET_IMAGE) \
 		--python $(PYTHON_VERSION) \
 		--allow-destructive \
-		--docker-terminate success
+		--docker-terminate $(DOCKER_TERMINATE)
 
 test: sanity-test integration-test
 
