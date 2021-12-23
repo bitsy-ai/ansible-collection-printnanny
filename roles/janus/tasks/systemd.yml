@@ -18,7 +18,7 @@
     dest: /etc/systemd/system/janus.service
     force: true
     backup: true
-    validate: systemd-analyze verify janus.service
+    validate: systemd-analyze verify %s
   notify:
     - reload janus service
   when: ansible_local.license.janus_admin_secret is defined

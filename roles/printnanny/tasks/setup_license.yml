@@ -8,7 +8,7 @@
     dest: /etc/systemd/system/printnanny-license.service
     force: true
     backup: true
-    validate: systemd-analyze verify printnanny-license.service
+    validate: systemd-analyze verify %s
   notify:
     - systemctl daemon-reload
 - name: Create '{{ printnanny_data_dir }}'
