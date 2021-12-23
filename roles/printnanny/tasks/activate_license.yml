@@ -32,13 +32,15 @@
     state: file
     owner: '{{ printnanny_user }}'
 
+# tasks file for license
 - name: Check if {{ printnanny_license_json_file }} exists
   become: true
   ansible.builtin.stat:
     path: '{{ printnanny_license_json_file }}'
-  register: licence
+  register: license_json
+
 
 - name: Check & activate license
   ansible.builtin.command:
     cmd: printnanny license check
-  when: licence.stat.exists
+  when: license_json.stat.exists

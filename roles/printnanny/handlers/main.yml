@@ -28,9 +28,11 @@
   ansible.builtin.systemd:
     name: mqtt
     state: restarted
+  when: license_json.stat.exists
 
 - name: restart printnanny-license service
   become: true
   ansible.builtin.systemd:
     name: printnanny-license
     state: restarted
+  when: license_json.stat.exists

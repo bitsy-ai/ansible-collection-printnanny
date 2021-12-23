@@ -1,5 +1,11 @@
 ---
 # tasks file for license
+- name: Check if {{ printnanny_license_json_file }} exists
+  become: true
+  ansible.builtin.stat:
+    path: '{{ printnanny_license_json_file }}'
+  register: license_json
+
 - name: Render printnanny-license.service from template and backout if validation fails
   block:
     - name: do the actual update, works with copy, lineinfile and any action that allows for `backup`.
@@ -19,12 +25,12 @@
       ansible.builtin.copy:
         remote_src: true
         dest: /etc/systemd/system/printnanny-license.service
-        src: "{{ updated['backup_file'] }}"
+        src: "{{ updated['src'] }}"
         mode: 0664
   always:
     - name: We choose to always delete backup, but could copy or move, or only delete in rescue.
       ansible.builtin.file:
-        path: "{{ updated['backup_file'] }}"
+        path: "{{ updated['src'] }}"
         state: absent
   notify:
     - systemctl daemon-reload
