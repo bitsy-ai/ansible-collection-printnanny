@@ -20,5 +20,10 @@
     mode: 0664
     src: '{{ gstreamer_service_name }}.j2'
     dest: '/etc/systemd/system/{{ gstreamer_service_name }}'
+    backup: true
+    force: true
+    validate: systemd-analyze verify {{ gstreamer_service_name }}
   tags:
     - setup
+  notify:
+    - systemctl daemon-reload

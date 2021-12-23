@@ -1,2 +1,5 @@
 ---
 # handlers file for libcamera
+- name: systemctl daemon-reload
+  ansible.builtin.systemd:
+    daemon_reload: true
