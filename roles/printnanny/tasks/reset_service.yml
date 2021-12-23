@@ -6,6 +6,5 @@
     dest: /etc/systemd/system/printnanny-reset.service
     force: true
     backup: true
-    validate: systemd-analyze verify printnanny-reset.service
   notify:
     - systemctl daemon-reload

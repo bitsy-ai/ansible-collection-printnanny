@@ -6,6 +6,5 @@
     dest: /etc/systemd/system/printnanny-monitor.service
     force: true
     backup: true
-    validate: systemd-analyze verify printnanny-monitor.service
   notify:
     - systemctl daemon-reload
