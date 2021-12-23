@@ -6,7 +6,6 @@
     dest: /etc/systemd/system/mqtt.service
     force: true
     backup: true
-    validate: systemd-analyze verify mqtt.service
   notify:
     - systemctl daemon-reload
 
