@@ -5,15 +5,37 @@
     src: "{{ item.value }}"
     dest: "{{ janus_conf_dir }}/{{ item.value }}"
     owner: "{{ janus_user }}"
+    force: true
+    backup: true
   with_dict: "{{ janus_conf_template }}"
   when: ansible_local.license.janus_admin_secret is defined
 
-- name: Render janus-gateway systemd unit
-  become: true
-  ansible.builtin.template:
-    mode: 0644
-    src: systemd/janus.service.j2
-    dest: /etc/systemd/system/janus.service
+- name: Create {{ gstreamer_service_name }} from template and backout if validation fails
+  block:
+    - name: Update /etc/systemd/system/janus.service
+      ansible.builtin.template:
+        mode: 0644
+        src: systemd/janus.service.j2
+        dest: /etc/systemd/system/janus.service
+        force: true
+        backup: true
+      register: updated
+    - name: Run validation. We assume it returns an error when not passing, use `failed_when` if otherwise.
+      become: true
+      ansible.builtin.command: systemd-analyze verify {{ updated['dest'] }}
+
+  rescue:
+    - name: Restore backup file to original
+      ansible.builtin.copy:
+        remote_src: true
+        dest: /etc/systemd/system/janus.service
+        src: "{{ updated['src'] }}"
+        mode: 0664
+  always:
+    - name: We choose to always delete backup, but could copy or move, or only delete in rescue.
+      ansible.builtin.file:
+        path: "{{ updated['src'] }}"
+        state: absent
   notify:
-    - reload janus service
+    - systemctl daemon-reload
   when: ansible_local.license.janus_admin_secret is defined

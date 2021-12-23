@@ -1,5 +1,9 @@
 ---
 # handlers file for setup
+- name: systemctl daemon-reload
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
 
 - name: render janus configs
   become: true
@@ -7,6 +11,8 @@
     mode: 0660
     src: "{{ item.value }}"
     dest: "{{ janus_conf_dir }}/{{ item.value }}"
+    force: true
+    backup: true
   with_dict: "{{ janus_conf_template }}"
   when: ansible_local.license.janus_admin_secret is defined
 
@@ -22,9 +28,11 @@
   ansible.builtin.systemd:
     name: mqtt
     state: restarted
+  when: license_json.stat.exists
 
 - name: restart printnanny-license service
   become: true
   ansible.builtin.systemd:
     name: printnanny-license
     state: restarted
+  when: license_json.stat.exists

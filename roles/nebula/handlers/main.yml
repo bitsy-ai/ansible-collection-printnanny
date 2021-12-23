@@ -1,7 +1,13 @@
 ---
 # handlers file for nebula
-- name: reload nebula systemd unit
+- name: restart nebula
   become: true
   ansible.builtin.systemd:
     name: nebula
+    daemon_reload: true
+    state: restarted
+
+- name: systemctl daemon-reload
+  become: true
+  ansible.builtin.systemd:
     daemon_reload: true
