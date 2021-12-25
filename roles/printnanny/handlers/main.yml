@@ -1,9 +1,11 @@
 ---
 # handlers file for setup
-- name: systemctl daemon-reload
+- name: restart printnanny-monitor
   become: true
   ansible.builtin.systemd:
     daemon_reload: true
+    name: printnanny-monitor
+    state: restarted
 
 - name: render janus configs
   become: true
