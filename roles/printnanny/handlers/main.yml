@@ -5,36 +5,35 @@
   ansible.builtin.systemd:
     daemon_reload: true
     name: printnanny-monitor
+    no_block: true
     state: restarted
+    enable: true
 
-- name: render janus configs
-  become: true
-  ansible.builtin.template:
-    mode: 0660
-    src: "{{ item.value }}"
-    dest: "{{ janus_conf_dir }}/{{ item.value }}"
-    force: true
-    backup: true
-  with_dict: "{{ janus_conf_template }}"
-  when: ansible_local.license.janus_admin_secret is defined
-
-- name: restart janus service
+- name: restart janus
   become: true
   ansible.builtin.systemd:
     daemon_reload: true
     name: janus
+    no_block: true
     state: restarted
+    enable: true
 
-- name: restart mqtt service
+- name: restart mqtt
   become: true
   ansible.builtin.systemd:
+    daemon_reload: true
     name: mqtt
+    no_block: true
     state: restarted
+    enable: true
   when: license_json.stat.exists
 
-- name: restart printnanny-license service
+- name: restart printnanny-license
   become: true
   ansible.builtin.systemd:
+    daemon_reload: true
     name: printnanny-license
+    no_block: true
     state: restarted
+    enable: true
   when: license_json.stat.exists
