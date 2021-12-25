@@ -10,7 +10,7 @@
   with_dict: "{{ janus_conf_template }}"
   when: ansible_local.license.janus_admin_secret is defined
 
-- name: Create {{ gstreamer_service_name }} from template and backout if validation fails
+- name: Create janus.service from template and backout if validation fails
   block:
     - name: Update /etc/systemd/system/janus.service
       ansible.builtin.template:

@@ -98,3 +98,6 @@
     path: "{{ janus_usrsctp_build_dir.path }}"
     state: absent
   when: janus_upgrade_available
+
+- name: Configure janus.service
+  import_tasks: systemd.yml
