@@ -50,4 +50,4 @@
         state: absent
       when: updated.backup_file is defined
   notify:
-    - systemctl daemon-reload
+    - reload janus service
