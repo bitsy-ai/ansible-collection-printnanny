@@ -42,7 +42,7 @@
     force: true
     backup: true
   notify:
-    - systemctl daemon-reload
+    - restart nebula
 
 - name: Check nebula pki ca
   become: true

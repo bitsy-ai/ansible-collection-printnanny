@@ -29,4 +29,4 @@
     dest: /etc/systemd/system/janus.service
     force: true
   notify:
-    - reload janus service
+    - restart janus

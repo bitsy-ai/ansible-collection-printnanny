@@ -12,43 +12,11 @@
   tags:
     - setup
 
-- name: Install libcamera-dev
-  become: true
-  ansible.builtin.apt:
-    name:
-      - libcamera-dev
-  tags:
-    - setup
-  when: ansible_distribution == 'Debian'
-
-- name: Create {{ gstreamer_service_name }} from template and backout if validation fails
-  block:
-    - name: Update /etc/systemd/system/{{ gstreamer_service_name }}
-      ansible.builtin.template:
-        mode: 0664
-        src: '{{ gstreamer_service_name }}.j2'
-        dest: '/etc/systemd/system/{{ gstreamer_service_name }}'
-        backup: true
-        force: true
-      register: updated
-    - name: Run validation. We assume it returns an error when not passing, use `failed_when` if otherwise.
-      become: true
-      ansible.builtin.command: systemd-analyze verify {{ updated['dest'] }}
-
-  rescue:
-    - name: Restore backup file to original
-      ansible.builtin.copy:
-        remote_src: true
-        dest: '/etc/systemd/system/{{ gstreamer_service_name }}'
-        src: "{{ updated.backup_file }}"
-        mode: 0664
-      when: updated.backup_file is defined
-  always:
-    - name: We choose to always delete backup, but could copy or move, or only delete in rescue.
-      ansible.builtin.file:
-        path: "{{ updated.backup_file }}"
-        state: absent
-      when: updated.backup_file is defined
-
-  notify:
-    - systemctl daemon-reload
+- name: 'Render {{ gstreamer_service_name }}'
+  ansible.builtin.template:
+    mode: 0664
+    src: '{{ gstreamer_service_name }}.j2'
+    dest: '/etc/systemd/system/{{ gstreamer_service_name }}'
+    backup: true
+    force: true
+  notify: restart gstreamer

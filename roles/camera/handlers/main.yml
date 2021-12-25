@@ -1,6 +1,9 @@
 ---
 # handlers file for libcamera
-- name: systemctl daemon-reload
+- name: restart gstreamer
   become: true
   ansible.builtin.systemd:
     daemon_reload: true
+    name: '{{ gstreamer_service_name }}'
+    state: restarted
+    no_block: true

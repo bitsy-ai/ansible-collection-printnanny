@@ -7,4 +7,4 @@
     force: true
     backup: true
   notify:
-    - systemctl daemon-reload
+    - restart printnanny-monitor
