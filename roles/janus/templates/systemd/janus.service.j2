@@ -25,6 +25,7 @@ ExecStart={{ janus_install_dir }}/bin/janus \
 ExecStartPost={{ cmd }}
 {% endfor %}
 Restart=on-failure
+RestartSec=30
 LimitNOFILE=65536
 
 [Install]
