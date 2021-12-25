@@ -21,33 +21,12 @@
     backup: true
   when: ansible_local.license.janus_admin_secret is defined
 
-- name: Create janus.service from template and backout if validation fails
-  block:
-    - name: Update /etc/systemd/system/janus.service
-      ansible.builtin.template:
-        mode: 0644
-        src: systemd/janus.service.j2
-        dest: /etc/systemd/system/janus.service
-        force: true
-        backup: true
-      register: updated
-    - name: Run validation. We assume it returns an error when not passing, use `failed_when` if otherwise.
-      become: true
-      ansible.builtin.command: systemd-analyze verify {{ updated['dest'] }}
-
-  rescue:
-    - name: Restore backup file to original
-      ansible.builtin.copy:
-        remote_src: true
-        dest: /etc/systemd/system/janus.service
-        src: "{{ updated.backup_file }}"
-        mode: 0664
-      when: updated.backup_file is defined
-  always:
-    - name: We choose to always delete backup, but could copy or move, or only delete in rescue.
-      ansible.builtin.file:
-        path: "{{ updated.backup_file }}"
-        state: absent
-      when: updated.backup_file is defined
+- name: Update /etc/systemd/system/janus.service
+  become: true
+  ansible.builtin.template:
+    mode: 0644
+    src: systemd/janus.service.j2
+    dest: /etc/systemd/system/janus.service
+    force: true
   notify:
     - reload janus service
