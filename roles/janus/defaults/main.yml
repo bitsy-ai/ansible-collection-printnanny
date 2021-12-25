@@ -46,8 +46,7 @@ janus_conf:
     events_folder: "{{ janus_install_dir }}/lib/janus/events"
     loggers_folder: "{{ janus_install_dir }}/lib/janus/loggers"
     log_to_stdout: true
-    debug_level: 4
-    daemonize: true
+    debug_level: 7
     pid_file: "/var/run/janus.pid"
     session_timeout: 60
     candidates_timeout: 45
