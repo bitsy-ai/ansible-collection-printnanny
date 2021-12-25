@@ -24,7 +24,7 @@
       - libtool
       - ninja-build
       - pkg-config
-      - systemd 
+      - systemd
       - systemd-cron
       - wget
     state: present
