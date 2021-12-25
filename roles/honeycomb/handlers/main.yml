@@ -1,6 +1,9 @@
 ---
 # handlers file for honeycomb
-- name: systemctl daemon-reload
+- name: restart honeytail
   become: true
   ansible.builtin.systemd:
     daemon_reload: true
+    name: honeytail
+    state: restarted
+    no_block: true

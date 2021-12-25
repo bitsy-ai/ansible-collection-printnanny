@@ -39,7 +39,7 @@
     backup: true
   when: honeycomb_api_key != None
   notify:
-    - systemctl daemon-reload
+    - restart honeytail
 
 - name: Enable honeytail service
   ansible.builtin.systemd:

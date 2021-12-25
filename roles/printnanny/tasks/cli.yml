@@ -15,5 +15,5 @@
   tags:
     - auto_update
   notify:
-    - restart mqtt service
-    - restart printnanny-license service
+    - restart mqtt
+    - restart printnanny-license
