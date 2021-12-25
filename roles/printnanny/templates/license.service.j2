@@ -12,8 +12,6 @@ Type=oneshot
 RuntimeDirectory={{ updater_app_name }}
 ConfigurationDirectory={{ updater_app_name }}
 User={{ updater_user }}
-StandardOutput=journal+inherit
-StandardError=journal+inherit
 ExecStart=/usr/bin/flock -F {{ ansible_lockfile }} \
     {{ updater_venv }}/bin/ansible-playbook \
     bitsyai.rpi.printnanny.activate_license

@@ -18,8 +18,6 @@ ExecStart=/usr/bin/flock -F {{ ansible_lockfile }} \
 
 ExecStartPost=-/usr/bin/flock -F {{ ansible_lockfile }} \
     /usr/bin/rm {{ ansible_lockfile }}
-StandardOutput=journal+inherit
-StandardError=journal+inherit
 SyslogIdentifier=printnanny-reset
 RemainAfterExit=yes
 Slice=ansible_pull.slice
