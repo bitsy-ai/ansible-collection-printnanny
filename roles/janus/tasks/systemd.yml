@@ -49,4 +49,3 @@
         state: absent
   notify:
     - systemctl daemon-reload
-  when: ansible_local.license.janus_admin_secret is defined
