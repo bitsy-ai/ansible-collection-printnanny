@@ -16,8 +16,8 @@ general: {
                                             # to stdout or not (default=true)
     log_to_file = "{{ janus_log_file }}"	# Whether to use a log file or not
     debug_level = "{{ janus_conf['janus']['debug_level'] }}"							# Debug/logging level, valid values are 0-7
-    #debug_timestamps = true				# Whether to show a timestamp for each log line
-    #debug_colors = false					# Whether colors should be disabled in the log
+    debug_timestamps = true				# Whether to show a timestamp for each log line
+    debug_colors = true					# Whether colors should be disabled in the log
     #debug_locks = true						# Whether to enable debugging of locks (very verbose!)
     log_prefix = "[janus] "				# In case you want log lines to be prefixed by some
                                             # custom text, you can use the 'log_prefix' property.
