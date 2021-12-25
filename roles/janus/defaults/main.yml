@@ -23,6 +23,7 @@ janus_conf_dir: "{{ janus_install_dir }}/etc/janus"
 janus_log_file: /var/log/janus/janus.log
 janus_lib_prefix: /usr/local
 janus_pid_file: /var/run/janus/janus.pid
+janus_env_file: "{{ janus_install_dir }}/etc/janus/janus.env"
 
 janus_libwebsockets_repo: https://github.com/warmcat/libwebsockets.git
 janus_libwebsockets_version: v3.2-stable

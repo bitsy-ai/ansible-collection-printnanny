@@ -10,7 +10,6 @@ gstreamer_service_unit_extra: |
 janus_service_name: janus.service
 janus_service_unit_extra: |
   After={{ gstreamer_service_name }}
-  Requires={{ gstreamer_service_name }}
   PartOf={{ printnanny_monitoring_service }}
 
 janus_user: janus

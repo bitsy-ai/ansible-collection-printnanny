@@ -10,6 +10,17 @@
   with_dict: "{{ janus_conf_template }}"
   when: ansible_local.license.janus_admin_secret is defined
 
+- name: Render {{ janus_env_file }}
+  become: true
+  ansible.builtin.template:
+    mode: 0660
+    src: "systemd/janus.env.j2"
+    dest: "{{ janus_env_file }}"
+    owner: "{{ janus_user }}"
+    force: true
+    backup: true
+  when: ansible_local.license.janus_admin_secret is defined
+
 - name: Create janus.service from template and backout if validation fails
   block:
     - name: Update /etc/systemd/system/janus.service
