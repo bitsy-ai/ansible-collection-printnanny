@@ -6,4 +6,4 @@
   ansible.builtin.systemd:
     daemon_reload: true
     name: janus
-    state: enabled
+    enabled: true
