@@ -20,6 +20,7 @@ ExecStart={{ janus_install_dir }}/bin/janus \
     --log-file={{ janus_log_file }} \
     --pid-file={{ janus_pid_file }}
 
+ExecStartPost=/usr/bin/sleep {{ janus_startup_delay }}
 {% for cmd in janus_exec_start_post %}
 ExecStartPost={{ cmd }}
 {% endfor %}

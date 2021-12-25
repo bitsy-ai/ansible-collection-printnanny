@@ -88,5 +88,7 @@ janus_upgrade_available: "{{ ansible_local.janus.version is not defined or janus
 janus_exec_start_post: []
 janus_service_unit_extra: null
 
+janus_startup_delay: 30
+
 ansible_facts_path: /etc/ansible/facts.d
 janus_fact: /etc/ansible/facts.d/janus.fact
