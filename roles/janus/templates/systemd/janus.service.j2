@@ -15,9 +15,11 @@ RuntimeDirectoryMode=755
 WorkingDirectory={{ janus_install_dir }}
 EnvironmentFile=-{{ janus_env_file }}
 ExecStart={{ janus_install_dir }}/bin/janus \
+    --daemon \
     --cwd-path={{ janus_install_dir }} \
     --configs-folder={{ janus_conf_dir }} \
-    --log-file={{ janus_log_file }}
+    --log-file={{ janus_log_file }} \
+    --pid-file={{ janus_pid_file }}
 
 {% for cmd in janus_exec_start_post %}
 ExecStartPost={{ cmd }}
