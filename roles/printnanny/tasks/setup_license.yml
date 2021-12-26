@@ -6,47 +6,15 @@
     path: '{{ printnanny_license_json_file }}'
   register: license_json
 
-- name: Render printnanny-license.service from template and backout if validation fails
-  block:
-    - name: Update /etc/systemd/system/printnanny-license.service
-      ansible.builtin.template:
-        mode: 0664
-        src: license.service.j2
-        dest: /etc/systemd/system/printnanny-license.service
-        force: true
-        backup: true
-      register: updated
-    - name: Run validation. We assume it returns an error when not passing, use `failed_when` if otherwise.
-      become: true
-      ansible.builtin.command: systemd-analyze verify {{ updated['dest'] }}
+- name: Update /etc/systemd/system/printnanny-license.service
+  become: true
+  ansible.builtin.template:
+    mode: 0664
+    src: license.service.j2
+    dest: /etc/systemd/system/printnanny-license.service
+    force: true
+    backup: true
 
-  rescue:
-    - name: Restore backup file to original
-      ansible.builtin.copy:
-        remote_src: true
-        dest: /etc/systemd/system/printnanny-license.service
-        src: "{{ updated.backup_file }}"
-        mode: 0664
-      when: updated.backup_file is defined
-  always:
-    - name: We choose to always delete backup, but could copy or move, or only delete in rescue.
-      ansible.builtin.file:
-        path: "{{ updated.backup_file }}"
-        state: absent
-      when: updated.backup_file is defined
-  notify:
-    - systemctl daemon-reload
-# - name: Render printnanny-license.service from template
-#   become: true
-#   ansible.builtin.template:
-#     mode: 0664
-#     src: license.service.j2
-#     dest: /etc/systemd/system/printnanny-license.service
-#     force: true
-#     backup: true
-#     validate: systemd-analyze verify %s
-#   notify:
-#     - systemctl daemon-reload
 - name: Create '{{ printnanny_data_dir }}'
   ansible.builtin.file:
     path: '{{ printnanny_data_dir }}'
