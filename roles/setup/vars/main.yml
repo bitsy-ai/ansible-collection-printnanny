@@ -1,2 +1,4 @@
 ---
 # vars file for users
+
+ansible_facts_path: /etc/ansible/facts.d
