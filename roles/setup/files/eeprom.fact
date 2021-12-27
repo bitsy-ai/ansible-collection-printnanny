@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+
+# pi@printnanny:~ $ sudo rpi-eeprom-update -jm /dev/stdout
+# BOOTLOADER: up to date
+#    CURRENT: Thu 29 Apr 16:11:25 UTC 2021 (1619712685)
+#     LATEST: Thu 29 Apr 16:11:25 UTC 2021 (1619712685)
+#    RELEASE: default (/lib/firmware/raspberrypi/bootloader/default)
+#             Use raspi-config to change the release.
+
+#   VL805_FW: Dedicated VL805 EEPROM
+#      VL805: up to date
+#    CURRENT: 000138a1
+#     LATEST: 000138a1
+# {
+#   "EXITCODE": "EXIT_SUCCESS",
+#   "BOOTLOADER_AUTO_UPDATE_MIN_VERSION": 1599135103,
+#   "BOOTLOADER_CURRENT": 1619712685,
+#   "BOOTLOADER_LATEST": 1619712685,
+#   "VL805_CURRENT": "000138a1",
+#   "VL805_LATEST": "000138a1",
+#   "VL805_EEPROM": true
+# }
+
+if ! command -v rpi-eeprom-update &> /dev/null
+then
+    echo "{}"
+fi
+# dirty hack: write json to stderr fd and ignore stdout of above command
+OUTPUT=$(rpi-eeprom-update -jm /dev/stderr 2> >( jq . ) >1 >/dev/null)
+echo "$OUTPUT"

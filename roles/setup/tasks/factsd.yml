@@ -1,0 +1,13 @@
+- name: Create {{ ansible_facts_path }}
+  become: true
+  ansible.builtin.file:
+    path: '{{ ansible_facts_path }}'
+    state: directory
+    mode: 0755
+
+- name: Copy eeprom.fact
+  become: true
+  ansible.builtin.copy:
+    src: eeprom.fact
+    dest: '{{ ansible_facts_path }}/eeprom.fact'
+    mode: 0755
