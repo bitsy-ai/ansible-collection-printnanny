@@ -13,7 +13,7 @@
     name: printnanny-monitor
     no_block: true
     state: restarted
-    enable: true
+    enabled: true
 
 - name: restart janus
   become: true
@@ -22,7 +22,7 @@
     name: janus
     no_block: true
     state: restarted
-    enable: true
+    enabled: true
 
 - name: restart mqtt
   become: true
@@ -31,7 +31,7 @@
     name: mqtt
     no_block: true
     state: restarted
-    enable: true
+    enabled: true
   when: license_json.stat.exists
 
 - name: restart printnanny-license
@@ -41,5 +41,5 @@
     name: printnanny-license
     no_block: true
     state: restarted
-    enable: true
+    enabled: true
   when: license_json.stat.exists
