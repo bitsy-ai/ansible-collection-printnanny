@@ -4,18 +4,28 @@
   become: true
   ansible.builtin.apt:
     name:
-        - pkg-config 
-        - python3-dev
-        - python3-pip
-        - python3-venv
+      - pkg-config
+      - python3-dev
+      - python3-pip
+      - python3-venv
 
 - name: Create octoprint user
+  become: true
   ansible.builtin.user:
     name: "{{ octoprint_user }}"
     state: present
     shell: /sbin/nologin
     comment: "Octoprint service user"
-  become: true
+    groups:
+      - adm
+      - gpio
+      - i2c
+      - input
+      - plugdev
+      - spi
+      - sudo
+      - tty
+      - video
 
 - name: 'Create Octoprint virtualenv'
   become_user: '{{ octoprint_user }}'
@@ -35,3 +45,18 @@
     virtualenv_command: /usr/bin/python3 -m venv
     virtualenv: '{{ octoprint_venv }}'
     extra_args: '--no-cache-dir'
+
+- name: Render octoprint.service template
+  become: true
+  ansible.builtin.template:
+    mode: 0664
+    src: service.j2
+    dest: '/etc/systemd/system/octoprint.service'
+    force: true
+
+- name: Enable systemd service
+  become: true
+  ansible.builtin.systemd:
+    name: octoprint.service
+    start: started
+    enabled: true
