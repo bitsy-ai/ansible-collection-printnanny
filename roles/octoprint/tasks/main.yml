@@ -46,6 +46,13 @@
     virtualenv: '{{ octoprint_venv }}'
     extra_args: '--no-cache-dir'
 
+- name: Make {{ octoprint_dir }}
+  become_user: '{{ octoprint_user }}'
+  ansible.builtin.file:
+    state: directory
+    path: '{{ octoprint_dir }}'
+    mode: 0775
+
 - name: Render octoprint config
   become_user: '{{ octoprint_user }}'
   ansible.builtin.template:
