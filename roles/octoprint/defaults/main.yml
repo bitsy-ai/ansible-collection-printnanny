@@ -5,3 +5,4 @@ octoprint_user: octoprint
 octoprint_version: 'octoprint>1.7,<2'
 octoprint_dir: "/home/{{ octoprint_user }}/.octoprint"
 octoprint_venv: "/home/{{ octoprint_user }}/venv"
+octoprint_config: "{{ octoprint_dir }}/config.yml"

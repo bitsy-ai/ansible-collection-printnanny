@@ -46,15 +46,23 @@
     virtualenv: '{{ octoprint_venv }}'
     extra_args: '--no-cache-dir'
 
+- name: Render octoprint config
+  become_user: '{{ octoprint_user }}'
+  ansible.builtin.template:
+    mode: 0664
+    src: octoprint.config.j2
+    dest: '{{ octoprint_config }}'
+    force: true
+
 - name: Render octoprint.service template
   become: true
   ansible.builtin.template:
     mode: 0664
-    src: service.j2
+    src: octoprint.service.j2
     dest: '/etc/systemd/system/octoprint.service'
     force: true
 
-- name: Enable systemd service
+- name: Enable octoprint.service
   become: true
   ansible.builtin.systemd:
     name: octoprint.service
