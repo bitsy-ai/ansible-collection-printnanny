@@ -12,7 +12,6 @@
       - spi
       - sudo
       - tty
-      - users
       - video
 
 - name: Add updater user '{{ updater_user }}' to printnanny group
