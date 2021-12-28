@@ -1,10 +1,10 @@
 ---
 # handlers file for ansible-role-janus-gateway
 
-- name: restart octoprint
+- name: restart janus
   become: true
   ansible.builtin.systemd:
     daemon_reload: true
-    name: octoprint
+    name: janus
     enabled: true
     no_block: true

@@ -1,11 +1,10 @@
 # {{ ansible_managed }}
 [Unit]
-Description=Bitsy Automatic Updater
+Description=Bitsy Manual Updater
 After={{ ansible_collection_updater }}.service
 Requires={{ ansible_collection_updater }}.service
 Wants=network-online.target
 After=network-online.target
-Wants={{ updater_auto_service }}.timer
 {% if updater_service_unit_extra is defined %}
 {{ updater_service_unit_extra }}
 {% endif %}
@@ -16,7 +15,7 @@ RuntimeDirectory={{ updater_app_name }}
 ConfigurationDirectory={{ updater_app_name }}
 User={{ updater_user }}
 
-{% for playbook in updater_auto_playbooks %}
+{% for playbook in updater_manual_playbooks %}
 ExecStart=/usr/bin/flock -F {{ ansible_lockfile }} \
     {{ updater_venv }}/bin/ansible-playbook \
     {{ playbook }}

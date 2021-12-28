@@ -95,7 +95,7 @@
   ansible.builtin.template:
     mode: 0644
     src: auto-upgrader.timer.j2
-    dest: '/etc/systemd/system/{{ auto_update_service }}.timer'
+    dest: '/etc/systemd/system/{{ updater_auto_service }}.timer'
   tags:
     - setup
 
@@ -117,13 +117,25 @@
   ansible.builtin.template:
     mode: 0644
     src: auto-upgrader.service.j2
-    dest: '/etc/systemd/system/{{ auto_update_service }}.service'
+    dest: '/etc/systemd/system/{{ updater_auto_service }}.service'
     force: true
     backup: true
   tags:
     - setup
   notify:
     - restart updater
+
+- name: Create updater service
+  become: true
+  ansible.builtin.template:
+    mode: 0644
+    src: manual-upgrader.service.j2
+    dest: '/etc/systemd/system/{{ updater_manual_service }}.service'
+    force: true
+    backup: true
+  tags:
+    - setup
+
 
 - name: Enable ansible update service
   become: true
@@ -138,7 +150,7 @@
 - name: Enable auto upgrade service
   become: true
   ansible.builtin.systemd:
-    name: '{{ auto_update_service }}'
+    name: '{{ updater_auto_service }}'
     enabled: true
   tags:
     - setup

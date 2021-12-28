@@ -18,7 +18,8 @@ jobs:
         - name: Perform sanity testing with ansible-test
           uses: ansible-community/ansible-test-gh-action@release/v1
           with:
-            ansible-core-version: devel
+            docker-image: ubuntu2004
+            ansible-core-version: stable-2.11
             python-version: 3.8
             target-python-version: 3.8
             testing-type: sanity
