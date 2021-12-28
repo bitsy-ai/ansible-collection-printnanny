@@ -66,5 +66,5 @@
   become: true
   ansible.builtin.systemd:
     name: octoprint.service
-    start: started
+    state: started
     enabled: true
