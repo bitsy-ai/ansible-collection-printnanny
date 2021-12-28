@@ -1,10 +1,10 @@
 # {{ ansible_managed }}
 [Unit]
-Description={{ auto_update_service }} timer
-Requires={{ auto_update_service }}.service
+Description={{ updater_auto_service }} timer
+Requires={{ updater_auto_service }}.service
 [Timer]
 Persistent=true
-Unit={{ auto_update_service }}.service
+Unit={{ updater_auto_service }}.service
 {% if updater_timer.OnStartupSec %} 
 OnStartupSec={{ updater_timer.OnStartupSec }}
 {% endif %}
