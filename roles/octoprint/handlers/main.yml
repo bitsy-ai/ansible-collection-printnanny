@@ -1,2 +1,102 @@
 ---
 # handlers file for octoprint
+---
+# tasks file for octoprint
+- name: Install apt dependencies
+  become: true
+  ansible.builtin.apt:
+    name:
+      - pkg-config
+      - python3-dev
+      - python3-pip
+      - python3-venv
+  tags:
+    - setup
+    - system-update
+    - octoprint
+
+- name: Create octoprint user
+  become: true
+  ansible.builtin.user:
+    name: "{{ octoprint_user }}"
+    state: present
+    shell: /sbin/nologin
+    comment: "Octoprint service user"
+    groups:
+      - adm
+      - gpio
+      - i2c
+      - input
+      - plugdev
+      - spi
+      - sudo
+      - tty
+      - video
+  tags:
+    - setup
+    - system-update
+    - octoprint
+
+- name: 'Create Octoprint virtualenv'
+  become_user: '{{ octoprint_user }}'
+  pip:
+    name:
+      - 'pip>21,<22'
+      - setuptools
+      - wheel
+    virtualenv_command: /usr/bin/python3 -m venv
+    virtualenv: '{{ octoprint_venv }}'
+    extra_args: '--no-cache-dir'
+  tags:
+    - setup
+    - system-update
+    - octoprint
+
+- name: Install octoprint into venv
+  become_user: '{{ octoprint_user }}'
+  pip:
+    name: '{{ octoprint_version }}'
+    virtualenv_command: /usr/bin/python3 -m venv
+    virtualenv: '{{ octoprint_venv }}'
+    extra_args: '--no-cache-dir'
+  tags:
+    - setup
+    - system-update
+    - octoprint
+
+- name: Make {{ octoprint_dir }}
+  become_user: '{{ octoprint_user }}'
+  ansible.builtin.file:
+    state: directory
+    path: '{{ octoprint_dir }}'
+    mode: 0775
+  tags:
+    - setup
+    - system-update
+    - octoprint
+
+- name: Render octoprint config
+  become_user: '{{ octoprint_user }}'
+  ansible.builtin.template:
+    mode: 0664
+    src: octoprint.config.j2
+    dest: '{{ octoprint_config }}'
+    force: true
+  tags:
+    - setup
+    - system-update
+    - octoprint
+
+- name: Render octoprint.service template
+  become: true
+  ansible.builtin.template:
+    mode: 0664
+    src: octoprint.service.j2
+    dest: '/etc/systemd/system/octoprint.service'
+    force: true
+  tags:
+    - setup
+    - system-update
+    - octoprint
+  notify:
+    - restart octoprint

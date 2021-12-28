@@ -9,6 +9,7 @@
       - python3-pip
       - python3-venv
   tags:
+    - setup
     - system-update
     - octoprint
 
@@ -30,6 +31,7 @@
       - tty
       - video
   tags:
+    - setup
     - system-update
     - octoprint
 
@@ -44,6 +46,7 @@
     virtualenv: '{{ octoprint_venv }}'
     extra_args: '--no-cache-dir'
   tags:
+    - setup
     - system-update
     - octoprint
 
@@ -55,6 +58,7 @@
     virtualenv: '{{ octoprint_venv }}'
     extra_args: '--no-cache-dir'
   tags:
+    - setup
     - system-update
     - octoprint
 
@@ -65,6 +69,7 @@
     path: '{{ octoprint_dir }}'
     mode: 0775
   tags:
+    - setup
     - system-update
     - octoprint
 
@@ -76,6 +81,7 @@
     dest: '{{ octoprint_config }}'
     force: true
   tags:
+    - setup
     - system-update
     - octoprint
 
@@ -87,6 +93,7 @@
     dest: '/etc/systemd/system/octoprint.service'
     force: true
   tags:
+    - setup
     - system-update
     - octoprint
 
@@ -97,5 +104,6 @@
     state: started
     enabled: true
   tags:
+    - setup
     - system-update
     - octoprint
