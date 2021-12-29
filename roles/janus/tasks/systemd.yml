@@ -9,6 +9,8 @@
     backup: true
   with_dict: "{{ janus_conf_template }}"
   when: ansible_local.license.janus_admin_secret is defined
+  notify:
+    - restart janus
 
 - name: Render {{ janus_env_file }}
   become: true
@@ -20,6 +22,8 @@
     force: true
     backup: true
   when: ansible_local.license.janus_admin_secret is defined
+  notify:
+    - restart janus
 
 - name: Update /etc/systemd/system/janus.service
   become: true

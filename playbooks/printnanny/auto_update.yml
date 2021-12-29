@@ -4,8 +4,16 @@
   gather_facts: true
   tasks:
     - name: Include roles/printnanny/vars
-      include_vars: ../../roles/printnanny/vars/main.yml
+      ansible.builtin.include_vars: ../../roles/printnanny/vars/main.yml
     - name: Update Print Nanny CLI
-      import_role:
+      ansible.builtin.import_role:
         name: bitsyai.rpi.printnanny
         tasks_from: cli
+    - name: Update Janus configs
+      ansible.builtin.import_role:
+        name: bitsyai.rpi.janus
+        tasks_from: systemd
+    - name: Update MQTT configs
+      ansible.builtin.import_role:
+        name: bitsyai.rpi.printnanny
+        tasks_from: mqtt

@@ -1,0 +1,5 @@
+- name: Remove extra pkgs if building from full Raspi OS img
+  become: true
+  ansible.builtin.apt:
+    name:
+      - software-properties-common
