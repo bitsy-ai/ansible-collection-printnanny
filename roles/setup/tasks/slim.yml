@@ -33,7 +33,6 @@
       - squeak-plugins-scratch
       - squeak-vm
       - system-config-printer-common
-      - vim-runtime
       - wolfram-engine
     state: absent
     purge: true
