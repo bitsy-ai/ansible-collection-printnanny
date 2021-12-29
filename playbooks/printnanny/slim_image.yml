@@ -1,0 +1,29 @@
+---
+- hosts: default
+  gather_facts: true
+  tasks:
+    - name: Include roles/printnanny/vars
+      include_vars: ../../roles/printnanny/vars/main.yml
+    - name: Common Raspberry Pi setup
+      include_role:
+        name: bitsyai.rpi.setup
+    - name: Slim unneeded packages install
+      include_role:
+        name: bitsyai.rpi.setup
+        tasks_from: slim
+    - name: Print Nanny setup
+      include_role:
+        name: bitsyai.rpi.printnanny
+    - name: Automatic software update setup
+      include_role:
+        name: bitsyai.rpi.updater
+    - name: Camera setup
+      include_role:
+        name: bitsyai.rpi.camera
+    - name: Janus Gateway setup
+      include_role:
+        name: bitsyai.rpi.janus
+    - name: Clean image
+      include_role:
+        name: bitsyai.rpi.setup
+        tasks_from: clean_image

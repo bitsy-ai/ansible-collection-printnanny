@@ -1,8 +1,4 @@
 ---
-- name: Slim packages
-  import_tasks: slim.yml
-  tags:
-    - setup
 - name: User setup
   import_tasks: users.yml
   tags:
