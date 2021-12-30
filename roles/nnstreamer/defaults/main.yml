@@ -10,7 +10,7 @@ nn_tensor_width: 300
 
 nn_framework: tensorflow-lite
 
-nn_base_url: https://print-nanny-cdn.com/ml/print3d_20201101015829
+nn_base_url: https://cdn.print-nanny.com/ml/print3d_20201101015829
 nn_model_url: '{{ nn_base_url }}/model.tflite'
 nn_label_url: '{{ nn_base_url }}/dict.txt'
 nn_metadata_url: '{{ nn_metadata_url }}/metadata.json'
