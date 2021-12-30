@@ -23,6 +23,9 @@
     - name: Janus Gateway setup
       include_role:
         name: bitsyai.rpi.janus
+    - name: nnstreamer setup
+      include_role:
+        name: bitsyai.rpi.nnstreamer
     - name: Clean image
       include_role:
         name: bitsyai.rpi.setup
