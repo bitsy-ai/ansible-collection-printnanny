@@ -13,7 +13,7 @@ honeycomb_api_key: '{{ ansible_local.license.honeycomb_api_key if ansible_local.
 
 # begin janus vars
 janus_admin_secret: '{{ ansible_local.license.janus_admin_secret  if ansible_local.license.janus_admin_secret is defined else None }}'
-janus_token: '{{ ansible_local.license.janus_token if ansible_local.license.janus_token else None }}'
+janus_token: '{{ ansible_local.license.janus_token if ansible_local.license.janus_token is defined else None }}'
 
 janus_service_name: janus.service
 janus_service_unit_extra: |
