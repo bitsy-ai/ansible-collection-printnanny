@@ -8,7 +8,7 @@
     force: true
     backup: true
   with_dict: "{{ janus_conf_template }}"
-  when: ansible_local.license.janus_admin_secret is defined
+  when: janus_admin_secret != None
   notify:
     - restart janus
 
@@ -21,7 +21,7 @@
     owner: "{{ janus_user }}"
     force: true
     backup: true
-  when: ansible_local.license.janus_admin_secret is defined
+  when: janus_admin_secret != None
   notify:
     - restart janus
 

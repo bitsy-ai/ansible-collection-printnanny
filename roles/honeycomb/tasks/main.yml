@@ -37,7 +37,7 @@
     mode: 0664
     force: true
     backup: true
-  when: honeycomb_api_key != None
+  when: honeycomb_api_key != None and honeycomb_dataset != None
   notify:
     - restart honeytail
 
@@ -47,4 +47,4 @@
     enabled: true
     state: started
     no_block: true
-  when: honeycomb_api_key != None
+  when: honeycomb_api_key != None and honeycomb_dataset != None
