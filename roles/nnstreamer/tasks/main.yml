@@ -14,3 +14,36 @@
     name:
       - nnstreamer
     codename: focal
+
+- name: Create {{ nn_install_dir }}
+  become: true
+  ansible.builtin.file:
+    state: directory
+    path: '{{ nn_install_dir }}'
+    owner: '{{ nn_user }}'
+    mode: 0664
+
+- name: Download {{ nn_model_url }}
+  become_user: '{{ nn_user }}'
+  ansible.builtin.get_url:
+    url: '{{ nn_model_url }}'
+    dest: '{{ nn_model_file }}'
+
+- name: Download {{ nn_label_url }}
+  become_user: '{{ nn_user }}'
+  ansible.builtin.get_url:
+    url: '{{ nn_model_url }}'
+    dest: '{{ nn_label_file }}'
+
+- name: Download {{ nn_metadata_file }}
+  become_user: '{{ nn_user }}'
+  ansible.builtin.get_url:
+    url: '{{ nn_model_url }}'
+    dest: '{{ nn_label_file }}'
+
+- name: Render launch script
+  become: true
+  ansible.builtin.template:
+    mode: 0774
+    src: gst-launch.j2.sh
+    dest: '{{ nn_install_dir }}/launch.sh'
