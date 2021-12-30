@@ -6,6 +6,7 @@
   ansible.builtin.apt_repository:
     repo: ppa:nnstreamer/ppa
     state: present
+    codename: focal
 
 - name: Install nnstreamer
   become: true
@@ -13,7 +14,6 @@
     update_cache: true
     name:
       - nnstreamer
-    codename: focal
 
 - name: Create {{ nn_install_dir }}
   become: true
