@@ -92,3 +92,6 @@ janus_startup_delay: 30
 
 ansible_facts_path: /etc/ansible/facts.d
 janus_fact: /etc/ansible/facts.d/janus.fact
+
+janus_admin_secret: null
+janus_token: null
