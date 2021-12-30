@@ -8,10 +8,14 @@
       name: bitsyai.rpi.printnanny
       tasks_from: activate_license
 - hosts: default
+  # refresh ansible_local facts
   gather_facts: true
   tasks:
     - name: Include roles/printnanny/vars
       include_vars: ../../roles/printnanny/vars/main.yml
+    - name: Render Honeycomb Config
+      include_role:
+        name: bitsyai.rpi.honeycomb
     - name: Render Janus Config
       include_role:
         name: bitsyai.rpi.janus

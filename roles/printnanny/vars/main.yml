@@ -6,7 +6,15 @@ gstreamer_service_name: gstreamer.service
 gstreamer_service_unit_extra: |
   PartOf={{ printnanny_monitoring_service }}
 
+# begin honeycomb
+honeycomb_dataset: '{{ ansible_local.license.honeycomb_dataset if ansible_local.license.honeycomb_dataset is defined else None }}'
+honeycomb_api_key: '{{ ansible_local.license.honeycomb_api_key if ansible_local.license.honeycomb_api_key is defined else None }}'
+# end honecomb
+
 # begin janus vars
+janus_admin_secret: '{{ ansible_local.license.janus_admin_secret  if ansible_local.license.janus_admin_secret is defined else None }}'
+janus_token: '{{ ansible_local.license.janus_token if ansible_local.license.janus_token else None }}'
+
 janus_service_name: janus.service
 janus_service_unit_extra: |
   After={{ gstreamer_service_name }}
