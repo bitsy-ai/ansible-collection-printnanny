@@ -1,2 +1,15 @@
 ---
 # tasks file for nnstreamer
+
+- name: Add nnstreamer PPA
+  become: true
+  ansible.builtin.apt_repository:
+    repo: ppa:nnstreamer/ppa
+    state: present
+
+- name: Install nnstreamer
+  become: true
+  ansible.builtin.apt:
+    update_cache: true
+    name:
+      - nnstreamer
