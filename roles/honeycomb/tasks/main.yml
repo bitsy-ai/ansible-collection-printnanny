@@ -40,11 +40,3 @@
   when: honeycomb_api_key != None and honeycomb_dataset != None
   notify:
     - restart honeytail
-
-- name: Enable honeytail service
-  ansible.builtin.systemd:
-    name: honeytail
-    enabled: true
-    state: started
-    no_block: true
-  when: honeycomb_api_key != None and honeycomb_dataset != None
