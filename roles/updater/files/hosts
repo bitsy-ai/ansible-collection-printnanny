@@ -1,5 +1,8 @@
 [auto_update]
 localhost ansible_connection=local
 
-[default]
+[printnanny]
+localhost ansible_connection=local
+
+[octoprint]
 localhost ansible_connection=local

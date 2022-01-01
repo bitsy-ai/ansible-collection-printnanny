@@ -1,6 +1,5 @@
 ---
 printnanny_monitoring_service: printnanny-monitoring.service
-
 # begin gstreamer vars
 gstreamer_service_name: gstreamer.service
 gstreamer_service_unit_extra: |

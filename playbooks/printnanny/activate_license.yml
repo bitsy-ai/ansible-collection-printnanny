@@ -1,5 +1,5 @@
 ---
-- hosts: default
+- hosts: printnanny
   tasks:
   - name: Include roles/printnanny/vars
     include_vars: ../../roles/printnanny/vars/main.yml
@@ -7,7 +7,7 @@
     include_role:
       name: bitsyai.rpi.printnanny
       tasks_from: activate_license
-- hosts: default
+- hosts: printnanny
   # refresh ansible_local facts
   gather_facts: true
   tasks:

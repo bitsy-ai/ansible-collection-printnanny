@@ -1,5 +1,5 @@
 ---
-- hosts: default
+- hosts: printnanny
   gather_facts: true
   tasks:
     - name: Include roles/printnanny/vars
