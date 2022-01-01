@@ -2,6 +2,41 @@
 - name: Install platform dependencies
   import_tasks: dependencies.yml
 
+- name: Create temporary janus build directory
+  ansible.builtin.tempfile:
+    state: directory
+    prefix: janus
+  register: janus_build_dir
+  when: janus_upgrade_available
+
+- name: Create temporary websockets build directory
+  ansible.builtin.tempfile:
+    state: directory
+    prefix: libwebsockets
+  register: janus_libwebsockets_build_dir
+  when: janus_upgrade_available
+
+- name: Create temporary libnice build directory
+  ansible.builtin.tempfile:
+    state: directory
+    prefix: libnice
+  register: janus_libnice_build_dir
+  when: janus_upgrade_available
+
+- name: Create temporary usrsctp build directory
+  ansible.builtin.tempfile:
+    state: directory
+    prefix: usrsctp
+  register: janus_usrsctp_build_dir
+  when: janus_upgrade_available
+
+- name: Create temporary libsrtp build directory
+  ansible.builtin.tempfile:
+    state: directory
+    prefix: libsrtp
+  register: janus_libsrtp_build_dir
+  when: janus_upgrade_available
+
 - name: Create workspace
   ansible.builtin.file:
     path: "{{ janus_build_dir.path }}"
@@ -79,3 +114,38 @@
     janus_libsrtp_version: "{{ janus_libsrtp_version }}"
     janus_libwebsockets_version: "{{ janus_libwebsockets_version }}"
     cacheable: true
+
+- name: "Delete {{ janus_build_dir.path }} build directory"
+  become: true
+  ansible.builtin.file:
+    path: "{{ janus_build_dir.path }}"
+    state: absent
+  when: janus_upgrade_available
+
+- name: "Delete {{ janus_libwebsockets_build_dir.path }} build directory"
+  become: true
+  ansible.builtin.file:
+    path: "{{ janus_libwebsockets_build_dir.path }}"
+    state: absent
+  when: janus_upgrade_available
+
+- name: "Delete {{ janus_libnice_build_dir.path }} build directory"
+  become: true
+  ansible.builtin.file:
+    path: "{{ janus_libnice_build_dir.path }}"
+    state: absent
+  when: janus_upgrade_available
+
+- name: "Delete {{ janus_libsrtp_build_dir.path }} build directory"
+  become: true
+  ansible.builtin.file:
+    path: "{{ janus_libsrtp_build_dir.path }}"
+    state: absent
+  when: janus_upgrade_available
+
+- name: "Delete {{ janus_usrsctp_build_dir.path }} build directory"
+  become: true
+  ansible.builtin.file:
+    path: "{{ janus_usrsctp_build_dir.path }}"
+    state: absent
+  when: janus_upgrade_available
