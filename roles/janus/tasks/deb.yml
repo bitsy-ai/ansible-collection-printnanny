@@ -1,19 +1,30 @@
+- name: Install dependencies
+  become: true
+  ansible.builtin.apt:
+    update_cache: true
+    pkg:
+      - libc6=2.33
+
 - name: Install janus deb
+  become: true
   ansible.builtin.apt:
     deb: '{{ janus_deb_amd64 }}'
   when: ansible_machine == 'x86_64'
 
 - name: Install janus deb
+  become: true
   ansible.builtin.apt:
     deb: '{{ janus_deb_arm64 }}'
   when: ansible_machine == 'aarch64' or ansible_machine == 'arm64'
 
 - name: Install janus-dev library
+  become: true
   ansible.builtin.apt:
     deb: '{{ janus_dev_deb_amd64 }}'
   when: ansible_machine == 'x86_64'
 
 - name: Install janus-dev library
+  become: true
   ansible.builtin.apt:
     deb: '{{ janus_dev_deb_arm64 }}'
   when: ansible_machine == 'aarch64' or ansible_machine == 'arm64'
