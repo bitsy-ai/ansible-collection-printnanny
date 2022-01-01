@@ -1,9 +1,19 @@
-- name: Install Janus
+- name: Install janus deb
   ansible.builtin.apt:
     deb: '{{ janus_deb_amd64 }}'
   when: ansible_machine == 'x86_64'
 
-- name: Install Janus
+- name: Install janus deb
   ansible.builtin.apt:
     deb: '{{ janus_deb_arm64 }}'
+  when: ansible_machine == 'aarch64' or ansible_machine == 'arm64'
+
+- name: Install janus-dev library
+  ansible.builtin.apt:
+    deb: '{{ janus_dev_deb_amd64 }}'
+  when: ansible_machine == 'x86_64'
+
+- name: Install janus-dev library
+  ansible.builtin.apt:
+    deb: '{{ janus_dev_deb_arm64 }}'
   when: ansible_machine == 'aarch64' or ansible_machine == 'arm64'

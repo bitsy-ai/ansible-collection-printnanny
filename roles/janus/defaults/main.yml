@@ -4,8 +4,12 @@
 janus_auth: {}
 
 janus_build_source: false
-janus_deb_amd64: http://ftp.us.debian.org/debian/pool/main/j/janus/janus-dev_0.11.6-1_amd64.deb
-janus_deb_arm64: http://ftp.us.debian.org/debian/pool/main/j/janus/janus-dev_0.11.6-1_arm64.deb
+
+janus_deb_amd64: http://ftp.us.debian.org/debian/pool/main/j/janus/janus_0.11.6-1_amd64.deb
+janus_dev_deb_amd64: http://ftp.us.debian.org/debian/pool/main/j/janus/janus-dev_0.11.6-1_amd64.deb
+
+janus_deb_arm64: http://ftp.us.debian.org/debian/pool/main/j/janus/janus_0.11.6-1_arm64.deb
+janus_dev_deb_arm64: http://ftp.us.debian.org/debian/pool/main/j/janus/janus-dev_0.11.6-1_arm64.deb
 
 janus_build_extras:
   audiobridge: false
