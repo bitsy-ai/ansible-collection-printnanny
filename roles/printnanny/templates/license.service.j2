@@ -22,7 +22,7 @@ ExecStartPost=-/usr/bin/flock -F {{ ansible_lockfile }} \
 RemainAfterExit=yes
 Slice=ansible_pull.slice
 Restart=on-failure
-RestartSec=600
+RestartSec=60
 
 [Install]
 WantedBy=multi-user.target
