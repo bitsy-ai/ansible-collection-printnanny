@@ -18,7 +18,7 @@
   ansible.builtin.user:
     name: "{{ octoprint_user }}"
     state: present
-    shell: /sbin/nologin
+    shell: /bin/bash
     comment: "Octoprint service user"
     groups:
       - adm
@@ -63,11 +63,12 @@
     - octoprint
 
 - name: Make {{ octoprint_dir }}
-  become_user: '{{ octoprint_user }}'
+  become: true
   ansible.builtin.file:
     state: directory
     path: '{{ octoprint_dir }}'
     mode: 0775
+    owner: '{{ octoprint_user }}'
   tags:
     - setup
     - system-update
