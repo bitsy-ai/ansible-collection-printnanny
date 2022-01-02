@@ -6,3 +6,4 @@ octoprint_version: 'octoprint>1.7,<2'
 octoprint_dir: "/home/{{ octoprint_user }}/.octoprint"
 octoprint_venv: "/home/{{ octoprint_user }}/venv"
 octoprint_config: "{{ octoprint_dir }}/config.yml"
+octoprint_printnanny_plugin_version: 'git+https://github.com/bitsy-ai/octoprint-nanny-plugin.git.@0.8.0'
