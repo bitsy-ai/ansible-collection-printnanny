@@ -37,7 +37,7 @@
 
 - name: 'Create Octoprint virtualenv'
   become_user: '{{ octoprint_user }}'
-  pip:
+  ansible.builtin.pip:
     name:
       - 'pip>21,<22'
       - setuptools
@@ -54,6 +54,21 @@
   become_user: '{{ octoprint_user }}'
   pip:
     name: '{{ octoprint_version }}'
+    virtualenv_command: /usr/bin/python3 -m venv
+    virtualenv: '{{ octoprint_venv }}'
+    extra_args: '--no-cache-dir'
+  tags:
+    - setup
+    - system-update
+    - octoprint
+
+# If OctoPrint is not installed first, plugin installation fails with the following erorr:
+## Could not import OctoPrint's setuptools,
+## are you sure you are running that under the same python installation that OctoPrint is installed under?\n    ----------------------------------------\n
+- name: Install octoprint plugin into venv (required to detect OctoPrint setuptools)
+  become_user: '{{ octoprint_user }}'
+  pip:
+    name: '{{ octoprint_printnanny_plugin_version }}'
     virtualenv_command: /usr/bin/python3 -m venv
     virtualenv: '{{ octoprint_venv }}'
     extra_args: '--no-cache-dir'
