@@ -31,6 +31,7 @@
     state: absent
 
 - name: Render Honeytail conf file
+  become: true
   ansible.builtin.template:
     src: honeytail.conf.j2
     dest: /etc/honeytail/honeytail.conf
