@@ -1,7 +1,7 @@
 ---
 # defaults file for octoprint
 
-octoprint_user: octoprint
+octoprint_user: pi
 octoprint_version: 'octoprint>1.7,<2'
 octoprint_dir: "/home/{{ octoprint_user }}/.octoprint"
 octoprint_venv: "/home/{{ octoprint_user }}/venv"
