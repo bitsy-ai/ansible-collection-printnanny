@@ -63,12 +63,13 @@
     - octoprint
 
 - name: Make {{ octoprint_dir }}
-  become: true
+  become_user: '{{ octoprint_user }}'
   ansible.builtin.file:
     state: directory
     path: '{{ octoprint_dir }}'
     mode: 0775
     owner: '{{ octoprint_user }}'
+    group: '{{ octoprint_user }}'
   tags:
     - setup
     - system-update
@@ -81,6 +82,8 @@
     src: octoprint.config.j2
     dest: '{{ octoprint_config }}'
     force: true
+    owner: '{{ octoprint_user }}'
+    group: '{{ octoprint_user }}'
   tags:
     - setup
     - system-update
