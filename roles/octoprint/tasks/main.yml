@@ -42,8 +42,6 @@
       - 'pip>21,<22'
       - setuptools
       - wheel
-      - '{{ octoprint_version }}'
-      - '{{ octoprint_printnanny_plugin_version }}'
     virtualenv_command: /usr/bin/python3 -m venv
     virtualenv: '{{ octoprint_venv }}'
     extra_args: '--no-cache-dir'
