@@ -6,7 +6,7 @@ Wants=network.online.target
 
 [Service]
 Type=simple
-Environment="OCTOPRINT_HOST=127.0.0.1"
+Environment="OCTOPRINT_HOST=0.0.0.0"
 Environment="OCTOPRINT_PORT=5000"
 User={{ octoprint_user }}
 ExecStart={{ octoprint_venv }}/bin/octoprint serve --host=${OCTOPRINT_HOST} --port=${OCTOPRINT_PORT}
