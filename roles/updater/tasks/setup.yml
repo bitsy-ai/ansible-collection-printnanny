@@ -90,15 +90,6 @@
   tags:
     - setup
 
-- name: Create updater systemd timers
-  become: true
-  ansible.builtin.template:
-    mode: 0644
-    src: auto-upgrader.timer.j2
-    dest: '/etc/systemd/system/{{ updater_auto_service }}.timer'
-  tags:
-    - setup
-
 - name: Create ansible-updater service
   become: true
   ansible.builtin.template:
@@ -119,6 +110,16 @@
     dest: '/etc/systemd/system/{{ item.name }}.service'
     force: true
     backup: true
+  tags:
+    - setup
+  with_items: '{{ updaters }}'
+
+- name: Create updater systemd timers
+  become: true
+  ansible.builtin.template:
+    mode: 0644
+    src: updater.timer.j2
+    dest: '/etc/systemd/system/{{ item.name }}.timer'
   tags:
     - setup
   with_items: '{{ updaters }}'
