@@ -11,12 +11,3 @@
       - libjpeg-dev
   tags:
     - setup
-
-- name: 'Render {{ gstreamer_service_name }}'
-  ansible.builtin.template:
-    mode: 0664
-    src: '{{ gstreamer_service_name }}.j2'
-    dest: '/etc/systemd/system/{{ gstreamer_service_name }}'
-    backup: true
-    force: true
-  notify: restart gstreamer
