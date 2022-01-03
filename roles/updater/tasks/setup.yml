@@ -109,8 +109,7 @@
     backup: true
   tags:
     - setup
-  notify:
-    - systemctl daemon-reload
+
 
 - name: Create updater systemd units
   become: true
@@ -137,7 +136,7 @@
 - name: Set updater systemd state
   become: true
   ansible.builtin.systemd:
-    name: '{{ updater.item }}'
+    name: '{{ item.name }}'
   tags:
     - setup
   with_items: '{{ updaters }}'

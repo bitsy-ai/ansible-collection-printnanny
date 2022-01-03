@@ -52,7 +52,7 @@ updaters:
     user: printnanny
     playbooks:
       - "bitsyai.rpi.printnanny.update.system"
-    service_template: "update-system.service.j2"
+    service_template: "updater.service.j2"
     service_enabled: false
     state: started
   - name: "printnanny-update-janus"
@@ -60,14 +60,14 @@ updaters:
     user: printnanny
     playbooks:
       - "bitsyai.rpi.printnanny.update.janus"
-    service_template: "update-app.service.j2"
+    service_template: "updater.service.j2"
     service_enabled: false
     state: started
   - name: "printnanny-update-cli"
     app_name: printnanny
     user: printnanny
-    playbook:
+    playbooks:
       - "bitsyai.rpi.printnanny.update.cli"
-    service_template: "update-app.service.j2"
+    service_template: "updater.service.j2"
     service_enabled: false
     state: started
