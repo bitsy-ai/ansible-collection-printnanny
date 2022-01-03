@@ -1,4 +1,0 @@
----
-- name: Import nnstreamer role
-  import_role:
-    name: bitsyai.rpi.nnstreamer
