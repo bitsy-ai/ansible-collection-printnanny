@@ -13,7 +13,6 @@
     src: license.service.j2
     dest: /etc/systemd/system/printnanny-license.service
     force: true
-    backup: true
 
 - name: Create '{{ printnanny_data_dir }}'
   ansible.builtin.file:

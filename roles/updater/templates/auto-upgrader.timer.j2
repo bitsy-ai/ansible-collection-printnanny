@@ -1,7 +1,6 @@
 # {{ ansible_managed }}
 [Unit]
-Description={{ updater_auto_service }} timer
-Requires={{ updater_auto_service }}.service
+Description=Updater timer
 [Timer]
 Persistent=true
 Unit={{ updater_auto_service }}.service
