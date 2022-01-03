@@ -1,21 +1,21 @@
 # {{ ansible_managed }}
 [Unit]
-Description=Bitsy Manual Updater
+Description={{ item.name }}
 After={{ ansible_collection_updater }}.service
 Requires={{ ansible_collection_updater }}.service
 Wants=network-online.target
 After=network-online.target
-{% if updater_service_unit_extra is defined %}
-{{ updater_service_unit_extra }}
+{% if item.timer is defined %}
+Wants={{ item.timer }}.timer
 {% endif %}
 
 [Service]
 Type=oneshot
-RuntimeDirectory={{ updater_app_name }}
-ConfigurationDirectory={{ updater_app_name }}
-User={{ updater_user }}
+RuntimeDirectory={{ item.app_name }}
+ConfigurationDirectory={{ item.app_name }}
+User={{ item.user }}
 
-{% for playbook in updater_manual_playbooks %}
+{% for playbook in item.playbooks %}
 ExecStart=/usr/bin/flock -F {{ ansible_lockfile }} \
     {{ updater_venv }}/bin/ansible-playbook \
     {{ playbook }}
@@ -25,7 +25,6 @@ ExecStartPost=-/usr/bin/flock -F {{ ansible_lockfile }} \
     /usr/bin/rm {{ ansible_lockfile }}
 
 Restart=on-failure
-RestartSec=600
 
 [Install]
 WantedBy=multi-user.target

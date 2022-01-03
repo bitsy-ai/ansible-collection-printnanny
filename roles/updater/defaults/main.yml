@@ -38,13 +38,36 @@ updater_timer:
   # always update 2 minutes after booting
   OnStartupSec: 120
 
-updater_service_unit_extra: null
-
-updaters: []
-  # map {} with keys:
+updaters:
+  # each entry is a map {} with keys:
   # name: ""
-  # playbook: ""
+  # playbooks: []
   # service_template: ""
   # service_enabled: ""
   # service_state: ""
   # user: ""
+  # add printnanny-updaters here
+  - name: "printnanny-update-system"
+    app_name: printnanny
+    user: printnanny
+    playbooks:
+      - "bitsyai.rpi.printnanny.update.system"
+    service_template: "update-system.service.j2"
+    service_enabled: false
+    state: started
+  - name: "printnanny-update-janus"
+    app_name: printnanny
+    user: printnanny
+    playbooks:
+      - "bitsyai.rpi.printnanny.update.janus"
+    service_template: "update-app.service.j2"
+    service_enabled: false
+    state: started
+  - name: "printnanny-update-cli"
+    app_name: printnanny
+    user: printnanny
+    playbook:
+      - "bitsyai.rpi.printnanny.update.cli"
+    service_template: "update-app.service.j2"
+    service_enabled: false
+    state: started
