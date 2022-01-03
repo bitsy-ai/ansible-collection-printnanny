@@ -40,10 +40,3 @@
   ansible.builtin.get_url:
     url: '{{ nn_model_url }}'
     dest: '{{ nn_label_file }}'
-
-- name: Render launch script
-  become: true
-  ansible.builtin.template:
-    mode: 0774
-    src: gst-launch.j2.sh
-    dest: '{{ nn_install_dir }}/launch.sh'
