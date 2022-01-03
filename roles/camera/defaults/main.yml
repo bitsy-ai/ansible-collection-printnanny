@@ -2,7 +2,6 @@
 # defaults file for libcamera
 rpi_build_libcamera_apps: true
 
-gstreamer_service_name: gstreamer.service
 gstreamer_num_buffers: 3
 gstreamer_config_interval: 1
 gstreamer_video_src: 'v4l2src'
@@ -16,7 +15,8 @@ gstreamer_rtp_host: "127.0.0.1"
 gstreamer_rtp_port: 5004
 
 # defaults for nnstreamer
-
+nn_rpt_service: nn-rtp
+nn_x_service: nn-x
 nn_capture_height: 720
 nn_capture_width: 1280
 nn_capture_framerate: 30

@@ -1,0 +1,17 @@
+- name: 'Render {{ nn_rtp_service }}'
+  ansible.builtin.template:
+    mode: 0664
+    src: '{{ nn_rtp_service }}.j2'
+    dest: '/etc/systemd/system/{{ nn_rtp_service }}.service'
+    backup: true
+    force: true
+  notify: restart {{ nn_rtp_service }}
+
+- name: 'Render {{ nn_x_service }}'
+  ansible.builtin.template:
+    mode: 0664
+    src: '{{ nn_x_service }}.service.j2'
+    dest: '/etc/systemd/system/{{ nn_x_service }}.service'
+    backup: true
+    force: true
+  notify: restart {{ nn_x_service }}
