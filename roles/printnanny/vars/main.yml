@@ -96,14 +96,6 @@ ansible_config:
   fact_caching: jsonfile
   fact_caching_connection: '/var/run/{{ updater_app_name }}/fact_cache'
 
-ansible_collection_updater: ansible-updater
-
-updater_auto_playbooks:
-  - bitsyai.rpi.printnanny.auto_update
-
-updater_manual_playbooks:
-  - bitsyai.rpi.printnanny.base_image
-
 updater_app_name: printnanny
 updater_tmpfs: '/var/run/{{ updater_app_name }}'
 ansible_lockfile: '/var/run/{{ updater_app_name }}/ansible.lock'

@@ -1,0 +1,8 @@
+---
+- hosts: printnanny
+  gather_facts: true
+  tasks:
+    - name: Update PrintNanny CLI
+      include_role:
+        name: bitsyai.rpi.printnanny
+        tasks_from: cli

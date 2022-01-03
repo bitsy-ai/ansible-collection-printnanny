@@ -1,0 +1,10 @@
+---
+- hosts: printnanny
+  gather_facts: true
+  tasks:
+    - name: Update PrintNanny Config
+      ansible.builtin.debug:
+        msg: "(DRYRUN) Backup config, apply new config, notify handlers"
+    #   include_role:
+    #     name: bitsyai.rpi.printnanny
+    #     tasks_from: config

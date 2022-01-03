@@ -1,0 +1,7 @@
+---
+- hosts: printnanny
+  gather_facts: true
+  tasks:
+    - name: Update Janus Gateway
+      include_role:
+        name: bitsyai.rpi.janus
