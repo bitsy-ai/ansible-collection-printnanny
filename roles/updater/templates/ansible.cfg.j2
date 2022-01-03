@@ -1,4 +1,15 @@
 # {{ ansible_managed }}
+{% if ara_plugin_setup.stdout is defined %}
+{{ ara_plugin_setup.stdout }}
+[ara]
+api_client = {{ ara_api_client }}
+api_server = {{ ara_api_server }}
+api_timeout = {{ ara_api_timeout }}
+callback_threads = {{ ara_callback_threads }}
+ignored_arguments = {{ ara_ignored_arguments }}
+default_labels = {{ ara_default_labels }}
+argument_labels = {{ ara_argument_labels }}
+{% endif %}
 [defaults]
 ansible_connection=local
 ansible_python_intepreter=/home/{{ updater_user }}/bin/python
