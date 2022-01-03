@@ -96,7 +96,7 @@ ansible_config:
   fact_caching: jsonfile
   fact_caching_connection: '/var/run/{{ updater_app_name }}/fact_cache'
 
-ansible_collection_updater: ansible-updater
+ansible_collection_updater: ansible-update
 
 updater_auto_playbooks:
   - bitsyai.rpi.printnanny.auto_update

@@ -12,8 +12,8 @@ updater_collection_url: git+https://github.com/bitsy-ai/ansible-collection-rpi.g
 updater_collection: bitsyai.rpi
 updater_app_name: bitsy
 
-updater_auto_service: '{{ updater_app_name }}-auto-update'
-updater_manual_service: '{{ updater_app_name }}-manual-update'
+updater_auto_service: '{{ updater_app_name }}-cli-update'
+updater_manual_service: '{{ updater_app_name }}-system-update'
 
 updater_user: ansible
 updater_venv: '/home/{{ updater_user }}/venv'
@@ -39,3 +39,12 @@ updater_timer:
   OnStartupSec: 120
 
 updater_service_unit_extra: null
+
+updaters: []
+  # map {} with keys:
+  # name: ""
+  # playbook: ""
+  # service_template: ""
+  # service_enabled: ""
+  # service_state: ""
+  # user: ""

@@ -112,30 +112,17 @@
   notify:
     - systemctl daemon-reload
 
-- name: Create updater service
+- name: Create updater systemd units
   become: true
   ansible.builtin.template:
     mode: 0644
-    src: auto-upgrader.service.j2
-    dest: '/etc/systemd/system/{{ updater_auto_service }}.service'
+    src: '{{ item.service_template }}'
+    dest: '/etc/systemd/system/{{ item.name }}.service'
     force: true
     backup: true
   tags:
     - setup
-  notify:
-    - restart updater
-
-- name: Create updater service
-  become: true
-  ansible.builtin.template:
-    mode: 0644
-    src: manual-upgrader.service.j2
-    dest: '/etc/systemd/system/{{ updater_manual_service }}.service'
-    force: true
-    backup: true
-  tags:
-    - setup
-
+  with_items: '{{ updaters }}'
 
 - name: Enable ansible update service
   become: true
@@ -147,13 +134,13 @@
   notify:
     - restart ansible-updater
 
-- name: Enable auto upgrade service
+- name: Set updater systemd state
   become: true
   ansible.builtin.systemd:
-    name: '{{ updater_auto_service }}'
-    enabled: true
+    name: '{{ updater.item }}'
   tags:
     - setup
+  with_items: '{{ updaters }}'
 
 - name: Create ansible pull hosts
   become: true
