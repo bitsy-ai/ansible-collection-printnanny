@@ -15,7 +15,7 @@ gstreamer_rtp_host: "127.0.0.1"
 gstreamer_rtp_port: 5004
 
 # defaults for nnstreamer
-nn_rpt_service: nn-rtp
+nn_rtp_service: nn-rtp
 nn_x_service: nn-x
 nn_capture_height: 720
 nn_capture_width: 1280
