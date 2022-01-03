@@ -1,19 +1,8 @@
 ---
-# defaults file for ansible_pull
-
-updater_auto_playbooks:
-  - bitsyai.rpi.auto_update
-
-updater_manual_playbooks:
-  - bitsyai.rpi.manual_update
-
 updater_collection_url: git+https://github.com/bitsy-ai/ansible-collection-rpi.git,main
 
 updater_collection: bitsyai.rpi
 updater_app_name: bitsy
-
-updater_auto_service: '{{ updater_app_name }}-cli-update'
-updater_manual_service: '{{ updater_app_name }}-system-update'
 
 updater_user: ansible
 updater_venv: '/home/{{ updater_user }}/venv'
