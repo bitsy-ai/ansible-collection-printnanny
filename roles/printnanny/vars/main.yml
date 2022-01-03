@@ -102,3 +102,4 @@ ansible_lockfile: '/var/run/{{ updater_app_name }}/ansible.lock'
 updater_user: printnanny
 updater_venv: '{{ printnanny_ansible_dir }}/venv'
 ansible_collection_updater: ansible-updater
+ara_enabled: true

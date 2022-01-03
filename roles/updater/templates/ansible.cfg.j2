@@ -1,5 +1,5 @@
 # {{ ansible_managed }}
-{% if ara_plugin_setup is defined %}
+{% if ara_plugin_setup.stdout is defined %}
 {{ ara_plugin_setup.stdout }}
 [ara]
 api_client = {{ ara_api_client }}
