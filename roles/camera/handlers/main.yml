@@ -1,6 +1,6 @@
 ---
 # handlers file for libcamera
-- name: restart {{ nn_rtp_service }}'
+- name: restart {{ nn_rtp_service }}
   become: true
   ansible.builtin.systemd:
     daemon_reload: true
@@ -8,7 +8,7 @@
     state: restarted
     no_block: true
 
-- name: restart {{ nn_x_service }}'
+- name: restart {{ nn_x_service }}
   become: true
   ansible.builtin.systemd:
     daemon_reload: true
