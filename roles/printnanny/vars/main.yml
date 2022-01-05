@@ -83,6 +83,8 @@ janus_exec_start_post:
     --token ${JANUS_TOKEN}
     --adminsecret ${JANUS_ADMIN_SECRET}
 
+# updater service defined in updater vars section below
+janus_updater: printnanny-update-janus
 # end janus vars
 
 # ansible / updater vars
@@ -103,3 +105,41 @@ updater_user: printnanny
 updater_venv: '{{ printnanny_ansible_dir }}/venv'
 ansible_collection_updater: ansible-updater
 ara_enabled: true
+
+updaters:
+  # each entry is a map {} with keys:
+  # name: ""
+  # playbooks: []
+  # service_template: ""
+  # service_enabled: ""
+  # service_state: ""
+  # user: ""
+  # timer: "" see realtime timers: https://wiki.archlinux.org/title/Systemd/Timers
+  # add printnanny-updaters here
+  - name: "printnanny-update-system"
+    app_name: printnanny
+    user: printnanny
+    playbooks:
+      - "bitsyai.rpi.printnanny.update.system"
+    service_template: "updater.service.j2"
+    service_enabled: false
+    state: started
+    timer: OnCalendar=Tue,Sat 20:00
+  - name: "printnanny-update-janus"
+    app_name: printnanny
+    user: printnanny
+    playbooks:
+      - "bitsyai.rpi.printnanny.update.janus"
+    service_template: "updater.service.j2"
+    service_enabled: false
+    state: started
+    timer: OnCalendar=Tue,Sat 20:30
+  - name: "printnanny-update-cli"
+    app_name: printnanny
+    user: printnanny
+    playbooks:
+      - "bitsyai.rpi.printnanny.update.cli"
+    service_template: "updater.service.j2"
+    service_enabled: false
+    state: started
+    timer: OnCalendar=Tue,Sat 21:00

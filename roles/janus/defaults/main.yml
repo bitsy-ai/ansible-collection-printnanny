@@ -99,3 +99,5 @@ janus_token: null
 janus_openssl_cert: /etc/ssl/crt/janus.crt
 janus_openssl_key: /etc/ssl/private/janus.pem
 janus_openssl_csr: /etc/ssl/csr/janus.csr
+
+janus_updater: null

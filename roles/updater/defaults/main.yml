@@ -19,43 +19,7 @@ ansible_config:
   fact_caching: jsonfile
   fact_caching_connection: /etc/ansible/facts.json
 
-updaters:
-  # each entry is a map {} with keys:
-  # name: ""
-  # playbooks: []
-  # service_template: ""
-  # service_enabled: ""
-  # service_state: ""
-  # user: ""
-  # timer: "" see realtime timers: https://wiki.archlinux.org/title/Systemd/Timers
-  # add printnanny-updaters here
-  - name: "printnanny-update-system"
-    app_name: printnanny
-    user: printnanny
-    playbooks:
-      - "bitsyai.rpi.printnanny.update.system"
-    service_template: "updater.service.j2"
-    service_enabled: false
-    state: started
-    timer: OnCalendar=Tue,Sat 20:00
-  - name: "printnanny-update-janus"
-    app_name: printnanny
-    user: printnanny
-    playbooks:
-      - "bitsyai.rpi.printnanny.update.janus"
-    service_template: "updater.service.j2"
-    service_enabled: false
-    state: started
-    timer: OnCalendar=Tue,Sat 20:30
-  - name: "printnanny-update-cli"
-    app_name: printnanny
-    user: printnanny
-    playbooks:
-      - "bitsyai.rpi.printnanny.update.cli"
-    service_template: "updater.service.j2"
-    service_enabled: false
-    state: started
-    timer: OnCalendar=Tue,Sat 21:00
+updaters: []
 
 # ara configuration (optional)
 # https://ara.readthedocs.io/
