@@ -2,8 +2,8 @@
 [Unit]
 Description=Janus Gateway
 After=syslog.target network.target network-online.target
-{% if janus_service_unit_extra is defined %}
-{{ janus_service_unit_extra }}
+{% if janus_updater is not none %}
+After={{ janus_updater }}
 {% endif %}
 
 [Service]
