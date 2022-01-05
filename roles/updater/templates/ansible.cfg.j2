@@ -1,6 +1,15 @@
 # {{ ansible_managed }}
 {% if ara_plugin_setup.stdout is defined %}
 {{ ara_plugin_setup.stdout }}
+ansible_connection=local
+ansible_python_intepreter=/home/{{ updater_user }}/bin/python
+ansible_user={{ updater_user }}
+fact_caching_connection={{ ansible_config.fact_caching_connection }}
+fact_caching_timeout={{ ansible_config.fact_caching_timeout }}
+fact_caching={{ ansible_config.fact_caching }}
+gathering=smart
+no_target_syslog=False
+pipelining=True
 [ara]
 api_client = {{ ara_api_client }}
 api_server = {{ ara_api_server }}
@@ -9,7 +18,8 @@ callback_threads = {{ ara_callback_threads }}
 ignored_arguments = {{ ara_ignored_arguments }}
 default_labels = {{ ara_default_labels }}
 argument_labels = {{ ara_argument_labels }}
-{% endif %}
+
+{% else %}
 [defaults]
 ansible_connection=local
 ansible_python_intepreter=/home/{{ updater_user }}/bin/python
@@ -20,6 +30,7 @@ fact_caching={{ ansible_config.fact_caching }}
 gathering=smart
 no_target_syslog=False
 pipelining=True
+{% endif %}
 
 [inventory]
 enable_plugins = yaml, ini
