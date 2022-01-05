@@ -19,7 +19,7 @@ janus_groups:
   - video
 janus_install_dir: /opt/janus
 janus_build_dir: build
-janus_conf_dir: "{{ janus_install_dir }}/etc/janus"
+janus_conf_dir: /etc/janus
 janus_log_file: /var/log/janus/janus.log
 janus_lib_prefix: /usr/local
 janus_pid_file: /var/run/janus/janus.pid
@@ -95,3 +95,7 @@ janus_fact: /etc/ansible/facts.d/janus.fact
 
 janus_admin_secret: null
 janus_token: null
+
+janus_openssl_cert: /etc/ssl/crt/janus.crt
+janus_openssl_key: /etc/ssl/private/janus.pem
+janus_openssl_csr: /etc/ssl/csr/janus.csr
