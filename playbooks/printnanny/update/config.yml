@@ -9,7 +9,7 @@
       - 'component:config'
   tasks:
     - name: Include roles/printnanny/vars
-      include_vars: ../../roles/printnanny/vars/main.yml
+      include_vars: ../../../roles/printnanny/vars/main.yml
     - name: Update PrintNanny Config
       ansible.builtin.debug:
         msg: "(DRYRUN) Backup config, apply new config, notify handlers"
