@@ -3,7 +3,7 @@
 Description=Janus Gateway
 After=syslog.target network.target network-online.target
 {% if janus_updater is not none %}
-After={{ janus_updater }}
+After={{ janus_updater }}.service
 {% endif %}
 
 [Service]
