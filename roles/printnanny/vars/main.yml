@@ -24,7 +24,6 @@ janus_groups:
   - printnanny
   - video
 janus_install_dir: /opt/janus
-janus_conf_dir: "{{ janus_install_dir }}/etc/janus"
 janus_conf:
   janus:
     plugins_folder: "{{ janus_install_dir }}/lib/janus/plugins"
