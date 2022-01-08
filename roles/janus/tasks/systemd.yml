@@ -1,3 +1,9 @@
+- name: Create {{ janus_conf_dir }}
+  become: true
+  ansible.builtin.file:
+    state: directory
+    mode: 0660
+
 - name: Render janus-gateway config templates
   become: true
   ansible.builtin.template:
