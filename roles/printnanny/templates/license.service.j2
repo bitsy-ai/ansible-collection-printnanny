@@ -1,7 +1,6 @@
 # {{ ansible_managed }}
 [Unit]
 Description=Print Nanny License installer
-ConditionPathExists={{ printnanny_license_zip }}
 After={{ ansible_collection_updater }}.service
 Wants={{ ansible_collection_updater }}.service
 Wants=network-online.target
