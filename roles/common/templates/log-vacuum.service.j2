@@ -2,7 +2,7 @@
 Description=Journal log vacuum service
 Wants=log-vacuum.timer
 
-[Timer]
+[Service]
 Type=oneshot
 ExecStart=/usr/bin/journalctl --vacuum-time={{ rpi_log_vacuum.VacuumTime }}
 RemainAfterExit=yes
