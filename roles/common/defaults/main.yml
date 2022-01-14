@@ -2,8 +2,14 @@
 # defaults file for setup role
 users: []
 sudoers_files:
-    - content: "%wheel  ALL=(ALL)  ALL"
-      file: "/etc/sudoers.d/00-wheel.conf"
+  - content: "%wheel  ALL=(ALL)  ALL"
+    file: "/etc/sudoers.d/00-wheel.conf"
 
 rpi_update_firmware: false
 rpi_firmware_version: 992de83e0ea01a9765196349abb386c5c8ea8944
+
+# run weekly and 5 minutes after every boot
+rpi_log_vacuum:
+  OnBootSec: 5m
+  OnUnitActiveSec: 1w
+  VacuumTime: 14d

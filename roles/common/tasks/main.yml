@@ -15,3 +15,7 @@
   ansible.builtin.import_tasks: apt.yml
   tags:
     - setup
+- name: Install log-vacuum service/timer
+  ansible.builtin.import_tasks: log.yml
+  tags:
+    - setup
