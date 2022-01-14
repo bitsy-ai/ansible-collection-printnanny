@@ -6,10 +6,10 @@
       include_vars: ../../roles/printnanny/vars/main.yml
     - name: Common Raspberry Pi setup
       include_role:
-        name: bitsyai.rpi.setup
+        name: bitsyai.rpi.common
     - name: Slim unneeded packages install
       include_role:
-        name: bitsyai.rpi.setup
+        name: bitsyai.rpi.common
         tasks_from: slim
     - name: Print Nanny setup
       include_role:
@@ -25,5 +25,5 @@
         name: bitsyai.rpi.janus
     - name: Clean image
       include_role:
-        name: bitsyai.rpi.setup
+        name: bitsyai.rpi.common
         tasks_from: clean_image

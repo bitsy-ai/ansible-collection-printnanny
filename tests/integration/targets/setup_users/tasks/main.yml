@@ -20,7 +20,7 @@
   ansible.builtin.group:
     name: pi
 - import_role:
-    name: bitsyai.rpi.setup
+    name: bitsyai.rpi.common
     tasks_from: users
 - import_role:
     name: bitsyai.rpi.printnanny
