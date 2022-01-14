@@ -5,8 +5,6 @@ Wants=log-vacuum.timer
 [Timer]
 Type=oneshot
 ExecStart=/usr/bin/journalctl --vacuum-time={{ rpi_log_vacuum.VacuumTime }}
-User=nobody
-Group=systemd-journal
 RemainAfterExit=yes
 
 [Install]
