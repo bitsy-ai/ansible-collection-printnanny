@@ -13,6 +13,19 @@
     - system-update
     - octoprint
 
+- name: Make {{ octoprint_dir }}
+  become_user: '{{ octoprint_user }}'
+  ansible.builtin.file:
+    state: directory
+    path: '{{ octoprint_dir }}'
+    mode: 0775
+    owner: '{{ octoprint_user }}'
+    group: '{{ octoprint_user }}'
+  tags:
+    - setup
+    - system-update
+    - octoprint
+
 - name: Create octoprint user
   become: true
   ansible.builtin.user:
@@ -52,7 +65,7 @@
 
 - name: Install octoprint into venv
   become_user: '{{ octoprint_user }}'
-  pip:
+  ansible.builtin.pip:
     name: '{{ octoprint_version }}'
     virtualenv_command: /usr/bin/python3 -m venv
     virtualenv: '{{ octoprint_venv }}'
@@ -72,19 +85,6 @@
     virtualenv_command: /usr/bin/python3 -m venv
     virtualenv: '{{ octoprint_venv }}'
     extra_args: '--no-cache-dir'
-  tags:
-    - setup
-    - system-update
-    - octoprint
-
-- name: Make {{ octoprint_dir }}
-  become_user: '{{ octoprint_user }}'
-  ansible.builtin.file:
-    state: directory
-    path: '{{ octoprint_dir }}'
-    mode: 0775
-    owner: '{{ octoprint_user }}'
-    group: '{{ octoprint_user }}'
   tags:
     - setup
     - system-update
