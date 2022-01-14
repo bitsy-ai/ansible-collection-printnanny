@@ -20,13 +20,13 @@
     groups: '{{ janus_groups }}'
     append: true
 
-# - name: Build janus from source
-#   import_tasks: build.yml
-#   when: janus_build_source == True
+- name: Build janus from source
+  import_tasks: build.yml
+  when: janus_build_source == True
 
-- name: Install Janus from deb
-  import_tasks: deb.yml
-  when: ansible_os_family == "Debian" and janus_build_source == False
+# - name: Install Janus from deb
+#   import_tasks: deb.yml
+#   when: ansible_os_family == "Debian" and janus_build_source == False
 
 - import_tasks: factsd.yml
 

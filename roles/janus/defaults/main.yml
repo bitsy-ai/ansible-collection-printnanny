@@ -3,7 +3,7 @@
 
 janus_auth: {}
 
-janus_build_source: false
+janus_build_source: true
 
 janus_build_extras:
   audiobridge: false

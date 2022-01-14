@@ -29,6 +29,5 @@
   become: true
   ansible.builtin.apt:
     pkg:
-      - libc6=3.33*
       - janus
       - janus-dev
