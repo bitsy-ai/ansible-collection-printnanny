@@ -1,10 +1,12 @@
+- name: Remove dependencies that are no longer required
+  ansible.builtin.apt:
+    autoremove: true
 - name: Clean apt cache
   become: true
   ansible.builtin.command: apt clean
 - name: Remove package lists
   become: true
   ansible.builtin.shell: rm -rf /var/lib/apt/lists/*
-
 - name: Ensure machine-id uninitialized
   become: true
   ansible.builtin.copy:
