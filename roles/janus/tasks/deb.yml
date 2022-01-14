@@ -13,17 +13,21 @@
   become: true
   ansible.builtin.copy:
     src: 'etc/apt/sources.list.d/{{ item }}.list'
-    dest: '/etc/apt/sources.list.d{{ item }}.list'
+    dest: '/etc/apt/sources.list.d/{{ item }}.list'
     mode: 0664
   loop:
     - bullseye
     - testing
     - unstable
 
-- name: Install janus + dependencies
+- name: Update package cache
   become: true
   ansible.builtin.apt:
     update_cache: true
+
+- name: Install Janus
+  become: true
+  ansible.builtin.apt:
     pkg:
       - janus
       - janus-dev
