@@ -5,6 +5,7 @@ Wants=log-vacuum.timer
 [Service]
 Type=oneshot
 ExecStart=/usr/bin/journalctl --vacuum-time={{ rpi_log_vacuum.VacuumTime }}
+User=nobody
 RemainAfterExit=yes
 
 [Install]
