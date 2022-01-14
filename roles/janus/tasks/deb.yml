@@ -1,0 +1,29 @@
+- name: Copy /etc/apt/preferences.d
+  become: true
+  ansible.builtin.copy:
+    src: 'etc/apt/preferences.d/{{ item }}.pref'
+    dest: '/etc/apt/preferences.d/{{ item }}.pref'
+    mode: 0664
+  loop:
+    - bullseye
+    - testing
+    - unstable
+
+- name: Copy /etc/apt/sources.list.d/
+  become: true
+  ansible.builtin.copy:
+    src: 'etc/apt/sources.list.d/{{ item }}.list'
+    dest: '/etc/apt/sources.list.d{{ item }}.list'
+    mode: 0664
+  loop:
+    - bullseye
+    - testing
+    - unstable
+
+- name: Install janus + dependencies
+  become: true
+  ansible.builtin.apt:
+    update_cache: true
+    pkg:
+      - janus
+      - janus-dev

@@ -12,43 +12,6 @@
     msg: 'janus_version={{ janus_version }} ansible_local.janus={{ ansible_local.janus }}'
   when: ansible_local.janus is defined
 
-- import_tasks: factsd.yml
-
-- name: Create temporary janus build directory
-  ansible.builtin.tempfile:
-    state: directory
-    prefix: janus
-  register: janus_build_dir
-  when: janus_upgrade_available
-
-- name: Create temporary websockets build directory
-  ansible.builtin.tempfile:
-    state: directory
-    prefix: libwebsockets
-  register: janus_libwebsockets_build_dir
-  when: janus_upgrade_available
-
-- name: Create temporary libnice build directory
-  ansible.builtin.tempfile:
-    state: directory
-    prefix: libnice
-  register: janus_libnice_build_dir
-  when: janus_upgrade_available
-
-- name: Create temporary usrsctp build directory
-  ansible.builtin.tempfile:
-    state: directory
-    prefix: usrsctp
-  register: janus_usrsctp_build_dir
-  when: janus_upgrade_available
-
-- name: Create temporary libsrtp build directory
-  ansible.builtin.tempfile:
-    state: directory
-    prefix: libsrtp
-  register: janus_libsrtp_build_dir
-  when: janus_upgrade_available
-
 - name: Create janus user
   become: true
   ansible.builtin.user:
@@ -57,47 +20,16 @@
     groups: '{{ janus_groups }}'
     append: true
 
-- name: Build janus-gateway from source
-  import_tasks: build.yml
-  when: janus_upgrade_available
+# - name: Build janus from source
+#   import_tasks: build.yml
+#   when: janus_build_source == True
 
-- name: Janus systemd unit
-  import_tasks: systemd.yml
+- name: Install Janus from deb
+  import_tasks: deb.yml
+  when: ansible_os_family == "Debian" and janus_build_source == False
 
-- name: "Delete {{ janus_build_dir.path }} build directory"
-  become: true
-  ansible.builtin.file:
-    path: "{{ janus_build_dir.path }}"
-    state: absent
-  when: janus_upgrade_available
+- import_tasks: factsd.yml
 
-- name: "Delete {{ janus_libwebsockets_build_dir.path }} build directory"
-  become: true
-  ansible.builtin.file:
-    path: "{{ janus_libwebsockets_build_dir.path }}"
-    state: absent
-  when: janus_upgrade_available
-
-- name: "Delete {{ janus_libnice_build_dir.path }} build directory"
-  become: true
-  ansible.builtin.file:
-    path: "{{ janus_libnice_build_dir.path }}"
-    state: absent
-  when: janus_upgrade_available
-
-- name: "Delete {{ janus_libsrtp_build_dir.path }} build directory"
-  become: true
-  ansible.builtin.file:
-    path: "{{ janus_libsrtp_build_dir.path }}"
-    state: absent
-  when: janus_upgrade_available
-
-- name: "Delete {{ janus_usrsctp_build_dir.path }} build directory"
-  become: true
-  ansible.builtin.file:
-    path: "{{ janus_usrsctp_build_dir.path }}"
-    state: absent
-  when: janus_upgrade_available
 
 - name: Configure janus.service
   import_tasks: systemd.yml
