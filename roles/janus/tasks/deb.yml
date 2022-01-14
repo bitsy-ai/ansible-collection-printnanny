@@ -1,20 +1,29 @@
-- name: Install dependencies
+- name: Copy /etc/apt/preferences.d
+  become: true
+  ansible.builtin.copy:
+    src: 'etc/apt/preferences.d/{{ item }}.pref'
+    dest: '/etc/apt/preferences.d/{{ item }}.pref'
+    mode: 0664
+  loop:
+    - bullseye
+    - testing
+    - unstable
+
+- name: Copy /etc/apt/sources.list.d/
+  become: true
+  ansible.builtin.copy:
+    src: 'etc/apt/sources.list.d/{{ item }}.list'
+    dest: '/etc/apt/sources.list.d{{ item }}.list'
+    mode: 0664
+  loop:
+    - bullseye
+    - testing
+    - unstable
+
+- name: Install janus + dependencies
   become: true
   ansible.builtin.apt:
     update_cache: true
     pkg:
-      - libc6=2.33
-
-- name: Install janus deb packages (x86_64)
-  become: true
-  ansible.builtin.apt:
-    deb: '{{ item.value }}'
-  when: ansible_machine == 'x86_64'
-  with_items: '{{ janus_deb.amd64 }}'
-
-- name: Install janus deb packages (aarch64)
-  become: true
-  ansible.builtin.apt:
-    deb: '{{ item.value }}'
-  when: ansible_machine == 'x86_64'
-  with_items: '{{ janus_deb.arm64 }}'
+      - janus
+      - janus-dev

@@ -20,9 +20,9 @@
     groups: '{{ janus_groups }}'
     append: true
 
-- name: Build janus from source
-  import_tasks: build.yml
-  when: janus_build_source
+# - name: Build janus from source
+#   import_tasks: build.yml
+#   when: janus_build_source == True
 
 - name: Install Janus from deb
   import_tasks: deb.yml
