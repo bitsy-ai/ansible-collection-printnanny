@@ -27,5 +27,5 @@
   ansible.builtin.systemd:
     service: printnanny-dash
     enabled: true
-    started: true
+    state: started
     no_block: true
