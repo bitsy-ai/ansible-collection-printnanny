@@ -5,7 +5,7 @@
   tags:
     - auto_update
 
-- name: Download Print Nanny CLI
+- name: Download Print Nanny Binaries
   become: true
   ansible.builtin.unarchive:
     src: '{{ printnanny_cli_url }}'
@@ -17,3 +17,10 @@
   notify:
     - restart mqtt
     - restart printnanny-license
+
+- name: Create a symlink for printnanny-cli
+  become: true
+  ansible.builtin.file:
+    src: /usr/local/bin/printnanny-cli
+    dest: /usr/local/bin/printnanny
+    state: link
