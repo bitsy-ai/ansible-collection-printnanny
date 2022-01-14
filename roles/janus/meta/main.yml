@@ -34,4 +34,4 @@ galaxy_info:
     - rabbitmq
     - mqtt
 dependencies:
-  - bitsyai.rpi.setup
+  - bitsyai.rpi.common

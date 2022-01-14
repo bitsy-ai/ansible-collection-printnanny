@@ -6,5 +6,5 @@
         name: bitsyai.rpi.octoprint
     - name: Clean image
       include_role:
-        name: bitsyai.rpi.setup
+        name: bitsyai.rpi.common
         tasks_from: clean_image

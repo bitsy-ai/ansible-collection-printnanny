@@ -12,7 +12,7 @@
       include_vars: ../../../roles/printnanny/vars/main.yml
     - name: Common Raspberry Pi setup
       include_role:
-        name: bitsyai.rpi.setup
+        name: bitsyai.rpi.common
     - name: Print Nanny setup
       include_role:
         name: bitsyai.rpi.printnanny
