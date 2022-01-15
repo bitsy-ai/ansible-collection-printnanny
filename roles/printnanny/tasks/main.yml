@@ -5,6 +5,8 @@
     msg: '{{ ansible_local.device }}'
   when: ansible_local.device is defined
 - import_tasks: users.yml
+# all tasks requiring secrets must appear after this task
+- import_tasks: secrets.yml
 - import_tasks: boot_config.yml
 - import_tasks: apt.yml
 - import_tasks: log.yml

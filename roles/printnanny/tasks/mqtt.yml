@@ -9,24 +9,6 @@
   notify:
     - systemctl daemon-reload
 
-- name: Create '{{ printnanny_cacerts_dir }}'
-  ansible.builtin.file:
-    path: '{{ printnanny_cacert_dir }}'
-    state: directory
-    mode: 0770
-
-- name: Download GCP LTS CA Certificate {{ gcp_lts_ca_primary }}
-  ansible.builtin.get_url:
-    url: '{{ gcp_lts_ca_primary }}'
-    dest: '{{ printnanny_cacert_dir }}/{{ gcp_lts_ca_primary | basename }}'
-    mode: 0770
-
-- name: Download GCP LTS CA Certificate {{ gcp_lts_ca_backup }}
-  ansible.builtin.get_url:
-    url: '{{ gcp_lts_ca_primary }}'
-    dest: '{{ printnanny_cacert_dir }}/{{ gcp_lts_ca_backup | basename }}'
-    mode: 0770
-
 - name: Enable mqtt service
   become: true
   ansible.builtin.systemd:
