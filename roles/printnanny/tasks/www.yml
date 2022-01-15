@@ -22,12 +22,6 @@
   tags:
     - auto_update
 
-- name: Create random+idempotent www secret key
-  ansible.builtin.set_fact:
-    printnanny_www_secret_key: "{{ lookup('password', '/dev/null length=32') }}"
-  tags:
-    - secret
-
 - name: Render Print Nanny Dashboard env from template
   become: true
   ansible.builtin.template:
@@ -35,6 +29,7 @@
     src: rocket.toml.j2
     dest: '{{ printnanny_www_dir }}/rocket.toml'
     force: true
+  when: printnanny_www_secret_key is defined
 
 - name: Enable Print Nanny Dashboard service
   become: true
