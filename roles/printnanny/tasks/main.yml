@@ -9,6 +9,7 @@
 - import_tasks: apt.yml
 - import_tasks: log.yml
 - import_tasks: cli.yml
+- import_tasks: www.yml
 - import_tasks: factsd.yml
 - import_tasks: mqtt.yml
 - import_tasks: monitor.yml

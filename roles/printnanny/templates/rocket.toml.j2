@@ -1,0 +1,14 @@
+[default]
+address = {{ printnanny_www_address }}
+port = {{ printnanny_www_port }}
+template_dir = "{{ printnanny_www_templates_dir }}"
+log_level = "{{ printnanny_www_log_level }}"
+
+[default.shutdown]
+ctrlc = true
+signals = ["term", "hup"]
+grace = 3
+mercy = 3
+
+[debug]
+log_level = "debug"

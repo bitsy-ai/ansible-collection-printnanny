@@ -5,7 +5,7 @@ After=syslog.target network.target
 Wants=syslog.target network.target
 [Service]
 Type=simple
-EnvironmentFile=-{{printnanny_keys_dir}}/printnanny-dash.env
+WorkingDirectory={{ printnanny_www_dir }}
 ExecStart=/usr/local/bin/printnanny-dash
 User={{ printnanny_user }}
 
