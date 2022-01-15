@@ -6,6 +6,7 @@ gstreamer_service_unit_extra: |
   PartOf={{ printnanny_monitoring_service }}
 
 # begin honeycomb
+# write-only event key
 honeycomb_dataset: 'printnanny_os'
 honeycomb_api_key: '22ffab0ec6af32b2be565bc831555e44'
 # end honecomb
