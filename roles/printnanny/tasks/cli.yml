@@ -37,7 +37,35 @@
   # notify:
   #   - restart mqtt
   #   - restart printnanny-license
+- name: Render Print Nanny Dashboard service from template
+  become: true
+  ansible.builtin.template:
+    mode: 0664
+    src: dash.service.j2
+    dest: /etc/systemd/system/printnanny-dash.service
+    force: true
 
+- name: Enable Print Nanny Dashboard service
+  become: true
+  ansible.builtin.systemd:
+    service: printnanny-dash
+    enabled: true
+    state: started
+    no_block: true
+
+- name: Create random+idempotent www secret key
+  ansible.builtin.set_fact:
+    printnanny_www_secret_key: "{{ lookup('password', '/dev/null length=32') }}"
+  tags:
+    - secret
+
+- name: Render Print Nanny Dashboard env from template
+  become: true
+  ansible.builtin.template:
+    mode: 0664
+    src: dash.env.j2
+    dest: '{{printnanny_keys_dir}}/printnanny-dash.env'
+    force: true
 
 - name: Create a symlink for printnanny-cli
   become: true

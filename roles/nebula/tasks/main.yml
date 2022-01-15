@@ -40,7 +40,6 @@
     dest: /etc/systemd/system/nebula.service
     mode: "0644"
     force: true
-    backup: true
   notify:
     - restart nebula
 

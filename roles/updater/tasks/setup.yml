@@ -102,10 +102,8 @@
     src: ansible-updater.service.j2
     dest: '/etc/systemd/system/{{ ansible_collection_updater }}.service'
     force: true
-    backup: true
   tags:
     - setup
-
 
 - name: Create updater systemd units
   become: true
@@ -114,7 +112,6 @@
     src: '{{ item.service_template }}'
     dest: '/etc/systemd/system/{{ item.name }}.service'
     force: true
-    backup: true
   tags:
     - setup
   with_items: '{{ updaters }}'
