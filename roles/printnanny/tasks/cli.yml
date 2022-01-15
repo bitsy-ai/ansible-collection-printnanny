@@ -14,9 +14,30 @@
   when: installed_version.stdout != printnanny_cli_version
   tags:
     - auto_update
-  notify:
-    - restart mqtt
-    - restart printnanny-license
+  # notify:
+  #   - restart mqtt
+  #   - restart printnanny-license
+
+- name: Create Print Nanny www dir
+  become: true
+  ansible.builtin.file:
+    path: '{{ printnanny_www_templates_dir }}'
+    state: directory
+    mode: 0664
+
+- name: Download Print Nanny www templates
+  become: true
+  ansible.builtin.unarchive:
+    src: '{{ printnanny_www_templates_url }}'
+    dest: '{{ printnanny_www_templates_dir }}'
+    remote_src: true
+  when: installed_version.stdout != printnanny_cli_version
+  tags:
+    - auto_update
+  # notify:
+  #   - restart mqtt
+  #   - restart printnanny-license
+
 
 - name: Create a symlink for printnanny-cli
   become: true
