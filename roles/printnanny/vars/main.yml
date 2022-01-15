@@ -6,8 +6,8 @@ gstreamer_service_unit_extra: |
   PartOf={{ printnanny_monitoring_service }}
 
 # begin honeycomb
-honeycomb_dataset: '{{ ansible_local.license.honeycomb_dataset if ansible_local.license.honeycomb_dataset is defined else None }}'
-honeycomb_api_key: '{{ ansible_local.license.honeycomb_api_key if ansible_local.license.honeycomb_api_key is defined else None }}'
+honeycomb_dataset: 'printnanny_os'
+honeycomb_api_key: '22ffab0ec6af32b2be565bc831555e44'
 # end honecomb
 
 # begin janus vars
