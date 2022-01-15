@@ -39,6 +39,15 @@
     group: "{{ printnanny_group }}"
     mode: 0775
 
+- name: Create {{ printnanny_keys_dir }}
+  become: true
+  ansible.builtin.file:
+    path: "{{ printnanny_keys_dir }}"
+    state: directory
+    owner: "{{ printnanny_user }}"
+    group: "{{ printnanny_group }}"
+    mode: 0660
+
 - name: Create {{ printnanny_backups_dir }}
   become: true
   ansible.builtin.file:
