@@ -3,7 +3,6 @@
 {{ ara_plugin_setup.stdout }}
 ansible_connection=local
 ansible_python_intepreter={{updater_venv}}/bin/python3
-ansible_user={{ updater_user }}
 fact_caching_connection={{ ansible_config.fact_caching_connection }}
 fact_caching_timeout={{ ansible_config.fact_caching_timeout }}
 fact_caching={{ ansible_config.fact_caching }}
@@ -22,8 +21,7 @@ argument_labels = {{ ara_argument_labels }}
 {% else %}
 [defaults]
 ansible_connection=local
-ansible_python_intepreter=/home/{{ updater_user }}/bin/python
-ansible_user={{ updater_user }}
+ansible_python_intepreter={{updater_venv}}/bin/python3
 fact_caching_connection={{ ansible_config.fact_caching_connection }}
 fact_caching_timeout={{ ansible_config.fact_caching_timeout }}
 fact_caching={{ ansible_config.fact_caching }}
