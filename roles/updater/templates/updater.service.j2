@@ -2,7 +2,7 @@
 [Unit]
 Description={{ item.name }}
 After={{ ansible_collection_updater }}.service
-Requires={{ ansible_collection_updater }}.service
+Wants={{ ansible_collection_updater }}.service
 Wants=network-online.target
 After=network-online.target
 {% if item.timer is defined %}
