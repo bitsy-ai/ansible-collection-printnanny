@@ -2,16 +2,16 @@
 [Unit]
 Description={{ item.name }}
 After={{ ansible_collection_updater }}.service network-online.target
-Wants={{ ansible_collection_updater }}.service network-online.target
 {% if item.timer is defined %}
-Wants={{ item.name }}.timer
+Wants={{ item.name }}.timer {{ ansible_collection_updater }}.service network-online.target
+{% else %}
+Wants={{ ansible_collection_updater }}.service network-online.target
 {% endif %}
 
 [Service]
 Type=oneshot
 RuntimeDirectory={{ item.app_name }}
 ConfigurationDirectory={{ item.app_name }}
-User={{ item.user }}
 
 {% for playbook in item.playbooks %}
 ExecStart=/usr/bin/flock -F {{ ansible_lockfile }} \
