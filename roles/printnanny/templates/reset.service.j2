@@ -10,8 +10,6 @@ After=network-online.target
 Type=oneshot
 RuntimeDirectory={{ updater_app_name }}
 ConfigurationDirectory={{ updater_app_name }}
-User={{ updater_user }}
-
 ExecStart=/usr/bin/flock -F {{ ansible_lockfile }} \
     {{ updater_venv }}/bin/ansible-playbook \
     bitsyai.rpi.printnanny.task.reset
