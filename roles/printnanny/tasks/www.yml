@@ -3,7 +3,7 @@
   ansible.builtin.file:
     path: '{{ printnanny_www_dir }}'
     state: directory
-    mode: 0664
+    mode: 0775
     owner: '{{ printnanny_user }}'
     group: '{{ printnanny_user }}'
 
@@ -12,7 +12,7 @@
   ansible.builtin.file:
     path: '{{ printnanny_www_templates_dir }}'
     state: directory
-    mode: 0664
+    mode: 0775
     owner: '{{ printnanny_user }}'
     group: '{{ printnanny_user }}'
 
