@@ -98,7 +98,9 @@ ansible_config:
   fact_caching: jsonfile
   fact_caching_connection: '/var/run/{{ updater_app_name }}/fact_cache'
 
+
 updater_app_name: printnanny
+updater_release_channel: '{{ printnanny.release_channel || default("main") }}'
 updater_tmpfs: '/var/run/{{ updater_app_name }}'
 ansible_lockfile: '/var/run/{{ updater_app_name }}/ansible.lock'
 updater_user: printnanny

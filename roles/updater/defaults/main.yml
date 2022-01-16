@@ -1,5 +1,6 @@
 ---
-updater_collection_url: git+https://github.com/bitsy-ai/ansible-collection-rpi.git,main
+updater_release_channel: main
+updater_collection_url: 'git+https://github.com/bitsy-ai/ansible-collection-rpi.git,{{ updater_release_channel }}'
 
 updater_collection: bitsyai.rpi
 updater_app_name: bitsy
