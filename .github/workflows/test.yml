@@ -51,4 +51,5 @@ jobs:
             test-deps: >-
               ansible.posix
               community.general
+              community.crypto
             verbosity: -vvv

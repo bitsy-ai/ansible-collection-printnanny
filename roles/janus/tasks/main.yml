@@ -1,12 +1,4 @@
 ---
-# Build notes
-# Libs conforming to Debian Multiarch are installed to /usr/local/lib/$(gcc -dumpmachine)/
-# https://wiki.debian.org/Multiarch
-- name: ansible_local.janus
-  ansible.builtin.debug:
-    msg: '{{ ansible_local.janus }}'
-  when: ansible_local.janus is defined
-
 - name: debug janus_upgrade_available={{ janus_upgrade_available }}
   ansible.builtin.debug:
     msg: 'janus_version={{ janus_version }} ansible_local.janus={{ ansible_local.janus }}'
@@ -20,16 +12,10 @@
     groups: '{{ janus_groups }}'
     append: true
 
-- name: Build janus from source
-  import_tasks: build.yml
+# all tasks requiring access to secrets must appear after this task
+- import_tasks: secrets.yml
+
+- import_tasks: build.yml
   when: janus_build_source == True
 
-# - name: Install Janus from deb
-#   import_tasks: deb.yml
-#   when: ansible_os_family == "Debian" and janus_build_source == False
-
 - import_tasks: factsd.yml
-
-
-- name: Configure janus.service
-  import_tasks: systemd.yml

@@ -1,6 +1,9 @@
 ---
 - import_role:
     name: bitsyai.rpi.printnanny
+    tasks_from: secrets
+- import_role:
+    name: bitsyai.rpi.printnanny
     tasks_from: mqtt
 
 - name: Stat primary ca cert

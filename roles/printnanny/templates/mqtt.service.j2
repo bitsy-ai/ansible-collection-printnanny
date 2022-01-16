@@ -6,7 +6,9 @@ Wants=syslog.target network.target
 ConditionPathExists={{ printnanny_public_key }}
 [Service]
 Type=simple
-ExecStart=/usr/local/bin/printnanny mqtt subscribe
+ExecStart=/usr/local/bin/printnanny mqtt subscribe \
+    --keys {{ printnanny_keys_dir }} \
+    --ca-certs {{ printnanny_cacert_dir }}
 User={{ printnanny_user }}
 
 Restart=on-failure
