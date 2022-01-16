@@ -7,7 +7,8 @@ ConditionPathExists={{ printnanny_public_key }}
 [Service]
 Type=simple
 ExecStart=/usr/local/bin/printnanny mqtt subscribe \
-    --keys {{ printnanny_keys_dir }} \
+    --private-key {{ printnanny_keys_private }} \
+    --public-key {{ printnanny_keys_public }} \
     --ca-certs {{ printnanny_cacert_dir }}
 User={{ printnanny_user }}
 
