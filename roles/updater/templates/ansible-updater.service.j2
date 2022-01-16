@@ -6,7 +6,7 @@ After=network-online.target
 
 [Service]
 Type=oneshot
-RuntimeDirectory=ansible
+RuntimeDirectory={{ updater_user }}
 ExecStart={{ updater_venv }}/bin/ansible-galaxy \
     collection install --upgrade {{ updater_collection_url }}
 Restart=on-failure
