@@ -20,7 +20,7 @@
   ansible.builtin.file:
     state: directory
     path: '{{ nn_install_dir }}'
-    mode: 0664
+    mode: 0775
 
 - name: Download {{ nn_model_url }}
   become: true

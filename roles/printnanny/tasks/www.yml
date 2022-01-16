@@ -31,7 +31,7 @@
 - name: Render Print Nanny Dashboard env from template
   become: true
   ansible.builtin.template:
-    mode: 0664
+    mode: 0660
     src: rocket.toml.j2
     dest: '{{ printnanny_www_dir }}/rocket.toml'
     force: true
