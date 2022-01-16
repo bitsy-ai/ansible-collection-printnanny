@@ -2,7 +2,7 @@
 {% if ara_plugin_setup.stdout is defined %}
 {{ ara_plugin_setup.stdout }}
 ansible_connection=local
-ansible_python_intepreter=/home/{{ updater_user }}/bin/python3
+ansible_python_intepreter={{updater_venv}}/bin/python3
 ansible_user={{ updater_user }}
 fact_caching_connection={{ ansible_config.fact_caching_connection }}
 fact_caching_timeout={{ ansible_config.fact_caching_timeout }}
