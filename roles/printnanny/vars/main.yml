@@ -120,7 +120,6 @@ updaters:
     app_name: printnanny
     user: printnanny
     playbooks:
-      - "bitsyai.rpi.printnanny.update.system --tags secrets"
       - "bitsyai.rpi.printnanny.update.system"
     service_template: "updater.service.j2"
     service_enabled: false
@@ -130,7 +129,6 @@ updaters:
     app_name: printnanny
     user: printnanny
     playbooks:
-      - "bitsyai.rpi.printnanny.update.janus --tags secrets"
       - "bitsyai.rpi.printnanny.update.janus"
     service_template: "updater.service.j2"
     service_enabled: false
@@ -140,7 +138,6 @@ updaters:
     app_name: printnanny
     user: printnanny
     playbooks:
-      - "bitsyai.rpi.printnanny.update.rs --tags secrets"
       - "bitsyai.rpi.printnanny.update.rs"
     service_template: "updater.service.j2"
     service_enabled: false
