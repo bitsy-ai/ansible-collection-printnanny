@@ -1,10 +1,8 @@
 # {{ ansible_managed }}
 [Unit]
 Description={{ item.name }}
-After={{ ansible_collection_updater }}.service
-Wants={{ ansible_collection_updater }}.service
-Wants=network-online.target
-After=network-online.target
+After={{ ansible_collection_updater }}.service network-online.target
+Wants={{ ansible_collection_updater }}.service network-online.target
 {% if item.timer is defined %}
 Wants={{ item.name }}.timer
 {% endif %}
