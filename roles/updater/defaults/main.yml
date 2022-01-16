@@ -34,5 +34,5 @@ ara_api_server: 'https://ara.print-nanny.com'
 ara_api_timeout: 15
 ara_callback_threads: 4
 ara_ignored_arguments: vault_password_files
-ara_default_labels: deploy
+ara_default_labels: 'channel:{{updater_release_channel}}'
 ara_argument_labels: check,subset,tags
