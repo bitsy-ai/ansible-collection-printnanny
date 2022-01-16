@@ -4,7 +4,7 @@
     src: '{{ janus_libsrtp_tarball }}'
     dest: "{{ janus_libsrtp_build_dir.path }}"
     remote_src: yes
-    mode: 0770
+    mode: 0771
 
 - name: Configure libsrtp
   command:

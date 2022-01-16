@@ -46,7 +46,7 @@
     state: directory
     owner: "{{ printnanny_user }}"
     group: "{{ printnanny_group }}"
-    mode: 0660
+    mode: 0771
 
 - name: Create {{ printnanny_backups_dir }}
   become: true

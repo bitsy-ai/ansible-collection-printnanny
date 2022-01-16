@@ -41,7 +41,7 @@
   ansible.builtin.file:
     path: "{{ janus_build_dir.path }}"
     state: directory
-    mode: "770"
+    mode: 0775
     recurse: true
   tags:
     - janus
