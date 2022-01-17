@@ -12,9 +12,9 @@
 
 - name: Generate Provisional Self-Signed OpenSSL certificate
   openssl_certificate:
-    path: '{{ janus_openssl_cert }}'
-    privatekey_path: '{{ janus_openssl_key }}'
-    csr_path: '{{ janus_openssl_csr }}'
+    path: '{{ janus_ssl_cert }}'
+    privatekey_path: '{{ janus_ssl_key }}'
+    csr_path: '{{ janus_ssl_csr }}'
     provider: selfsigned
   tags:
     - secret
