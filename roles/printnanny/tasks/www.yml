@@ -32,8 +32,8 @@
   become: true
   ansible.builtin.template:
     mode: 0660
-    src: rocket.toml.j2
-    dest: '{{ printnanny_www_dir }}/rocket.toml'
+    src: Rocket.toml.j2
+    dest: '{{ printnanny_www_dir }}/Rocket.toml'
     force: true
   when: printnanny_www_secret_key is defined
 
