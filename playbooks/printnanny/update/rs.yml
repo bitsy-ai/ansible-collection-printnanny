@@ -23,11 +23,11 @@
       - update
       - printnanny
       - 'component:www'
-  name: Update Print Nanny WWWW
+  name: Update Print Nanny www
   tasks:
     - name: Include roles/printnanny/vars
       include_vars: ../../../roles/printnanny/vars/main.yml
     - name: Update PrintNanny CLI
       include_role:
         name: bitsyai.rpi.printnanny
-        tasks_from: wwww
+        tasks_from: www
