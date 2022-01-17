@@ -18,6 +18,10 @@
       include_role:
         name: bitsyai.rpi.janus
         tasks_from: secrets
+    - name: Generate Print Nanny certificates
+      include_role:
+        name: bitsyai.rpi.printnanny
+        tasks_from: cert
 - hosts: printnanny
   gather_facts: true
   vars:
@@ -31,10 +35,6 @@
       include_vars: ../../../roles/printnanny/defaults/main.yml
     - name: Include roles/printnanny/vars
       include_vars: ../../../roles/printnanny/vars/main.yml
-    - name: Generate self-signed cert
-      include_role:
-        name: bitsyai.rpi.janus
-        tasks_from: cert.yml
     - name: Update Janus Gateway
       include_role:
         name: bitsyai.rpi.janus
