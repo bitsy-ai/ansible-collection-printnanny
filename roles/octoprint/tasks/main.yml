@@ -122,6 +122,7 @@
     name: octoprint.service
     state: started
     enabled: true
+    no_block: true
   tags:
     - setup
     - system-update

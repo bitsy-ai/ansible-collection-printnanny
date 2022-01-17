@@ -8,22 +8,26 @@
         name: '{{ gstreamer_service_name }}'
         state: started
         enabled: true
+        no_block: true
       when: ansible_local.device.monitoring_active
     - name: Enable {{ janus_service_name }}
       ansible.builtin.systemd:
         name: '{{ janus_service_name }}'
         state: started
         enabled: true
+        no_block: true
       when: ansible_local.device.monitoring_active
     - name: Stop & Disable {{ janus_service_name }}
       ansible.builtin.systemd:
         name: '{{ janus_service_name }}'
         state: stopped
         enabled: false
+        no_block: true
       when: not ansible_local.device.monitoring_active
     - name: Stop & Disable {{ gstreamer_service_name }}
       ansible.builtin.systemd:
         name: '{{ gstreamer_service_name }}'
         state: stopped
         enabled: false
+        no_block: true
       when: not ansible_local.device.monitoring_active
