@@ -72,7 +72,7 @@ cors: {
 certificates: {
 	cert_pem = "{{ janus_ssl_cert }}"
 	cert_key = "{{ janus_ssl_key }}"
-	{% if janus_ssl_passphrase is defined %}
+	{% if janus_ssl_passphrase is not none %}
 	cert_pwd = "{{ janus_ssl_passphrase }}"
 	{% endif %}
 	ciphers = "{{ janus_ssl_ciphers }}"
