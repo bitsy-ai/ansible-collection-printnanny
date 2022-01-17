@@ -16,6 +16,6 @@
 - include_tasks: secrets.yml
 
 - include_tasks: build.yml
-  when: janus_build_source == True
+  when: janus_build_source == True and janus_upgrade_available
 
 - include_tasks: factsd.yml
