@@ -7,6 +7,7 @@
 - include_tasks: users.yml
 # all tasks requiring secrets must appear after this task
 - include_tasks: secrets.yml
+- include_tasks: cert.yml
 - include_tasks: boot_config.yml
 - include_tasks: apt.yml
 - include_tasks: log.yml
