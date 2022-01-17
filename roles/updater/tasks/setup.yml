@@ -91,7 +91,6 @@
     src: ansible.cfg.j2
     dest: "/etc/ansible/ansible.cfg"
     force: true
-    backup: true
   tags:
     - setup
 

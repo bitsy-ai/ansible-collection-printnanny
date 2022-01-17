@@ -30,7 +30,6 @@
     dest: "{{ nebula_config_file }}"
     mode: 0644
     force: true
-    backup: true
   notify:
     - restart nebula
 
