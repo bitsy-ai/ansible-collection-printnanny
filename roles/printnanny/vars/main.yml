@@ -81,7 +81,7 @@ janus_exec_start_post:
     printnanny
     janus-admin
     --host {{ janus_admin_url }}
-    addtoken
+    add-token
     --token ${JANUS_TOKEN}
     --adminsecret ${JANUS_ADMIN_SECRET}
 
