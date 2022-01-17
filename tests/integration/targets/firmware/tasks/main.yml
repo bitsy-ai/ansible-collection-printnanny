@@ -1,5 +1,5 @@
 ---
 - name: Import users role
-  import_role:
+  include_role:
     name: bitsyai.rpi.common
     tasks_from: firmware

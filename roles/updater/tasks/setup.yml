@@ -81,7 +81,7 @@
 
 # get ara configuration before rendering ansible.cfg (if enabled)
 - name: Configure ara
-  ansible.builtin.import_tasks: ara.yml
+  ansible.builtin.include_tasks: ara.yml
   when: ara_enabled
 
 - name: Create ansible.cfg

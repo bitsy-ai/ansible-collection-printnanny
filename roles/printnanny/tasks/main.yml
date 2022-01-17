@@ -4,15 +4,15 @@
   ansible.builtin.debug:
     msg: '{{ ansible_local.device }}'
   when: ansible_local.device is defined
-- import_tasks: users.yml
+- include_tasks: users.yml
 # all tasks requiring secrets must appear after this task
-- import_tasks: secrets.yml
-- import_tasks: boot_config.yml
-- import_tasks: apt.yml
-- import_tasks: log.yml
-- import_tasks: cli.yml
-- import_tasks: www.yml
-- import_tasks: factsd.yml
-- import_tasks: mqtt.yml
-- import_tasks: monitor.yml
-- import_tasks: reset_service.yml
+- include_tasks: secrets.yml
+- include_tasks: boot_config.yml
+- include_tasks: apt.yml
+- include_tasks: log.yml
+- include_tasks: cli.yml
+- include_tasks: www.yml
+- include_tasks: factsd.yml
+- include_tasks: mqtt.yml
+- include_tasks: monitor.yml
+- include_tasks: reset_service.yml

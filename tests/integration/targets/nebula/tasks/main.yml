@@ -1,4 +1,4 @@
 ---
 - name: Import nebula role
-  import_role:
+  include_role:
     name: bitsyai.rpi.nebula
