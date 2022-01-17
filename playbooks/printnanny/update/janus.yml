@@ -11,7 +11,7 @@
   name: Update Print Nanny Secrets
   tasks:
     - name: Include roles/printnanny/defai;t
-      include_vars: ../../../roles/printnanny/default/main.yml
+      include_vars: ../../../roles/printnanny/defaults/main.yml
     - name: Include roles/printnanny/vars
       include_vars: ../../../roles/printnanny/vars/main.yml
     - name: Update Janus Secrets
@@ -28,7 +28,7 @@
       - 'component:janus'
   tasks:
     - name: Include roles/printnanny/defai;t
-      include_vars: ../../../roles/printnanny/default/main.yml
+      include_vars: ../../../roles/printnanny/defaults/main.yml
     - name: Include roles/printnanny/vars
       include_vars: ../../../roles/printnanny/vars/main.yml
     - name: Generate self-signed cert
