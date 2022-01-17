@@ -1,9 +1,9 @@
 # {{ ansible_managed }}
 [Unit]
 Description={{ item.name }} timer
+Requires={{item.name}}.service
 [Timer]
 Persistent=true
-Unit={{item.name}}.service
 {{ item.timer }}
 RandomizedDelaySec=600
 AccuracySec=1s

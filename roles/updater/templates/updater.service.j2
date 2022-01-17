@@ -2,11 +2,7 @@
 [Unit]
 Description={{ item.name }}
 After={{ ansible_collection_updater }}.service network-online.target
-{% if item.timer is defined %}
-Wants={{ item.name }}.timer {{ ansible_collection_updater }}.service network-online.target
-{% else %}
 Wants={{ ansible_collection_updater }}.service network-online.target
-{% endif %}
 
 [Service]
 Type=oneshot
