@@ -1,6 +1,20 @@
-- name: Generate a Self Signed OpenSSL certificate
+- name: Create Janus ssl dirs
+  ansible.builtin.file:
+    state: directory
+    mode: 0771
+    path: '{{ item }}'
+  with_items:
+    - '{{ janus_ssl_crt_dir }}'
+    - '{{ janus_ssl_csr_dir }}'
+    - '{{ janus_ssl_key_dir }}'
+  tags:
+    - secret
+
+- name: Generate Provisional Self-Signed OpenSSL certificate
   openssl_certificate:
     path: '{{ janus_openssl_cert }}'
     privatekey_path: '{{ janus_openssl_key }}'
     csr_path: '{{ janus_openssl_csr }}'
     provider: selfsigned
+  tags:
+    - secret
