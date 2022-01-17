@@ -115,7 +115,7 @@ updaters:
   # name: ""
   # playbooks: []
   # service_template: ""
-  # service_enabled: ""
+  # enabled: ""
   # service_state: ""
   # user: ""
   # timer: "" see realtime timers: https://wiki.archlinux.org/title/Systemd/Timers
@@ -126,7 +126,7 @@ updaters:
     playbooks:
       - "bitsyai.rpi.printnanny.update.system"
     service_template: "updater.service.j2"
-    service_enabled: false
+    enabled: true
     state: started
     timer: OnCalendar=Tue,Sat 20:00
   - name: "printnanny-update-janus"
@@ -135,7 +135,7 @@ updaters:
     playbooks:
       - "bitsyai.rpi.printnanny.update.janus"
     service_template: "updater.service.j2"
-    service_enabled: false
+    enabled: true
     state: started
     timer: OnCalendar=Tue,Sat 20:30
   - name: "printnanny-update-rs"
@@ -144,6 +144,6 @@ updaters:
     playbooks:
       - "bitsyai.rpi.printnanny.update.rs"
     service_template: "updater.service.j2"
-    service_enabled: false
+    enabled: true
     state: started
     timer: OnCalendar=Tue,Sat 21:00

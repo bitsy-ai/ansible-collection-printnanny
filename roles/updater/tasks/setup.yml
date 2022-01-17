@@ -104,6 +104,17 @@
   tags:
     - setup
 
+- name: Enable ansible update service
+  become: true
+  ansible.builtin.systemd:
+    name: '{{ ansible_collection_updater }}'
+    enabled: true
+  tags:
+    - setup
+  notify:
+    - restart ansible-updater
+
+
 - name: Create updater systemd units
   become: true
   ansible.builtin.template:
@@ -125,20 +136,22 @@
     - setup
   with_items: '{{ updaters }}'
 
-- name: Enable ansible update service
+- name: Set updater service enabled
   become: true
   ansible.builtin.systemd:
-    name: '{{ ansible_collection_updater }}'
-    enabled: true
+    name: '{{ item.name }}.service'
+    enabled: '{{ item.enabled }}'
+    state: '{{ item.state }}'
   tags:
     - setup
-  notify:
-    - restart ansible-updater
+  with_items: '{{ updaters }}'
 
-- name: Set updater systemd state
+- name: Set updater timer enabled
   become: true
   ansible.builtin.systemd:
-    name: '{{ item.name }}'
+    name: '{{ item.name }}.timer'
+    enabled: '{{ item.enabled }}'
+    state: '{{ item.state }}'
   tags:
     - setup
   with_items: '{{ updaters }}'
