@@ -10,9 +10,11 @@
       - 'component:janus'
   name: Update Print Nanny Secrets
   tasks:
+    - name: Include roles/printnanny/defai;t
+      include_vars: ../../../roles/printnanny/default/main.yml
     - name: Include roles/printnanny/vars
       include_vars: ../../../roles/printnanny/vars/main.yml
-    - name: Update PrintNanny CLI
+    - name: Update Janus Secrets
       include_role:
         name: bitsyai.rpi.janus
         tasks_from: secrets
@@ -25,6 +27,8 @@
       - printnanny
       - 'component:janus'
   tasks:
+    - name: Include roles/printnanny/defai;t
+      include_vars: ../../../roles/printnanny/default/main.yml
     - name: Include roles/printnanny/vars
       include_vars: ../../../roles/printnanny/vars/main.yml
     - name: Generate self-signed cert
