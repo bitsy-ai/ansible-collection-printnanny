@@ -8,7 +8,7 @@ updater_app_name: bitsy
 updater_user: ansible
 updater_venv: '/home/{{ updater_user }}/venv'
 
-ansible_updater_version: 'ansible>4,<5'
+ansible_updater_version: 'ansible-core>2.11,<2.12'
 ansible_collection_updater: ansible-updater
 
 updater_tmpfs: '/var/run/{{ updater_app_name }}'
