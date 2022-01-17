@@ -14,6 +14,8 @@ honeycomb_api_key: '22ffab0ec6af32b2be565bc831555e44'
 # begin janus vars
 janus_admin_secret: '{{ ansible_local.license.janus_admin_secret  if ansible_local.license.janus_admin_secret is defined else None }}'
 janus_token: '{{ ansible_local.license.janus_token if ansible_local.license.janus_token is defined else None }}'
+janus_admin_secret_file: '{{ printnanny_keys_dir }}/janus_admin_secret'
+janus_token_file: '{{ printnanny_keys_dir }}/janus_token'
 
 janus_service_name: janus.service
 janus_service_unit_extra: |
