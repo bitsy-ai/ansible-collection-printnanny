@@ -2,6 +2,23 @@
 - hosts: printnanny
   gather_facts: true
   vars:
+    ara_playbook_name: 'update printnanny cli'
+    ara_playbook_labels:
+      - update
+      - printnanny
+      - 'component:secret'
+      - 'component:janus'
+  name: Update Print Nanny Secrets
+  tasks:
+    - name: Include roles/printnanny/vars
+      include_vars: ../../../roles/printnanny/vars/main.yml
+    - name: Update PrintNanny CLI
+      include_role:
+        name: bitsyai.rpi.janus
+        tasks_from: secrets
+- hosts: printnanny
+  gather_facts: true
+  vars:
     ara_playbook_name: 'update printnanny janus'
     ara_playbook_labels:
       - update
