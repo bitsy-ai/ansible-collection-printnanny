@@ -1,6 +1,0 @@
-- name: Generate a Self Signed OpenSSL certificate
-  openssl_certificate:
-    path: '{{ janus_openssl_cert }}'
-    privatekey_path: '{{ janus_openssl_key }}'
-    csr_path: '{{ janus_openssl_csr }}'
-    provider: selfsigned

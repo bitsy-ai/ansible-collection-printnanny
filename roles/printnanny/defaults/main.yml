@@ -39,3 +39,18 @@ printnanny_group: printnanny
 
 gcp_lts_ca_primary: https://pki.goog/gtsltsr/gtsltsr.crt
 gcp_lts_ca_backup: https://pki.goog/gsr4/GSR4.crt
+
+
+printnanny_ssl_key_size: 4096
+printnanny_ssl_key_type: DSA
+printnanny_ssl_dir: '{{ janus_install_dir }}/ssl'
+printnanny_ssl_crt_dir: '{{ janus_install_dir }}/ssl/crt'
+printnanny_ssl_key_dir: '{{ janus_install_dir }}/ssl/private'
+printnanny_ssl_csr_dir: '{{ janus_install_dir }}/ssl/csr'
+printnanny_ssl_cert: '{{ printnanny_ssl_crt_dir}}/janus.crt'
+printnanny_ssl_key: '{{ printnanny_ssl_key_dir}}/janus.pem'
+printnanny_ssl_csr: '{{ printnanny_ssl_csr_dir }}/janus.csr'
+
+printnanny_ssl_country_name: 'US'
+printnanny_ssl_email_address: support@print-nanny.com
+printnanny_ssl_organization_name: 'Bitsy AI Labs, LLC'

@@ -1,0 +1,48 @@
+- name: Create ssl dirs
+  become: true
+  ansible.builtin.file:
+    state: directory
+    mode: 0771
+    path: '{{ item }}'
+    owner: '{{ printnanny_user }}'
+  with_items:
+    - '{{ printnanny_ssl_crt_dir }}'
+    - '{{ printnanny_ssl_csr_dir }}'
+    - '{{ printnanny_ssl_key_dir }}'
+
+- name: Generate janus privatekey
+  become: true
+  openssl_privatekey:
+    path: '{{ printnanny_ssl_key }}'
+    size: '{{ printnanny_ssl_key_size }}'
+    type: '{{ printnanny_ssl_key_type }}'
+    backup: true
+  tags:
+    - secret
+    - ssl
+    - janus
+
+# TODO fix country code, email, organization name, unit name
+- name: Generate self-signing request
+  openssl_csr:
+    path: '{{ printnanny_ssl_csr  }}'
+    privatekey_path: '{{ printnanny_ssl_key }}'
+    country_name: '{{ printnanny_ssl_country_name }}'
+    email_address: '{{ printnanny_ssl_email_address }}'
+    organization_name: '{{ printnanny_ssl_organization_name }}'
+    common_name: '{{ ansible_fqdn }}'
+  tags:
+    - secret
+    - ssl
+    - janus
+
+- name: Generate Provisional Self-Signed OpenSSL certificate
+  become: true
+  openssl_certificate:
+    path: '{{ printnanny_ssl_cert }}'
+    privatekey_path: '{{ printnanny_ssl_key }}'
+    provider: selfsigned
+  tags:
+    - secret
+    - ssl
+    - janus

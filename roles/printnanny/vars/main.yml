@@ -85,6 +85,10 @@ janus_exec_start_post:
     --token ${JANUS_TOKEN}
     --adminsecret ${JANUS_ADMIN_SECRET}
 
+janus_ssl_enabled: true
+janus_ssl_cert: '{{ printnanny_ssl_cert }}'
+janus_ssl_key: '{{ printnanny_ssl_key }}'
+
 # updater service defined in updater vars section below
 janus_updater: printnanny-update-janus
 # end janus vars
