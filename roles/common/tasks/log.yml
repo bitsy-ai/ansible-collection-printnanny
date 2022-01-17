@@ -16,3 +16,4 @@
   ansible.builtin.systemd:
     name: log-vacuum
     enabled: true
+    no_block: true

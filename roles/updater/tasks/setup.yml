@@ -109,6 +109,7 @@
   ansible.builtin.systemd:
     name: '{{ ansible_collection_updater }}'
     enabled: true
+    no_block: true
   tags:
     - setup
   notify:
@@ -142,6 +143,7 @@
     name: '{{ item.name }}.service'
     enabled: '{{ item.enabled }}'
     state: '{{ item.state }}'
+    no_block: true
   tags:
     - setup
   with_items: '{{ updaters }}'
@@ -152,6 +154,7 @@
     name: '{{ item.name }}.timer'
     enabled: '{{ item.enabled }}'
     state: '{{ item.state }}'
+    no_block: true
   tags:
     - setup
   with_items: '{{ updaters }}'
