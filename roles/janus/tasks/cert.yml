@@ -7,8 +7,6 @@
     - '{{ janus_ssl_crt_dir }}'
     - '{{ janus_ssl_csr_dir }}'
     - '{{ janus_ssl_key_dir }}'
-  tags:
-    - secret
 
 - name: Generate Provisional Self-Signed OpenSSL certificate
   openssl_certificate:
@@ -18,3 +16,5 @@
     provider: selfsigned
   tags:
     - secret
+    - cert
+    - janus
