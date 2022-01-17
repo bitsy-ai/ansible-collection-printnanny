@@ -1,11 +1,13 @@
 # {{ ansible_managed }}
 [Unit]
 Description={{ item.name }} timer
-Requires={{item.name}}.service
+Wants=network.target network-online.target
 [Timer]
+Unit={{item.name}}.service
 Persistent=true
 {{ item.timer }}
 RandomizedDelaySec=600
 AccuracySec=1s
+OnBootSec=3s
 [Install]
 WantedBy=timers.target
