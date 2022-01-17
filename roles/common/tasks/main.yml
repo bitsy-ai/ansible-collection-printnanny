@@ -1,21 +1,21 @@
 ---
 - name: User setup
-  ansible.builtin.import_tasks: users.yml
+  ansible.builtin.include_tasks: users.yml
   tags:
     - setup
 - name: Setup ansible facts.d
-  ansible.builtin.import_tasks: factsd.yml
+  ansible.builtin.include_tasks: factsd.yml
   tags:
     - setup
 - name: Slim packages
-  ansible.builtin.import_tasks: slim.yml
+  ansible.builtin.include_tasks: slim.yml
   tags:
     - setup
 - name: Install apt packages
-  ansible.builtin.import_tasks: apt.yml
+  ansible.builtin.include_tasks: apt.yml
   tags:
     - setup
 - name: Install log-vacuum service/timer
-  ansible.builtin.import_tasks: log.yml
+  ansible.builtin.include_tasks: log.yml
   tags:
     - setup

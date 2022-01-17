@@ -2,7 +2,7 @@
 - hosts: octoprint
   tasks:
     - name: Octoprint role
-      import_role:
+      include_role:
         name: bitsyai.rpi.octoprint
     - name: Clean image
       include_role:

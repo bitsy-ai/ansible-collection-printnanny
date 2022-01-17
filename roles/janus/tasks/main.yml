@@ -13,9 +13,9 @@
     append: true
 
 # all tasks requiring access to secrets must appear after this task
-- import_tasks: secrets.yml
+- include_tasks: secrets.yml
 
-- import_tasks: build.yml
+- include_tasks: build.yml
   when: janus_build_source == True
 
-- import_tasks: factsd.yml
+- include_tasks: factsd.yml

@@ -1,8 +1,8 @@
 ---
-- import_role:
+- include_role:
     name: bitsyai.rpi.printnanny
     tasks_from: secrets
-- import_role:
+- include_role:
     name: bitsyai.rpi.printnanny
     tasks_from: mqtt
 
