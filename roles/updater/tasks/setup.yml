@@ -149,10 +149,9 @@
 - name: Set updater timer enabled
   become: true
   ansible.builtin.systemd:
-    name: '{{ item.name }}.enabled'
+    name: '{{ item.name }}.timer'
     enabled: '{{ item.enabled }}'
     state: '{{ item.state }}'
-
   tags:
     - setup
   with_items: '{{ updaters }}'
