@@ -15,7 +15,7 @@
   ansible.builtin.include_tasks: apt.yml
   tags:
     - setup
-- name: Install log-vacuum service/timer
-  ansible.builtin.include_tasks: log.yml
+- name: Configure log rotation
+  ansible.builtin.include_tasks: logs.yml
   tags:
     - setup
