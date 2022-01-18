@@ -30,7 +30,7 @@
     country_name: '{{ printnanny_ssl_country_name }}'
     email_address: '{{ printnanny_ssl_email_address }}'
     organization_name: '{{ printnanny_ssl_organization_name }}'
-    common_name: '{{ ansible_fqdn }}'
+    common_name: '{{ inventory_hostname }}'
   tags:
     - secret
     - ssl
