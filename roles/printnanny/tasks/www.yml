@@ -35,6 +35,8 @@
     src: Rocket.toml.j2
     dest: '{{ printnanny_www_dir }}/Rocket.toml'
     force: true
+    owner: '{{ printnanny_user }}'
+    group: '{{ printnanny_user }}'
   when: printnanny_www_secret_key is defined
 
 - name: Enable Print Nanny Dashboard service
