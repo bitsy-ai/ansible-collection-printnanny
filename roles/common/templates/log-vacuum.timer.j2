@@ -1,9 +1,0 @@
-[Unit]
-Description=Journal log vacuum timer
-
-[Timer]
-OnBootSec={{ rpi_log_vacuum.OnBootSec }}
-OnUnitActiveSec={{ rpi_log_vacuum.OnUnitActiveSec }}
-
-[Install]
-WantedBy=timers.target
