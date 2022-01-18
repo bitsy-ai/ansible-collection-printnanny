@@ -9,6 +9,8 @@
       - 'component:secret'
   name: Update Print Nanny Secrets
   tasks:
+    - name: Include roles/printnanny/defaults
+      include_vars: ../../../roles/printnanny/defaults/main.yml
     - name: Include roles/printnanny/vars
       include_vars: ../../../roles/printnanny/vars/main.yml
     - name: Update PrintNanny CLI
@@ -25,6 +27,8 @@
       - 'component:cli'
   name: Update Print Nanny CLI
   tasks:
+    - name: Include roles/printnanny/defaults
+      include_vars: ../../../roles/printnanny/defaults/main.yml
     - name: Include roles/printnanny/vars
       include_vars: ../../../roles/printnanny/vars/main.yml
     - name: Update PrintNanny CLI
@@ -41,6 +45,8 @@
       - 'component:www'
   name: Update Print Nanny www
   tasks:
+    - name: Include roles/printnanny/defaults
+      include_vars: ../../../roles/printnanny/defaults/main.yml
     - name: Include roles/printnanny/vars
       include_vars: ../../../roles/printnanny/vars/main.yml
     - name: Update PrintNanny CLI

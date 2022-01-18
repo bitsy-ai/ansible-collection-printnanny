@@ -8,6 +8,8 @@
       - printnanny
       - 'component:config'
   tasks:
+    - name: Include roles/printnanny/defaults
+      include_vars: ../../../roles/printnanny/defaults/main.yml
     - name: Include roles/printnanny/vars
       include_vars: ../../../roles/printnanny/vars/main.yml
     - name: Update PrintNanny Config

@@ -8,6 +8,8 @@
       - printnanny
       - system
   tasks:
+    - name: Include roles/printnanny/defaults
+      include_vars: ../../../roles/printnanny/defaults/main.yml
     - name: Include roles/printnanny/vars
       include_vars: ../../../roles/printnanny/vars/main.yml
     - name: Common Raspberry Pi setup
