@@ -17,8 +17,5 @@ ExecStart=/usr/bin/flock -F {{ ansible_lockfile }} \
 
 ExecStartPost=-/usr/bin/flock -F {{ ansible_lockfile }} \
     /usr/bin/rm {{ ansible_lockfile }}
-
-Restart=on-failure
-
 [Install]
 WantedBy=multi-user.target
