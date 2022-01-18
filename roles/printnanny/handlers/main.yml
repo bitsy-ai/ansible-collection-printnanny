@@ -35,12 +35,11 @@
     enabled: true
   when: license_json.stat.exists
 
-- name: restart printnanny-license
+- name: restart printnanny-dash
   become: true
   ansible.builtin.systemd:
     daemon_reload: true
-    name: printnanny-license
+    name: printnanny-dash
     no_block: true
     state: restarted
     enabled: true
-  when: license_json.stat.exists

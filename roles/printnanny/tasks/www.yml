@@ -25,10 +25,10 @@
     owner: '{{ printnanny_user }}'
     group: '{{ printnanny_user }}'
   when: installed_version.stdout != printnanny_cli_version
-  tags:
-    - auto_update
+  notify:
+    - restart printnanny-dash
 
-- name: Render Print Nanny Dashboard env from template
+- name: Render Print Nanny Dashboard Rocket.toml
   become: true
   ansible.builtin.template:
     mode: 0660
@@ -38,6 +38,8 @@
     owner: '{{ printnanny_user }}'
     group: '{{ printnanny_user }}'
   when: printnanny_www_secret_key is defined
+  notify:
+    - restart printnanny-dash
 
 - name: Enable Print Nanny Dashboard service
   become: true
