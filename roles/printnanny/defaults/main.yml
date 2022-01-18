@@ -21,7 +21,7 @@ printnanny_www_secret_file: '{{ printnanny_www_dir }}/key'
 printnanny_www_templates_dir: '{{ printnanny_www_dir }}/templates'
 printnanny_www_address: "0.0.0.0"
 printnanny_www_port: 9001
-printnanny_www_log_level: "info"
+printnanny_www_log_level: "normal"
 
 ansible_facts_path: /etc/ansible/facts.d
 printnanny_device_fact: /etc/ansible/facts.d/device.fact
