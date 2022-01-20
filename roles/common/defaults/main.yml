@@ -11,8 +11,8 @@ rpi_firmware_version: 992de83e0ea01a9765196349abb386c5c8ea8944
 rpi_journald_conf:
   MaxFileSec: 14day
   ForwardToSyslog: yes
-  SystemMaxUse: '10%'
-  RuntimeMaxUse: '10%'
+  SystemMaxUse: "10%"
+  RunTimeMaxUse: "10%"
 
 rpi_rsyslog_rotate:
   rotate: 2
