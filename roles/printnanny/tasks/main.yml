@@ -10,7 +10,6 @@
 - include_tasks: cert.yml
 - include_tasks: boot_config.yml
 - include_tasks: apt.yml
-- include_tasks: log.yml
 - include_tasks: cli.yml
 - include_tasks: www.yml
 - include_tasks: factsd.yml
