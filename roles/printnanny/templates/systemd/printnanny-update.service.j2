@@ -7,7 +7,7 @@ Wants=network.service network-online.target
 [Service]
 Type=oneshot
 RuntimeDirectory={{ updater_app_name }}
-ConfigurationDirectory={{ updater app_name }}
+ConfigurationDirectory={{ updater_app_name }}
 
 ExecStart={{ updater_venv }}/bin/ansible-galaxy \
     collection install --upgrade {{ updater_collection_url }}
