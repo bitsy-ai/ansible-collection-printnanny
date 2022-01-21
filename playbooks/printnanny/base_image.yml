@@ -10,9 +10,6 @@
     - name: Print Nanny setup
       include_role:
         name: bitsyai.rpi.printnanny
-    - name: Automatic software update setup
-      include_role:
-        name: bitsyai.rpi.updater
     - name: Camera setup
       include_role:
         name: bitsyai.rpi.camera
