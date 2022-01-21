@@ -1,6 +1,10 @@
 ---
 - include_tasks: users.yml
 - include_tasks: secrets.yml
+- name: Include Janus secrets/service
+  include_role:
+    name: bitsyai.rpi.janus
+    tasks_from: secrets.yml
 # secrets available to tasks beyond this point
 - include_tasks: cert.yml
 # certs available to tasks beyond this point
