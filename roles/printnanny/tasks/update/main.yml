@@ -163,3 +163,10 @@
     mode: 0755
   tags:
     - setup
+
+- name: Render /etc/ansible/facts.d/device.fact
+  become: true
+  ansible.builtin.copy:
+    src: facts.d/device.fact
+    dest: '{{ printnanny_device_fact }}'
+    mode: 0755
