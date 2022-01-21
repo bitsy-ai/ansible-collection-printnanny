@@ -13,9 +13,6 @@ printnanny_keys_public: '{{ printnanny_keys_private }}.pub'
 
 printnanny_backups_dir: "{{ printnanny_install_dir }}/backups"
 printnanny_ansible_dir: "{{ printnanny_install_dir }}/ansible"
-printnanny_license_zip: /boot/printnanny_license.zip
-printnanny_license_json_file: '{{ printnanny_data_dir }}/license.json'
-printnanny_public_key: '{{ printnanny_data_dir }}/ecdsa_public.pem'
 
 printnanny_www_dir: '{{ printnanny_install_dir }}/www'
 printnanny_www_secret_file: '{{ printnanny_www_dir }}/key'

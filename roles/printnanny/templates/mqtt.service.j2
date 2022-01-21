@@ -3,7 +3,7 @@ Description=Print Nanny MQTT Client
 Requires=network.target
 After=syslog.target network.target
 Wants=syslog.target network.target
-ConditionPathExists={{ printnanny_public_key }}
+ConditionPathExists={{ printnanny_keys_public }}
 [Service]
 Type=simple
 ExecStart=/usr/local/bin/printnanny mqtt subscribe \
