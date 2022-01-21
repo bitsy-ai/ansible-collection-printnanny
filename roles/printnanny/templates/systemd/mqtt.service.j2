@@ -1,11 +1,12 @@
 [Unit]
 Description=Print Nanny MQTT Client
-Requires=network.target
-After=syslog.target network.target
-Wants=syslog.target network.target
+After=network.target network-online.target
+Wants=network.target network-online.target
+PartOf=printnanny.service
 ConditionPathExists={{ printnanny_ecdsa_private_key }}
 ConditionPathExists={{ printnanny_ecdsa_public_key }}
 ConditionDirectoryNotEmpty={{ printnanny_cacerts }}
+
 [Service]
 Type=simple
 EnvironmentFile=-{{ printnanny_service_env }}

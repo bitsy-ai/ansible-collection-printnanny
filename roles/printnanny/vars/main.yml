@@ -126,7 +126,7 @@ updaters:
     app_name: printnanny
     user: printnanny
     playbooks:
-      - "bitsyai.rpi.printnanny.update.system"
+      - "bitsyai.rpi.printnanny.update_system"
     service_template: "updater.service.j2"
     enabled: true
     state: started

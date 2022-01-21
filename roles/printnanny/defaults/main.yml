@@ -3,6 +3,9 @@
 # defaults file for ansible-role-print-nanny
 tflite_version: v2.5.1
 
+##
+# printnanny_ vars
+##
 printnanny_profile: default
 printnanny_service_dir: /etc/systemd/printnanny.d
 printnanny_env:
@@ -46,10 +49,6 @@ printnanny_update_schedule: '*/15 * * * *'
 printnanny_user: printnanny
 printnanny_group: printnanny
 
-gcp_lts_ca_primary: https://pki.goog/gtsltsr/gtsltsr.crt
-gcp_lts_ca_backup: https://pki.goog/gsr4/GSR4.crt
-
-
 printnanny_ssl_key_size: 4096
 printnanny_ssl_key_type: DSA
 printnanny_ssl_dir: '{{ janus_install_dir }}/ssl'
@@ -63,3 +62,50 @@ printnanny_ssl_csr: '{{ printnanny_ssl_csr_dir }}/janus.csr'
 printnanny_ssl_country_name: 'US'
 printnanny_ssl_email_address: support@print-nanny.com
 printnanny_ssl_organization_name: 'Bitsy AI Labs, LLC'
+
+##
+# gcp_ vars
+##
+gcp_lts_ca_primary: https://pki.goog/gtsltsr/gtsltsr.crt
+gcp_lts_ca_backup: https://pki.goog/gsr4/GSR4.crt
+
+##
+# updater_ vars
+##
+
+updater_app_name: printnanny
+updater_release_channel: '{{ printnanny.release_channel | default("main") }}'
+updater_collection_url: 'git+https://github.com/bitsy-ai/ansible-collection-rpi.git,{{ updater_release_channel }}'
+
+updater_user: ansible
+updater_venv: '{{ printnanny_ansible_dir }}/venv'
+
+ansible_updater_version: 'ansible-core>2.11,<2.12'
+ansible_collection_updater: ansible-updater
+
+updater_tmpfs: '/var/run/{{ updater_app_name }}'
+ansible_lockfile: '/var/run/{{ updater_app_name }}/ansible.lock'
+
+ansible_hosts_file: /etc/ansible/hosts
+ansible_config:
+    fact_caching_timeout: 86400
+    fact_caching: jsonfile
+    fact_caching_connection: /etc/ansible/facts.json
+
+##
+# ara_ vars
+##
+# ara configuration (optional)
+# https://ara.readthedocs.io/
+
+ara_enabled: true
+ara_version: 'ara>1.5,<1.6'
+
+# ara configuration values: https://ara.readthedocs.io/en/latest/ansible-plugins-and-use-cases.html
+ara_api_client: 'http'
+ara_api_server: 'https://ara.print-nanny.com'
+ara_api_timeout: 15
+ara_callback_threads: 4
+ara_ignored_arguments: vault_password_files
+ara_default_labels: 'channel:{{updater_release_channel}}'
+ara_argument_labels: check,subset,tags

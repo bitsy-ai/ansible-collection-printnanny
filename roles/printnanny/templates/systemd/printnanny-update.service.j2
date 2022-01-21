@@ -1,0 +1,25 @@
+# {{ ansible_managed }}
+[Unit]
+Description=Print Nanny Update Service
+After=network.target network-online.target
+Wants=network.service network-online.target
+
+[Service]
+Type=oneshot
+RuntimeDirectory={{ updater_app_name }}
+ConfigurationDirectory={{ updater app_name }}
+
+ExecStart={{ updater_venv }}/bin/ansible-galaxy \
+    collection install --upgrade {{ updater_collection_url }}
+
+{% for playbook in updater.playbooks %}
+ExecStart=/usr/bin/flock -F {{ ansible_lockfile }} \
+    {{ updater_venv }}/bin/ansible-playbook \
+    {{ playbook }}
+{% endfor %}
+ExecStartPost=-/usr/bin/flock -F {{ ansible_lockfile }} \
+    /usr/bin/rm {{ ansible_lockfile }}
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
