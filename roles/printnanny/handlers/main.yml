@@ -44,6 +44,15 @@
     state: restarted
     enabled: true
 
+- name: restart printnanny-update
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: printnanny-update
+    no_block: true
+    state: restarted
+    enabled: true
+
 - name: restart {{ nn_rtp_service }}
   become: true
   ansible.builtin.systemd:
