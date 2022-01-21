@@ -9,7 +9,7 @@ ConditionDirectoryNotEmpty={{ printnanny_cacerts }}
 
 [Service]
 Type=simple
-EnvironmentFile=-{{ printnanny_service_env }}
+EnvironmentFile=-{{ printnanny_env }}
 ExecStart=/usr/local/bin/printnanny mqtt subscribe \
     --private-key ${PRINTNANNY_ECDSA_PRIVATE_KEY} \
     --public-key ${PRINTNANNY_ECDSA_PUBLIC_KEY} \
@@ -20,4 +20,5 @@ Restart=on-failure
 RestartSec=600
 
 [Install]
+PartOf=printnanny.service
 WantedBy=multi-user.target

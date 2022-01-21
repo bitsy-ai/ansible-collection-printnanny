@@ -8,15 +8,8 @@ tflite_version: v2.5.1
 ##
 printnanny_profile: default
 printnanny_service_dir: /etc/systemd/printnanny.d
-printnanny_env:
-    default: /var/run/printnanny/default.env
-    sandbox: /var/run/printnanny/sandbox.env
-    local: /var/run/printnanny/local.env
-printnanny_env_sh:
-    default: /var/run/printnanny/default.sh
-    sandbox: /var/run/printnanny/sandbox.sh
-    local: /var/run/printnanny/local.sh
-
+printnanny_env: '/var/run/printnanny/{{printnanny_profile}}.env'
+printnanny_env_sh: '/var/run/printnanny/{{printnanny_profile}}.sh'
 
 printnanny_install_dir: '/opt/printnanny/{{printnanny_profile}}'
 printnanny_cacerts: '{{ printnanny_install_dir }}/ca-certificates'

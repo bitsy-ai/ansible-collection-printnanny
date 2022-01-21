@@ -1,10 +1,10 @@
 [Unit]
 Description=Print Nanny Dashboard
-Requires=network.target
-After=syslog.target network.target
-Wants=syslog.target network.target
+After=syslog.target network.target network-online.target
+Wants=syslog.target network.target network-online.target
 [Service]
 Type=simple
+EnvironmentFile=-{{ printnanny_env }}
 WorkingDirectory={{ printnanny_www_dir }}
 ExecStart=/usr/local/bin/printnanny-dash
 User={{ printnanny_user }}
@@ -13,4 +13,5 @@ Restart=on-failure
 RestartSec=1
 
 [Install]
+PartOf=printnanny.service
 WantedBy=multi-user.target
