@@ -1,5 +1,0 @@
----
-- hosts: camera
-  tasks:
-    - include_role:
-        name: bitsyai.rpi.camera
