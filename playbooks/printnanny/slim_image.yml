@@ -14,9 +14,6 @@
     - name: Print Nanny setup
       include_role:
         name: bitsyai.rpi.printnanny
-    - name: Camera setup
-      include_role:
-        name: bitsyai.rpi.camera
     - name: Janus Gateway setup
       include_role:
         name: bitsyai.rpi.janus
