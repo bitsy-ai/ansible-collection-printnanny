@@ -4,6 +4,7 @@
 # secrets available to tasks beyond this point
 - include_tasks: cert.yml
 # certs available to tasks beyond this point
+- include_tasks: env.yml
 - include_tasks: boot_config.yml
 - include_tasks: apt.yml
 - include_tasks: cli.yml

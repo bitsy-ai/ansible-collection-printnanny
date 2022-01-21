@@ -7,6 +7,8 @@ tflite_version: v2.5.1
 # printnanny_ vars
 ##
 printnanny_profile: default
+
+printnanny_api_url: https://print-nanny.com
 printnanny_service_dir: /etc/systemd/printnanny.d
 printnanny_env: '/var/run/printnanny/{{printnanny_profile}}.env'
 printnanny_env_sh: '/var/run/printnanny/{{printnanny_profile}}.sh'
