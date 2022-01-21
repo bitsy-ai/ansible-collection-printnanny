@@ -23,7 +23,7 @@ printnanny_cacerts: '{{ printnanny_install_dir }}/ca-certificates'
 printnanny_data_dir: '{{ printnanny_install_dir }}/data'
 printnanny_keys_dir: '{{ printnanny_install_dir }}/keys'
 printnanny_ecdsa_private: '{{ printnanny_keys_dir }}/id_ecdsa'
-printnanny_keys_public: '{{ printnanny_ecdsa_private }}.pub'
+printnanny_ecdsa_public: '{{ printnanny_ecdsa_private }}.pub'
 
 printnanny_backups_dir: "{{ printnanny_install_dir }}/backups"
 printnanny_ansible_dir: "{{ printnanny_install_dir }}/ansible"
