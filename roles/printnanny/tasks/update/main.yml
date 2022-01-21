@@ -126,48 +126,34 @@
     - restart printnanny-update
 
 
-- name: Create updater systemd units
+- name: Render printnanny-updater.service
   become: true
   ansible.builtin.template:
     mode: 0644
-    src: '{{ item.service_template }}'
-    dest: '/etc/systemd/system/{{ item.name }}.service'
+    src: systemd/printnanny-update.service.j2
+    dest: /etc/systemd/system/printnanny-update.service
     force: true
   tags:
     - setup
-  with_items: '{{ updaters }}'
 
-- name: Create updater systemd timers
+- name: Render printnanny-updater.target
   become: true
   ansible.builtin.template:
     mode: 0644
-    src: updater.timer.j2
-    dest: '/etc/systemd/system/{{ item.name }}.timer'
+    src: systemd/printnanny-update.target.j2
+    dest: /etc/systemd/system/printnanny-target.service
+    force: true
   tags:
     - setup
-  with_items: '{{ updaters }}'
 
 - name: Set updater service enabled
   become: true
   ansible.builtin.systemd:
-    name: '{{ item.name }}.service'
-    enabled: '{{ item.enabled }}'
-    state: '{{ item.state }}'
+    name: 'printnanny-update'
+    enabled: true
     no_block: true
   tags:
     - setup
-  with_items: '{{ updaters }}'
-
-- name: Set updater timer enabled
-  become: true
-  ansible.builtin.systemd:
-    name: '{{ item.name }}.timer'
-    enabled: '{{ item.enabled }}'
-    state: '{{ item.state }}'
-    no_block: true
-  tags:
-    - setup
-  with_items: '{{ updaters }}'
 
 - name: Create ansible pull hosts
   become: true

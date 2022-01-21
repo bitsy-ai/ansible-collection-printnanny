@@ -12,7 +12,7 @@ ConfigurationDirectory={{ updater app_name }}
 ExecStart={{ updater_venv }}/bin/ansible-galaxy \
     collection install --upgrade {{ updater_collection_url }}
 
-{% for playbook in updater.playbooks %}
+{% for playbook in updater_playbooks %}
 ExecStart=/usr/bin/flock -F {{ ansible_lockfile }} \
     {{ updater_venv }}/bin/ansible-playbook \
     {{ playbook }}

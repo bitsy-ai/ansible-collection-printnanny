@@ -67,6 +67,11 @@ gcp_lts_ca_backup: https://pki.goog/gsr4/GSR4.crt
 ##
 
 updater_app_name: printnanny
+updater_playbooks:
+    - bitsyai.rpi.printnanny.update.rs
+    - bitsyai.rpi.printnanny.update_system
+    - bitsyai.rpi.printnanny.update.janus
+
 updater_release_channel: '{{ printnanny.release_channel | default("main") }}'
 updater_collection_url: 'git+https://github.com/bitsy-ai/ansible-collection-rpi.git,{{ updater_release_channel }}'
 
@@ -75,7 +80,6 @@ updater_venv: '{{ printnanny_ansible_dir }}/venv'
 
 ansible_updater_version: 'ansible-core>2.11,<2.12'
 ansible_collection_updater: ansible-updater
-
 updater_tmpfs: '/var/run/{{ updater_app_name }}'
 ansible_lockfile: '/var/run/{{ updater_app_name }}/ansible.lock'
 
