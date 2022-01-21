@@ -2,4 +2,4 @@
 - name: Import ara tasks
   include_role:
     name: bitsyai.rpi.printnanny
-    tasks_from: updater/ara.yml
+    tasks_from: update/ara.yml
