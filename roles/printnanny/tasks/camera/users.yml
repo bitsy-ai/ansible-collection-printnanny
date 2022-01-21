@@ -1,8 +1,0 @@
----
-- name: Create camera user and group
-  ansible.builtin.user:
-    name: '{{ printnanny_user }}'
-    groups:
-      - video
-  tags:
-    - setup
