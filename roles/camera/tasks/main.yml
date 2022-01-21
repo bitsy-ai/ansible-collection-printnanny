@@ -1,4 +1,0 @@
-- include_tasks: users.yml
-- include_tasks: gstreamer.yml
-- include_tasks: nnstreamer.yml
-- include_tasks: systemd.yml

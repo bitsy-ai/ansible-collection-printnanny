@@ -1,13 +1,10 @@
 ---
-# tasks file for setup
-- name: ansible_local.device
-  ansible.builtin.debug:
-    msg: '{{ ansible_local.device }}'
-  when: ansible_local.device is defined
 - include_tasks: users.yml
-# all tasks requiring secrets must appear after this task
 - include_tasks: secrets.yml
+# secrets available to tasks beyond this point
 - include_tasks: cert.yml
+# certs available to tasks beyond this point
+- include_tasks: env.yml
 - include_tasks: boot_config.yml
 - include_tasks: apt.yml
 - include_tasks: cli.yml
@@ -15,4 +12,5 @@
 - include_tasks: factsd.yml
 - include_tasks: mqtt.yml
 - include_tasks: monitor.yml
-- include_tasks: reset_service.yml
+- include_tasks: update/main.yml
+- include_tasks: camera/main.yml

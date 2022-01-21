@@ -4,8 +4,6 @@ Documentation for the collection.
 
 # Roles
 
-## `bitsyai.rpi.camera`
-
 ## `bitsyai.rpi.honeycomb`
 
 ## `bitsyai.rpi.janus`
@@ -17,5 +15,3 @@ Documentation for the collection.
 ## `bitsyai.rpi.printnanny`
 
 ## `bitsyai.rpi.common`
-
-## `bitsyai.rpi.updater`

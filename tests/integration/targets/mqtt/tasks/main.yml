@@ -8,7 +8,7 @@
 
 - name: Stat primary ca cert
   ansible.builtin.stat:
-    path: '{{ printnanny_cacert_dir }}/{{ gcp_lts_ca_primary | basename }}'
+    path: '{{ printnanny_cacerts }}/{{ gcp_lts_ca_primary | basename }}'
   register: primary_cacert
 
 - name: Assert primary cert exists
@@ -18,7 +18,7 @@
 
 - name: Stat secondary ca cert
   ansible.builtin.stat:
-    path: '{{ printnanny_cacert_dir }}/{{ gcp_lts_ca_backup | basename }}'
+    path: '{{ printnanny_cacerts }}/{{ gcp_lts_ca_backup | basename }}'
   register: secondary_cacert
 
 - name: Assert backup cert exists

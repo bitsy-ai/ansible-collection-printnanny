@@ -3,18 +3,25 @@
 # defaults file for ansible-role-print-nanny
 tflite_version: v2.5.1
 
-printnanny_install_dir: /opt/printnanny
-printnanny_cacert_dir: '{{ printnanny_install_dir }}/ca-certificates'
+##
+# printnanny_ vars
+##
+printnanny_profile: default
+
+printnanny_api_url: https://print-nanny.com
+printnanny_service_dir: /etc/systemd/printnanny.d
+printnanny_env: '/var/run/printnanny/{{printnanny_profile}}.env'
+printnanny_env_sh: '/var/run/printnanny/{{printnanny_profile}}.sh'
+
+printnanny_install_dir: '/opt/printnanny/{{printnanny_profile}}'
+printnanny_cacerts: '{{ printnanny_install_dir }}/ca-certificates'
 printnanny_data_dir: '{{ printnanny_install_dir }}/data'
 printnanny_keys_dir: '{{ printnanny_install_dir }}/keys'
-printnanny_keys_private: '{{ printnanny_keys_dir }}/id_ecdsa'
-printnanny_keys_public: '{{ printnanny_keys_private }}.pub'
+printnanny_ecdsa_private_key: '{{ printnanny_keys_dir }}/id_ecdsa'
+printnanny_ecdsa_public_key: '{{ printnanny_ecdsa_private_key }}.pub'
 
 printnanny_backups_dir: "{{ printnanny_install_dir }}/backups"
 printnanny_ansible_dir: "{{ printnanny_install_dir }}/ansible"
-printnanny_license_zip: /boot/printnanny_license.zip
-printnanny_license_json_file: '{{ printnanny_data_dir }}/license.json'
-printnanny_public_key: '{{ printnanny_data_dir }}/ecdsa_public.pem'
 
 printnanny_www_dir: '{{ printnanny_install_dir }}/www'
 printnanny_www_secret_file: '{{ printnanny_www_dir }}/key'
@@ -37,10 +44,6 @@ printnanny_update_schedule: '*/15 * * * *'
 printnanny_user: printnanny
 printnanny_group: printnanny
 
-gcp_lts_ca_primary: https://pki.goog/gtsltsr/gtsltsr.crt
-gcp_lts_ca_backup: https://pki.goog/gsr4/GSR4.crt
-
-
 printnanny_ssl_key_size: 4096
 printnanny_ssl_key_type: DSA
 printnanny_ssl_dir: '{{ janus_install_dir }}/ssl'
@@ -54,3 +57,93 @@ printnanny_ssl_csr: '{{ printnanny_ssl_csr_dir }}/janus.csr'
 printnanny_ssl_country_name: 'US'
 printnanny_ssl_email_address: support@print-nanny.com
 printnanny_ssl_organization_name: 'Bitsy AI Labs, LLC'
+
+##
+# gcp_ vars
+##
+gcp_lts_ca_primary: https://pki.goog/gtsltsr/gtsltsr.crt
+gcp_lts_ca_backup: https://pki.goog/gsr4/GSR4.crt
+
+##
+# updater_ vars
+##
+
+updater_app_name: printnanny
+updater_playbooks:
+    - bitsyai.rpi.printnanny.update.rs
+    - bitsyai.rpi.printnanny.update_system
+    - bitsyai.rpi.printnanny.update.janus
+
+updater_release_channel: '{{ printnanny.release_channel | default("main") }}'
+updater_collection_url: 'git+https://github.com/bitsy-ai/ansible-collection-rpi.git,{{ updater_release_channel }}'
+
+updater_user: ansible
+updater_venv: '{{ printnanny_ansible_dir }}/venv'
+
+ansible_updater_version: 'ansible-core>2.11,<2.12'
+ansible_collection_updater: ansible-updater
+updater_tmpfs: '/var/run/{{ updater_app_name }}'
+ansible_lockfile: '/var/run/{{ updater_app_name }}/ansible.lock'
+
+ansible_hosts_file: /etc/ansible/hosts
+ansible_config:
+    fact_caching_timeout: 86400
+    fact_caching: jsonfile
+    fact_caching_connection: /etc/ansible/facts.json
+
+##
+# ara_ vars
+##
+# ara configuration (optional)
+# https://ara.readthedocs.io/
+
+ara_enabled: true
+ara_version: 'ara>1.5,<1.6'
+
+# ara configuration values: https://ara.readthedocs.io/en/latest/ansible-plugins-and-use-cases.html
+ara_api_client: 'http'
+ara_api_server: 'https://ara.print-nanny.com'
+ara_api_timeout: 15
+ara_callback_threads: 4
+ara_ignored_arguments: vault_password_files
+ara_default_labels: 'channel:{{updater_release_channel}}'
+ara_argument_labels: check,subset,tags
+
+##
+# gstreamer vars
+##
+
+gstreamer_num_buffers: 3
+gstreamer_config_interval: 1
+gstreamer_video_src: 'v4l2src'
+
+gstreamer_video_w: 1280
+gstreamer_video_h: 720
+gstreamer_rtp_host: "127.0.0.1"
+gstreamer_rtp_port: 5004
+
+##
+# nnstreamer vars
+##
+
+nn_rtp_service: nn-rtp
+nn_x_service: nn-x
+nn_capture_height: 720
+nn_capture_width: 1280
+nn_capture_framerate: 30
+
+nn_tensor_height: 300
+nn_tensor_width: 300
+
+nn_framework: tensorflow-lite
+
+nn_base_url: https://cdn.print-nanny.com/ml/print3d_20201101015829
+nn_model_url: '{{ nn_base_url }}/model.tflite'
+nn_label_url: '{{ nn_base_url }}/dict.txt'
+nn_metadata_url: '{{ nn_metadata_url }}/metadata.json'
+
+nn_install_dir: '{{printnanny_install_dir}}/nn'
+
+nn_model_file: '{{ nn_install_dir }}/model.tflite'
+nn_label_file: '{{ nn_install_dir }}/dict.txt'
+nn_metadata_file: '{{ nn_install_dir }}/metadata.json'

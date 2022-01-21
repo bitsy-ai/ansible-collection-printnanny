@@ -1,0 +1,7 @@
+[Unit]
+Description=Print Nanny Services
+After=syslog.target network.target
+Wants=syslog.target network.target printnanny-update.target
+
+[Install]
+WantedBy=multi-user.target

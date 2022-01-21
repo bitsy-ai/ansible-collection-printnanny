@@ -1,0 +1,24 @@
+[Unit]
+Description=Print Nanny MQTT Client
+After=network.target network-online.target
+Wants=network.target network-online.target
+PartOf=printnanny.target
+ConditionPathExists={{ printnanny_ecdsa_private_key }}
+ConditionPathExists={{ printnanny_ecdsa_public_key }}
+ConditionDirectoryNotEmpty={{ printnanny_cacerts }}
+
+[Service]
+Type=simple
+EnvironmentFile=-{{ printnanny_env }}
+ExecStart=/usr/local/bin/printnanny mqtt subscribe \
+    --private-key ${PRINTNANNY_ECDSA_PRIVATE_KEY} \
+    --public-key ${PRINTNANNY_ECDSA_PUBLIC_KEY} \
+    --ca-certs ${PRINTNANNY_CA_CERTS}
+User={{ printnanny_user }}
+
+Restart=on-failure
+RestartSec=600
+
+[Install]
+PartOf=printnanny.target
+WantedBy=multi-user.target
