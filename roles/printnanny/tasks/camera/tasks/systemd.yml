@@ -1,7 +1,7 @@
 - name: 'Render {{ nn_rtp_service }}'
   ansible.builtin.template:
     mode: 0664
-    src: '{{ nn_rtp_service }}.service.j2'
+    src: 'camera/{{ nn_rtp_service }}.service.j2'
     dest: '/etc/systemd/system/{{ nn_rtp_service }}.service'
     force: true
   notify: restart {{ nn_rtp_service }}
@@ -9,7 +9,7 @@
 - name: 'Render {{ nn_x_service }}'
   ansible.builtin.template:
     mode: 0664
-    src: '{{ nn_x_service }}.service.j2'
+    src: 'camera/{{ nn_x_service }}.service.j2'
     dest: '/etc/systemd/system/{{ nn_x_service }}.service'
     force: true
   notify: restart {{ nn_x_service }}

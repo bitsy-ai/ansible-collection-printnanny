@@ -1,11 +1,11 @@
 [Unit]
 Description=Gstreamer RTP Camera Sink
-After=network.online.target
-Wants=network.online.target
+After=network.target network-online.target
+Wants=network.target network-online.target
 
 [Service]
 Type=simple
-User={{ gstreamer_user }}
+User={{ printnanny_user }}
 
 ExecStart= gst-launch-1.0 \
     libcamerasrc name=cam_src ! videoconvert ! videoscale ! video/x-raw,width={{ nn_capture_height }},height={{ nn_capture_width }},format=RGB,framerate={{ nn_capture_framerate }}/1 ! tee name=t \
@@ -22,4 +22,5 @@ ExecStart= gst-launch-1.0 \
             udpsink host={{ gstreamer_rtp_host }} port={{ gstreamer_rtp_port }} \
     t. ! queue leaky=2 max-size-buffers=10 ! mix.
 [Install]
+PartOf=printnanny.target
 WantedBy=multi-user.target

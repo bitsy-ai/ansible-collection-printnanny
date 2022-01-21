@@ -2,7 +2,7 @@
 Description=Print Nanny MQTT Client
 After=network.target network-online.target
 Wants=network.target network-online.target
-PartOf=printnanny.service
+PartOf=printnanny.target
 ConditionPathExists={{ printnanny_ecdsa_private_key }}
 ConditionPathExists={{ printnanny_ecdsa_public_key }}
 ConditionDirectoryNotEmpty={{ printnanny_cacerts }}
@@ -20,5 +20,5 @@ Restart=on-failure
 RestartSec=600
 
 [Install]
-PartOf=printnanny.service
+PartOf=printnanny.target
 WantedBy=multi-user.target
