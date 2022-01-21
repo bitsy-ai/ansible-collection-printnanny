@@ -164,6 +164,13 @@
   tags:
     - setup
 
+- name: Create {{ ansible_facts_path }}
+  become: true
+  ansible.builtin.file:
+    path: '{{ ansible_facts_path }}'
+    state: directory
+    mode: 0755
+
 - name: Render /etc/ansible/facts.d/device.fact
   become: true
   ansible.builtin.copy:
