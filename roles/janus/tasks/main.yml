@@ -4,14 +4,6 @@
     msg: 'janus_version={{ janus_version }} ansible_local.janus={{ ansible_local.janus }}'
   when: ansible_local.janus is defined
 
-- name: Create janus user
-  become: true
-  ansible.builtin.user:
-    name: '{{ janus_user }}'
-    shell: /bin/bash
-    groups: '{{ janus_groups }}'
-    append: true
-
 # all tasks requiring access to secrets must appear after this task
 - include_tasks: secrets.yml
 - include_tasks: build.yml
