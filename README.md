@@ -4,8 +4,6 @@ Documentation for the collection.
 
 # Roles
 
-## `bitsyai.rpi.camera`
-
 ## `bitsyai.rpi.honeycomb`
 
 ## `bitsyai.rpi.janus`
