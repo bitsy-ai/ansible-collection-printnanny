@@ -10,10 +10,11 @@ printnanny_profile: default
 
 printnanny_api_url: https://print-nanny.com
 printnanny_service_dir: /etc/systemd/printnanny.d
-printnanny_env: '/var/run/printnanny/{{printnanny_profile}}.env'
-printnanny_env_sh: '/var/run/printnanny/{{printnanny_profile}}.sh'
+printnanny_runtime_dir: /var/run/printnanny
+printnanny_env: '{{ printnanny_runtime_dir }}/{{ printnanny_profile }}.env'
+printnanny_env_sh: '{{ printnanny_runtime_dir }}/{{printnanny_profile}}.sh'
 
-printnanny_install_dir: '/opt/printnanny/{{printnanny_profile}}'
+printnanny_install_dir: '/opt/printnanny/{{ printnanny_profile }}'
 printnanny_cacerts: '{{ printnanny_install_dir }}/ca-certificates'
 printnanny_data_dir: '{{ printnanny_install_dir }}/data'
 printnanny_keys_dir: '{{ printnanny_install_dir }}/keys'
