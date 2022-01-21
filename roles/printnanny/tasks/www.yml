@@ -32,7 +32,7 @@
   become: true
   ansible.builtin.template:
     mode: 0660
-    src: Rocket.toml.j2
+    src: www/Rocket.toml.j2
     dest: '{{ printnanny_www_dir }}/Rocket.toml'
     force: true
     owner: '{{ printnanny_user }}'
@@ -40,6 +40,14 @@
   when: printnanny_www_secret_key is defined
   notify:
     - restart printnanny-dash
+
+- name: Render Print Nanny Dashboard service from template
+  become: true
+  ansible.builtin.template:
+    mode: 0664
+    src: systemd/dash.service.j2
+    dest: /etc/systemd/system/printnanny-dash.service
+    force: true
 
 - name: Enable Print Nanny Dashboard service
   become: true
