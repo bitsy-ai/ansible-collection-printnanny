@@ -17,5 +17,3 @@ Documentation for the collection.
 ## `bitsyai.rpi.printnanny`
 
 ## `bitsyai.rpi.common`
-
-## `bitsyai.rpi.updater`
