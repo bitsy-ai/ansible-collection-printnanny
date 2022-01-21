@@ -2,4 +2,4 @@
 - name: Import updater role
   include_role:
     name: bitsyai.rpi.printnanny
-    tasks_from: updater/main.yml
+    tasks_from: update/main.yml
