@@ -117,9 +117,6 @@ gstreamer_num_buffers: 3
 gstreamer_config_interval: 1
 gstreamer_video_src: 'v4l2src'
 
-printnanny_user: '{{ printnanny_user }}'
-printnanny_group: 'gstreamer'
-
 gstreamer_video_w: 1280
 gstreamer_video_h: 720
 gstreamer_rtp_host: "127.0.0.1"
