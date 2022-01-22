@@ -156,7 +156,7 @@ honeycomb_api_key: '22ffab0ec6af32b2be565bc831555e44'
 ##
 # janus vars
 ##
-
+janus_install_dir: /opt/janus
 janus_admin_url: 'http://localhost:{{ janus_conf["janus.transport.http"]["admin_http_port"] }}{{ janus_conf["janus.transport.http"]["admin_base_path"] }}'
 janus_url: 'http://localhost:{{ janus_conf["janus.transport.http"]["http_port"] }}{{ janus_conf["janus.transport.http"]["base_path"] }}'
 
