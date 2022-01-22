@@ -89,7 +89,7 @@
   ansible.builtin.template:
     mode: 0755
     src: ansible/ansible.cfg.j2
-    dest: "/etc/ansible/ansible.cfg"
+    dest: /etc/ansible/ansible.cfg
     force: true
   tags:
     - setup
@@ -99,7 +99,7 @@
   ansible.builtin.template:
     mode: 0644
     src: systemd/printnanny-metadata.service.j2
-    dest: '/etc/systemd/system/printnanny-metadata.service'
+    dest: /etc/systemd/system/printnanny-metadata.service
     force: true
   tags:
     - setup
@@ -109,7 +109,7 @@
   ansible.builtin.template:
     mode: 0644
     src: systemd/printnanny-metadata.target.j2
-    dest: '/etc/systemd/system/printnanny-metadata.target'
+    dest: /etc/systemd/system/printnanny-metadata.target
     force: true
   tags:
     - setup
@@ -154,23 +154,12 @@
   notify:
     - restart printnanny-update
 
-
-- name: Render printnanny-updater.service
+- name: Render printnanny.target
   become: true
   ansible.builtin.template:
     mode: 0644
-    src: systemd/printnanny-update.service.j2
-    dest: /etc/systemd/system/printnanny-update.service
-    force: true
-  tags:
-    - setup
-
-- name: Render printnanny-updater.target
-  become: true
-  ansible.builtin.template:
-    mode: 0644
-    src: systemd/printnanny-update.target.j2
-    dest: /etc/systemd/system/printnanny-target.service
+    src: systemd/printnanny.target.j2
+    dest: /etc/systemd/system/printnanny.target
     force: true
   tags:
     - setup
@@ -178,7 +167,7 @@
 - name: Set updater service enabled
   become: true
   ansible.builtin.systemd:
-    name: 'printnanny-update'
+    name: printnanny.target
     enabled: true
     no_block: true
   tags:
@@ -206,3 +195,11 @@
     src: facts.d/device.fact
     dest: '{{ printnanny_device_fact }}'
     mode: 0755
+
+- name: Render printnanny-profile.sh
+  become: true
+  ansible.builtin.template:
+    src: printnanny-profile.sh.j2
+    dest: /usr/local/bin/printnanny-profile
+    force: true
+    mode: 0775
