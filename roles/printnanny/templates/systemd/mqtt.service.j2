@@ -11,7 +11,8 @@ EnvironmentFile=-{{ printnanny_env }}
 ExecStart=/usr/local/bin/printnanny mqtt subscribe \
     --private-key ${PRINTNANNY_ECDSA_PRIVATE_KEY} \
     --public-key ${PRINTNANNY_ECDSA_PUBLIC_KEY} \
-    --ca-certs ${PRINTNANNY_CA_CERTS}
+    --ca-certs ${PRINTNANNY_CA_CERTS} \
+    --config ${PRINTNANNY_CONFIG}
 User={{ printnanny_user }}
 
 Restart=on-failure
