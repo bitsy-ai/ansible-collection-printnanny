@@ -110,8 +110,6 @@ janus_fact: /etc/ansible/facts.d/janus.fact
 janus_admin_secret: null
 janus_token: null
 
-janus_updater: null
-
 janus_ssl_ciphers: PFS:-VERS-TLS1.0:-VERS-TLS1.1:-3DES-CBC:-ARCFOUR-128
 janus_ssl_enabled: false
 janus_ssl_cert: null

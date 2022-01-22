@@ -1,0 +1,17 @@
+# {{ ansible_managed }}
+[Unit]
+Description=Print Nanny Metadata Service
+After=network.target network-online.target
+Wants=network.service network-online.target
+
+[Service]
+Type=oneshot
+RuntimeDirectory={{ printnanny_user }}
+ConfigurationDirectory={{ printnanny_user }}
+RemainAfterExit=yes
+ExecStart={{ updater_venv }}/bin/ansible-playbook \
+    bitsyai.rpi.printnanny.metadata
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

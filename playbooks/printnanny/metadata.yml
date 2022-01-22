@@ -1,0 +1,26 @@
+---
+- hosts: printnanny
+  gather_facts: true
+  vars:
+    ara_playbook_name: 'render printnanny metadata'
+    ara_playbook_labels:
+      - printnanny
+      - env
+      - metadata
+  tasks:
+    - name: Include roles/printnanny/vars
+      include_vars: '../../roles/printnanny/vars/{{ printnanny_profile }}.yml'
+    - name: Render certs
+      include_role:
+        name: bitsyai.rpi.printnanny
+        tasks_from: certs.yml
+
+    - name: Render secrets
+      include_role:
+        name: bitsyai.rpi.printnanny
+        tasks_from: secrets.yml
+
+    - name: Render env
+      include_role:
+        name: bitsyai.rpi.printnanny
+        tasks_from: env.yml

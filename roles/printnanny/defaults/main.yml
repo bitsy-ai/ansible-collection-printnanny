@@ -71,9 +71,7 @@ gcp_lts_ca_backup: https://pki.goog/gsr4/GSR4.crt
 
 updater_app_name: printnanny
 updater_playbooks:
-    - bitsyai.rpi.printnanny.update.rs
     - bitsyai.rpi.printnanny.update.system
-    - bitsyai.rpi.printnanny.update.janus
 
 updater_release_channel: '{{ printnanny.release_channel | default("main") }}'
 updater_collection_url: 'git+https://github.com/bitsy-ai/ansible-collection-rpi.git,{{ updater_release_channel }}'
@@ -148,3 +146,29 @@ nn_install_dir: '{{printnanny_install_dir}}/nn'
 nn_model_file: '{{ nn_install_dir }}/model.tflite'
 nn_label_file: '{{ nn_install_dir }}/dict.txt'
 nn_metadata_file: '{{ nn_install_dir }}/metadata.json'
+
+##
+# honeycomb vars
+##
+honeycomb_dataset: 'printnanny_os'
+honeycomb_api_key: '22ffab0ec6af32b2be565bc831555e44'
+
+##
+# janus vars
+##
+janus_install_dir: /opt/janus
+janus_admin_url: 'http://localhost:{{ janus_conf["janus.transport.http"]["admin_http_port"] }}{{ janus_conf["janus.transport.http"]["admin_base_path"] }}'
+janus_url: 'http://localhost:{{ janus_conf["janus.transport.http"]["http_port"] }}{{ janus_conf["janus.transport.http"]["base_path"] }}'
+
+janus_exec_start_post:
+  - >-
+    printnanny
+    janus-admin
+    --host {{ janus_admin_url }}
+    add-token
+    --token ${JANUS_TOKEN}
+    --adminsecret ${JANUS_ADMIN_SECRET}
+
+janus_ssl_enabled: true
+janus_ssl_cert: '{{ printnanny_ssl_cert }}'
+janus_ssl_key: '{{ printnanny_ssl_key }}'
