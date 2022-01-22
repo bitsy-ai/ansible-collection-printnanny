@@ -21,15 +21,6 @@
     groups: '{{ printnanny_user }}'
     append: true
 
-- name: Create {{ printnanny_install_dir }}
-  become: true
-  ansible.builtin.file:
-    path: "{{ printnanny_install_dir }}"
-    state: directory
-    owner: "{{ printnanny_user }}"
-    group: "{{ printnanny_group }}"
-    mode: 0775
-
 - name: Create {{ printnanny_data_dir }}
   become: true
   ansible.builtin.file:
@@ -38,6 +29,7 @@
     owner: "{{ printnanny_user }}"
     group: "{{ printnanny_group }}"
     mode: 0775
+    recurse: true
 
 - name: Create {{ printnanny_keys_dir }}
   become: true
