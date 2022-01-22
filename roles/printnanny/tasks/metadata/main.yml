@@ -1,0 +1,3 @@
+- include_tasks: env.yml
+- include_tasks: cert.yml
+- include_tasks: secrets.yml

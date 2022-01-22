@@ -5,8 +5,17 @@
   when: ansible_local.janus is defined
 
 # all tasks requiring access to secrets must appear after this task
-- include_tasks: secrets.yml
+- include_tasks: metadata/main.yml
 - include_tasks: build.yml
   when: janus_build_source == True and janus_upgrade_available
 
 - include_tasks: factsd.yml
+- name: Update /etc/systemd/system/janus.service
+  become: true
+  ansible.builtin.template:
+    mode: 0775
+    src: systemd/janus.service.j2
+    dest: /etc/systemd/system/janus.service
+    force: true
+  notify:
+    - restart janus
