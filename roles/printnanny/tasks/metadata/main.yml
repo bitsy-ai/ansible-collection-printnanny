@@ -1,7 +1,7 @@
 - name: Render config.toml
   ansible.builtin.template:
     src: config.toml.j2
-    dest: '{{ printnanny_profile_dir }}/PrintNanny.toml'
+    dest: '{{ printnanny_config_toml }}'
     mode: 0770
     force: true
 - include_tasks: metadata/env.yml

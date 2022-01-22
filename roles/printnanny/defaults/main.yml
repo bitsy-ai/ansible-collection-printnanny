@@ -22,6 +22,7 @@ printnanny_keys_dir: '{{ printnanny_profile_dir }}/keys'
 printnanny_ecdsa_private_key: '{{ printnanny_keys_dir }}/id_ecdsa'
 printnanny_ecdsa_public_key: '{{ printnanny_ecdsa_private_key }}.pub'
 
+printnanny_config_toml: '{{ printnanny_profile_dir }}/PrintNanny.toml'
 printnanny_backups_dir: "{{ printnanny_profile_dir }}/backups"
 printnanny_ansible_dir: "{{ printnanny_install_dir }}/ansible"
 
