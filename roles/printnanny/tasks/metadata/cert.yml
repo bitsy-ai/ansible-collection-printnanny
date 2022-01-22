@@ -9,6 +9,10 @@
     - '{{ printnanny_ssl_crt_dir }}'
     - '{{ printnanny_ssl_csr_dir }}'
     - '{{ printnanny_ssl_key_dir }}'
+  tags:
+    - secret
+    - ssl
+    - metadata
 
 - name: Generate janus privatekey
   become: true
@@ -20,7 +24,7 @@
   tags:
     - secret
     - ssl
-    - janus
+    - metadata
 
 # TODO fix country code, email, organization name, unit name
 - name: Generate self-signing request
@@ -34,7 +38,7 @@
   tags:
     - secret
     - ssl
-    - janus
+    - metadata
 
 - name: Generate Provisional Self-Signed OpenSSL certificate
   become: true
@@ -45,4 +49,4 @@
   tags:
     - secret
     - ssl
-    - janus
+    - metadata

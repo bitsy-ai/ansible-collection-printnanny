@@ -196,10 +196,10 @@
     dest: '{{ printnanny_device_fact }}'
     mode: 0755
 
-- name: Render printnanny-profile.sh
+- name: Render printnanny-update.sh
   become: true
   ansible.builtin.template:
-    src: printnanny-profile.sh.j2
-    dest: /usr/local/bin/printnanny-profile
+    src: printnanny-update.sh.j2
+    dest: /usr/local/bin/printnanny-update
     force: true
     mode: 0775

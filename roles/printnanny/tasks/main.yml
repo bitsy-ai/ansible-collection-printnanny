@@ -1,14 +1,11 @@
 ---
 - include_tasks: users.yml
-- include_tasks: secrets.yml
+- include_tasks: metadata/main.yml
 - name: Include Janus secrets/service
   include_role:
     name: bitsyai.rpi.janus
-    tasks_from: secrets.yml
-# secrets available to tasks beyond this point
-- include_tasks: cert.yml
-# certs available to tasks beyond this point
-- include_tasks: env.yml
+    tasks_from: metadata/main.yml
+# metadata available to tasks beyond this point
 - include_tasks: boot_config.yml
 - include_tasks: apt.yml
 - include_tasks: cli.yml

@@ -1,7 +1,7 @@
 ---
 - include_role:
     name: bitsyai.rpi.printnanny
-    tasks_from: secrets
+    tasks_from: metadata/main.yml
 - include_role:
     name: bitsyai.rpi.printnanny
     tasks_from: mqtt

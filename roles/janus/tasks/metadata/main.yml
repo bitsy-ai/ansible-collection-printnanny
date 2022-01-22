@@ -1,0 +1,1 @@
+- include_tasks: metadata/secrets.yml

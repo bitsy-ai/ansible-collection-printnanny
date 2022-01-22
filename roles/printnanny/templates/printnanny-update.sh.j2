@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+{{ updater_venv }}/bin/ansible printnanny \
+    -m ansible.builtin.set_fact \
+    printnanny_profile="$1" \
+    cacheable=true
+
+{% for playbook in updater_playbooks %}
+{{ updater_venv }}/bin/ansible-playbook {{ playbook }}
+{% endfor %}
