@@ -72,7 +72,7 @@ gcp_lts_ca_backup: https://pki.goog/gsr4/GSR4.crt
 updater_app_name: printnanny
 updater_playbooks:
     - bitsyai.rpi.printnanny.update.rs
-    - bitsyai.rpi.printnanny.update_system
+    - bitsyai.rpi.printnanny.update.system
     - bitsyai.rpi.printnanny.update.janus
 
 updater_release_channel: '{{ printnanny.release_channel | default("main") }}'
