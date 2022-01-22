@@ -5,7 +5,7 @@
     printnanny_profile="$1" \
     cacheable=true
 
-{{ updater_venv }}/bin/ansible-playbook bitsyai.printnanny.metadata --tags metadata
+{{ updater_venv }}/bin/ansible-playbook bitsyai.rpi.printnanny.metadata --tags metadata
 
 {% for playbook in updater_playbooks %}
 {{ updater_venv }}/bin/ansible-playbook {{ playbook }}
