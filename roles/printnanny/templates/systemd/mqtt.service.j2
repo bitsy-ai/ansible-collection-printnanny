@@ -1,11 +1,9 @@
 [Unit]
 Description=Print Nanny MQTT Client
-After=network.target network-online.target
-Wants=network.target network-online.target
+After=network.target network-online.target printnanny-metadata.target
+Wants=network.target network-online.target printnanny-metadata.target
 PartOf=printnanny.target
-ConditionPathExists={{ printnanny_ecdsa_private_key }}
-ConditionPathExists={{ printnanny_ecdsa_public_key }}
-ConditionDirectoryNotEmpty={{ printnanny_cacerts }}
+
 
 [Service]
 Type=simple

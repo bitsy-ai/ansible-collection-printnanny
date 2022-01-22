@@ -1,7 +1,7 @@
 [Unit]
 Description=Print Nanny Dashboard
-After=syslog.target network.target network-online.target
-Wants=syslog.target network.target network-online.target
+After=network.target network-online.target printnanny-metadata.target
+Wants=network.target network-online.target printnanny-metadata.target
 PartOf=printnanny.target
 
 [Service]
