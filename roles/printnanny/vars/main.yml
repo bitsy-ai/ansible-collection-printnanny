@@ -23,7 +23,6 @@ janus_groups:
   - printnanny
   - video
 
-
 janus_admin_url: 'http://localhost:{{ janus_conf["janus.transport.http"]["admin_http_port"] }}{{ janus_conf["janus.transport.http"]["admin_base_path"] }}'
 janus_url: 'http://localhost:{{ janus_conf["janus.transport.http"]["http_port"] }}{{ janus_conf["janus.transport.http"]["base_path"] }}'
 
@@ -39,7 +38,3 @@ janus_exec_start_post:
 janus_ssl_enabled: true
 janus_ssl_cert: '{{ printnanny_ssl_cert }}'
 janus_ssl_key: '{{ printnanny_ssl_key }}'
-
-# updater service defined in updater vars section below
-janus_updater: printnanny-update-janus
-# end janus vars
