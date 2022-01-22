@@ -8,6 +8,8 @@
       - env
       - metadata
   tasks:
+    - name: Include roles/printnanny/vars
+      include_vars: '../../roles/printnanny/vars/{{ printnanny_profile }}.yml'
     - name: Render certs
       include_role:
         name: bitsyai.rpi.printnanny
