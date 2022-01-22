@@ -6,6 +6,12 @@
     name: bitsyai.rpi.janus
     tasks_from: metadata/main.yml
 # metadata available to tasks beyond this point
+- name: Render config.toml
+  ansible.builtin.template:
+    src: '{{ printnanny_profile_dir }}/config.toml.j2'
+    dest: PrintNanny.toml
+    mode: 0770
+    force: true
 - include_tasks: boot_config.yml
 - include_tasks: apt.yml
 - include_tasks: cli.yml

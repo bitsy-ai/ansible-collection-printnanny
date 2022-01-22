@@ -1,4 +1,4 @@
-- name: Remove {{ printnanny_install_dir }}
+- name: Remove {{ printnanny_profile_dir }}
   become: true
   ansible.builtin.file:
     path: '{{ ansible_facts_path }}'
@@ -8,10 +8,10 @@
     - reset
     - printnanny
 
-- name: Create {{ printnanny_install_dir }}
+- name: Create {{ printnanny_profile_dir }}
   become: true
   ansible.builtin.file:
-    path: "{{ printnanny_install_dir }}"
+    path: "{{ printnanny_profile_dir }}"
     state: directory
     owner: "{{ printnanny_user }}"
     group: "{{ printnanny_group }}"

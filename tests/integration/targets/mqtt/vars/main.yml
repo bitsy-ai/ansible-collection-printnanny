@@ -1,5 +1,5 @@
 ---
-printnanny_install_dir: /opt/printnanny
-printnanny_cacerts: '{{ printnanny_install_dir }}/ca-certificates'
+printnanny_profile_dir: /opt/printnanny
+printnanny_cacerts: '{{ printnanny_profile_dir }}/ca-certificates'
 gcp_lts_ca_primary: https://pki.goog/gtsltsr/gtsltsr.crt
 gcp_lts_ca_backup: https://pki.goog/gsr4/GSR4.crt
