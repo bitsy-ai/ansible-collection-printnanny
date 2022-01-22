@@ -2,7 +2,7 @@
 [Unit]
 Description=Print Nanny Update Service
 After=network.target network-online.target printnanny-metadata.target
-Wants=network.service network-online.target printnanny-metadata.target
+Wants=network.target network-online.target printnanny-metadata.target
 
 [Service]
 Type=oneshot
