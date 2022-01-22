@@ -167,7 +167,7 @@
 - name: Set updater service enabled
   become: true
   ansible.builtin.systemd:
-    name: printnanny
+    name: printnanny.target
     enabled: true
     no_block: true
   tags:
