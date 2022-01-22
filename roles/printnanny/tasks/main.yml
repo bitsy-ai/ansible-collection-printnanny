@@ -8,8 +8,8 @@
 # metadata available to tasks beyond this point
 - name: Render config.toml
   ansible.builtin.template:
-    src: '{{ printnanny_profile_dir }}/config.toml.j2'
-    dest: PrintNanny.toml
+    src: config.toml.j2'
+    dest: '{{ printnanny_profile_dir }}/PrintNanny.toml'
     mode: 0770
     force: true
 - include_tasks: boot_config.yml
