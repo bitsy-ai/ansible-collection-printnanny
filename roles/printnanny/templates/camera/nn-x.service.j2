@@ -2,9 +2,7 @@
 Description=PrintNanny Video (X window debug service)
 After=network.target network-online.target
 Wants=network.target network-online.target
-{% if gstreamer_service_unit_extra is defined %}
-{{ gstreamer_service_unit_extra }}
-{% endif %}
+PartOf=printnanny.target
 
 
 [Service]
@@ -20,5 +18,4 @@ ExecStart=gst-launch-1.0 \
     t. ! queue leaky=2 max-size-buffers=10 ! mix.
 
 [Install]
-PartOf=printnanny.target
 WantedBy=multi-user.target
