@@ -18,3 +18,5 @@ rpi_rsyslog_rotate:
   rotate: 2
   frequency: weekly
   maxage: 14 # days
+
+ansible_facts_path: /etc/ansible/facts.d
