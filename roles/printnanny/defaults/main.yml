@@ -164,10 +164,7 @@ janus_url: 'http://localhost:{{ janus_conf["janus.transport.http"]["http_port"] 
 janus_unit_extra: >-
     EnvironmentFile=-{{ printnanny_env }}
     ExecStartPost=printnanny janus-admin \
-        --host {{ janus_admin_url }} \
-        add-token \
-        --token ${JANUS_TOKEN} \
-        --adminsecret ${JANUS_ADMIN_SECRET}
+        add-token
 
 janus_ssl_enabled: true
 janus_ssl_cert: '{{ printnanny_ssl_cert }}'
