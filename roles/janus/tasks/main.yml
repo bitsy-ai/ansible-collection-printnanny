@@ -6,7 +6,7 @@
 
 # all tasks requiring access to secrets must appear after this task
 - include_tasks: metadata/main.yml
-- include_tasks: build.yml
+- include_tasks: build/main.yml
   when: janus_build_source == True and janus_upgrade_available
 
 - include_tasks: factsd.yml

@@ -1,0 +1,199 @@
+---
+##
+# libnice (meson)
+##
+- name: Run libnice meson build
+  command:
+    cmd: "meson --prefix={{ janus_lib_prefix }} build"
+    chdir: "{{ janus_libnice_build_dir.path }}"
+  when: janus_upgrade_available
+  async: 300
+  poll: 0
+  register: build_libnice
+  environment:
+    PATH: "{{ janus_build_dir.path }}/venv/bin:{{ ansible_env.PATH }}"
+  tags:
+    - janus
+    - setup
+    - auto_update
+
+- name: Configure libsrtp
+  command:
+    cmd: "./configure --prefix={{ janus_lib_prefix }} --enable-openssl"
+    chdir: "{{ janus_libsrtp_build_dir.path }}/libsrtp-{{ janus_libsrtp_version }}"
+  when: janus_upgrade_available
+
+##
+# libsrtp
+##
+- name: Build libsrtp
+  async: 300
+  poll: 0
+  register: build_srtp
+  ansible.builtin.command:
+    cmd: make shared_library
+    chdir: "{{ janus_libsrtp_build_dir.path }}/libsrtp-{{ janus_libsrtp_version }}"
+  when: janus_upgrade_available
+
+- name: Check build_libnice status
+  ansible.builtin.async_status:
+    jid: "{{ build_libnice.ansible_job_id }}"
+  register: job
+  until: job.finished
+  retries: 30
+  delay: 10
+
+##
+# libnice (meson)
+##
+- name: Configure libnice ninja build
+  async: 300
+  poll: 0
+  register: build_libnice
+  ansible.builtin.command:
+    cmd: "ninja -C build"
+    chdir: "{{ janus_libnice_build_dir.path }}"
+  when: janus_upgrade_available
+  environment:
+    PATH: "{{ janus_build_dir.path }}/venv/bin:{{ ansible_env.PATH }}"
+  tags:
+    - janus
+    - setup
+    - auto_update
+
+##
+# build websockets
+##
+- name: Make websockets build configs
+  ansible.builtin.command:
+    cmd: cmake -DLWS_MAX_SMP=1 -DLWS_WITHOUT_EXTENSIONS=0 -DCMAKE_INSTALL_PREFIX:PATH=/usr -DCMAKE_C_FLAGS="-fpic" .
+    chdir: "{{ janus_libwebsockets_build_dir.path }}"
+  when: janus_upgrade_available
+  tags:
+    - janus
+    - setup
+    - auto_update
+
+- name: Make websockets library
+  async: 300
+  poll: 0
+  register: build_websockets
+  ansible.builtin.command:
+    cmd: make
+    chdir: "{{ janus_libwebsockets_build_dir.path }}"
+  when: janus_upgrade_available
+  tags:
+    - janus
+    - setup
+    - auto_update
+
+##
+# build usrscp
+##
+- name: Bootstrap usrsctp
+  command:
+    cmd: ./bootstrap
+    chdir: "{{ janus_usrsctp_build_dir.path }}"
+  when: janus_upgrade_available
+
+- name: Configure usrsctp
+  command:
+    cmd: "./configure --prefix={{ janus_lib_prefix }} --disable-programs --disable-inet --disable-inet6"
+    chdir: "{{ janus_usrsctp_build_dir.path }}"
+  when: janus_upgrade_available
+
+- name: Make usrsctp
+  async: 300
+  poll: 0
+  register: build_usrsctp
+  command:
+    cmd: make
+    chdir: "{{ janus_usrsctp_build_dir.path }}"
+  when: janus_upgrade_available
+
+#### end async
+#### begin async polling
+
+- name: Check build_libnice status
+  ansible.builtin.async_status:
+    jid: "{{ build_libnice.ansible_job_id }}"
+  register: job
+  until: job.finished
+  retries: 30
+  delay: 10
+
+##
+# install libnice
+##
+- name: Install libnice
+  become: true
+  command:
+    cmd: "ninja -C build install"
+    chdir: "{{ janus_libnice_build_dir.path }}"
+  when: janus_upgrade_available
+  environment:
+    PATH: "{{ janus_build_dir.path }}/venv/bin:{{ ansible_env.PATH }}"
+  tags:
+    - janus
+    - setup
+    - auto_update
+
+##
+# install libsrtp
+##
+- name: Check build_srtp status
+  async_status:
+    jid: "{{ build_srtp.ansible_job_id }}"
+  register: job
+  until: job.finished
+  retries: 30
+  delay: 10
+
+- name: Install libsrtp
+  become: true
+  command:
+    cmd: make install
+    chdir: "{{ janus_libsrtp_build_dir.path }}/libsrtp-{{ janus_libsrtp_version }}"
+  when: janus_upgrade_available
+
+##
+# install websockets
+##
+
+- name: Check build_websockets status
+  async_status:
+    jid: "{{ build_websockets.ansible_job_id }}"
+  register: job
+  until: job.finished
+  retries: 30
+  delay: 10
+
+- name: Install websockets library
+  become: true
+  ansible.builtin.command:
+    cmd: make install
+    chdir: "{{ janus_libwebsockets_build_dir.path }}"
+  when: janus_upgrade_available
+  tags:
+    - janus
+    - setup
+    - auto_update
+
+##
+# install usrsctp
+##
+
+- name: Check build_usrsctp status
+  async_status:
+    jid: "{{ build_usrsctp.ansible_job_id }}"
+  register: job
+  until: job.finished
+  retries: 30
+  delay: 10
+
+- name: Install usrsctp
+  become: true
+  command:
+    cmd: make install
+    chdir: "{{ janus_usrsctp_build_dir.path }}"
+  when: janus_upgrade_available

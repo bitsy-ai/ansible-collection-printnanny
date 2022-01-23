@@ -1,85 +1,20 @@
-# tasks file for ansible-role-- janus
-- name: Install platform dependencies
-  include_tasks: dependencies.yml
-
-- name: Create temporary janus build directory
-  ansible.builtin.tempfile:
-    state: directory
-    prefix: janus
-  register: janus_build_dir
-  when: janus_upgrade_available
-
-- name: Create temporary websockets build directory
-  ansible.builtin.tempfile:
-    state: directory
-    prefix: libwebsockets
-  register: janus_libwebsockets_build_dir
-  when: janus_upgrade_available
-
-- name: Create temporary libnice build directory
-  ansible.builtin.tempfile:
-    state: directory
-    prefix: libnice
-  register: janus_libnice_build_dir
-  when: janus_upgrade_available
-
-- name: Create temporary usrsctp build directory
-  ansible.builtin.tempfile:
-    state: directory
-    prefix: usrsctp
-  register: janus_usrsctp_build_dir
-  when: janus_upgrade_available
-
-- name: Create temporary libsrtp build directory
-  ansible.builtin.tempfile:
-    state: directory
-    prefix: libsrtp
-  register: janus_libsrtp_build_dir
-  when: janus_upgrade_available
-
-- name: Create workspace
-  ansible.builtin.file:
-    path: "{{ janus_build_dir.path }}"
-    state: directory
-    mode: 0775
-    recurse: true
+# Build libnice
+- name: 'Create {{ janus_build_dir.path }}/venv'
+  ansible.builtin.pip:
+    name:
+      - 'pip>21,<22'
+      - setuptools
+      - wheel
+    virtualenv_command: /usr/bin/python3 -m venv
+    virtualenv: '{{ janus_build_dir.path }}/venv'
+    extra_args: '--no-cache-dir'
   tags:
     - janus
     - setup
-  when: janus_upgrade_available
-
-- name: Install libnice
-  include_tasks: libnice.yml
-  async: 300
-  poll: 0
-  when: janus_upgrade_available
-  register: libnice_install
-
-- name: Install libwebsockets
-  include_tasks: libwebsockets.yml
-  when: janus_upgrade_available
-
-
-- name: Install libsrtp
-  include_tasks: libsrtp.yml
-  tags:
-    - janus
-  when: janus_upgrade_available
-
-# Build - janus
-- name: Clone - janus
-  git:
-    repo: "{{ janus_repo }}"
-    dest: "{{ janus_build_dir.path }}/build"
-    version: "{{ janus_version }}"
-  when: janus_upgrade_available
-
-- name: Run - janus config autogen
-  command:
-    cmd: sh autogen.sh
-    chdir: "{{ janus_build_dir.path }}/build"
-  when: janus_upgrade_available
-
+    - auto_update
+- include_tasks: build/sources.yml
+# first parallelizable stage of each component build
+- include_tasks: build/build_async.yml
 - name: Configure - janus build
   command:
     cmd: "./configure \
@@ -93,7 +28,6 @@
       {{ janus_build_extras.sip | ternary('', '--disable-plugin-sip') }}"
     chdir: "{{ janus_build_dir.path }}/build"
   when: janus_upgrade_available
-
 - name: Build - janus
   become: true
   command:
@@ -151,11 +85,3 @@
     path: "{{ janus_usrsctp_build_dir.path }}"
     state: absent
   when: janus_upgrade_available
-
-- name: Check libnice_install satus
-  async_status:
-    jid: "{{ libnice_install.ansible_job_id }}"
-  register: libnice_job
-  until: libnice_job.finished
-  retries: 30
-  delay: 10
