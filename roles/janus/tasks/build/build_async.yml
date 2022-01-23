@@ -75,7 +75,7 @@
     - auto_update
 
 - name: Make websockets library
-  async: 300
+  async: 600
   poll: 0
   register: build_websockets
   ansible.builtin.command:
@@ -103,7 +103,7 @@
   when: janus_upgrade_available
 
 - name: Make usrsctp
-  async: 300
+  async: 600
   poll: 0
   register: build_usrsctp
   command:
@@ -119,7 +119,7 @@
     jid: "{{ build_libnice.ansible_job_id }}"
   register: job
   until: job.finished
-  retries: 300
+  retries: 600
   delay: 1
 
 ##
@@ -146,7 +146,7 @@
     jid: "{{ build_srtp.ansible_job_id }}"
   register: job
   until: job.finished
-  retries: 300
+  retries: 600
   delay: 1
 
 - name: Install libsrtp
@@ -165,7 +165,7 @@
     jid: "{{ build_websockets.ansible_job_id }}"
   register: job
   until: job.finished
-  retries: 300
+  retries: 600
   delay: 1
 
 - name: Install websockets library
@@ -188,7 +188,7 @@
     jid: "{{ build_usrsctp.ansible_job_id }}"
   register: job
   until: job.finished
-  retries: 300
+  retries: 600
   delay: 1
 
 - name: Install usrsctp
