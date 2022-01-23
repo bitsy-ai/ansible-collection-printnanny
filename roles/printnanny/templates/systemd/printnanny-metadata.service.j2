@@ -7,11 +7,10 @@ Wants=network.service network-online.target
 [Service]
 Type=oneshot
 RuntimeDirectory={{ printnanny_user }}
+RuntimeDirectoryPreserve=yes
 ConfigurationDirectory={{ printnanny_user }}
-RemainAfterExit=yes
 ExecStart={{ updater_venv }}/bin/ansible-playbook \
     bitsyai.rpi.printnanny.metadata \
-    --tags metadata
 Restart=on-failure
 
 [Install]
