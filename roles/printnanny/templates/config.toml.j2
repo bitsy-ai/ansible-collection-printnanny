@@ -5,8 +5,8 @@ path = "{{ printnanny_profile_dir }}"
 base_path = "{{ printnanny_api_url }}"
 
 [janus]
-admin_secret = "{{ janus_conf['janus.transport.http'].janus_admin_secret }}"
-token = "{{ janus_conf['janus.transport.http'].janus_token }}"
+admin_secret = "{{ janus_admin_secret }}"
+token = "{{ janus_token }}"
 admin_base_path = "{{ janus_conf['janus.transport.http'].admin_base_path }}"
 admin_http_port = "{{ janus_conf['janus.transport.http'].admin_http_port }}"
 admin_https_port = "{{ janus_conf['janus.transport.http'].admin_https_port }}"
