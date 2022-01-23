@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+{{ updater_venv }}/bin/ansible printnanny \
+    -m ansible.builtin.set_fact -a "printnanny_profile=$1 cacheable=true"
+
+{{ updater_venv }}/bin/ansible-playbook bitsyai.rpi.printnanny.metadata
