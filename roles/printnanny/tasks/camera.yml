@@ -15,6 +15,8 @@
   ansible.builtin.get_url:
     url: '{{ nn_model_url }}'
     dest: '{{ nn_model_file }}'
+  tags:
+    - firstboot
 
 - name: Download {{ nn_label_url }}
   become: true
@@ -24,6 +26,8 @@
   ansible.builtin.get_url:
     url: '{{ nn_label_url }}'
     dest: '{{ nn_label_file }}'
+  tags:
+    - firstboot
 
 - name: Download {{ nn_metadata_file }}
   become: true
@@ -33,6 +37,8 @@
   ansible.builtin.get_url:
     url: '{{ nn_metadata_url }}'
     dest: '{{ nn_metadata_file }}'
+  tags:
+    - firstboot
 
 - name: 'Render {{ nn_rtp_service }}'
   become: true
@@ -51,3 +57,15 @@
     dest: '/etc/systemd/system/{{ nn_x_service }}.service'
     force: true
   notify: restart {{ nn_x_service }}
+
+- name: Enble rpt service
+  ansible.builtin.systemd:
+    name: '{{ nn_rtp_service }}.service'
+    enabled: true
+    no_block: true
+
+- name: Enble nnstreamer service
+  ansible.builtin.systemd:
+    name: '{{ nn_x_service }}.service'
+    enabled: true
+    no_block: true
