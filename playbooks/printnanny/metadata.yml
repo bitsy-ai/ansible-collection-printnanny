@@ -12,6 +12,8 @@
       include_role:
         name: bitsyai.rpi.printnanny
         tasks_from: metadata/debug.yml
+    - name: Include handlers
+      include: ../roles/printnanny/handlers/main.yml
     - name: Include profile-specific roles/printnanny/vars
       include_vars: '../../roles/printnanny/vars/{{ printnanny_profile }}.yml'
     - name: Print gathered facts
