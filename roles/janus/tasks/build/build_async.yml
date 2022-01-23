@@ -41,7 +41,6 @@
   register: job
   until: job.finished
   retries: 30
-  delay: 10
 
 ##
 # libnice (meson)
@@ -120,7 +119,7 @@
   register: job
   until: job.finished
   retries: 600
-  delay: 1
+  
 
 ##
 # install libnice
@@ -147,7 +146,7 @@
   register: job
   until: job.finished
   retries: 600
-  delay: 1
+  
 
 - name: Install libsrtp
   become: true
@@ -166,7 +165,7 @@
   register: job
   until: job.finished
   retries: 600
-  delay: 1
+  
 
 - name: Install websockets library
   become: true
@@ -189,7 +188,7 @@
   register: job
   until: job.finished
   retries: 600
-  delay: 1
+  
 
 - name: Install usrsctp
   become: true

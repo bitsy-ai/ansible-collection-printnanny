@@ -4,7 +4,7 @@
   register: job
   until: job.finished
   retries: 300
-  delay: 1
+  
 
 - name: Check download_nn_label status
   async_status:
@@ -12,7 +12,7 @@
   register: job
   until: job.finished
   retries: 300
-  delay: 1
+  
 
 - name: Check download_nn_metadatastatus
   async_status:
@@ -20,7 +20,7 @@
   register: job
   until: job.finished
   retries: 300
-  delay: 1
+  
 
 - name: Check apt_async status
   async_status:
@@ -28,4 +28,4 @@
   register: job
   until: job.finished
   retries: 300
-  delay: 1
+  

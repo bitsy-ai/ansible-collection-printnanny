@@ -14,4 +14,3 @@
 - include_tasks: update/main.yml
 - include_tasks: mqtt.yml
 - include_tasks: monitor.yml
-- include_tasks: async_status.yml
