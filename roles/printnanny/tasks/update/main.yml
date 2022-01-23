@@ -137,15 +137,6 @@
   tags:
     - setup
 
-- name: Set updater service enabled
-  become: true
-  ansible.builtin.systemd:
-    name: printnanny.service
-    enabled: true
-    no_block: true
-  tags:
-    - setup
-
 - name: Create ansible pull hosts
   become: true
   ansible.builtin.copy:
