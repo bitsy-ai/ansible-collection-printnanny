@@ -27,7 +27,6 @@
       - python3-venv
       - python3-apt
       - systemd
-      - systemd-cron
       - rustc
       - sudo
       - vim
