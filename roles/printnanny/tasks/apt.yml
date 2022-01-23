@@ -5,8 +5,6 @@
     repo: ppa:nnstreamer/ppa
     state: present
     codename: focal
-  when: ( (ansible_distribution_major_version == 11 and ansible_distribution == "Debian")
-    or (ansible_distribution_major_version == 20 and ansible_distribution == "Ubuntu"))
 
 - name: Install apt dependencies
   become: true
