@@ -1,0 +1,57 @@
+---
+# tasks file for nnstreamer
+- name: Create {{ nn_install_dir }}
+  become: true
+  ansible.builtin.file:
+    state: directory
+    path: '{{ nn_install_dir }}'
+    mode: 0775
+
+- name: Download {{ nn_model_url }}
+  become: true
+  async: 300
+  poll: 0
+  register: download_nn_model
+  ansible.builtin.get_url:
+    url: '{{ nn_model_url }}'
+    dest: '{{ nn_model_file }}'
+
+- name: Download {{ nn_label_url }}
+  become: true
+  async: 300
+  poll: 0
+  register: download_nn_label
+  ansible.builtin.get_url:
+    url: '{{ nn_label_url }}'
+    dest: '{{ nn_label_file }}'
+
+- name: Download {{ nn_metadata_file }}
+  become: true
+  async: 300
+  poll: 0
+  register: download_nn_metadata
+  ansible.builtin.get_url:
+    url: '{{ nn_metadata_url }}'
+    dest: '{{ nn_metadata_file }}'
+
+- name: 'Render {{ nn_rtp_service }}'
+  become: true
+  async: 30
+  poll: 0
+  ansible.builtin.template:
+    mode: 0664
+    src: 'camera/{{ nn_rtp_service }}.service.j2'
+    dest: '/etc/systemd/system/{{ nn_rtp_service }}.service'
+    force: true
+  notify: restart {{ nn_rtp_service }}
+
+- name: 'Render {{ nn_x_service }}'
+  become: true
+  async: 30
+  poll: 0
+  ansible.builtin.template:
+    mode: 0664
+    src: 'camera/{{ nn_x_service }}.service.j2'
+    dest: '/etc/systemd/system/{{ nn_x_service }}.service'
+    force: true
+  notify: restart {{ nn_x_service }}

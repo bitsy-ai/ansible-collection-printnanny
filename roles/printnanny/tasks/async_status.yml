@@ -1,0 +1,31 @@
+- name: Check download_nn_model status
+  async_status:
+    jid: "{{ download_nn_model.ansible_job_id }}"
+  register: job
+  until: job.finished
+  retries: 300
+  delay: 1
+
+- name: Check download_nn_label status
+  async_status:
+    jid: "{{ download_nn_label.ansible_job_id }}"
+  register: job
+  until: job.finished
+  retries: 300
+  delay: 1
+
+- name: Check download_nn_metadatastatus
+  async_status:
+    jid: "{{ download_nn_metadata.ansible_job_id }}"
+  register: job
+  until: job.finished
+  retries: 300
+  delay: 1
+
+- name: Check apt_async status
+  async_status:
+    jid: "{{ apt_async.ansible_job_id }}"
+  register: job
+  until: job.finished
+  retries: 300
+  delay: 1
