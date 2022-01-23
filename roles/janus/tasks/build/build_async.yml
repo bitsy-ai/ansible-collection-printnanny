@@ -156,6 +156,24 @@
   when: janus_upgrade_available
 
 ##
+# install usrsctp
+##
+
+- name: Check build_usrsctp status
+  async_status:
+    jid: "{{ build_usrsctp.ansible_job_id }}"
+  register: job
+  until: job.finished
+  retries: 600
+
+- name: Install usrsctp
+  become: true
+  command:
+    cmd: make install
+    chdir: "{{ janus_usrsctp_build_dir.path }}"
+  when: janus_upgrade_available
+
+##
 # install websockets
 ##
 
@@ -165,7 +183,7 @@
   register: job
   until: job.finished
   retries: 600
-  
+
 
 - name: Install websockets library
   become: true
@@ -177,22 +195,3 @@
     - janus
     - setup
     - auto_update
-
-##
-# install usrsctp
-##
-
-- name: Check build_usrsctp status
-  async_status:
-    jid: "{{ build_usrsctp.ansible_job_id }}"
-  register: job
-  until: job.finished
-  retries: 600
-  
-
-- name: Install usrsctp
-  become: true
-  command:
-    cmd: make install
-    chdir: "{{ janus_usrsctp_build_dir.path }}"
-  when: janus_upgrade_available
