@@ -102,8 +102,8 @@ ara_enabled: true
 ara_version: 'ara>1.5,<1.6'
 
 # ara configuration values: https://ara.readthedocs.io/en/latest/ansible-plugins-and-use-cases.html
-ara_api_client: 'http'
-ara_api_server: 'https://ara.print-nanny.com'
+ara_api_client: http
+ara_api_server: https://ara.print-nanny.com
 ara_api_timeout: 15
 ara_callback_threads: 4
 ara_ignored_arguments: vault_password_files

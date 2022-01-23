@@ -1,4 +1,4 @@
 ---
 printnanny_profile: local
-printnanny_api_url: https://aurora:8000
+printnanny_api_url: http://aurora:8000
 ara_enabled: false
