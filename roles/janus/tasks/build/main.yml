@@ -1,4 +1,75 @@
-# Build libnice
+- name: Install required platform dependencies
+  become: true
+  apt:
+    name:
+      - automake
+      - build-essential
+      - cmake
+      - cmake-data
+      - gengetopt
+      - git
+      - libconfig-dev
+      - libcurl4-openssl-dev
+      - libglib2.0-dev
+      - libjansson-dev
+      - liblua5.3-dev
+      - libmicrohttpd-dev
+      - libogg-dev
+      - libopus-dev
+      - libsofia-sip-ua-dev
+      - libssl-dev
+      - libsystemd-dev
+      - libtool
+      - ninja-build
+      - pkg-config
+      - systemd
+      - systemd-cron
+      - wget
+    state: present
+  tags:
+    - janus
+
+- name: Create temporary janus build directory
+  ansible.builtin.tempfile:
+    state: directory
+    prefix: janus
+  register: janus_build_dir
+  when: janus_upgrade_available
+
+- name: Create temporary websockets build directory
+  ansible.builtin.tempfile:
+    state: directory
+    prefix: libwebsockets
+  register: janus_libwebsockets_build_dir
+  when: janus_upgrade_available
+
+- name: Create temporary libnice build directory
+  ansible.builtin.tempfile:
+    state: directory
+    prefix: libnice
+  register: janus_libnice_build_dir
+  when: janus_upgrade_available
+
+- name: Create temporary usrsctp build directory
+  ansible.builtin.tempfile:
+    state: directory
+    prefix: usrsctp
+  register: janus_usrsctp_build_dir
+  when: janus_upgrade_available
+
+- name: Create temporary libsrtp build directory
+  ansible.builtin.tempfile:
+    state: directory
+    prefix: libsrtp
+  register: janus_libsrtp_build_dir
+  when: janus_upgrade_available
+
+- name: Create workspace
+  ansible.builtin.file:
+    path: "{{ janus_build_dir.path }}"
+    state: directory
+    mode: 0775
+    recurse: true
 - name: 'Create {{ janus_build_dir.path }}/venv'
   ansible.builtin.pip:
     name:
