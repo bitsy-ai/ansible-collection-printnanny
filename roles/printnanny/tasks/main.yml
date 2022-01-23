@@ -14,3 +14,7 @@
 - include_tasks: update/main.yml
 - include_tasks: mqtt.yml
 - include_tasks: monitor.yml
+- name: Clean .ansible_async dir
+  ansible.builtin.file:
+    path: '{{ ansible_env.HOME }}/.ansible_async'
+    state: absent
