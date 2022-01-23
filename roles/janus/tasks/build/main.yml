@@ -86,6 +86,11 @@
 - include_tasks: build/sources.yml
 # first parallelizable stage of each component build
 - include_tasks: build/build_async.yml
+- name: Run - janus config autogen
+  command:
+    cmd: sh autogen.sh
+    chdir: "{{ janus_build_dir.path }}/build"
+  when: janus_upgrade_available
 - name: Configure - janus build
   command:
     cmd: "./configure \
@@ -99,6 +104,7 @@
       {{ janus_build_extras.sip | ternary('', '--disable-plugin-sip') }}"
     chdir: "{{ janus_build_dir.path }}/build"
   when: janus_upgrade_available
+
 - name: Build - janus
   become: true
   command:
