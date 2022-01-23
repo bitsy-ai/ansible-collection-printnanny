@@ -8,15 +8,27 @@
       - env
       - metadata
   tasks:
-    - name: Include profile-specific roles/printnanny/vars
-      include_vars: '../../roles/printnanny/vars/{{ printnanny_profile }}.yml'
     - name: Print gathered facts
       include_role:
         name: bitsyai.rpi.printnanny
         tasks_from: metadata/debug.yml
+        vars_from: '{{ printnanny_profile }}.yml'
+      when: printnanny_profile is defined
+    - name: Print gathered facts
+      include_role:
+        name: bitsyai.rpi.printnanny
+        tasks_from: metadata/debug.yml
+      when: not printnanny_profile is defined
     - name: Set metadata
       include_role:
         name: bitsyai.rpi.printnanny
         tasks_from: metadata/main.yml
+      when: not printnanny_profile is defined
+    - name: Set metadata
+      include_role:
+        name: bitsyai.rpi.printnanny
+        tasks_from: metadata/main.yml
+        vars_from: '{{ printnanny_profile }}.yml'
+      when: printnanny_profile is defined
   handlers:
     - include: ../../roles/printnanny/handlers/main.yml
