@@ -1,7 +1,0 @@
-- name: apt upgrade
-  ansible.builtin.apt:
-    upgrade: dist
-- name: Reboot to apply kernel patches
-  reboot:
-    reboot_timeout: 600
-  when: 'ansible_connection != "local"'
