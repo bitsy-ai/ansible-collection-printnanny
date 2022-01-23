@@ -1,8 +1,6 @@
 ---
 - hosts: printnanny
   gather_facts: true
-  roles:
-    - bitsyai.rpi.printnanny
   vars:
     ara_playbook_name: 'render printnanny metadata'
     ara_playbook_labels:
