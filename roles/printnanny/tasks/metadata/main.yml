@@ -5,6 +5,9 @@
     mode: 0644
     force: true
     owner: '{{ printnanny_user }}'
+  notify:
+    - restart printnanny-dash
+    - restart mqtt
 - include_tasks: metadata/env.yml
 - include_tasks: metadata/cert.yml
 - include_tasks: metadata/secrets.yml
