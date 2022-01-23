@@ -57,7 +57,7 @@
   git:
     repo: "{{ janus_repo }}"
     dest: "{{ janus_build_dir.path }}/build"
-    version: "{{ janus_version }}"
+    version: "v{{ janus_version }}"
   when: janus_upgrade_available
 
 - name: Download and unarchive libsrtp

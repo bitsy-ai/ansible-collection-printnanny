@@ -120,15 +120,6 @@
     chdir: "{{ janus_build_dir.path }}/build"
   when: janus_upgrade_available
 
-- name: Set installed version facts
-  ansible.builtin.set_fact:
-    janus_version: "{{ janus_version }}"
-    janus_libnice_version: "{{ janus_libnice_version }}"
-    janus_usrsctp_version: "{{ janus_usrsctp_version }}"
-    janus_libsrtp_version: "{{ janus_libsrtp_version }}"
-    janus_libwebsockets_version: "{{ janus_libwebsockets_version }}"
-    cacheable: true
-
 - name: "Delete {{ janus_build_dir.path }} build directory"
   become: true
   ansible.builtin.file:
@@ -163,3 +154,12 @@
     path: "{{ janus_usrsctp_build_dir.path }}"
     state: absent
   when: janus_upgrade_available
+
+- name: Set installed version facts
+  ansible.builtin.set_fact:
+    janus_version: "{{ janus_version }}"
+    janus_libnice_version: "{{ janus_libnice_version }}"
+    janus_usrsctp_version: "{{ janus_usrsctp_version }}"
+    janus_libsrtp_version: "{{ janus_libsrtp_version }}"
+    janus_libwebsockets_version: "{{ janus_libwebsockets_version }}"
+    cacheable: true
