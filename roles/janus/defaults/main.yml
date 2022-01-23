@@ -70,7 +70,7 @@ janus_conf:
   janus.transport.http:
     admin_base_path: "/admin"
     admin_http_port: 7088
-    admin_https_port: 7889
+    admin_https_port: 7089
     admin_http: true
     admin_https: false
     base_path: "/janus"
@@ -99,7 +99,7 @@ janus_conf_template:
 
 janus_installed_version: "v{{ ansible_local.janus.version if ansible_local.janus.version is defined else None }}"
 janus_upgrade_available: "{{ ansible_local.janus.version is not defined or janus_installed_version != janus_version }}"
-janus_exec_start_post: []
+janus_unit_extra: []
 janus_service_unit_extra: null
 
 janus_startup_delay: 30
