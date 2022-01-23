@@ -14,7 +14,7 @@
       include_role:
         name: bitsyai.rpi.printnanny
         tasks_from: metadata/debug.yml
-    - name: Print gathered facts
+    - name: Set metadata
       include_role:
         name: bitsyai.rpi.printnanny
         tasks_from: metadata/main.yml

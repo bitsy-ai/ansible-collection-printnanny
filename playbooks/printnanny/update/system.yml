@@ -9,5 +9,18 @@
       - system
   roles:
     - bitsyai.rpi.common
-    - bitsyai.rpi.printnanny
-    - bitsyai.rpi.janus
+  tasks:
+    - name: Include printnanny role (custom profile)
+      include_role:
+        name: bitsyai.rpi.printnanny
+        public: true
+        vars_from: '{{ printnanny_profile }}.yml'
+      when: printnanny_profile is defined
+    - name: Include printnanny role (custom profile)
+      include_role:
+        name: bitsyai.rpi.printnanny
+        public: true
+      when: not printnanny_profile is defined
+    - name: Include janus role
+      include_role:
+        name: bitsyai.rpi.janus
