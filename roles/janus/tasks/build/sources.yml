@@ -83,14 +83,6 @@
   retries: 30
   delay: 10
 
-- name: Check download_libsrtp status
-  async_status:
-    jid: "{{ download_libsrtp.ansible_job_id }}"
-  register: job
-  until: job.finished
-  retries: 30
-  delay: 10
-
 - name: Check download_libwebsockets status
   async_status:
     jid: "{{ download_libwebsockets.ansible_job_id }}"
