@@ -1,0 +1,14 @@
+# {{ ansible_managed }}
+[Unit]
+Description=Update Ansible Collection {{ updater_collection_url }}
+After=network.target network-online.target
+Wants=network.service network-online.target
+
+[Service]
+Type=oneshot
+ExecStart={{ updater_venv }}/bin/ansible-galaxy \
+    collection install --upgrade {{ updater_collection_url }}
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
