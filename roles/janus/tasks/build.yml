@@ -50,13 +50,10 @@
 
 - name: Install libnice
   include_tasks: libnice.yml
+  async: 300
+  poll: 0
   when: janus_upgrade_available
-
-# used for data channels
-# - name: Install usrsctp
-#   include_tasks: usrsctp.yml
-#   tags:
-#     - janus
+  register: libnice_install
 
 - name: Install libwebsockets
   include_tasks: libwebsockets.yml
@@ -154,3 +151,11 @@
     path: "{{ janus_usrsctp_build_dir.path }}"
     state: absent
   when: janus_upgrade_available
+
+- name: Check libnice_install satus
+  async_status:
+    jid: "{{ libnice_install.ansible_job_id }}"
+  register: libnice_job
+  until: libnice_job.finished
+  retries: 30
+  delay: 10
