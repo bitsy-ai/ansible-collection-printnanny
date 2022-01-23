@@ -78,7 +78,6 @@ updater_playbooks:
 updater_release_channel: '{{ printnanny.release_channel | default("main") }}'
 updater_collection_url: 'git+https://github.com/bitsy-ai/ansible-collection-rpi.git,{{ updater_release_channel }}'
 
-updater_user: ansible
 updater_venv: '{{ printnanny_ansible_dir }}/venv'
 
 ansible_updater_version: 'ansible-core>2.11,<2.12'

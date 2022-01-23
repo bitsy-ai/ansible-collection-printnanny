@@ -14,13 +14,6 @@
       - tty
       - video
 
-- name: Add updater user '{{ updater_user }}' to printnanny group
-  become: true
-  ansible.builtin.user:
-    name: '{{ updater_user }}'
-    groups: '{{ printnanny_user }}'
-    append: true
-
 - name: Create {{ printnanny_data_dir }}
   become: true
   ansible.builtin.file:

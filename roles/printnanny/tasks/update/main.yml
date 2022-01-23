@@ -6,19 +6,6 @@
   tags:
     - setup
 
-- name: Create updater user
-  become: true
-  ansible.builtin.user:
-    name: '{{ updater_user }}'
-    state: present
-    shell: /sbin/nologin
-    comment: "Ansible service user"
-    groups:
-      - adm
-      - sudo
-  tags:
-    - setup
-
 - name: Install apt dependencies
   become: true
   ansible.builtin.apt:
@@ -44,7 +31,6 @@
     - setup
 
 - name: 'Update ansible virtualenv pip, setuptools'
-  become_user: '{{ updater_user }}'
   ansible.builtin.pip:
     name:
       - 'pip>21,<22'
@@ -57,7 +43,6 @@
     - setup
 
 - name: Install ansible into virtual env
-  become_user: '{{ updater_user }}'
   ansible.builtin.pip:
     name: '{{ ansible_updater_version }}'
     virtualenv_command: /usr/bin/python3 -m venv
@@ -66,18 +51,6 @@
   tags:
     - setup
     - requirements
-
-- name: Setup passwordless sudo for ansible user
-  become: true
-  ansible.builtin.copy:
-    content: '{{ updater_user }} ALL=(ALL) NOPASSWD: ALL'
-    dest: /etc/sudoers.d/010_ansible-no-passwd
-    owner: root
-    group: root
-    mode: 0440
-    validate: visudo -cf %s
-  tags:
-    - setup
 
 # get ara configuration before rendering ansible.cfg (if enabled)
 - name: Configure ara
