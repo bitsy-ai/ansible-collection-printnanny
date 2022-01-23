@@ -1,5 +1,0 @@
----
-- name: 'Run Packer image tasks'
-  include_role:
-    name: bitsyai.rpi.printnanny
-    tasks_from: setup_license
