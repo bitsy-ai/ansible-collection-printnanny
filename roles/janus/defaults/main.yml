@@ -96,9 +96,6 @@ janus_conf_template:
   janus.transport.http.jcfg: janus.transport.http.jcfg
   janus.transport.pfunix.jcfg: janus.transport.pfunix.jcfg
   janus.transport.websockets.jcfg: janus.transport.websockets.jcfg
-
-janus_installed_version: "v{{ ansible_local.janus.version if ansible_local.janus.version is defined else None }}"
-janus_upgrade_available: "{{ ansible_local.janus.version is not defined or janus_installed_version != janus_version }}"
 janus_unit_extra: []
 janus_service_unit_extra: null
 
@@ -115,3 +112,4 @@ janus_ssl_enabled: false
 janus_ssl_cert: null
 janus_ssl_key: null
 janus_ssl_passphrase: null
+janus_upgrade_available: true
