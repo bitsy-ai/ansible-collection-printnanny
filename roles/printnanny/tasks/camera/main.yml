@@ -1,3 +1,0 @@
-- include_tasks: camera/gstreamer.yml
-- include_tasks: camera/nnstreamer.yml
-- include_tasks: camera/systemd.yml

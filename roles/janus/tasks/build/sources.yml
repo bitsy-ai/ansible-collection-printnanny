@@ -73,7 +73,7 @@
   register: job
   until: job.finished
   retries: 30
-  delay: 10
+
 
 - name: Check clone_libnice status
   async_status:
@@ -81,7 +81,7 @@
   register: job
   until: job.finished
   retries: 30
-  delay: 10
+
 
 - name: Check download_libwebsockets status
   async_status:
@@ -89,7 +89,7 @@
   register: job
   until: job.finished
   retries: 30
-  delay: 10
+
 
 - name: Check download_usrsctp status
   async_status:
@@ -97,7 +97,7 @@
   register: job
   until: job.finished
   retries: 30
-  delay: 10
+
 
 - name: Check download_janus status
   async_status:
@@ -105,4 +105,3 @@
   register: job
   until: job.finished
   retries: 30
-  delay: 10

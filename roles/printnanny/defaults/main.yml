@@ -140,13 +140,13 @@ nn_framework: tensorflow-lite
 nn_base_url: https://cdn.print-nanny.com/ml/print3d_20201101015829
 nn_model_url: '{{ nn_base_url }}/model.tflite'
 nn_label_url: '{{ nn_base_url }}/dict.txt'
-nn_metadata_url: '{{ nn_metadata_url }}/metadata.json'
+nn_metadata_url: '{{ nn_base_url }}/tflite_metadata.json'
 
 nn_install_dir: '{{printnanny_profile_dir}}/nn'
 
 nn_model_file: '{{ nn_install_dir }}/model.tflite'
 nn_label_file: '{{ nn_install_dir }}/dict.txt'
-nn_metadata_file: '{{ nn_install_dir }}/metadata.json'
+nn_metadata_file: '{{ nn_install_dir }}/tflite_metadata.json'
 
 ##
 # honeycomb vars

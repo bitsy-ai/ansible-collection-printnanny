@@ -1,5 +1,11 @@
-- name: 'Configure {{ printnanny_user }} user/groups'
+- name: 'Configure {{ printnanny_user }} user'
   become: true
+  ansible.builtin.user:
+    name: '{{ printnanny_user }}'
+
+- name: 'Configure {{ printnanny_user }} groups'
+  become: true
+  ignore_errors: true
   ansible.builtin.user:
     name: '{{ printnanny_user }}'
     groups:
