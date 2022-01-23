@@ -91,6 +91,7 @@
     cmd: sh autogen.sh
     chdir: "{{ janus_build_dir.path }}/build"
   when: janus_upgrade_available
+
 - name: Configure - janus build
   command:
     cmd: "./configure \

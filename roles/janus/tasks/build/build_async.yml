@@ -119,8 +119,8 @@
     jid: "{{ build_libnice.ansible_job_id }}"
   register: job
   until: job.finished
-  retries: 30
-  delay: 10
+  retries: 300
+  delay: 1
 
 ##
 # install libnice
@@ -146,8 +146,8 @@
     jid: "{{ build_srtp.ansible_job_id }}"
   register: job
   until: job.finished
-  retries: 30
-  delay: 10
+  retries: 300
+  delay: 1
 
 - name: Install libsrtp
   become: true
@@ -165,8 +165,8 @@
     jid: "{{ build_websockets.ansible_job_id }}"
   register: job
   until: job.finished
-  retries: 30
-  delay: 10
+  retries: 300
+  delay: 1
 
 - name: Install websockets library
   become: true
@@ -188,8 +188,8 @@
     jid: "{{ build_usrsctp.ansible_job_id }}"
   register: job
   until: job.finished
-  retries: 30
-  delay: 10
+  retries: 300
+  delay: 1
 
 - name: Install usrsctp
   become: true
