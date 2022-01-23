@@ -20,34 +20,6 @@
       - tty
       - video
 
-- name: Create {{ printnanny_data_dir }}
-  become: true
-  ansible.builtin.file:
-    path: "{{ printnanny_data_dir }}"
-    state: directory
-    owner: "{{ printnanny_user }}"
-    group: "{{ printnanny_group }}"
-    mode: 0775
-    recurse: true
-
-- name: Create {{ printnanny_keys_dir }}
-  become: true
-  ansible.builtin.file:
-    path: "{{ printnanny_keys_dir }}"
-    state: directory
-    owner: "{{ printnanny_user }}"
-    group: "{{ printnanny_group }}"
-    mode: 0771
-
-- name: Create {{ printnanny_backups_dir }}
-  become: true
-  ansible.builtin.file:
-    path: "{{ printnanny_backups_dir }}"
-    state: directory
-    owner: "{{ printnanny_user }}"
-    group: "{{ printnanny_group }}"
-    mode: 0775
-
 - name: Create {{ printnanny_ansible_dir }}
   become: true
   ansible.builtin.file:
