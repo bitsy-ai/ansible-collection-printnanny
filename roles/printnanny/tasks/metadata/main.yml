@@ -1,3 +1,9 @@
+- name: Create '{{ printnanny_profile_dir }}'
+  ansible.builtin.file:
+    state: directory
+    path: '{{ printnanny_profile_dir }}'
+    mode: 0755
+    owner: '{{ printnanny_user }}'
 - name: Render config.toml
   ansible.builtin.template:
     src: config.toml.j2
