@@ -1,10 +1,10 @@
 ---
 - include_tasks: users.yml
-- include_tasks: metadata/main.yml
 - name: Include Janus secrets/service
   include_role:
     name: bitsyai.rpi.janus
     tasks_from: metadata/main.yml
+- include_tasks: metadata/main.yml
 # metadata available to tasks beyond this point
 - include_tasks: boot_config.yml
 - include_tasks: apt.yml
@@ -16,5 +16,5 @@
 - include_tasks: monitor.yml
 - name: Clean ansible_async dir
   ansible.builtin.file:
-    path: "{{ lookup('env','HOME')}}/.ansible_async"
+    path: "{{ lookup('env','HOME') }}/.ansible_async"
     state: absent

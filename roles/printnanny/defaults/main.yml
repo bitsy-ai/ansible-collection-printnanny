@@ -38,7 +38,7 @@ printnanny_device_fact: /etc/ansible/facts.d/device.fact
 printnanny_license_fact: /etc/ansible/facts.d/license.fact
 printnanny_janus_fact: /etc/ansible/facts.d/janus.fact
 
-printnanny_cli_version: 0.12.6
+printnanny_cli_version: 0.12.7
 printnanny_cli_repo: 'https://github.com/bitsy-ai/printnanny-cli'
 printnanny_cli_url: '{{ printnanny_cli_repo }}/releases/download/v{{ printnanny_cli_version }}/printnanny-{{ ansible_architecture }}-unknown-linux-gnu.tar.gz'
 printnanny_www_templates_url: '{{ printnanny_cli_repo }}/releases/download/v{{ printnanny_cli_version }}/printnanny-www-templates.tar.gz'
@@ -169,3 +169,28 @@ janus_unit_extra: >-
 janus_ssl_enabled: true
 janus_ssl_cert: '{{ printnanny_ssl_cert }}'
 janus_ssl_key: '{{ printnanny_ssl_key }}'
+janus_conf:
+    janus:
+        plugins_folder: "{{ janus_install_dir }}/lib/janus/plugins"
+        transports_folder: "{{ janus_install_dir }}/lib/janus/transports"
+        events_folder: "{{ janus_install_dir }}/lib/janus/events"
+        loggers_folder: "{{ janus_install_dir }}/lib/janus/loggers"
+        log_to_stdout: true
+        debug_level: 7
+        pid_file: "/var/run/janus.pid"
+        session_timeout: 60
+        candidates_timeout: 45
+        reclaim_session_timeout: 0
+        no_webrtc_encryption: false
+        ignore_unreachable_ice_server: true
+    janus.transport.http:
+        admin_base_path: "/admin"
+        admin_http_port: 7088
+        admin_https_port: 7089
+        admin_http: true
+        admin_https: false
+        base_path: "/janus"
+        https: false
+        https_port: 8089
+        http: true
+        http_port: 8088
