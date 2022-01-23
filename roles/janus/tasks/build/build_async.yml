@@ -119,7 +119,7 @@
   register: job
   until: job.finished
   retries: 600
-  
+
 
 ##
 # install libnice
