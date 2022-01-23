@@ -7,10 +7,6 @@
     codename: focal
 
 - name: Install apt dependencies
-  become: true
-  async: 300
-  poll: 0
-  register: apt_async
   ansible.builtin.apt:
     update_cache: true
     name:
