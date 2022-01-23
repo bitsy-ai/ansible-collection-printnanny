@@ -36,8 +36,6 @@
 
 - name: 'Render {{ nn_rtp_service }}'
   become: true
-  async: 30
-  poll: 0
   ansible.builtin.template:
     mode: 0664
     src: 'camera/{{ nn_rtp_service }}.service.j2'
@@ -47,8 +45,6 @@
 
 - name: 'Render {{ nn_x_service }}'
   become: true
-  async: 30
-  poll: 0
   ansible.builtin.template:
     mode: 0664
     src: 'camera/{{ nn_x_service }}.service.j2'
