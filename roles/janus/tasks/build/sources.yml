@@ -1,0 +1,108 @@
+---
+- name: Install meson and ninja build systems
+  ansible.builtin.pip:
+    name:
+      - meson
+    virtualenv: "{{ janus_build_dir.path }}/venv"
+    virtualenv_command: /usr/bin/python3 -m venv
+    extra_args: '--no-cache-dir'
+  async: 300
+  poll: 0
+  register: install_meson
+  tags:
+    - janus
+    - setup
+    - auto_update
+
+- name: Clone libnice
+  git:
+    repo: "{{ janus_libnice_repo }}"
+    dest: "{{ janus_libnice_build_dir.path }}"
+    version: "{{ janus_libnice_version }}"
+  async: 300
+  poll: 0
+  register: clone_libnice
+  tags:
+    - janus
+    - setup
+    - auto_update
+
+- name: Clone libwebsockets
+  async: 300
+  poll: 0
+  register: download_libwebsockets
+  ansible.builtin.git:
+    repo: "{{ janus_libwebsockets_repo }}"
+    dest: "{{ janus_libwebsockets_build_dir.path }}"
+    version: "{{ janus_libwebsockets_version }}"
+  when: janus_upgrade_available
+  tags:
+    - janus
+    - setup
+    - auto_update
+
+- name: Clone usrsctp
+  async: 300
+  poll: 0
+  register: download_usrsctp
+  git:
+    repo: https://github.com/sctplab/usrsctp
+    dest: "{{ janus_usrsctp_build_dir.path }}"
+    version: "{{ janus_usrsctp_version }}"
+
+- name: Clone - janus
+  async: 300
+  poll: 0
+  register: download_janus
+  git:
+    repo: "{{ janus_repo }}"
+    dest: "{{ janus_build_dir.path }}/build"
+    version: "{{ janus_version }}"
+  when: janus_upgrade_available
+
+- name: Download and unarchive libsrtp
+  ansible.builtin.unarchive:
+    src: '{{ janus_libsrtp_tarball }}'
+    dest: "{{ janus_libsrtp_build_dir.path }}"
+    remote_src: true
+    mode: 0771
+
+- name: Check libnice_install status
+  async_status:
+    jid: "{{ install_meson.ansible_job_id }}"
+  register: job
+  until: job.finished
+  retries: 30
+  delay: 10
+
+- name: Check clone_libnice status
+  async_status:
+    jid: "{{ clone_libnice.ansible_job_id }}"
+  register: job
+  until: job.finished
+  retries: 30
+  delay: 10
+
+- name: Check download_libwebsockets status
+  async_status:
+    jid: "{{ download_libwebsockets.ansible_job_id }}"
+  register: job
+  until: job.finished
+  retries: 30
+  delay: 10
+
+- name: Check download_usrsctp status
+  async_status:
+    jid: "{{ download_usrsctp.ansible_job_id }}"
+  register: job
+  until: job.finished
+  retries: 30
+  delay: 10
+
+- name: Check download_janus status
+  async_status:
+    jid: "{{ download_janus.ansible_job_id }}"
+  register: job
+  until: job.finished
+  retries: 30
+  delay: 10

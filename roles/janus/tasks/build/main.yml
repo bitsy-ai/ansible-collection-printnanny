@@ -1,6 +1,33 @@
-# tasks file for ansible-role-- janus
-- name: Install platform dependencies
-  include_tasks: dependencies.yml
+- name: Install required platform dependencies
+  become: true
+  apt:
+    name:
+      - automake
+      - build-essential
+      - cmake
+      - cmake-data
+      - gengetopt
+      - git
+      - libconfig-dev
+      - libcurl4-openssl-dev
+      - libglib2.0-dev
+      - libjansson-dev
+      - liblua5.3-dev
+      - libmicrohttpd-dev
+      - libogg-dev
+      - libopus-dev
+      - libsofia-sip-ua-dev
+      - libssl-dev
+      - libsystemd-dev
+      - libtool
+      - ninja-build
+      - pkg-config
+      - systemd
+      - systemd-cron
+      - wget
+    state: present
+  tags:
+    - janus
 
 - name: Create temporary janus build directory
   ansible.builtin.tempfile:
@@ -43,46 +70,27 @@
     state: directory
     mode: 0775
     recurse: true
+- name: 'Create {{ janus_build_dir.path }}/venv'
+  ansible.builtin.pip:
+    name:
+      - 'pip>21,<22'
+      - setuptools
+      - wheel
+    virtualenv_command: /usr/bin/python3 -m venv
+    virtualenv: '{{ janus_build_dir.path }}/venv'
+    extra_args: '--no-cache-dir'
   tags:
     - janus
     - setup
-  when: janus_upgrade_available
-
-- name: Install libnice
-  include_tasks: libnice.yml
-  when: janus_upgrade_available
-
-# used for data channels
-# - name: Install usrsctp
-#   include_tasks: usrsctp.yml
-#   tags:
-#     - janus
-
-- name: Install libwebsockets
-  include_tasks: libwebsockets.yml
-  when: janus_upgrade_available
-
-
-- name: Install libsrtp
-  include_tasks: libsrtp.yml
-  tags:
-    - janus
-  when: janus_upgrade_available
-
-# Build - janus
-- name: Clone - janus
-  git:
-    repo: "{{ janus_repo }}"
-    dest: "{{ janus_build_dir.path }}/build"
-    version: "{{ janus_version }}"
-  when: janus_upgrade_available
-
+    - auto_update
+- include_tasks: build/sources.yml
+# first parallelizable stage of each component build
+- include_tasks: build/build_async.yml
 - name: Run - janus config autogen
   command:
     cmd: sh autogen.sh
     chdir: "{{ janus_build_dir.path }}/build"
   when: janus_upgrade_available
-
 - name: Configure - janus build
   command:
     cmd: "./configure \
