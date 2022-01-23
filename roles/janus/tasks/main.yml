@@ -19,5 +19,3 @@
     force: true
   notify:
     - restart janus
-
-- include_tasks: metadata/async_status.yml
