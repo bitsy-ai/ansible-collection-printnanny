@@ -1,0 +1,13 @@
+---
+- hosts: printnanny
+  gather_facts: true
+  vars:
+    ara_playbook_name: 'update printnanny system'
+    ara_playbook_labels:
+      - update
+      - printnanny
+      - system
+  tasks:
+    - name: Debug facts.d vars
+      ansible.builtin.debug:
+        var: ansible_local
