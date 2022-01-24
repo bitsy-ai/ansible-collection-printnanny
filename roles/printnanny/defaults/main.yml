@@ -127,7 +127,6 @@ gstreamer_rtp_port: 5004
 ##
 
 nn_rtp_service: nn-rtp
-nn_x_service: nn-x
 nn_capture_height: 720
 nn_capture_width: 1280
 nn_capture_framerate: 30
