@@ -6,24 +6,24 @@ if [[ "$1" == "x" ]]
 then
     gst-launch-1.0 \
         libcamerasrc name=cam_src ! videoconvert ! videoscale ! \
-        video/x-raw,width="{{ nn_capture_width }}",height="{{ nn_capture_height }}",format=RGB ! tee name=t_raw \
-        t_raw. ! queue leaky=2 max-size-buffers=2 ! videoscale ! video/x-raw,width="{{ nn_tensor_width }}",height="{{ nn_tensor_height }}" ! tensor_converter ! \
+        video/x-raw,width={{ nn_capture_width }},height={{ nn_capture_height }},format=RGB ! tee name=t_raw \
+        t_raw. ! queue leaky=2 max-size-buffers=2 ! videoscale ! video/x-raw,width={{ nn_tensor_width }},height={{ nn_tensor_height }} ! tensor_converter ! \
         tensor_transform mode=arithmetic option=typecast:float32,add:-127.5,div:127.5 ! \
-        tensor_filter framework=tensorflow-lite model="{{ nn_model_file }}" ! \
-        tensor_decoder mode=bounding_boxes option1=mobilenet-ssd option2="{{ nn_label_file }}" \
-        option4="{{ nn_capture_width }}:{{ nn_capture_height }}" option5="{{ nn_tensor_width }}:{{ nn_tensor_height }}" ! \
+        tensor_filter framework=tensorflow-lite model={{ nn_model_file }} ! \
+        tensor_decoder mode=bounding_boxes option1=mobilenet-ssd option2={{ nn_label_file }} \
+        option4={{ nn_capture_width }}:{{ nn_capture_height }} option5={{ nn_tensor_width }}:{{ nn_tensor_height }} ! \
         compositor name=mix sink_0::zorder=2 sink_1::zorder=1 ! videoconvert ! ximagesink \
         t_raw. ! queue leaky=2 max-size-buffers=10 ! mix.
 elif [[ "$1" == "rtp" ]]
 then
     gst-launch-1.0 \
         libcamerasrc name=cam_src ! videoconvert ! videoscale ! \
-        video/x-raw,width="{{ nn_capture_width }}",height="{{ nn_capture_height }}",format=RGB ! tee name=t_raw \
-        t_raw. ! queue leaky=2 max-size-buffers=2 ! videoscale ! video/x-raw,width="{{ nn_tensor_width }}",height="{{ nn_tensor_height }}" ! tensor_converter ! \
+        video/x-raw,width={{ nn_capture_width }},height={{ nn_capture_height }},format=RGB ! tee name=t_raw \
+        t_raw. ! queue leaky=2 max-size-buffers=2 ! videoscale ! video/x-raw,width={{ nn_tensor_width }},height={{ nn_tensor_height }} ! tensor_converter ! \
         tensor_transform mode=arithmetic option=typecast:float32,add:-127.5,div:127.5 ! \
-        tensor_filter framework=tensorflow-lite model="{{ nn_model_file }}" ! \
-        tensor_decoder mode=bounding_boxes option1=mobilenet-ssd option2="{{ nn_label_file }}" \
-        option4="{{ nn_capture_width }}:{{ nn_capture_height }}" option5="{{ nn_tensor_width }}:{{ nn_tensor_height }}" ! \
+        tensor_filter framework=tensorflow-lite model={{ nn_model_file }} ! \
+        tensor_decoder mode=bounding_boxes option1=mobilenet-ssd option2={{ nn_label_file }} \
+        option4={{ nn_capture_width }}:{{ nn_capture_height }} option5={{ nn_tensor_width }}:{{ nn_tensor_height }} ! \
         compositor name=mix sink_0::zorder=2 sink_1::zorder=1 ! videoconvert ! ximagesink \
         t_raw. ! queue leaky=2 max-size-buffers=10 ! mix. ! \
         v4l2convert ! \
@@ -31,7 +31,7 @@ then
             'video/x-h264,level=(string)4' ! \
             h264parse ! \
             rtph264pay ! \
-            udpsink host="{{ gstreamer_rtp_host }}" port="{{ gstreamer_rtp_port }}"
+            udpsink host={{ gstreamer_rtp_host }} port={{ gstreamer_rtp_port }}
 else
     echo "Unsupported sink $1 - expected x|rtp"
     exit 1
