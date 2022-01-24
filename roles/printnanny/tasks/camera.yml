@@ -62,9 +62,3 @@
     name: '{{ nn_rtp_service }}.service'
     enabled: true
     no_block: true
-
-- name: Enable nnstreamer service
-  ansible.builtin.systemd:
-    name: '{{ nn_x_service }}.service'
-    enabled: true
-    no_block: true
