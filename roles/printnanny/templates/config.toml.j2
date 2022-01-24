@@ -17,6 +17,7 @@ https_port = {{ janus_conf['janus.transport.http'].https_port }}
 [mqtt]
 private_key = "{{ printnanny_ec_private_key }}"
 public_key = "{{ printnanny_ec_private_key }}"
+ca_certs = "{{ printnanny_cacerts }}"
 fingerprint = "{{ printnanny_ec_public_key_output.fingerprint.md5 }}"
 fingerprint_algorithm = "md5"
 cipher = "secp256r1"
