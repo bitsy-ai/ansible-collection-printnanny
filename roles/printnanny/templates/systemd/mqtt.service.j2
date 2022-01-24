@@ -9,8 +9,8 @@ PartOf=printnanny.target
 Type=simple
 EnvironmentFile=-{{ printnanny_env }}
 ExecStart=/usr/local/bin/printnanny mqtt subscribe \
-    --private-key ${PRINTNANNY_ECDSA_PRIVATE_KEY} \
-    --public-key ${PRINTNANNY_ECDSA_PUBLIC_KEY} \
+    --private-key ${PRINTNANNY_EC_PRIVATE_KEY} \
+    --public-key ${PRINTNANNY_EC_PUBLIC_KEY} \
     --ca-certs ${PRINTNANNY_CA_CERTS}
 User={{ printnanny_user }}
 
