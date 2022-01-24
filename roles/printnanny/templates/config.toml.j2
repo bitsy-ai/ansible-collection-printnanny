@@ -13,3 +13,9 @@ admin_https_port = {{ janus_conf['janus.transport.http'].admin_https_port }}
 base_path = "{{ janus_conf['janus.transport.http'].base_path }}"
 http_port = {{ janus_conf['janus.transport.http'].http_port }}
 https_port = {{ janus_conf['janus.transport.http'].https_port }}
+
+[mqtt]
+private_key = "{{ printnanny_ec_private_key }}"
+public_key = "{{ printnanny_ec_private_key }}"
+fingerprint = "{{ printnanny_ec_public_key_output.fingerprint.md5 }}"
+fingerprint_algorithm = "md5"
