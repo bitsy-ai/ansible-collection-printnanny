@@ -49,23 +49,16 @@
     force: true
   notify: restart {{ nn_rtp_service }}
 
-- name: 'Render {{ nn_x_service }}'
+- name: Render printnanny-monitor
   become: true
   ansible.builtin.template:
-    mode: 0664
-    src: 'camera/{{ nn_x_service }}.service.j2'
-    dest: '/etc/systemd/system/{{ nn_x_service }}.service'
+    mode: 0755
+    src: camera/printnanny-monitor.sh.j2
+    dest: /usr/local/bin/printnanny-monitor
     force: true
-  notify: restart {{ nn_x_service }}
 
 - name: Enble rpt service
   ansible.builtin.systemd:
     name: '{{ nn_rtp_service }}.service'
-    enabled: true
-    no_block: true
-
-- name: Enble nnstreamer service
-  ansible.builtin.systemd:
-    name: '{{ nn_x_service }}.service'
     enabled: true
     no_block: true
