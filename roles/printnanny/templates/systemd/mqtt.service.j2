@@ -8,10 +8,7 @@ PartOf=printnanny.target
 [Service]
 Type=simple
 EnvironmentFile=-{{ printnanny_env }}
-ExecStart=/usr/local/bin/printnanny mqtt subscribe \
-    --private-key ${PRINTNANNY_EC_PRIVATE_KEY} \
-    --public-key ${PRINTNANNY_EC_PUBLIC_KEY} \
-    --ca-certs ${PRINTNANNY_CA_CERTS}
+ExecStart=/usr/local/bin/printnanny mqtt subscribe
 User={{ printnanny_user }}
 
 Restart=on-failure
