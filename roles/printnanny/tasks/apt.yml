@@ -40,5 +40,6 @@
       - openssh-server
       # nnstreamer
       - nnstreamer
+      - nnstreamer-tensorflow-lite
   tags:
     - auto_update
