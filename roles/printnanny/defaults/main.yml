@@ -126,13 +126,13 @@ gstreamer_rtp_port: 5004
 # nnstreamer vars
 ##
 
-nn_rtp_service: nn-rtp
+nn_rtp_service: printnanny-gst
 nn_capture_height: 720
 nn_capture_width: 1280
 nn_capture_framerate: 30
 
-nn_tensor_height: 300
-nn_tensor_width: 300
+nn_tensor_height: 320
+nn_tensor_width: 320
 
 nn_framework: tensorflow-lite
 
