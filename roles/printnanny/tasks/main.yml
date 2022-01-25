@@ -13,7 +13,6 @@
 - include_tasks: www.yml
 - include_tasks: update/main.yml
 - include_tasks: mqtt.yml
-- include_tasks: monitor.yml
 - name: Clean ansible_async dir
   ansible.builtin.file:
     path: "{{ lookup('env','HOME') }}/.ansible_async"
