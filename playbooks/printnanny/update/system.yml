@@ -21,6 +21,3 @@
         name: bitsyai.rpi.printnanny
         public: true
       when: not printnanny_profile is defined
-    - name: Include janus role
-      include_role:
-        name: bitsyai.rpi.janus
