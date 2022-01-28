@@ -19,12 +19,16 @@
         name: bitsyai.rpi.printnanny
         tasks_from: metadata/debug.yml
       when: not printnanny_profile is defined
-    - name: Set metadata
+    - name: Set Janus metadata
+      include_role:
+        name: bitsyai.rpi.janus
+        tasks_from: metadata/main.yml
+    - name: Set Print Nanny metadata
       include_role:
         name: bitsyai.rpi.printnanny
         tasks_from: metadata/main.yml
       when: not printnanny_profile is defined
-    - name: Set metadata
+    - name: Set Print Nanny metadata
       include_role:
         name: bitsyai.rpi.printnanny
         tasks_from: metadata/main.yml
