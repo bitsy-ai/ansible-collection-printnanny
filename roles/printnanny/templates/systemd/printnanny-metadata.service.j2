@@ -7,11 +7,12 @@ Wants=network.service network-online.target ansible-collection.service
 [Service]
 Type=oneshot
 RuntimeDirectory={{ printnanny_user }}
-RuntimeDirectoryPreserve=yes
+RuntimeDirectoryPreserve=restart
 ConfigurationDirectory={{ printnanny_user }}
 ExecStart={{ updater_venv }}/bin/ansible-playbook \
     bitsyai.rpi.printnanny.metadata
 Restart=on-failure
+RemainAfterExit=yes
 
 [Install]
 WantedBy=multi-user.target
