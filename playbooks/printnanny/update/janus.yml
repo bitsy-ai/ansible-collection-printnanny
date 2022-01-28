@@ -1,0 +1,12 @@
+---
+- hosts: printnanny
+  gather_facts: true
+  vars:
+    ara_playbook_name: 'update janus'
+    ara_playbook_labels:
+      - update
+      - printnanny
+      - janus
+      - system
+  roles:
+    - bitsyai.rpi.janus
