@@ -65,7 +65,7 @@
 ##
 - name: Make websockets build configs
   ansible.builtin.command:
-    cmd: cmake -DLWS_MAX_SMP=1 -DLWS_WITHOUT_EXTENSIONS=0 -DCMAKE_INSTALL_PREFIX:PATH=/usr -DCMAKE_C_FLAGS="-fpic" .
+    cmd: 'cmake -DLWS_MAX_SMP=1 -DLWS_WITHOUT_EXTENSIONS=0 -DCMAKE_INSTALL_PREFIX:PATH={{ janus_lib_prefix }} -DCMAKE_C_FLAGS="-fpic" .'
     chdir: "{{ janus_libwebsockets_build_dir.path }}"
   when: janus_upgrade_available
   tags:
@@ -146,7 +146,6 @@
   register: job
   until: job.finished
   retries: 600
-  
 
 - name: Install libsrtp
   become: true
