@@ -181,4 +181,3 @@
   ansible.builtin.file:
     path: "{{ libcamera_apps_build_dir.path }}"
     state: absent
-
