@@ -162,10 +162,9 @@ janus_install_dir: /opt/janus
 janus_admin_url: 'http://localhost:{{ janus_conf["janus.transport.http"]["admin_http_port"] }}{{ janus_conf["janus.transport.http"]["admin_base_path"] }}'
 janus_url: 'http://localhost:{{ janus_conf["janus.transport.http"]["http_port"] }}{{ janus_conf["janus.transport.http"]["base_path"] }}'
 
-janus_unit_extra: >-
+janus_unit_extra: |
     EnvironmentFile=-{{ printnanny_env }}
-    ExecStartPost=printnanny janus-admin \
-        add-token
+    ExecStartPost=printnanny janus-admin add-token
 
 janus_ssl_cert: '{{ printnanny_ssl_cert }}'
 janus_ssl_key: '{{ printnanny_ssl_key }}'
