@@ -21,6 +21,7 @@
     size: '{{ printnanny_ssl_key_size }}'
     type: '{{ printnanny_ssl_key_type }}'
     backup: true
+    owner: '{{ janus_user }}'
   tags:
     - secret
     - ssl
@@ -28,6 +29,7 @@
 
 # TODO fix country code, email, organization name, unit name
 - name: Generate self-signing request
+  become: true
   openssl_csr:
     path: '{{ printnanny_ssl_csr  }}'
     privatekey_path: '{{ printnanny_ssl_key }}'
@@ -35,6 +37,7 @@
     email_address: '{{ printnanny_ssl_email_address }}'
     organization_name: '{{ printnanny_ssl_organization_name }}'
     common_name: '{{ inventory_hostname }}'
+    owner: '{{ janus_user }}'
   tags:
     - secret
     - ssl
@@ -46,6 +49,7 @@
     path: '{{ printnanny_ssl_cert }}'
     privatekey_path: '{{ printnanny_ssl_key }}'
     provider: selfsigned
+    owner: '{{ janus_user }}'
   tags:
     - secret
     - ssl
