@@ -1,8 +1,15 @@
 ---
+- name: Stat janus binary
+  ansible.builtin.stat:
+    path: /opt/janus/bin/janus
+  register: janus_bin
+
 - name: Set janus_upgrade_available
   ansible.builtin.set_fact:
-    janus_upgrade_available: "{{ ansible_local['janus']['version'] != janus_version }}"
-  when: ansible_local.janus is defined
+    # TODO re-enable dynamic version/upgrade check
+    # janus_upgrade_available: "{{ ansible_local['janus']['version'] != janus_version }}"
+    # for now, just default to false if janus binary is installed
+    janus_upgrade_available: "{{ janus_bin.stat.exists == False }}"
 
 - name: print janus_version
   ansible.builtin.debug:
