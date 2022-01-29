@@ -17,9 +17,9 @@ ExecStart={{janus_install_dir}}/bin/janus \
     --pid-file={{ janus_pid_file }}
 
 ExecStartPost=/usr/bin/sleep {{ janus_startup_delay }}
-{% for cmd in janus_unit_extra %}
-ExecStartPost={{ cmd }}
-{% endfor %}
+{% if janus_unit_extra is not none %}
+{{ janus_unit_extra }}
+{% endif %}
 Restart=on-failure
 RestartSec=30
 LimitNOFILE=65536

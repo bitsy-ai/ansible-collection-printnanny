@@ -96,7 +96,7 @@ janus_conf_template:
   janus.transport.http.jcfg: janus.transport.http.jcfg
   janus.transport.pfunix.jcfg: janus.transport.pfunix.jcfg
   janus.transport.websockets.jcfg: janus.transport.websockets.jcfg
-janus_unit_extra: []
+janus_unit_extra: null
 janus_service_unit_extra: null
 
 janus_startup_delay: 30
