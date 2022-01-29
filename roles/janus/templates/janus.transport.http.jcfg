@@ -75,6 +75,8 @@ certificates: {
 	{% if janus_ssl_passphrase is not none %}
 	cert_pwd = "{{ janus_ssl_passphrase }}"
 	{% endif %}
+	{% if janus_ssl_ciphers is not none %}
 	ciphers = "{{ janus_ssl_ciphers }}"
+	{% endif %}
 }
 {% endif %}
