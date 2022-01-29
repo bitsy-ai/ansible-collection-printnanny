@@ -169,3 +169,16 @@
   tags:
     - libcamera
     - setup
+
+- name: "Delete libcamera build directory"
+  become: true
+  ansible.builtin.file:
+    path: "{{ libcamera_build_dir.path }}"
+    state: absent
+
+- name: "Delete libcamera-apps build directory"
+  become: true
+  ansible.builtin.file:
+    path: "{{ libcamera_apps_build_dir.path }}"
+    state: absent
+
