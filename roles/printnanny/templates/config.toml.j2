@@ -17,7 +17,10 @@ https_port = {{ janus_conf['janus.transport.http'].https_port }}
 [mqtt]
 private_key = "{{ printnanny_ec_private_key }}"
 public_key = "{{ printnanny_ec_public_key }}"
-ca_certs = "{{ printnanny_cacerts }}"
+ca_certs = [
+    "{{ printnanny_cacerts }}/{{ gcp_lts_ca_primary | basename }}",
+    "{{ printnanny_cacerts }}/{{ gcp_lts_ca_backup| basename }}"
+]
 {% if printnanny_ec_public_key_output is defined %}
 fingerprint = "{{ printnanny_ec_public_key_output.fingerprint.md5 }}"
 {% endif %}
