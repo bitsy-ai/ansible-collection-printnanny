@@ -51,7 +51,7 @@
 - name: Clone libcamera
   ansible.builtin.git:
     repo: "{{ libcamera_apps_repo }}"
-    dest: "{{ libcamera_app_build_dir.path }}"
+    dest: "{{ libcamera_apps_build_dir.path }}"
     version: "{{ libcamera_appsversion }}"
   async: 300
   poll: 0
