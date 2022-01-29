@@ -5,7 +5,6 @@
   ansible.builtin.apt:
     name:
       # libcamera
-      - jinja2
       - python3-pip
       - libboost-dev
       - libgnutls28-dev
@@ -73,6 +72,7 @@
       - meson
       - ply
       - pyyaml
+      - jinja2
     virtualenv: "{{ libcamera_build_dir.path }}/venv"
     virtualenv_command: /usr/bin/python3 -m venv
     extra_args: '--no-cache-dir'
