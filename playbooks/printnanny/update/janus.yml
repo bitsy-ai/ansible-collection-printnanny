@@ -8,5 +8,9 @@
       - printnanny
       - janus
       - system
-  roles:
-    - bitsyai.rpi.janus
+  tasks:
+    - name: Include roles/printnanny/defaults
+      include_vars: ../../../roles/printnanny/defaults/main.yml
+    - name: Include janus role
+      include_role:
+        name: bitsyai.rpi.janus
