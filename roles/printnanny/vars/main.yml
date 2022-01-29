@@ -1,0 +1,89 @@
+---
+printnanny_monitoring_service: printnanny-monitoring.service
+# begin gstreamer vars
+gstreamer_service_name: gstreamer.service
+
+# begin honeycomb
+# write-only event key
+honeycomb_dataset: 'printnanny_os'
+honeycomb_api_key: '22ffab0ec6af32b2be565bc831555e44'
+# end honecomb
+
+# begin janus vars
+janus_admin_secret_file: '{{ printnanny_keys_dir }}/janus_admin_secret'
+janus_token_file: '{{ printnanny_keys_dir }}/janus_token'
+
+janus_service_name: janus.service
+janus_service_unit_extra: |
+  After={{ gstreamer_service_name }}
+  PartOf={{ printnanny_monitoring_service }}
+
+janus_user: janus
+janus_groups:
+  - printnanny
+  - video
+janus_install_dir: /opt/janus
+janus_conf:
+  janus:
+    plugins_folder: "{{ janus_install_dir }}/lib/janus/plugins"
+    transports_folder: "{{ janus_install_dir }}/lib/janus/transports"
+    events_folder: "{{ janus_install_dir }}/lib/janus/events"
+    loggers_folder: "{{ janus_install_dir }}/lib/janus/loggers"
+    log_to_stdout: true
+    debug_level: 4
+    daemonize: false
+    pid_file: "/var/run/janus.pid"
+    session_timeout: 60
+    candidates_timeout: 45
+    reclaim_session_timeout: 0
+    no_webrtc_encryption: false
+    ignore_unreachable_ice_server: true
+  janus.transport.http:
+    admin_base_path: "/admin"
+    admin_http_port: 7088
+    admin_https_port: 7889
+    admin_http: true
+    admin_https: false
+    base_path: "/janus"
+    https: false
+    https_port: 8089
+    http: true
+    http_port: 8088
+
+janus_conf_template:
+  janus.eventhandler.gelfevh.jcfg: janus.eventhandler.gelfevh.jcfg
+  janus.eventhandler.sampleevh.jcfg: janus.eventhandler.sampleevh.jcfg
+  janus.eventhandler.wsevh.jcfg: janus.eventhandler.wsevh.jcfg
+  janus.jcfg: janus.jcfg
+  janus.plugin.audiobridge.jcfg: janus.plugin.audiobridge.jcfg
+  janus.plugin.echotest.jcfg: janus.plugin.echotest.jcfg
+  janus.plugin.nosip.jcfg: janus.plugin.nosip.jcfg
+  janus.plugin.recordplay.jcfg: janus.plugin.recordplay.jcfg
+  janus.plugin.sip.jcfg: janus.plugin.sip.jcfg
+  janus.plugin.streaming.jcfg: janus.plugin.streaming.jcfg
+  janus.plugin.textroom.jcfg: janus.plugin.textroom.jcfg
+  janus.plugin.videocall.jcfg: janus.plugin.videocall.jcfg
+  janus.plugin.voicemail.jcfg: janus.plugin.voicemail.jcfg
+  janus.transport.http.jcfg: janus.transport.http.jcfg
+  janus.transport.pfunix.jcfg: janus.transport.pfunix.jcfg
+  janus.transport.websockets.jcfg: janus.transport.websockets.jcfg
+
+
+janus_admin_url: 'http://localhost:{{ janus_conf["janus.transport.http"]["admin_http_port"] }}{{ janus_conf["janus.transport.http"]["admin_base_path"] }}'
+janus_url: 'http://localhost:{{ janus_conf["janus.transport.http"]["http_port"] }}{{ janus_conf["janus.transport.http"]["base_path"] }}'
+
+janus_exec_start_post:
+  - >-
+    printnanny
+    janus-admin
+    --host {{ janus_admin_url }}
+    add-token
+    --token ${JANUS_TOKEN}
+    --adminsecret ${JANUS_ADMIN_SECRET}
+
+janus_ssl_cert: '{{ printnanny_ssl_cert }}'
+janus_ssl_key: '{{ printnanny_ssl_key }}'
+
+# updater service defined in updater vars section below
+janus_updater: printnanny-update-janus
+# end janus vars
