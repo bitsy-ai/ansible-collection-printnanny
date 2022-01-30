@@ -27,6 +27,7 @@
       - libboost-program-options-dev
       - libdrm-dev
       - libexif-dev
+      - libpng-dev
       - g++
 
 - name: Create temporary libcamera build directory
