@@ -1,0 +1,204 @@
+- name: Install libcamera build deps
+  async: 300
+  poll: 0
+  register: apt_libcamera
+  ansible.builtin.apt:
+    name:
+      # libcamera
+      - libboost-dev
+      - libgnutls28-dev
+      - openssl
+      - libtiff5-dev
+      - qtbase5-dev
+      - libqt5core5a
+      - libqt5gui5
+      - libqt5widgets5
+      - libglib2.0-dev
+      - libgstreamer-plugins-base1.0-dev
+      # libcamera-apps
+      - cmake
+      - libboost-program-options-dev
+      - libdrm-dev
+      - libexif-dev
+      - g++
+
+- name: Remove libcamera apt packages
+  become: true
+  ansible.builtin.apt:
+    state: absent
+    name:
+      - libcamera0
+      - libcamera-apps
+
+
+- name: Create temporary libcamera build directory
+  ansible.builtin.tempfile:
+    state: directory
+    prefix: libcamera
+  register: libcamera_build_dir
+
+- name: Create temporary libcamera-apps build directory
+  ansible.builtin.tempfile:
+    state: directory
+    prefix: libcamera-apps
+  register: libcamera_apps_build_dir
+
+- name: Clone libcamera
+  ansible.builtin.git:
+    repo: "{{ libcamera_repo }}"
+    dest: "{{ libcamera_build_dir.path }}"
+    version: "{{ libcamera_version }}"
+  async: 300
+  poll: 0
+  register: clone_libcamera
+  tags:
+    - libcamera
+    - setup
+
+- name: Clone libcamera
+  ansible.builtin.git:
+    repo: "{{ libcamera_apps_repo }}"
+    dest: "{{ libcamera_apps_build_dir.path }}"
+    version: "{{ libcamera_apps_version }}"
+  async: 300
+  poll: 0
+  register: clone_libcamera_apps
+  environment:
+    GIT_SSL_NO_VERIFY: true
+  tags:
+    - libcamera
+    - setup
+
+- name: Check apt install status
+  async_status:
+    jid: "{{ apt_libcamera.ansible_job_id }}"
+  register: job
+  until: job.finished
+  retries: 30
+
+- name: Install meson and ninja build systems
+  ansible.builtin.pip:
+    name:
+      - meson
+      - ply
+      - pyyaml
+      - jinja2
+      - ninja
+    virtualenv: "{{ libcamera_build_dir.path }}/venv"
+    virtualenv_command: /usr/bin/python3 -m venv
+    extra_args: '--no-cache-dir'
+  async: 300
+  poll: 0
+  register: install_meson
+  tags:
+    - libcamera
+    - setup
+
+- name: Check venv install status
+  async_status:
+    jid: "{{ install_meson.ansible_job_id }}"
+  register: job
+  until: job.finished
+  retries: 30
+
+- name: Check clone libcamera repo status
+  async_status:
+    jid: "{{ clone_libcamera.ansible_job_id }}"
+  register: job
+  until: job.finished
+  retries: 30
+
+- name: Check clone libcamera-apps repo status
+  async_status:
+    jid: "{{ clone_libcamera_apps.ansible_job_id }}"
+  register: job
+  until: job.finished
+  retries: 30
+
+# TODO
+# the following build params are for Raspberry Pi OS (Desktop)
+- name: Run libcamera meson build
+  ansible.builtin.shell:
+    cmd: ". {{ libcamera_build_dir.path }}/venv/bin/activate && \
+        meson build --buildtype=release -Dpipelines=raspberrypi -Dipas=raspberrypi -Dv4l2=true \
+        -Dgstreamer=enabled -Dtest=false -Dlc-compliance=disabled \
+        -Dcam=disabled -Dqcam=enabled -Ddocumentation=disabled"
+    chdir: "{{ libcamera_build_dir.path }}"
+  tags:
+    - libcamera
+    - setup
+
+# TODO support slim / headless build params
+- name: Run libcamera ninja build
+  ansible.builtin.shell:
+    cmd: ". {{ libcamera_build_dir.path }}/venv/bin/activate && ninja -C build"
+    chdir: "{{ libcamera_build_dir.path }}"
+  tags:
+    - libcamera
+    - setup
+
+- name: Run libcamera ninja build
+  become: true
+  ansible.builtin.shell:
+    cmd: ". {{ libcamera_build_dir.path }}/venv/bin/activate && ninja -C build install"
+    chdir: "{{ libcamera_build_dir.path }}"
+  tags:
+    - libcamera
+    - setup
+
+- name: Create libcamera-apps/build dir
+  ansible.builtin.file:
+    state: directory
+    path: "{{ libcamera_apps_build_dir.path }}/build"
+  tags:
+    - libcamera
+    - setup
+
+# TODO support slim / headless params
+# https://www.raspberrypi.com/documentation/accessories/camera.html#building-libcamera-apps
+# cmake .. -DENABLE_DRM=1 -DENABLE_X11=0 -DENABLE_QT=0 -DENABLE_OPENCV=0 -DENABLE_TFLITE=0
+- name: Run libcamera-apps cmake
+  ansible.builtin.command:
+    cmd: "cmake .. -DENABLE_DRM=1 -DENABLE_X11=1 -DENABLE_QT=1 -DENABLE_OPENCV=0 -DENABLE_TFLITE=0"
+    chdir: "{{ libcamera_apps_build_dir.path }}/build"
+  tags:
+    - libcamera
+    - setup
+
+- name: Run libcamera-apps make
+  ansible.builtin.command:
+    cmd: "make -j4"
+    chdir: "{{ libcamera_apps_build_dir.path }}/build"
+  tags:
+    - libcamera
+    - setup
+
+- name: Run libcamera-apps make
+  become: true
+  ansible.builtin.command:
+    cmd: "make install"
+    chdir: "{{ libcamera_apps_build_dir.path }}/build"
+  tags:
+    - libcamera
+    - setup
+
+- name: Run libcamera-apps make
+  become: true
+  ansible.builtin.command:
+    cmd: "ldconfig"
+    chdir: "{{ libcamera_apps_build_dir.path }}/build"
+  tags:
+    - libcamera
+    - setup
+
+- name: "Delete libcamera build directory"
+  become: true
+  ansible.builtin.file:
+    path: "{{ libcamera_build_dir.path }}"
+    state: absent
+
+- name: "Delete libcamera-apps build directory"
+  become: true
+  ansible.builtin.file:
+    path: "{{ libcamera_apps_build_dir.path }}"
+    state: absent
