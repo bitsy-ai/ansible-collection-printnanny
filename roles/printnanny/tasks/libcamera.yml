@@ -22,6 +22,15 @@
       - libexif-dev
       - g++
 
+- name: Remove libcamera apt packages
+  become: true
+  ansible.builtin.apt:
+    state: absent
+    name:
+      - libcamera0
+      - libcamera-apps
+
+
 - name: Create temporary libcamera build directory
   ansible.builtin.tempfile:
     state: directory
