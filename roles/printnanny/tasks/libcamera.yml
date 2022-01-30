@@ -46,6 +46,8 @@
     repo: "{{ libcamera_repo }}"
     dest: "{{ libcamera_build_dir.path }}"
     version: "{{ libcamera_version }}"
+  environment:
+    GIT_SSL_NO_VERIFY: true
   async: 300
   poll: 0
   register: clone_libcamera
@@ -61,8 +63,6 @@
   async: 300
   poll: 0
   register: clone_libcamera_apps
-  environment:
-    GIT_SSL_NO_VERIFY: true
   tags:
     - libcamera
     - setup

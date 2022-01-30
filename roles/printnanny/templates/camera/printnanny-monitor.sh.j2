@@ -1,41 +1,21 @@
 #!/usr/bin/env bash
 
-echo "Launching gstreamer app to sink $1"
-
-if [[ "$1" == "x" ]]
-then
-    gst-launch-1.0 --verbose libcamerasrc name=cam_src ! \
-        video/x-raw,width=640,height=480,format=RGB,framerate=30/1 ! \
-        tee name=t \
-            t. ! queue leaky=2 ! timeoverlay ! compositor name=mix sink_0::zorder=1 sink_1::zorder=2 ! videoconvert ! fpsdisplaysink video-sink=ximagesink \
-            t. ! \
-                queue leaky=2 max-size-buffers=2 ! \
-                videoscale ! video/x-raw,width=320,height=320,format=RGB ! \
-                tensor_converter ! \
-                tensor_transform mode=arithmetic option=typecast:uint8,add:0,div:1 \
-                ! tensor_filter framework=tensorflow2-lite model=/opt/printnanny/default/nn/model.tflite \
-                ! tensor_decoder mode=bounding_boxes option1=mobilenet-ssd-postprocess option2=/opt/printnanny/default/nn/dict.txt option3=0:1:2:3,50 option4=640:480 option5=320:320 \
-                ! mix.
-elif [[ "$1" == "rtp" ]]
-then
-    gst-launch-1.0 --verbose libcamerasrc name=cam_src ! \
-        video/x-raw,width=640,height=480,format=RGB,framerate=30/1 ! \
-        tee name=t \
-            t. ! queue leaky=2 ! timeoverlay ! compositor name=mix sink_0::zorder=1 sink_1::zorder=2 ! v4l2convert ! \
-                v4l2h264enc extra-controls="controls,repeat_sequence_header=1" ! \
-                'video/x-h264,level=(string)4' ! \
-                h264parse ! \
-                rtph264pay ! \
-                udpsink host={{ gstreamer_rtp_host }} port={{ gstreamer_rtp_port }} \
-            t. ! \
-                queue leaky=2 max-size-buffers=2 ! \
-                videoscale ! video/x-raw,width=320,height=320,format=RGB ! \
-                tensor_converter ! \
-                tensor_transform mode=arithmetic option=typecast:uint8,add:0,div:1 \
-                ! tensor_filter framework=tensorflow2-lite model=/opt/printnanny/default/nn/model.tflite \
-                ! tensor_decoder mode=bounding_boxes option1=mobilenet-ssd-postprocess option2=/opt/printnanny/default/nn/dict.txt option3=0:1:2:3,50 option4=640:480 option5=320:320 \
-                ! mix.
-else
-    echo "Unsupported sink $1 - expected x|rtp"
-    exit 1
-fi
+gst-launch-1.0 libcamerasrc ! capsfilter caps=video/x-raw,width={{ gstreamer_video_w }},height={{ gstreamer_video_h }},format=RGB \
+    ! tee name=t \
+        ! queue leaky=2 \
+        ! v4l2convert \
+        ! "video/x-raw,format=RGB,width={{ nn_tensor_width }},height={{ nn_tensor_height }}" \
+        ! tensor_converter \
+        ! tensor_transform mode=arithmetic option=typecast:uint8,add:0,div:1 \
+        ! tensor_filter framework=tensorflow2-lite model=/opt/printnanny/default/nn/model.tflite \
+        ! tensor_decoder mode=bounding_boxes option1=mobilenet-ssd-postprocess option2=/opt/printnanny/default/nn/dict.txt option3=0:1:2:3,{{ nn_threshold }} option4={{ gstreamer_video_w }}:{{ gstreamer_video_h}} option5={{ nn_tensor_width}}:{{ nn_tensor_height}} \
+        ! capssetter caps="video/x-raw,format=RGB,width={{ gstreamer_video_w }},height={{ gstreamer_video_h }}" \
+        ! v4l2convert \
+        ! v4l2h264enc extra-controls="controls,repeat_sequence_header=1" \
+        ! 'video/x-h264,width={{ gstreamer_video_w }},height={{ gstreamer_video_h }},level=(string)4' \
+        ! h264parse ! rtph264pay ! udpsink host=localhost port={{ nn_rtp_port }} \
+        t. ! queue leaky=2 \
+        ! v4l2convert \
+        ! v4l2h264enc extra-controls="controls,repeat_sequence_header=1" \
+        ! 'video/x-h264,width={{ gstreamer_video_w }},height={{ gstreamer_video_h }},level=(string)4' \
+        ! h264parse ! rtph264pay ! udpsink host=localhost port={{ cam_rtp_port }}
