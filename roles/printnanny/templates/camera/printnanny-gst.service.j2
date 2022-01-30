@@ -8,6 +8,7 @@ PartOf=printnanny.target
 Type=simple
 User={{ printnanny_user }}
 ExecStart=/usr/local/bin/printnanny-monitor
+Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target
