@@ -1,4 +1,3 @@
-
 - name: Remove libcamera apt packages
   become: true
   ansible.builtin.apt:
