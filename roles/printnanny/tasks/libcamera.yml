@@ -200,3 +200,8 @@
   ansible.builtin.file:
     path: "{{ libcamera_apps_build_dir.path }}"
     state: absent
+
+- name: Determine if libcamera installed
+  ansible.builtin.set_fact:
+    libcamera_installed: '{{ libcamera_version }}'
+    cacheable: true
