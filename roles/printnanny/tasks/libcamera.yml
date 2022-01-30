@@ -13,7 +13,6 @@
       - libqt5core5a
       - libqt5gui5
       - libqt5widgets5
-      - meson
       - libglib2.0-dev
       - libgstreamer-plugins-base1.0-dev
       # libcamera-apps
@@ -109,9 +108,9 @@
 # TODO
 # the following build params are for Raspberry Pi OS (Desktop)
 - name: Run libcamera meson build
-  ansible.builtin.command:
-    cmd: "{{ libcamera_build_dir.path }}/venv/bin/python3 -m meson \
-        --buildtype=release -Dpipelines=raspberrypi -Dipas=raspberrypi -Dv4l2=true \
+  ansible.builtin.shell:
+    cmd: "source {{ libcamera_build_dir.path }}/venv/bin/activate && \
+        meson --buildtype=release -Dpipelines=raspberrypi -Dipas=raspberrypi -Dv4l2=true \
         -Dgstreamer=enabled -Dtest=false -Dlc-compliance=disabled \
         -Dcam=disabled -Dqcam=enabled -Ddocumentation=disabled"
     chdir: "{{ libcamera_build_dir.path }}"
@@ -121,8 +120,8 @@
 
 # TODO support slim / headless build params
 - name: Run libcamera ninja build
-  ansible.builtin.command:
-    cmd: "{{ libcamera_build_dir.path }}/venv/bin/python3 -m ninja -C build"
+  ansible.builtin.shell:
+    cmd: "source {{ libcamera_build_dir.path }}/venv/bin/activate && ninja -C build"
     chdir: "{{ libcamera_build_dir.path }}"
   tags:
     - libcamera
@@ -130,8 +129,8 @@
 
 - name: Run libcamera ninja build
   become: true
-  ansible.builtin.command:
-    cmd: "{{ libcamera_build_dir.path }}/venv/bin/python3 -m ninja -C build install"
+  ansible.builtin.shell:
+    cmd: "source {{ libcamera_build_dir.path }}/venv/bin/activate && ninja -C build install"
     chdir: "{{ libcamera_build_dir.path }}"
   tags:
     - libcamera
