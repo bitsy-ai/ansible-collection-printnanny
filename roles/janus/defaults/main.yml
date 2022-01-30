@@ -13,9 +13,6 @@ janus_auth: {}
 
 cam_rtp_port: 5104
 nn_rtp_port: 5105
-
-janus_build_source: true
-
 janus_build_extras:
   audiobridge: false
   mqtt: false
