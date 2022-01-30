@@ -5,7 +5,6 @@
   ansible.builtin.apt:
     name:
       # libcamera
-      - python3-pip
       - libboost-dev
       - libgnutls28-dev
       - openssl
@@ -22,6 +21,7 @@
       - libboost-program-options-dev
       - libdrm-dev
       - libexif-dev
+      - g++
 
 - name: Create temporary libcamera build directory
   ansible.builtin.tempfile:
