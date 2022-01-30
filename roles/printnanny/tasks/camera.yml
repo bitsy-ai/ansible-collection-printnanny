@@ -78,4 +78,4 @@
 
 - name: Import libcamera tasks
   include_tasks: libcamera.yml
-  when: libcamera_installed
+  when: not libcamera_installed
