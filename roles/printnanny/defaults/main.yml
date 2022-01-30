@@ -124,22 +124,24 @@ ara_argument_labels: check,subset,tags
 # gstreamer vars
 ##
 
+cam_rtp_port: 5104
 gstreamer_num_buffers: 3
 gstreamer_config_interval: 1
 gstreamer_video_src: 'v4l2src'
 
-gstreamer_video_w: 1280
-gstreamer_video_h: 720
+# TODO select from output of:
+# libcamera-vid --list-camera
+gstreamer_video_w: 1920
+gstreamer_video_h: 1080
 gstreamer_rtp_host: "127.0.0.1"
-gstreamer_rtp_port: 5004
 
 ##
 # nnstreamer vars
 ##
 
+nn_threshold: 50
+nn_rtp_port: 5105
 nn_rtp_service: printnanny-gst
-nn_capture_height: 720
-nn_capture_width: 1280
 nn_capture_framerate: 30
 
 nn_tensor_height: 320

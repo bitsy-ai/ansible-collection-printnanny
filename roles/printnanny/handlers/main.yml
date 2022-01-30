@@ -60,10 +60,10 @@
     state: restarted
     no_block: true
 
-- name: restart {{ nn_x_service }}
+- name: restart {{ cam_rtp_service }}
   become: true
   ansible.builtin.systemd:
     daemon_reload: true
-    name: '{{ nn_x_service }}'
+    name: '{{ cam_rtp_service }}'
     state: restarted
     no_block: true
