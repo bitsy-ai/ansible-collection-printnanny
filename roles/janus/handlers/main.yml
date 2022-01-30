@@ -8,3 +8,8 @@
     name: janus
     enabled: true
     no_block: true
+
+- name: ldconfig
+  become: true
+  ansible.builtin.command:
+    cmd: ldconfig
