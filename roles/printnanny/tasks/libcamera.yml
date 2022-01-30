@@ -4,7 +4,6 @@
     state: absent
     name:
       - libcamera0
-      - libcamera-apps
 
 - name: Install libcamera build deps
   async: 300
