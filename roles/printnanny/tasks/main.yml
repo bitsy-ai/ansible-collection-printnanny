@@ -8,7 +8,6 @@
 # metadata available to tasks beyond this point
 - include_tasks: boot_config.yml
 - include_tasks: apt.yml
-- include_tasks: libcamera.yml
 - include_tasks: camera.yml
 - include_tasks: cli.yml
 - include_tasks: www.yml
