@@ -35,6 +35,7 @@
 - include_tasks: metadata/env.yml
 - include_tasks: metadata/cert.yml
 - include_tasks: metadata/secrets.yml
+
 - name: Render config.toml
   ansible.builtin.template:
     src: config.toml.j2
@@ -43,5 +44,6 @@
     force: true
     owner: '{{ printnanny_user }}'
   notify:
+    - restart printnanny-metadata
     - restart printnanny-dash
     - restart mqtt

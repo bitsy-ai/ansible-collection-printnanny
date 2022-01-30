@@ -27,6 +27,7 @@
       - libboost-program-options-dev
       - libdrm-dev
       - libexif-dev
+      - libpng-dev
       - g++
 
 - name: Create temporary libcamera build directory
@@ -171,7 +172,7 @@
     - libcamera
     - setup
 
-- name: Run libcamera-apps make
+- name: Run libcamera-apps make install
   become: true
   ansible.builtin.command:
     cmd: "make install"
@@ -180,11 +181,10 @@
     - libcamera
     - setup
 
-- name: Run libcamera-apps make
+- name: Run ldconfig
   become: true
   ansible.builtin.command:
     cmd: "ldconfig"
-    chdir: "{{ libcamera_apps_build_dir.path }}/build"
   tags:
     - libcamera
     - setup
