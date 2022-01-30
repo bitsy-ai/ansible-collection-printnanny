@@ -1,3 +1,12 @@
+
+- name: Remove libcamera apt packages
+  become: true
+  ansible.builtin.apt:
+    state: absent
+    name:
+      - libcamera0
+      - libcamera-apps
+
 - name: Install libcamera build deps
   async: 300
   poll: 0
@@ -21,15 +30,6 @@
       - libdrm-dev
       - libexif-dev
       - g++
-
-- name: Remove libcamera apt packages
-  become: true
-  ansible.builtin.apt:
-    state: absent
-    name:
-      - libcamera0
-      - libcamera-apps
-
 
 - name: Create temporary libcamera build directory
   ansible.builtin.tempfile:
