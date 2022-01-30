@@ -11,6 +11,9 @@ printnanny_ssl_key: '{{ printnanny_ssl_key_dir}}/janus.pem'
 printnanny_ssl_csr: '{{ printnanny_ssl_csr_dir }}/janus.csr'
 janus_auth: {}
 
+cam_rtp_port: 5104
+nn_rtp_port: 5105
+
 janus_build_source: true
 
 janus_build_extras:
