@@ -1,0 +1,20 @@
+- name: Create /etc/ld.so.conf.d/
+  become: true
+  ansible.builtin.file:
+    path: /etc/ld.so.conf.d/
+    state: directory
+    mode: 0755
+    owner: root
+    group: root
+
+- name: Configure ld library path
+  become: true
+  ansible.builtin.template:
+    src: ldconfig.j2
+    dest: /etc/ld.so.conf.d/99local.conf
+    owner: root
+    group: root
+    mode: 0644
+    force: true
+  notify:
+    - ldconfig

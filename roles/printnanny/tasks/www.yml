@@ -38,6 +38,10 @@
     owner: '{{ printnanny_user }}'
     group: '{{ printnanny_user }}'
   when: printnanny_www_secret_key is defined
+  tags:
+    - secret
+    - env
+    - metadata
   notify:
     - restart printnanny-dash
 
