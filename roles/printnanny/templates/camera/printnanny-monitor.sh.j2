@@ -17,5 +17,5 @@ gst-launch-1.0 libcamerasrc ! capsfilter caps=video/x-raw,width={{ gstreamer_vid
         t. ! queue leaky=2 \
         ! v4l2convert \
         ! v4l2h264enc extra-controls="controls,repeat_sequence_header=1" \
-        ! 'video/x-h264,width={{ gstreamer_width_w }},height={{ gstreamer_video_h }},level=(string)4' \
+        ! 'video/x-h264,width={{ gstreamer_video_w }},height={{ gstreamer_video_h }},level=(string)4' \
         ! h264parse ! rtph264pay ! udpsink host=localhost port={{ cam_rtp_port }}
