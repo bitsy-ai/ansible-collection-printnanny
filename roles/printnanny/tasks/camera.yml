@@ -63,11 +63,6 @@
     enabled: true
     no_block: true
 
-- name: Get current ldconfig
-  ansible.builtin.command:
-    cmd: ldconfig --print-cache
-  register: ldconfig_cache
-
 - name: Import libcamera tasks
   include_tasks: libcamera.yml
   when: libcamera_installed is not defined or libcamera_installed != libcamera_version
