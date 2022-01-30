@@ -110,18 +110,16 @@
 # the following build params are for Raspberry Pi OS (Desktop)
 - name: Run libcamera meson build
   ansible.builtin.command:
-    cmd: "meson build --buildtype=release -Dpipelines=raspberrypi -Dipas=raspberrypi -Dv4l2=true -Dgstreamer=enabled -Dtest=false -Dlc-compliance=disabled -Dcam=disabled -Dqcam=enabled -Ddocumentation=disabled"
+    cmd: "{{ libcamera_build_dir.path }}/venv/bin/meson build --buildtype=release -Dpipelines=raspberrypi -Dipas=raspberrypi -Dv4l2=true -Dgstreamer=enabled -Dtest=false -Dlc-compliance=disabled -Dcam=disabled -Dqcam=enabled -Ddocumentation=disabled"
     chdir: "{{ libcamera_build_dir.path }}"
   tags:
     - libcamera
     - setup
 
 # TODO support slim / headless build params
-# 
-
 - name: Run libcamera ninja build
   ansible.builtin.command:
-    cmd: "ninja -C build"
+    cmd: "{{ libcamera_build_dir.path }}/venv/bin/ninja -C build"
     chdir: "{{ libcamera_build_dir.path }}"
   tags:
     - libcamera
