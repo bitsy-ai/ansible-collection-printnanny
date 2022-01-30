@@ -48,6 +48,6 @@
       - openssh-server
       # nnstreamer
       - nnstreamer
-      - nnstreamer-tensorflow-lite
+      - nnstreamer-tensorflow2-lite
   tags:
     - auto_update
