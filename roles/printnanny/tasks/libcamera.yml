@@ -149,7 +149,7 @@
 - name: Create libcamera-apps/build dir
   ansible.builtin.file:
     state: directory
-    chdir: "{{ libcamera_apps_build_dir.path }}/build"
+    path: "{{ libcamera_apps_build_dir.path }}/build"
   tags:
     - libcamera
     - setup
