@@ -110,7 +110,7 @@
 - name: Run libcamera meson build
   ansible.builtin.shell:
     cmd: ". {{ libcamera_build_dir.path }}/venv/bin/activate && \
-        meson --buildtype=release -Dpipelines=raspberrypi -Dipas=raspberrypi -Dv4l2=true \
+        meson build --buildtype=release -Dpipelines=raspberrypi -Dipas=raspberrypi -Dv4l2=true \
         -Dgstreamer=enabled -Dtest=false -Dlc-compliance=disabled \
         -Dcam=disabled -Dqcam=enabled -Ddocumentation=disabled"
     chdir: "{{ libcamera_build_dir.path }}"
