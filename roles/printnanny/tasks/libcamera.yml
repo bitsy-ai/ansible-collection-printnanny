@@ -74,6 +74,7 @@
       - ply
       - pyyaml
       - jinja2
+      - ninja
     virtualenv: "{{ libcamera_build_dir.path }}/venv"
     virtualenv_command: /usr/bin/python3 -m venv
     extra_args: '--no-cache-dir'
