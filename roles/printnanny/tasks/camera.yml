@@ -68,14 +68,6 @@
     cmd: ldconfig --print-cache
   register: ldconfig_cache
 
-- name: Determine if libcamera installed
-  ansible.builtin.set_fact:
-    libcamera_installed: '{{ "libcamera" in ldconfig_cache.stdout }}'
-
-- name: Print libcamera_installed
-  ansible.builtin.debug:
-    var: libcamera_installed
-
 - name: Import libcamera tasks
   include_tasks: libcamera.yml
-  when: not libcamera_installed
+  when: libcamera_installed is not defined or libcamera_installed != libcamera_version
