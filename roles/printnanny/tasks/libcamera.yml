@@ -160,7 +160,7 @@
 - name: Run libcamera-apps cmake
   ansible.builtin.command:
     cmd: "cmake .. -DENABLE_DRM=1 -DENABLE_X11=1 -DENABLE_QT=1 -DENABLE_OPENCV=0 -DENABLE_TFLITE=0"
-    chdir: "{{ libcamera_build_dir.path }}/build"
+    chdir: "{{ libcamera_apps_build_dir.path }}/build"
   tags:
     - libcamera
     - setup
@@ -168,7 +168,7 @@
 - name: Run libcamera-apps make
   ansible.builtin.command:
     cmd: "make -j4"
-    chdir: "{{ libcamera_build_dir.path }}/build"
+    chdir: "{{ libcamera_apps_build_dir.path }}/build"
   tags:
     - libcamera
     - setup
@@ -177,7 +177,7 @@
   become: true
   ansible.builtin.command:
     cmd: "make install"
-    chdir: "{{ libcamera_build_dir.path }}/build"
+    chdir: "{{ libcamera_apps_build_dir.path }}/build"
   tags:
     - libcamera
     - setup
@@ -186,7 +186,7 @@
   become: true
   ansible.builtin.command:
     cmd: "ldconfig"
-    chdir: "{{ libcamera_build_dir.path }}/build"
+    chdir: "{{ libcamera_apps_build_dir.path }}/build"
   tags:
     - libcamera
     - setup
