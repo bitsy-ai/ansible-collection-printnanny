@@ -52,6 +52,7 @@
     repo: "{{ libcamera_apps_repo }}"
     dest: "{{ libcamera_apps_build_dir.path }}"
     version: "{{ libcamera_apps_version }}"
+    accept_newhostkey: true
   async: 300
   poll: 0
   register: clone_libcamera_apps
