@@ -110,28 +110,17 @@
 # you override the fmtp SDP attribute via 'videofmtp'. The following is an
 # example of how to create a simple H.264 mountpoint: you can feed it via
 # an x264enc+rtph264pay pipeline in gstreamer, an ffmpeg script or other.
-#
+# https://github.com/meetecho/janus-gateway/blob/master/conf/janus.plugin.streaming.jcfg.sample.in
 
 h264-video: {
         type = "rtp"
         id = 123
+	video = true
+	audio = false
+	data = false
+	videortpmap = "H264/90000"
+	videopt = 100
+	videoport = {{ cam_rtp_port }}
+	videoport2 = {{ nn_rtp_port }}
         description = "Composite video + nnstreamer output"
-        media = (
-                {
-                        type = "video"
-                        mid = "c0"
-                        label = "Video camera"
-                        port = {{ cam_rtp_port }}
-                        pt = 100
-                        rtpmap = "H264/90000"
-                },
-                {
-                        type = "video"
-                        mid = "n0"
-                        label = "Bounding Box Overlay"
-                        port = {{ nn_rtp_port }}
-                        pt = 100
-                        rtpmap = "H264/90000"
-                }
-        )
 }
