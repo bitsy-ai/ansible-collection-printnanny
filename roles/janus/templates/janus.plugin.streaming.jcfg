@@ -118,6 +118,7 @@ h264-video: {
 	video = true
 	audio = false
 	data = false
+        videosimulcast = true
 	videortpmap = "H264/90000"
 	videopt = 100
 	videoport = {{ cam_rtp_port }}
