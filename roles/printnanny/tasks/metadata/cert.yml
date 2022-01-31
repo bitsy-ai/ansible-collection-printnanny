@@ -18,10 +18,13 @@
   become: true
   openssl_privatekey:
     path: '{{ printnanny_ssl_key }}'
-    size: '{{ printnanny_ssl_key_size }}'
-    type: '{{ printnanny_ssl_key_type }}'
     backup: true
+    type: ECC
+    # prime256v1
+    curve: secp256r1
+    format: pkcs8
     owner: '{{ janus_user }}'
+    group: '{{ janus_user }}'
   tags:
     - secret
     - ssl
