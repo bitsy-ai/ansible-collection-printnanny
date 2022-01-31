@@ -1,7 +1,5 @@
 ---
 # defaults file for ansible-role-janus-gateway
-printnanny_ssl_key_size: 2048
-printnanny_ssl_key_type: DSA
 printnanny_ssl_dir: '{{ janus_install_dir }}/ssl'
 printnanny_ssl_crt_dir: '{{ janus_install_dir }}/ssl/crt'
 printnanny_ssl_key_dir: '{{ janus_install_dir }}/ssl/private'
