@@ -60,14 +60,6 @@
     state: restarted
     no_block: true
 
-- name: restart {{ cam_rtp_service }}
-  become: true
-  ansible.builtin.systemd:
-    daemon_reload: true
-    name: '{{ cam_rtp_service }}'
-    state: restarted
-    no_block: true
-
 - name: restart printnanny-metadata
   become: true
   ansible.builtin.systemd:
