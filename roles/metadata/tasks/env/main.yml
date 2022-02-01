@@ -37,6 +37,8 @@
   ansible.builtin.stat:
     path: '{{ printnanny_runtime_dir }}'
   register: printnanny_cache
+  tags:
+    - metadata
 
 - name: Render printnanny.env
   become_user: '{{ printnanny_user }}'
