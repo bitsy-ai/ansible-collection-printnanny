@@ -6,7 +6,8 @@
   command:
     cmd: "meson --prefix={{ janus_lib_prefix }} build"
     chdir: "{{ janus_libnice_build_dir.path }}"
-  when: janus_upgrade_available
+  when: janus_version != janus_installed_version
+
   async: 300
   poll: 0
   register: build_libnice
@@ -21,7 +22,7 @@
   command:
     cmd: "./configure --prefix={{ janus_lib_prefix }} --enable-openssl"
     chdir: "{{ janus_libsrtp_build_dir.path }}/libsrtp-{{ janus_libsrtp_version }}"
-  when: janus_upgrade_available
+  when: janus_version != janus_installed_version
 
 ##
 # libsrtp
@@ -33,7 +34,7 @@
   ansible.builtin.command:
     cmd: make shared_library
     chdir: "{{ janus_libsrtp_build_dir.path }}/libsrtp-{{ janus_libsrtp_version }}"
-  when: janus_upgrade_available
+  when: janus_version != janus_installed_version
 
 - name: Check build_libnice status
   ansible.builtin.async_status:
@@ -52,7 +53,7 @@
   ansible.builtin.command:
     cmd: "ninja -C build"
     chdir: "{{ janus_libnice_build_dir.path }}"
-  when: janus_upgrade_available
+  when: janus_version != janus_installed_version
   environment:
     PATH: "{{ janus_build_dir.path }}/venv/bin:{{ ansible_env.PATH }}"
   tags:
@@ -67,7 +68,7 @@
   ansible.builtin.command:
     cmd: 'cmake -DLWS_MAX_SMP=1 -DLWS_WITHOUT_EXTENSIONS=0 -DCMAKE_INSTALL_PREFIX:PATH={{ janus_lib_prefix }} -DCMAKE_C_FLAGS="-fpic" .'
     chdir: "{{ janus_libwebsockets_build_dir.path }}"
-  when: janus_upgrade_available
+  when: janus_version != janus_installed_version
   tags:
     - janus
     - setup
@@ -80,7 +81,7 @@
   ansible.builtin.command:
     cmd: make
     chdir: "{{ janus_libwebsockets_build_dir.path }}"
-  when: janus_upgrade_available
+  when: janus_version != janus_installed_version
   tags:
     - janus
     - setup
@@ -93,13 +94,13 @@
   command:
     cmd: ./bootstrap
     chdir: "{{ janus_usrsctp_build_dir.path }}"
-  when: janus_upgrade_available
+  when: janus_version != janus_installed_version
 
 - name: Configure usrsctp
   command:
     cmd: "./configure --prefix={{ janus_lib_prefix }} --disable-programs --disable-inet --disable-inet6"
     chdir: "{{ janus_usrsctp_build_dir.path }}"
-  when: janus_upgrade_available
+  when: janus_version != janus_installed_version
 
 - name: Make usrsctp
   async: 600
@@ -108,7 +109,7 @@
   command:
     cmd: make
     chdir: "{{ janus_usrsctp_build_dir.path }}"
-  when: janus_upgrade_available
+  when: janus_version != janus_installed_version
 
 #### end async
 #### begin async polling
@@ -129,7 +130,7 @@
   command:
     cmd: "ninja -C build install"
     chdir: "{{ janus_libnice_build_dir.path }}"
-  when: janus_upgrade_available
+  when: janus_version != janus_installed_version
   environment:
     PATH: "{{ janus_build_dir.path }}/venv/bin:{{ ansible_env.PATH }}"
   tags:
@@ -152,7 +153,7 @@
   command:
     cmd: make install
     chdir: "{{ janus_libsrtp_build_dir.path }}/libsrtp-{{ janus_libsrtp_version }}"
-  when: janus_upgrade_available
+  when: janus_version != janus_installed_version
 
 ##
 # install usrsctp
@@ -170,7 +171,7 @@
   command:
     cmd: make install
     chdir: "{{ janus_usrsctp_build_dir.path }}"
-  when: janus_upgrade_available
+  when: janus_version != janus_installed_version
 
 ##
 # install websockets
@@ -189,7 +190,7 @@
   ansible.builtin.command:
     cmd: make install
     chdir: "{{ janus_libwebsockets_build_dir.path }}"
-  when: janus_upgrade_available
+  when: janus_version != janus_installed_version
   tags:
     - janus
     - setup
