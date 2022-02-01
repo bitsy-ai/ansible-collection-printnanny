@@ -1,6 +1,6 @@
 [Unit]
 Description=Print Nanny Updated
-After=network.target printnanny-metadata.target
+After=network.target printnanny-metadata.target printnanny-update.service
 Wants=network.target printnanny-metadata.target printnanny-update.service
 
 [Install]
