@@ -15,7 +15,7 @@
         tasks_from: mqtt/main.yml
         vars_from: '{{ printnanny_profile }}.yml'
   handlers:
-    - include: ../../roles/printnanny/handlers/main.yml
-      static: false
-    - include: ../../roles/janus/handlers/main.yml
-      static: false
+    - include: ../../../roles/printnanny/handlers/main.yml
+      static: true
+    - include: ../../../roles/janus/handlers/main.yml
+      static: true
