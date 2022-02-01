@@ -1,5 +1,9 @@
 ---
 # metadata available to tasks beyond this point
+- name: 'Configure {{ printnanny_user }} user'
+  become: true
+  ansible.builtin.user:
+    name: '{{ printnanny_user }}'
 - include_tasks: boot_config.yml
 - include_tasks: apt.yml
 - include_tasks: camera.yml
