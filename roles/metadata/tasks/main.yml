@@ -1,25 +1,3 @@
-- name: 'Configure {{ printnanny_user }} user'
-  become: true
-  ansible.builtin.user:
-    name: '{{ printnanny_user }}'
-
-- name: 'Configure {{ printnanny_user }} groups'
-  become: true
-  ignore_errors: true
-  ansible.builtin.user:
-    name: '{{ printnanny_user }}'
-    groups:
-      - adm
-      - gpio
-      - i2c
-      - input
-      - netdev
-      - plugdev
-      - spi
-      - sudo
-      - tty
-      - video
-
 - name: Create {{ printnanny_ansible_dir }}
   become: true
   ansible.builtin.file:

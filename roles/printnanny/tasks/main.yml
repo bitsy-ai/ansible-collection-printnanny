@@ -4,6 +4,26 @@
   become: true
   ansible.builtin.user:
     name: '{{ printnanny_user }}'
+  tags:
+    - metadata
+- name: 'Configure {{ printnanny_user }} groups'
+  become: true
+  ignore_errors: true
+  ansible.builtin.user:
+    name: '{{ printnanny_user }}'
+    groups:
+      - adm
+      - gpio
+      - i2c
+      - input
+      - netdev
+      - plugdev
+      - spi
+      - sudo
+      - tty
+      - video
+  tags:
+    - metadata
 - include_tasks: boot_config.yml
 - include_tasks: apt.yml
 - include_tasks: camera.yml
