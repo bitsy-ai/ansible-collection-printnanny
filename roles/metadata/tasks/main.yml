@@ -49,6 +49,7 @@
     dest: /etc/systemd/system/printnanny-metadata@.target
     mode: 0664
     force: true
+
 - name: Enable metadata services
   ansible.builtin.systemd:
     name: 'printnanny-metadata@{{ item }}.service'
