@@ -54,7 +54,6 @@
     - env
     - metadata
   notify:
-    - restart printnanny-metadata
     - restart printnanny-dash
     - restart mqtt
 
@@ -73,7 +72,6 @@
     - env
     - metadata
   notify:
-    - restart printnanny-metadata
     - restart printnanny-dash
     - restart mqtt
 
