@@ -1,3 +1,11 @@
+- name: Create {{ janus_conf_dir }}
+  become: true
+  ansible.builtin.file:
+    state: directory
+    mode: 0775
+    path: '{{ janus_conf_dir }}'
+  tags:
+    - metadata
 - name: Render janus configs
   ansible.builtin.template:
     src: '{{ item }}'
