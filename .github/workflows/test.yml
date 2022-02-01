@@ -38,8 +38,8 @@ jobs:
             - group6
             - group7
           include:
-            group: group7
-            tags: metadata
+            - group: group7
+              tags: metadata
       steps:
         - uses: actions/checkout@v2
           with:
