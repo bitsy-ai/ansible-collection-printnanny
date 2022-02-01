@@ -4,3 +4,27 @@ metadata_apps:
     - www
     - env
     - mqtt
+
+##
+# updater_ vars
+##
+
+updater_app_name: printnanny
+updater_playbooks:
+    - bitsyai.rpi.printnanny.update.system
+
+updater_release_channel: '{{ printnanny.release_channel | default("main") }}'
+updater_collection_url: 'git+https://github.com/bitsy-ai/ansible-collection-rpi.git,{{ updater_release_channel }}'
+
+updater_venv: '{{ printnanny_ansible_dir }}/venv'
+
+ansible_updater_version: 'ansible-core>2.11,<2.12'
+ansible_collection_updater: ansible-updater
+updater_tmpfs: '/var/run/{{ updater_app_name }}'
+ansible_lockfile: '/var/run/{{ updater_app_name }}/ansible.lock'
+
+ansible_hosts_file: /etc/ansible/hosts
+ansible_config:
+    fact_caching_timeout: 86400
+    fact_caching: jsonfile
+    fact_caching_connection: /etc/ansible/facts.json

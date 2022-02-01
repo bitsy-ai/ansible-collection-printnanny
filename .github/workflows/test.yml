@@ -35,6 +35,7 @@ jobs:
             - group4
             - group5
             - group6
+            - group7
       steps:
         - uses: actions/checkout@v2
           with:
