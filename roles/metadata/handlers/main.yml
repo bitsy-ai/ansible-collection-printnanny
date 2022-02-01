@@ -1,8 +1,5 @@
 ---
 # handlers file for metadata
----
-# handlers file for setup
-
 - name: systemctl daemon-reload
   become: true
   ansible.builtin.systemd:
