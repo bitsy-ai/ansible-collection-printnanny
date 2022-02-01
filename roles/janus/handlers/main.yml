@@ -12,7 +12,7 @@
   ansible.builtin.command:
     cmd: ldconfig
 
-- name: Render janus config
+- name: Render janus configs
   become: true
   ansible.builtin.template:
     mode: 0775

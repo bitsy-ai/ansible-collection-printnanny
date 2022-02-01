@@ -9,6 +9,8 @@
       - metadata
       - mqtt
     printnanny_profile: default
+  roles:
+    - bitsyai.rpi.printnanny
   tasks:
     - name: Set mqtt metadata
       include_role:

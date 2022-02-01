@@ -52,7 +52,9 @@ general: {
                                     # without this, the Admin API MUST
                                     # be enabled, as tokens are added and removed
                                     # through messages sent there.
-    admin_secret = "{{ janus_admin_secret }}"	
+    {% if janus_admin_secret is defined %}
+    admin_secret = "{{ janus_admin_secret }}"
+    {% endif %}
                                     # String that all Janus requests must contain
                                     # to be accepted/authorized by the admin/monitor.
                                     # only needed if you enabled the admin API

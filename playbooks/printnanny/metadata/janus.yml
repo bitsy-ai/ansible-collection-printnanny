@@ -9,6 +9,8 @@
       - metadata
       - janus
     printnanny_profile: default
+  roles:
+    - bitsyai.rpi.janus
   tasks:
     - name: Set janus metadata
       include_role:

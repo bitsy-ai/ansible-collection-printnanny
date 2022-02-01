@@ -29,6 +29,7 @@
 - include_tasks: build/main.yml
   when: janus_version != janus_installed_version
 
+- include_tasks: configs.yml
 - include_tasks: factsd.yml
 - name: Update /etc/systemd/system/janus.service
   become: true

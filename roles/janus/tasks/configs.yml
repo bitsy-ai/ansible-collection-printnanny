@@ -1,0 +1,14 @@
+- name: Render janus configs
+  ansible.builtin.template:
+    src: '{{ item }}'
+    dest: '{{ janus_conf_dir }}/{{ item }}'
+    owner: '{{ janus_user }}'
+    group: '{{ janus_group }}'
+    mode: 0644
+    force: true
+  with_dict: '{{ janus_conf_template }}'
+  tags:
+    - metadata
+    - secret
+  notify:
+    - restart janus

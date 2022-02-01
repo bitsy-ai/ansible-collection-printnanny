@@ -1,3 +1,4 @@
+- include_tasks: janus/secets.yml
 - name: Create {{ janus_conf_dir }}
   become: true
   ansible.builtin.file:
@@ -6,31 +7,7 @@
     path: '{{ janus_conf_dir }}'
   tags:
     - metadata
-- name: Create janus secrets
-  ansible.builtin.set_fact:
-    cacheable: true
-    janus_admin_secret: "{{ lookup('password', janus_admin_secret_file, length=32 ) }}"
-    janus_token: "{{ lookup('password', janus_token_file, length=32 ) }}"
-  tags:
-    - secrets
-    - metadata
-  notify:
-    - render janus config
-    - restart janus
 
-- name: Render {{ janus_env_file }}
-  become: true
-  ansible.builtin.template:
-    mode: 0771
-    src: "janus.env.j2"
-    dest: "{{ janus_env_file }}"
-    owner: "{{ janus_user }}"
-    force: true
-  when: janus_admin_secret is defined
-  notify:
-    - restart janus
-  tags:
-    - metadata
 - name: Create ssl dirs
   become: true
   ansible.builtin.file:
