@@ -29,9 +29,17 @@
 - name: Render printnanny-metadata.target
   ansible.builtin.template:
     src: printnanny-metadata.target.j2
-    dest: /etc/systemd/system/printnanny-metadata@.target
+    dest: /etc/systemd/system/printnanny-metadata.target
     mode: 0664
     force: true
+  tags:
+    - metadata
+- name: Enable metadata services
+  ansible.builtin.systemd:
+    name: 'printnanny-metadata.target'
+    enabled: true
+    no_block: true
+  with_items: '{{ metadata_apps }}'
   tags:
     - metadata
 - name: Enable metadata services
