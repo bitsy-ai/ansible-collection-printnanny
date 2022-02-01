@@ -6,6 +6,7 @@ PartOf=printnanny.target
 
 [Service]
 Type=simple
+SyslogIdentifier=printnanny-www
 EnvironmentFile=-{{ printnanny_env }}
 WorkingDirectory={{ printnanny_www_dir }}
 ExecStart=/usr/local/bin/printnanny-dash

@@ -5,6 +5,7 @@ After=network.online.target
 Wants=network.online.target
 
 [Service]
+SyslogIdentifier=octoprint
 Type=simple
 Environment="OCTOPRINT_HOST=0.0.0.0"
 Environment="OCTOPRINT_PORT=5000"

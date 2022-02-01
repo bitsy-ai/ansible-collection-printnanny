@@ -5,6 +5,7 @@ After=network.target network-online.target
 Wants=network.service network-online.target
 
 [Service]
+SyslogIdentifier=ansible-collection
 Type=oneshot
 ExecStart={{ updater_venv }}/bin/ansible-galaxy \
     collection install --upgrade {{ updater_collection_url }}

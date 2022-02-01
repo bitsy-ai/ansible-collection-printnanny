@@ -6,6 +6,7 @@ PartOf=printnanny.target
 
 [Service]
 Type=simple
+SyslogIdentifier=printnanny-monitor
 User={{ printnanny_user }}
 ExecStart=/usr/local/bin/printnanny-monitor
 Restart=on-failure

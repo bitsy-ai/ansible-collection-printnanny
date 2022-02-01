@@ -7,6 +7,7 @@ PartOf=printnanny.target
 
 [Service]
 Type=simple
+SyslogIdentifier=printnanny-mqtt
 EnvironmentFile=-{{ printnanny_env }}
 ExecStart=/usr/local/bin/printnanny mqtt subscribe
 User={{ printnanny_user }}

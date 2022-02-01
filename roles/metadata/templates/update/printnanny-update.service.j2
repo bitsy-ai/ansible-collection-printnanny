@@ -5,6 +5,7 @@ After=network.target network-online.target ansible-collection.service printnanny
 Wants=network.target network-online.target ansible-collection.service printnanny-metadata.target
 
 [Service]
+SyslogIdentifier=printnanny-update
 Type=oneshot
 RuntimeDirectory={{ updater_app_name }}
 ConfigurationDirectory={{ updater_app_name }}
