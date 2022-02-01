@@ -6,9 +6,9 @@ ansible_python_intepreter={{updater_venv}}/bin/python3
 fact_caching_connection={{ ansible_config.fact_caching_connection }}
 fact_caching_timeout={{ ansible_config.fact_caching_timeout }}
 fact_caching={{ ansible_config.fact_caching }}
-gathering=smart
 no_target_syslog=False
 pipelining=True
+use_persistent_connections=True
 [ara]
 api_client = {{ ara_api_client }}
 api_server = {{ ara_api_server }}
@@ -25,9 +25,9 @@ ansible_python_intepreter={{updater_venv}}/bin/python3
 fact_caching_connection={{ ansible_config.fact_caching_connection }}
 fact_caching_timeout={{ ansible_config.fact_caching_timeout }}
 fact_caching={{ ansible_config.fact_caching }}
-gathering=smart
 no_target_syslog=False
 pipelining=True
+use_persistent_connections=True
 {% endif %}
 
 [inventory]
