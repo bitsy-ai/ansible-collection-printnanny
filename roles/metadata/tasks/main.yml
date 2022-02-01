@@ -56,3 +56,6 @@
     enabled: true
     no_block: true
   with_items: '{{ metadata_apps }}'
+
+- name: Setup printnanny-update service
+  include_tasks: updater/main.yml
