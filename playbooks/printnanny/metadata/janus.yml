@@ -15,5 +15,5 @@
         tasks_from: janus/main.yml
         vars_from: '{{ printnanny_profile }}.yml'
   handlers:
-    - include: ../../roles/printnanny/handlers/main.yml
-    - include: ../../roles/janus/handlers/main.yml
+    - include: ../../../roles/printnanny/handlers/main.yml
+    - include: ../../../roles/janus/handlers/main.yml
