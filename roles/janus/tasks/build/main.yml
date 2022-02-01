@@ -34,35 +34,35 @@
     state: directory
     prefix: janus
   register: janus_build_dir
-   when: janus_version != janus_installed_version
+  when: janus_version != janus_installed_version
 
 - name: Create temporary websockets build directory
   ansible.builtin.tempfile:
     state: directory
     prefix: libwebsockets
   register: janus_libwebsockets_build_dir
-   when: janus_version != janus_installed_version
+  when: janus_version != janus_installed_version
 
 - name: Create temporary libnice build directory
   ansible.builtin.tempfile:
     state: directory
     prefix: libnice
   register: janus_libnice_build_dir
-   when: janus_version != janus_installed_version
+  when: janus_version != janus_installed_version
 
 - name: Create temporary usrsctp build directory
   ansible.builtin.tempfile:
     state: directory
     prefix: usrsctp
   register: janus_usrsctp_build_dir
-   when: janus_version != janus_installed_version
+  when: janus_version != janus_installed_version
 
 - name: Create temporary libsrtp build directory
   ansible.builtin.tempfile:
     state: directory
     prefix: libsrtp
   register: janus_libsrtp_build_dir
-   when: janus_version != janus_installed_version
+  when: janus_version != janus_installed_version
 
 - name: Create workspace
   ansible.builtin.file:
@@ -90,7 +90,7 @@
   command:
     cmd: sh autogen.sh
     chdir: "{{ janus_build_dir.path }}/build"
-   when: janus_version != janus_installed_version
+  when: janus_version != janus_installed_version
 
 - name: Configure - janus build
   command:
