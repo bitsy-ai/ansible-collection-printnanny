@@ -18,7 +18,7 @@ jobs:
           with:
             path: "${{ github.repository }}"
         - name: Perform sanity testing with ansible-test
-          uses: leigh-johnson/ljohnson-tags
+          uses: leigh-johnson/ansible-test-gh-action@ljohnson-tags
           with:
             docker-image: ubuntu2004
             ansible-core-version: stable-2.11
@@ -45,7 +45,7 @@ jobs:
           with:
             path: "${{ github.repository }}"
         - name: Perform integration testing with ansible-test
-          uses: leigh-johnson/ljohnson-tags
+          uses: leigh-johnson/ansible-test-gh-action@ljohnson-tags
           with:
             ansible-core-version: stable-2.11
             docker-image: ubuntu2004
