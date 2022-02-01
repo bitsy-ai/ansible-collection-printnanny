@@ -10,10 +10,10 @@
       - www
     printnanny_profile: default
   tasks:
-    - name: Set wwww metadata
+    - name: Set www metadata
       include_role:
         name: bitsyai.rpi.metadata
-        tasks_from: wwww/main.yml
+        tasks_from: www/main.yml
         vars_from: '{{ printnanny_profile }}.yml'
   handlers:
     - include: ../../../roles/printnanny/handlers/main.yml
