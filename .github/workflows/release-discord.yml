@@ -1,0 +1,22 @@
+name: Bump version
+on:
+  push:
+    # Sequence of patterns matched against refs/tags
+    tags:
+      - "v*" # Push events to matching v*, i.e. v1.0, v20.15.10
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: '0'
+    - name: Send Discord notification
+      env:
+        DISCORD_WEBHOOK: ${{ secrets.PRINT_NANNY_DISCORD_DEPLOY_WEBHOOK }}
+      uses: Ilshidur/action-discord@master
+      with:
+        args: |
+            🥧 **Hot & Fresh Configs** {{ github.repository.full_name }}@{{ GITHUB_SHA }}
+            **Version**: `${{ github.ref }}`
+            **Release Notes** https://github.com/bitsy-ai/ansible-collection-rpi/releases/tag/${{ github.ref }}
