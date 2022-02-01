@@ -6,6 +6,8 @@
     owner: "{{ printnanny_user }}"
     group: "{{ printnanny_group }}"
     mode: 0775
+  tags:
+    - metadata
 
 - name: Print all vars
   ansible.builtin.debug:
@@ -14,26 +16,33 @@
 - name: Include tasks for each app in service_apps
   include_tasks: '{{ item }}/main.yml'
   with_items: '{{ metadata_apps }}'
-
+  tags:
+    - metadata
 - name: Render printnanny-metadata@.service template
   ansible.builtin.template:
     src: printnanny-metadata@.service.j2
     dest: /etc/systemd/system/printnanny-metadata@.service
     mode: 0664
     force: true
+  tags:
+    - metadata
 - name: Render printnanny-metadata.target
   ansible.builtin.template:
     src: printnanny-metadata.target.j2
     dest: /etc/systemd/system/printnanny-metadata@.target
     mode: 0664
     force: true
-
+  tags:
+    - metadata
 - name: Enable metadata services
   ansible.builtin.systemd:
     name: 'printnanny-metadata@{{ item }}.service'
     enabled: true
     no_block: true
   with_items: '{{ metadata_apps }}'
-
+  tags:
+    - metadata
 - name: Setup printnanny-update service
   include_tasks: updater/main.yml
+  tags:
+    - metadata

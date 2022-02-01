@@ -6,7 +6,7 @@
     mode: 0755
   tags:
     - setup
-
+    - metadata
 - name: 'Update ansible virtualenv pip, setuptools'
   ansible.builtin.pip:
     name:
@@ -18,6 +18,7 @@
     extra_args: '--no-cache-dir'
   tags:
     - setup
+    - metadata
 
 - name: Install ansible into virtual env
   ansible.builtin.pip:
@@ -28,12 +29,14 @@
   tags:
     - setup
     - requirements
+    - metadata
 
 # get ara configuration before rendering ansible.cfg (if enabled)
 - name: Configure ara
   ansible.builtin.include_tasks: update/ara.yml
   when: ara_enabled
-
+  tags:
+    - metadata
 - name: Create ansible.cfg
   become: true
   ansible.builtin.template:
@@ -42,7 +45,7 @@
     dest: /etc/ansible/ansible.cfg
     force: true
   tags:
-    - setup
+    - metadata
 
 - name: Create ansible-collection service
   become: true
@@ -52,7 +55,7 @@
     dest: /etc/systemd/system/ansible-collection.service
     force: true
   tags:
-    - setup
+    - metadata
 
 - name: Enable ansible-collection unit
   become: true
@@ -61,8 +64,7 @@
     enabled: true
     no_block: true
   tags:
-    - setup
-
+    - metadata
 - name: Create printnanny-update service
   become: true
   ansible.builtin.template:
@@ -71,7 +73,7 @@
     dest: /etc/systemd/system/printnanny-update.service
     force: true
   tags:
-    - setup
+    - metadata
 
 - name: Create printnanny-update target
   become: true
@@ -81,8 +83,7 @@
     dest: '/etc/systemd/system/printnanny-update.target'
     force: true
   tags:
-    - setup
-
+    - metadata
 - name: Enable printnanny-update unit
   become: true
   ansible.builtin.systemd:
@@ -90,7 +91,7 @@
     enabled: true
     no_block: true
   tags:
-    - setup
+    - metadata
   notify:
     - restart printnanny-update
 
@@ -102,7 +103,7 @@
     dest: /etc/systemd/system/printnanny.target
     force: true
   tags:
-    - setup
+    - metadata
 
 - name: Create ansible pull hosts
   become: true
@@ -111,7 +112,7 @@
     dest: '{{ ansible_hosts_file }}'
     mode: 0755
   tags:
-    - setup
+    - metadata
 
 - name: Create {{ ansible_facts_path }}
   become: true
@@ -119,14 +120,16 @@
     path: '{{ ansible_facts_path }}'
     state: directory
     mode: 0755
-
+  tags:
+    - metadata
 - name: Render /etc/ansible/facts.d/device.fact
   become: true
   ansible.builtin.copy:
     src: facts.d/device.fact
     dest: '{{ printnanny_device_fact }}'
     mode: 0755
-
+  tags:
+    - metadata
 - name: Render printnanny-update.sh
   become: true
   ansible.builtin.template:
@@ -134,7 +137,8 @@
     dest: /usr/local/bin/printnanny-update
     force: true
     mode: 0775
-
+  tags:
+    - metadata
 - name: Render printnanny-profile.sh
   become: true
   ansible.builtin.template:
@@ -142,3 +146,5 @@
     dest: /usr/local/bin/printnanny-profile
     force: true
     mode: 0775
+  tags:
+    - metadata
