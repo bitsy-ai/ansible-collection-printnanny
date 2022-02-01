@@ -131,8 +131,8 @@ gstreamer_video_src: 'v4l2src'
 
 # TODO select from output of:
 # libcamera-vid --list-camera
-gstreamer_video_w: 1920
-gstreamer_video_h: 1080
+gstreamer_video_w: 1280
+gstreamer_video_h: 720
 gstreamer_rtp_host: "127.0.0.1"
 
 ##
