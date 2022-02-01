@@ -43,6 +43,6 @@
   tags:
     - metadata
 - name: Setup printnanny-update service
-  include_tasks: updater/main.yml
+  include_tasks: update/main.yml
   tags:
     - metadata
