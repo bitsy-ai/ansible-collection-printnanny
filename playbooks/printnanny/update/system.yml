@@ -9,6 +9,7 @@
       - system
   roles:
     - bitsyai.rpi.common
+    - bitsyai.rpi.metadata
   tasks:
     - name: Include printnanny role (custom profile)
       include_role:

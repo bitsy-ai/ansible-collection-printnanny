@@ -7,7 +7,8 @@
     mode: 0750
     group: '{{ printnanny_user }}'
     owner: '{{ printnanny_user }}'
-
+  tags:
+    - metadata
 - name: Create provisional private key
   become: true
   community.crypto.openssl_privatekey:
@@ -44,7 +45,8 @@
     mode: 0775
     group: '{{ printnanny_user }}'
     owner: '{{ printnanny_user }}'
-
+  tags:
+    - metadata
 - name: Download GCP LTS CA Certificate {{ gcp_lts_ca_primary }}
   become: true
   ansible.builtin.get_url:

@@ -65,4 +65,4 @@
 
 - name: Import libcamera tasks
   include_tasks: libcamera.yml
-  when: libcamera_installed is not defined or libcamera_installed != libcamera_version
+  when: libcamera_installed_version != libcamera_version

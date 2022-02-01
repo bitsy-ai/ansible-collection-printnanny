@@ -18,7 +18,7 @@ jobs:
           with:
             path: "${{ github.repository }}"
         - name: Perform sanity testing with ansible-test
-          uses: ansible-community/ansible-test-gh-action@release/v1
+          uses: leigh-johnson/ansible-test-gh-action@ljohnson-tags
           with:
             docker-image: ubuntu2004
             ansible-core-version: stable-2.11
@@ -34,16 +34,18 @@ jobs:
             - group1
             - group2
             - group3
-            - group4
             - group5
             - group6
             - group7
+          include:
+            - group: group7
+              tags: metadata
       steps:
         - uses: actions/checkout@v2
           with:
             path: "${{ github.repository }}"
         - name: Perform integration testing with ansible-test
-          uses: ansible-community/ansible-test-gh-action@release/v1
+          uses: leigh-johnson/ansible-test-gh-action@ljohnson-tags
           with:
             ansible-core-version: stable-2.11
             docker-image: ubuntu2004
@@ -57,3 +59,4 @@ jobs:
               community.general
               community.crypto
             verbosity: -vvv
+            tags: ${{ matrix.tags }}

@@ -6,7 +6,8 @@
     virtualenv: '{{ updater_venv }}'
     extra_args: '--no-cache-dir'
   when: ara_enabled
-
+  tags:
+    - metadata
 # get ansible.cfg values for ara e.g.
 # [defaults]
 # callback_plugins=/home/leigh/.local/lib/python3.8/site-packages/ara/plugins/callback
@@ -17,3 +18,5 @@
   ansible.builtin.command: '{{ updater_venv }}/bin/python -m ara.setup.ansible'
   register: ara_plugin_setup
   when: ara_enabled
+  tags:
+    - metadata

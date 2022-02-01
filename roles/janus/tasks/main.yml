@@ -6,25 +6,12 @@
     shell: /bin/bash
     groups: '{{ janus_groups }}'
     append: true
+  tags:
+    - metadata
 - name: Stat janus binary
   ansible.builtin.stat:
     path: /opt/janus/bin/janus
   register: janus_bin
-
-- name: Set janus_upgrade_available
-  ansible.builtin.set_fact:
-    # TODO re-enable dynamic version/upgrade check
-    # janus_upgrade_available: "{{ ansible_local['janus']['version'] != janus_version }}"
-    # for now, just default to false if janus binary is installed
-    janus_upgrade_available: "{{ janus_bin.stat.exists == False }}"
-
-- name: print janus_version
-  ansible.builtin.debug:
-    var: janus_version
-
-- name: print janus_upgrade_available
-  ansible.builtin.debug:
-    var: janus_upgrade_available
 
 - name: ansible_local
   ansible.builtin.debug:
@@ -32,7 +19,7 @@
 
 # all tasks requiring access to secrets must appear after this task
 - include_tasks: build/main.yml
-  when: janus_upgrade_available
+  when: janus_version != janus_installed_version
 
 - include_tasks: factsd.yml
 - name: Update /etc/systemd/system/janus.service

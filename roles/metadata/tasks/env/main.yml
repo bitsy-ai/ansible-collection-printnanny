@@ -37,6 +37,8 @@
   ansible.builtin.stat:
     path: '{{ printnanny_runtime_dir }}'
   register: printnanny_cache
+  tags:
+    - metadata
 
 - name: Render printnanny.env
   become_user: '{{ printnanny_user }}'
@@ -52,7 +54,6 @@
     - env
     - metadata
   notify:
-    - restart printnanny-metadata
     - restart printnanny-dash
     - restart mqtt
 
@@ -71,7 +72,6 @@
     - env
     - metadata
   notify:
-    - restart printnanny-metadata
     - restart printnanny-dash
     - restart mqtt
 

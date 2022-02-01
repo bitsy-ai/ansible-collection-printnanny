@@ -59,10 +59,3 @@
     name: '{{ nn_rtp_service }}'
     state: restarted
     no_block: true
-
-- name: restart printnanny-metadata
-  become: true
-  ansible.builtin.systemd:
-    name: printnanny-metadata
-    state: restarted
-    enabled: true
