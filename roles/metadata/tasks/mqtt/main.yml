@@ -1,53 +1,68 @@
-- include_tasks: users.yml
-- name: Create '{{ printnanny_profile_dir }}'
+# TODO send certificate to remote for signing after user authenticates
+- name: Create '{{ printnanny_keys_dir }}'
+  become: true
   ansible.builtin.file:
+    path: '{{ printnanny_keys_dir }}'
     state: directory
-    path: '{{ printnanny_profile_dir }}'
-    mode: 0755
+    mode: 0750
+    group: '{{ printnanny_user }}'
     owner: '{{ printnanny_user }}'
 
-- name: Create {{ printnanny_data_dir }}
+- name: Create provisional private key
   become: true
-  ansible.builtin.file:
-    path: "{{ printnanny_data_dir }}"
-    state: directory
-    owner: "{{ printnanny_user }}"
-    group: "{{ printnanny_group }}"
-    mode: 0775
-    recurse: true
-
-- name: Create {{ printnanny_keys_dir }}
-  become: true
-  ansible.builtin.file:
-    path: "{{ printnanny_keys_dir }}"
-    state: directory
-    owner: "{{ printnanny_user }}"
-    group: "{{ printnanny_group }}"
-    mode: 0771
-
-- name: Create {{ printnanny_backups_dir }}
-  become: true
-  ansible.builtin.file:
-    path: "{{ printnanny_backups_dir }}"
-    state: directory
-    owner: "{{ printnanny_user }}"
-    group: "{{ printnanny_group }}"
-    mode: 0775
-- include_tasks: metadata/env.yml
-- include_tasks: metadata/cert.yml
-- include_tasks: metadata/secrets.yml
-
-- name: Render config.toml
-  ansible.builtin.template:
-    src: config.toml.j2
-    dest: '{{ printnanny_config_toml }}'
-    mode: 0644
-    force: true
+  community.crypto.openssl_privatekey:
+    group: '{{ printnanny_user }}'
     owner: '{{ printnanny_user }}'
-  notify:
-    - restart printnanny-metadata
-    - restart printnanny-dash
-    - restart mqtt
+    path: '{{ printnanny_ec_private_key }}'
+    regenerate: 'full_idempotence'
+    type: ECC
+    # prime256v1
+    curve: secp256r1
+    format: pkcs8
   tags:
     - secret
+    - metadata
+
+- name: Extract provisional public key
+  become: true
+  community.crypto.openssl_publickey:
+    group: '{{ printnanny_user }}'
+    owner: '{{ printnanny_user }}'
+    privatekey_path: '{{ printnanny_ec_private_key }}'
+    path: '{{ printnanny_ec_public_key }}'
+  tags:
+    - secret
+    - metadata
+  register: printnanny_ec_public_key_output
+
+
+- name: Create '{{ printnanny_cacerts_dir }}'
+  become: true
+  ansible.builtin.file:
+    path: '{{ printnanny_cacerts }}'
+    state: directory
+    mode: 0775
+    group: '{{ printnanny_user }}'
+    owner: '{{ printnanny_user }}'
+
+- name: Download GCP LTS CA Certificate {{ gcp_lts_ca_primary }}
+  become: true
+  ansible.builtin.get_url:
+    url: '{{ gcp_lts_ca_primary }}'
+    dest: '{{ printnanny_cacerts }}/{{ gcp_lts_ca_primary | basename }}'
+    mode: 0771
+    group: '{{ printnanny_user }}'
+    owner: '{{ printnanny_user }}'
+  tags:
+    - metadata
+
+- name: Download GCP LTS CA Certificate {{ gcp_lts_ca_backup }}
+  become: true
+  ansible.builtin.get_url:
+    url: '{{ gcp_lts_ca_backup }}'
+    dest: '{{ printnanny_cacerts }}/{{ gcp_lts_ca_backup | basename }}'
+    mode: 0771
+    group: '{{ printnanny_user }}'
+    owner: '{{ printnanny_user }}'
+  tags:
     - metadata

@@ -30,5 +30,4 @@ galaxy_info:
     - stream
     - rabbitmq
     - mqtt
-dependencies:
-  - role: bitsyai.rpi.metadata
+dependencies: []

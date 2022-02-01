@@ -11,3 +11,13 @@
   become: true
   ansible.builtin.command:
     cmd: ldconfig
+
+- name: Render janus config
+  become: true
+  ansible.builtin.template:
+    mode: 0775
+    src: "{{ item.value }}"
+    dest: "{{ janus_conf_dir }}/{{ item.value }}"
+    owner: "{{ janus_user }}"
+    force: true
+  with_dict: "{{ janus_conf_template }}"

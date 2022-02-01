@@ -16,6 +16,7 @@
     enabled: true
 
 - name: restart janus
+  ignore_errors: true
   become: true
   ansible.builtin.systemd:
     daemon_reload: true
@@ -25,6 +26,7 @@
     enabled: true
 
 - name: restart mqtt
+  ignore_errors: true
   become: true
   ansible.builtin.systemd:
     daemon_reload: true
@@ -34,6 +36,7 @@
     enabled: true
 
 - name: restart printnanny-dash
+  ignore_errors: true
   become: true
   ansible.builtin.systemd:
     daemon_reload: true
@@ -65,14 +68,6 @@
     name: printnanny-metadata
     state: restarted
     enabled: true
-
-- name: restart janus
-  become: true
-  ansible.builtin.systemd:
-    daemon_reload: true
-    name: janus
-    enabled: true
-    no_block: true
 
 - name: ldconfig
   become: true
