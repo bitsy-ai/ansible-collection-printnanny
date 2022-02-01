@@ -8,6 +8,8 @@ Documentation for the collection.
 
 ## `bitsyai.rpi.janus`
 
+## `bitsyai.rpi.metadata`
+
 ## `bitsyai.rpi.nebula`
 
 ## `bitsyai.rpi.octoprint`
