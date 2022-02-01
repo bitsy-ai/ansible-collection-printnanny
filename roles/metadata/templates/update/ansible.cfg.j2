@@ -8,6 +8,7 @@ fact_caching_timeout={{ ansible_config.fact_caching_timeout }}
 fact_caching={{ ansible_config.fact_caching }}
 no_target_syslog=False
 pipelining=True
+use_persistent_connections=True
 [ara]
 api_client = {{ ara_api_client }}
 api_server = {{ ara_api_server }}
@@ -26,6 +27,7 @@ fact_caching_timeout={{ ansible_config.fact_caching_timeout }}
 fact_caching={{ ansible_config.fact_caching }}
 no_target_syslog=False
 pipelining=True
+use_persistent_connections=True
 {% endif %}
 
 [inventory]
