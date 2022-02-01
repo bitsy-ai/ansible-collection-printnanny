@@ -32,3 +32,6 @@ galaxy_info:
     - 3dprinter
     - octoprint
     - mainsail
+
+dependencies:
+  - role: bitsyai.rpi.metadata

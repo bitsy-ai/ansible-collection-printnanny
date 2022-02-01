@@ -1,0 +1,108 @@
+- name: Create janus user
+  become: true
+  ansible.builtin.user:
+    name: '{{ janus_user }}'
+    shell: /bin/bash
+    groups: '{{ janus_groups }}'
+    append: true
+
+- name: Create {{ janus_conf_dir }}
+  become: true
+  ansible.builtin.file:
+    state: directory
+    mode: 0775
+    path: '{{ janus_conf_dir }}'
+
+- name: Create janus secrets
+  ansible.builtin.set_fact:
+    cacheable: true
+    janus_admin_secret: "{{ lookup('password', janus_admin_secret_file, length=32 ) }}"
+    janus_token: "{{ lookup('password', janus_token_file, length=32 ) }}"
+  tags:
+    - secrets
+    - metadata
+
+- name: Render janus-gateway config templates
+  become: true
+  ansible.builtin.template:
+    mode: 0775
+    src: "{{ item.value }}"
+    dest: "{{ janus_conf_dir }}/{{ item.value }}"
+    owner: "{{ janus_user }}"
+    force: true
+  with_dict: "{{ janus_conf_template }}"
+  when: janus_admin_secret is defined
+  notify:
+    - restart janus
+
+- name: Render {{ janus_env_file }}
+  become: true
+  ansible.builtin.template:
+    mode: 0771
+    src: "systemd/janus.env.j2"
+    dest: "{{ janus_env_file }}"
+    owner: "{{ janus_user }}"
+    force: true
+  when: janus_admin_secret is defined
+  notify:
+    - restart janus
+
+- name: Create ssl dirs
+  become: true
+  ansible.builtin.file:
+    state: directory
+    mode: 0771
+    path: '{{ item }}'
+    owner: '{{ printnanny_user }}'
+  with_items:
+    - '{{ janus_ssl_crt_dir }}'
+    - '{{ janus_ssl_csr_dir }}'
+    - '{{ janus_ssl_key_dir }}'
+  tags:
+    - secret
+    - ssl
+    - metadata
+
+- name: Generate janus privatekey
+  become: true
+  openssl_privatekey:
+    path: '{{ janus_ssl_key }}'
+    backup: true
+    type: ECC
+    # prime256v1
+    curve: secp256r1
+    format: pkcs8
+    owner: '{{ janus_user }}'
+    group: '{{ janus_user }}'
+  tags:
+    - secret
+    - ssl
+    - metadata
+
+# TODO fix country code, email, organization name, unit name
+- name: Generate self-signing request
+  become: true
+  openssl_csr:
+    path: '{{ janus_ssl_csr  }}'
+    privatekey_path: '{{ janus_ssl_key }}'
+    country_name: '{{ janus_ssl_country_name }}'
+    email_address: '{{ janus_ssl_email_address }}'
+    organization_name: '{{ janus_ssl_organization_name }}'
+    common_name: '{{ inventory_hostname }}'
+    owner: '{{ janus_user }}'
+  tags:
+    - secret
+    - ssl
+    - metadata
+
+- name: Generate Provisional Self-Signed OpenSSL certificate
+  become: true
+  openssl_certificate:
+    path: '{{ janus_ssl_cert }}'
+    privatekey_path: '{{ janus_ssl_key }}'
+    provider: selfsigned
+    owner: '{{ janus_user }}'
+  tags:
+    - secret
+    - ssl
+    - metadata

@@ -1,0 +1,7 @@
+[Unit]
+Description=Print Nanny Metadata
+After=syslog.target network.target {% for app in metadata_apps%}printnanny-metadata@{{ app }}.service {% endfor %}
+Wants=syslog.target network.target {% for app in metadata_apps%}printnanny-metadata@{{ app }}.service {% endfor %}
+
+[Install]
+WantedBy=multi-user.target

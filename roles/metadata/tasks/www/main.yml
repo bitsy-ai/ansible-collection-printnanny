@@ -1,0 +1,26 @@
+- name: Create set fact printnanny_www_secret_key
+  become: true
+  ansible.builtin.set_fact:
+    cacheable: true
+    printnanny_www_secret_key: "{{ lookup('password', printnanny_www_secret_file + ' chars=hexdigits length=64') }}"
+  tags:
+    - secret
+    - env
+    - metadata
+
+- name: Render Print Nanny Dashboard Rocket.toml
+  become: true
+  ansible.builtin.template:
+    mode: 0660
+    src: www/Rocket.toml.j2
+    dest: '{{ printnanny_www_dir }}/Rocket.toml'
+    force: true
+    owner: '{{ printnanny_user }}'
+    group: '{{ printnanny_user }}'
+  when: printnanny_www_secret_key is defined
+  tags:
+    - secret
+    - env
+    - metadata
+  notify:
+    - restart printnanny-dash

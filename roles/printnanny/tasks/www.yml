@@ -28,23 +28,6 @@
   notify:
     - restart printnanny-dash
 
-- name: Render Print Nanny Dashboard Rocket.toml
-  become: true
-  ansible.builtin.template:
-    mode: 0660
-    src: www/Rocket.toml.j2
-    dest: '{{ printnanny_www_dir }}/Rocket.toml'
-    force: true
-    owner: '{{ printnanny_user }}'
-    group: '{{ printnanny_user }}'
-  when: printnanny_www_secret_key is defined
-  tags:
-    - secret
-    - env
-    - metadata
-  notify:
-    - restart printnanny-dash
-
 - name: Render Print Nanny Dashboard service from template
   become: true
   ansible.builtin.template:

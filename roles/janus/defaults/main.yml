@@ -1,12 +1,12 @@
 ---
 # defaults file for ansible-role-janus-gateway
-printnanny_ssl_dir: '{{ janus_install_dir }}/ssl'
-printnanny_ssl_crt_dir: '{{ janus_install_dir }}/ssl/crt'
-printnanny_ssl_key_dir: '{{ janus_install_dir }}/ssl/private'
-printnanny_ssl_csr_dir: '{{ janus_install_dir }}/ssl/csr'
-printnanny_ssl_cert: '{{ printnanny_ssl_crt_dir}}/cert.pem'
-printnanny_ssl_key: '{{ printnanny_ssl_key_dir}}/key.pem'
-printnanny_ssl_csr: '{{ printnanny_ssl_csr_dir }}/janus.csr'
+janus_ssl_dir: '{{ janus_install_dir }}/ssl'
+janus_ssl_crt_dir: '{{ janus_install_dir }}/ssl/crt'
+janus_ssl_key_dir: '{{ janus_install_dir }}/ssl/private'
+janus_ssl_csr_dir: '{{ janus_install_dir }}/ssl/csr'
+janus_ssl_cert: '{{ janus_ssl_crt_dir}}/cert.pem'
+janus_ssl_key: '{{ janus_ssl_key_dir}}/key.pem'
+janus_ssl_csr: '{{ janus_ssl_csr_dir }}/janus.csr'
 janus_auth: {}
 
 cam_rtp_port: 5104
@@ -107,7 +107,7 @@ janus_token: null
 
 janus_ssl_ciphers: null
 janus_ssl_enabled: true
-janus_ssl_cert: '{{ printnanny_ssl_cert }}'
-janus_ssl_key: '{{ printnanny_ssl_key }}'
+janus_ssl_cert: '{{ janus_ssl_cert }}'
+janus_ssl_key: '{{ janus_ssl_key }}'
 janus_ssl_passphrase: null
 janus_upgrade_available: true
