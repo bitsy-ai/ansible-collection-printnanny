@@ -40,4 +40,4 @@ jobs:
             🥧 **Hot & Fresh Configs** {{ EVENT_PAYLOAD.repository.full_name }}@{{ GITHUB_SHA }}
             **Version**: `${{ steps.tags.outputs.new_tag }}`
             **Channel**: `${{ steps.git.outputs.git_branch }}`
-            **Release Notes** https://github.com/bitsy-ai/ansible-collection-rpi/releases/tag/v${{ steps.tags.outputs.new_tag }}
+            **Release Notes** https://github.com/bitsy-ai/ansible-collection-rpi/releases/tag/${{ steps.tags.outputs.new_tag }}
