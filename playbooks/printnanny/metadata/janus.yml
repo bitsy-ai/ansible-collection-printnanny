@@ -8,6 +8,7 @@
       - env
       - metadata
       - janus
+    printnanny_profile: default
   tasks:
     - name: Set janus metadata
       include_role:

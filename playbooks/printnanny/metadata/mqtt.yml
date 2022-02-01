@@ -8,6 +8,7 @@
       - env
       - metadata
       - mqtt
+    printnanny_profile: default
   tasks:
     - name: Set mqtt metadata
       include_role:

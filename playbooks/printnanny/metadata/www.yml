@@ -8,6 +8,7 @@
       - env
       - metadata
       - www
+    printnanny_profile: default
   tasks:
     - name: Set wwww metadata
       include_role:
