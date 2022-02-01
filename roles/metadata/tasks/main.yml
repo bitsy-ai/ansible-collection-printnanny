@@ -36,6 +36,14 @@
     - metadata
 - name: Enable metadata services
   ansible.builtin.systemd:
+    name: 'printnanny-metadata.target'
+    enabled: true
+    no_block: true
+  with_items: '{{ metadata_apps }}'
+  tags:
+    - metadata
+- name: Enable metadata services
+  ansible.builtin.systemd:
     name: 'printnanny-metadata@{{ item }}.service'
     enabled: true
     no_block: true
