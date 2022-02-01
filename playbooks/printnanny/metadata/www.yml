@@ -1,0 +1,19 @@
+---
+- hosts: printnanny
+  gather_facts: true
+  vars:
+    ara_playbook_name: 'render printnanny metadata for www app'
+    ara_playbook_labels:
+      - printnanny
+      - env
+      - metadata
+      - www
+  tasks:
+    - name: Set wwww metadata
+      include_role:
+        name: bitsyai.rpi.metadata
+        tasks_from: wwww/main.yml
+        vars_from: '{{ printnanny_profile }}.yml'
+  handlers:
+    - include: ../../roles/printnanny/handlers/main.yml
+    - include: ../../roles/janus/handlers/main.yml

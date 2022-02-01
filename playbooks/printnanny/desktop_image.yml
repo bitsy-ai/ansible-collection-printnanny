@@ -5,6 +5,7 @@
     - bitsyai.rpi.common
     - bitsyai.rpi.printnanny
     - bitsyai.rpi.janus
+    - bitsyai.rpi.metadata
   tasks:
     - name: Clean and minimize image
       include_role:
