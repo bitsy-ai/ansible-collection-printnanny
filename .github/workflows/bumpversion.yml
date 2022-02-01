@@ -1,6 +1,9 @@
 name: Bump version
 on:
   workflow_dispatch:
+    defaultBump:
+      default: minor
+      description: 'Default bump to use if no explicit #patch #minor #major commit message is found'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -20,6 +23,7 @@ jobs:
         DRY_RUN: true
         RELEASE_BRANCHES: "main"
         PRERELEASE_SUFFIX: "nightly"
+        DEFAULT_BUMP: ${{ inputs.defaultBump }}
     - name: Commit version bump message
       run: |
         ./tools/bump-version.sh ${{ steps.tags.outputs.tag }} ${{ steps.tags.outputs.new_tag }} ${{ steps.git.outputs.git_branch }} 
@@ -31,6 +35,8 @@ jobs:
         DRY_RUN: false
         RELEASE_BRANCHES: "main"
         PRERELEASE_SUFFIX: "nightly"
+        DEFAULT_BUMP: ${{ inputs.defaultBump }}
+
     - name: Send Discord notification
       env:
         DISCORD_WEBHOOK: ${{ secrets.PRINT_NANNY_DISCORD_DEPLOY_WEBHOOK }}
