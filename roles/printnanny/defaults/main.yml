@@ -1,8 +1,4 @@
 ---
-# defaults file for setup
-# defaults file for ansible-role-print-nanny
-tflite_version: v2.5.1
-
 ##
 # printnanny_ vars
 ##
@@ -48,19 +44,19 @@ printnanny_update_schedule: '*/15 * * * *'
 printnanny_user: printnanny
 printnanny_group: printnanny
 
-printnanny_ssl_key_size: 2048
-printnanny_ssl_key_type: DSA
-printnanny_ssl_dir: '{{ janus_install_dir }}/ssl'
-printnanny_ssl_crt_dir: '{{ janus_install_dir }}/ssl/crt'
-printnanny_ssl_key_dir: '{{ janus_install_dir }}/ssl/private'
-printnanny_ssl_csr_dir: '{{ janus_install_dir }}/ssl/csr'
-printnanny_ssl_cert: '{{ printnanny_ssl_crt_dir}}/janus.crt'
-printnanny_ssl_key: '{{ printnanny_ssl_key_dir}}/janus.pem'
-printnanny_ssl_csr: '{{ printnanny_ssl_csr_dir }}/janus.csr'
+janus_ssl_key_size: 2048
+janus_ssl_key_type: DSA
+janus_ssl_dir: '{{ janus_install_dir }}/ssl'
+janus_ssl_crt_dir: '{{ janus_install_dir }}/ssl/crt'
+janus_ssl_key_dir: '{{ janus_install_dir }}/ssl/private'
+janus_ssl_csr_dir: '{{ janus_install_dir }}/ssl/csr'
+janus_ssl_cert: '{{ janus_ssl_crt_dir}}/janus.crt'
+janus_ssl_key: '{{ janus_ssl_key_dir}}/janus.pem'
+janus_ssl_csr: '{{ janus_ssl_csr_dir }}/janus.csr'
 
-printnanny_ssl_country_name: 'US'
-printnanny_ssl_email_address: support@print-nanny.com
-printnanny_ssl_organization_name: 'Bitsy AI Labs, LLC'
+janus_ssl_country_name: 'US'
+janus_ssl_email_address: support@print-nanny.com
+janus_ssl_organization_name: 'Bitsy AI Labs, LLC'
 printnanny_variant: desktop
 
 ##
@@ -169,6 +165,11 @@ honeycomb_api_key: '22ffab0ec6af32b2be565bc831555e44'
 ##
 # janus vars
 ##
+janus_groups: []
+janus_conf_dir: /etc/janus
+janus_env_file: /etc/janus/janus.env
+janus_admin_secret_file: '{{ janus_conf_dir }}/janus_admin_secret'
+janus_token_file: '{{ janus_conf_dir }}/janus_token'
 janus_user: janus
 janus_install_dir: /opt/janus
 janus_admin_url: 'http://localhost:{{ janus_conf["janus.transport.http"]["admin_http_port"] }}{{ janus_conf["janus.transport.http"]["admin_base_path"] }}'
@@ -178,8 +179,6 @@ janus_unit_extra: |
     EnvironmentFile=-{{ printnanny_env }}
     ExecStartPost=printnanny janus-admin add-token
 
-janus_ssl_cert: '{{ printnanny_ssl_cert }}'
-janus_ssl_key: '{{ printnanny_ssl_key }}'
 janus_conf:
     janus:
         plugins_folder: "{{ janus_install_dir }}/lib/janus/plugins"

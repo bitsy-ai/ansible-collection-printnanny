@@ -1,0 +1,58 @@
+- name: 'Configure {{ printnanny_user }} user'
+  become: true
+  ansible.builtin.user:
+    name: '{{ printnanny_user }}'
+
+- name: 'Configure {{ printnanny_user }} groups'
+  become: true
+  ignore_errors: true
+  ansible.builtin.user:
+    name: '{{ printnanny_user }}'
+    groups:
+      - adm
+      - gpio
+      - i2c
+      - input
+      - netdev
+      - plugdev
+      - spi
+      - sudo
+      - tty
+      - video
+
+- name: Create {{ printnanny_ansible_dir }}
+  become: true
+  ansible.builtin.file:
+    path: "{{ printnanny_ansible_dir }}"
+    state: directory
+    owner: "{{ printnanny_user }}"
+    group: "{{ printnanny_group }}"
+    mode: 0775
+
+- name: Print all vars
+  ansible.builtin.debug:
+    var: hostvars[inventory_hostname]
+
+- name: Include tasks for each app in service_apps
+  include_tasks: '{{ item }}/main.yml'
+  with_items: '{{ metadata_apps }}'
+
+- name: Render printnanny-metadata@.service template
+  ansible.builtin.template:
+    src: printnanny-metadata@.service.j2
+    dest: /etc/systemd/system/printnanny-metadata@.service
+    mode: 0664
+    force: true
+- name: Render printnanny-metadata.target
+  ansible.builtin.template:
+    src: printnanny-metadata.target.j2
+    dest: /etc/systemd/system/printnanny-metadata@.target
+    mode: 0664
+    force: true
+
+- name: Enable metadata services
+  ansible.builtin.systemd:
+    name: 'printnanny-metadata@{{ item }}.service'
+    enabled: true
+    no_block: true
+  with_items: '{{ metadata_apps }}'

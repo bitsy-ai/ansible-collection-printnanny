@@ -1,11 +1,9 @@
 ---
-- include_tasks: users.yml
-- name: Include Janus secrets/service
-  include_role:
-    name: bitsyai.rpi.janus
-    tasks_from: metadata/main.yml
-- include_tasks: metadata/main.yml
 # metadata available to tasks beyond this point
+- name: 'Configure {{ printnanny_user }} user'
+  become: true
+  ansible.builtin.user:
+    name: '{{ printnanny_user }}'
 - include_tasks: boot_config.yml
 - include_tasks: apt.yml
 - include_tasks: camera.yml

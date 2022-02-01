@@ -1,0 +1,38 @@
+---
+- hosts: printnanny
+  gather_facts: true
+  vars:
+    ara_playbook_name: 'render printnanny metadata for dash app'
+    ara_playbook_labels:
+      - printnanny
+      - env
+      - metadata
+  tasks:
+    - name: Print gathered facts
+      include_role:
+        name: bitsyai.rpi.printnanny
+        tasks_from: metadata/debug.yml
+        vars_from: '{{ printnanny_profile }}.yml'
+      when: printnanny_profile is defined
+    - name: Print gathered facts
+      include_role:
+        name: bitsyai.rpi.printnanny
+        tasks_from: metadata/debug.yml
+      when: not printnanny_profile is defined
+    - name: Set Janus metadata
+      include_role:
+        name: bitsyai.rpi.janus
+        tasks_from: metadata/main.yml
+    - name: Set Print Nanny metadata
+      include_role:
+        name: bitsyai.rpi.printnanny
+        tasks_from: metadata/main.yml
+      when: not printnanny_profile is defined
+    - name: Set Print Nanny metadata
+      include_role:
+        name: bitsyai.rpi.printnanny
+        tasks_from: metadata/main.yml
+        vars_from: '{{ printnanny_profile }}.yml'
+      when: printnanny_profile is defined
+  handlers:
+    - include: ../../roles/printnanny/handlers/main.yml

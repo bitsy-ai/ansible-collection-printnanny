@@ -1,16 +1,17 @@
 # {{ ansible_managed }}
 [Unit]
-Description=Print Nanny Metadata Service
+Description=Print Nanny Metadata Service for %i
 After=network.target network-online.target ansible-collection.service
 Wants=network.service network-online.target ansible-collection.service
+PartOf=printnanny-metadata.target
 
 [Service]
 Type=oneshot
 RuntimeDirectory={{ printnanny_user }}
-RuntimeDirectoryPreserve=restart
+RuntimeDirectoryPreserve=yes
 ConfigurationDirectory={{ printnanny_user }}
 ExecStart={{ updater_venv }}/bin/ansible-playbook \
-    bitsyai.rpi.printnanny.metadata
+    bitsyai.rpi.printnanny.metadata.%i
 Restart=on-failure
 RemainAfterExit=yes
 
