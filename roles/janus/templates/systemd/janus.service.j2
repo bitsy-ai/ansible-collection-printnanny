@@ -6,6 +6,7 @@ Wants=syslog.target network.target network-online.target printnanny-metadata@jan
 
 [Service]
 Type=simple
+SyslogIdentifier=janus
 User={{ janus_user }}
 RuntimeDirectory={{ janus_user }}
 LogsDirectory={{ janus_user }}
