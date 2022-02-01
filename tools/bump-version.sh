@@ -6,5 +6,5 @@ git config --global user.name "Release Automation"
 
 bump2version --current-version $(cat version.txt) --new-version "$1" patch
 
-git commit -m "🚀 Bump version: $1 -> $2"
-git push origin "$3"
+git push origin
+git push --tags
