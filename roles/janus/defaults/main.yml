@@ -107,7 +107,5 @@ janus_token: null
 
 janus_ssl_ciphers: null
 janus_ssl_enabled: true
-janus_ssl_cert: '{{ janus_ssl_cert }}'
-janus_ssl_key: '{{ janus_ssl_key }}'
 janus_ssl_passphrase: null
 janus_upgrade_available: true
