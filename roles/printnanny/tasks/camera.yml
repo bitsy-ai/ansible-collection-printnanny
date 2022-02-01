@@ -63,6 +63,14 @@
     enabled: true
     no_block: true
 
+- name: Debug libcamera_version
+  ansible.builtin.debug:
+    var: libcamera_version
+
+- name: Debug libcamera_installed_version
+  ansible.builtin.debug:
+    var: libcamera_installed_version
+
 - name: Import libcamera tasks
   include_tasks: libcamera.yml
   when: libcamera_installed_version != libcamera_version
