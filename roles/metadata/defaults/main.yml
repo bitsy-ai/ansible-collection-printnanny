@@ -28,5 +28,3 @@ ansible_config:
     fact_caching_timeout: 86400
     fact_caching: jsonfile
     fact_caching_connection: /etc/ansible/facts.json
-
-printnanny_profile: default
