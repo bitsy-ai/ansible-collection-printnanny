@@ -1,5 +1,0 @@
----
-- name: Import updater role
-  include_role:
-    name: bitsyai.rpi.metadata
-    tasks_from: update/main.yml
