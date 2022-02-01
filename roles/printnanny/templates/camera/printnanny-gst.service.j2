@@ -9,6 +9,6 @@ Type=simple
 User={{ printnanny_user }}
 ExecStart=/usr/local/bin/printnanny-monitor
 Restart=on-failure
-
+RestartSec=10
 [Install]
 WantedBy=multi-user.target
