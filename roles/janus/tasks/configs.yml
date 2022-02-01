@@ -6,7 +6,7 @@
     group: '{{ janus_group }}'
     mode: 0644
     force: true
-  with_dict: '{{ janus_conf_template }}'
+  with_items: '{{ janus_conf_template }}'
   tags:
     - metadata
     - secret
