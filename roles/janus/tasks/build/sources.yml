@@ -35,7 +35,7 @@
     repo: "{{ janus_libwebsockets_repo }}"
     dest: "{{ janus_libwebsockets_build_dir.path }}"
     version: "{{ janus_libwebsockets_version }}"
-   when: janus_version != janus_installed_version
+  when: janus_version != janus_installed_version
   tags:
     - janus
     - setup
@@ -58,7 +58,7 @@
     repo: "{{ janus_repo }}"
     dest: "{{ janus_build_dir.path }}/build"
     version: "v{{ janus_version }}"
-   when: janus_version != janus_installed_version
+  when: janus_version != janus_installed_version
 
 - name: Download and unarchive libsrtp
   ansible.builtin.unarchive:
