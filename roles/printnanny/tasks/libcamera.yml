@@ -66,7 +66,7 @@
     jid: "{{ apt_libcamera.ansible_job_id }}"
   register: job
   until: job.finished
-  retries: 30
+  retries: 300
 
 - name: Install meson and ninja build systems
   ansible.builtin.pip:
