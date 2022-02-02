@@ -9,6 +9,8 @@
       - metadata
       - www
     printnanny_profile: default
+  roles:
+    - bitsyai.rpi.printnanny
   tasks:
     - name: Set www metadata
       include_role:

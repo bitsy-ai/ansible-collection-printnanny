@@ -1,0 +1,22 @@
+- name: Create {{ janus_conf_dir }}
+  become: true
+  ansible.builtin.file:
+    state: directory
+    mode: 0775
+    path: '{{ janus_conf_dir }}'
+  tags:
+    - metadata
+- name: Render janus configs
+  ansible.builtin.template:
+    src: '{{ item }}'
+    dest: '{{ janus_conf_dir }}/{{ item }}'
+    owner: '{{ janus_user }}'
+    group: '{{ janus_group }}'
+    mode: 0644
+    force: true
+  with_items: '{{ janus_conf_template }}'
+  tags:
+    - metadata
+    - secret
+  notify:
+    - restart janus
