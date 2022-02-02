@@ -17,6 +17,6 @@ jobs:
       uses: Ilshidur/action-discord@master
       with:
         args: |
-            🥧 **Hot & Fresh Configs** {{ github.repository.full_name }}@{{ GITHUB_SHA }}
+            🥧 **New Print Nanny OS Version**
             **Version**: `${{ github.ref }}`
             **Release Notes** https://github.com/bitsy-ai/ansible-collection-rpi/releases/tag/${{ github.ref }}
