@@ -32,9 +32,10 @@
     name: "{{ octoprint_user }}"
     state: present
     shell: /bin/bash
-    comment: "Octoprint service user"
+    comment: "OctoPrint service user"
     groups:
       - adm
+      - dialout
       - gpio
       - i2c
       - input
