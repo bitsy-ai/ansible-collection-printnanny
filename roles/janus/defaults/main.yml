@@ -1,12 +1,5 @@
 ---
 # defaults file for ansible-role-janus-gateway
-janus_ssl_dir: '{{ janus_install_dir }}/ssl'
-janus_ssl_crt_dir: '{{ janus_install_dir }}/ssl/crt'
-janus_ssl_key_dir: '{{ janus_install_dir }}/ssl/private'
-janus_ssl_csr_dir: '{{ janus_install_dir }}/ssl/csr'
-janus_ssl_cert: '{{ janus_ssl_crt_dir}}/cert.pem'
-janus_ssl_key: '{{ janus_ssl_key_dir}}/key.pem'
-janus_ssl_csr: '{{ janus_ssl_csr_dir }}/janus.csr'
 janus_auth: {}
 
 cam_rtp_port: 5104
@@ -103,6 +96,9 @@ janus_fact: /etc/ansible/facts.d/janus.fact
 
 janus_admin_secret: null
 janus_token: null
+
+janus_ssl_cert: null
+janus_ssl_key: null
 
 janus_ssl_ciphers: null
 janus_ssl_enabled: true

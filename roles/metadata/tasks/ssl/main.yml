@@ -1,0 +1,59 @@
+- name: Create ssl dirs
+  become: true
+  ansible.builtin.file:
+    state: directory
+    mode: 0771
+    path: '{{ item }}'
+    owner: '{{ printnanny_user }}'
+  with_items:
+    - '{{ printnanny_ssl_crt_dir }}'
+    - '{{ printnanny_ssl_key_dir }}'
+  tags:
+    - secret
+    - ssl
+    - metadata
+
+- name: Generate ssl privatekey
+  become: true
+  openssl_privatekey:
+    path: '{{ printnanny_ssl_key }}'
+    backup: true
+    type: ECC
+    # prime256v1
+    curve: secp256r1
+    format: pkcs8
+    owner: '{{ printnanny_user }}'
+    group: '{{ printnanny_user }}'
+  tags:
+    - secret
+    - ssl
+    - metadata
+
+# TODO fix country code, email, organization name, unit name
+- name: Generate self-signing request
+  become: true
+  openssl_csr:
+    path: '{{ printnanny_ssl_csr  }}'
+    privatekey_path: '{{ printnanny_ssl_key }}'
+    country_name: '{{ printnanny_ssl_country_name }}'
+    email_address: '{{ printnanny_ssl_email_address }}'
+    organization_name: '{{ printnanny_ssl_organization_name }}'
+    common_name: '{{ inventory_hostname }}'
+    owner: '{{ printnanny_user }}'
+  tags:
+    - secret
+    - ssl
+    - metadata
+
+- name: Generate Provisional Self-Signed OpenSSL certificate
+  become: true
+  openssl_certificate:
+    path: '{{ printnanny_ssl_cert }}'
+    privatekey_path: '{{ printnanny_ssl_key }}'
+    provider: selfsigned
+    owner: '{{ printnanny_user }}'
+    group: '{{ printnanny_user }}'
+  tags:
+    - secret
+    - ssl
+    - metadata

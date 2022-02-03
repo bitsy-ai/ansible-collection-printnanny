@@ -1,1 +1,9 @@
 ---
+
+printnanny_ssl_crt_dir: '{{ printnanny_install_dir  }}/ssl/crt'
+printnanny_ssl_key_dir: '{{ printnanny_install_dir }}/ssl/private'
+printnanny_ssl_cert: '{{ printnanny_ssl_crt_dir}}/cert.pem'
+printnanny_ssl_key: '{{ printnanny_ssl_key_dir}}/key.pem'
+
+janus_ssl_cert: '{{ printnanny_ssl_cert }}'
+janus_ssl_key: '{{ printnanny_ssl_key }}'
