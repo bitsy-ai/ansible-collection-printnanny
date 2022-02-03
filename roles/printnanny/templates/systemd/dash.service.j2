@@ -1,7 +1,7 @@
 [Unit]
 Description=Print Nanny Dashboard
-After=network.target network-online.target printnanny-metadata@www.service printnanny-metadata@env.service
-Wants=network.target network-online.target printnanny-metadata@www.service printnanny-metadata@env.service
+After=network.target network-online.target printnanny-metadata@ssl.service printnanny-metadata@www.service printnanny-metadata@env.service
+Wants=network.target network-online.target printnanny-metadata@ssl.service printnanny-metadata@www.service printnanny-metadata@env.service
 PartOf=printnanny.target
 
 [Service]
