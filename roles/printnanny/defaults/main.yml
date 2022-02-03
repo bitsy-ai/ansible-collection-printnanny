@@ -44,19 +44,19 @@ printnanny_update_schedule: '*/15 * * * *'
 printnanny_user: printnanny
 printnanny_group: printnanny
 
-janus_ssl_key_size: 2048
-janus_ssl_key_type: DSA
-janus_ssl_dir: '{{ janus_install_dir }}/ssl'
-janus_ssl_crt_dir: '{{ janus_install_dir }}/ssl/crt'
-janus_ssl_key_dir: '{{ janus_install_dir }}/ssl/private'
-janus_ssl_csr_dir: '{{ janus_install_dir }}/ssl/csr'
-janus_ssl_cert: '{{ janus_ssl_crt_dir}}/janus.crt'
-janus_ssl_key: '{{ janus_ssl_key_dir}}/janus.pem'
-janus_ssl_csr: '{{ janus_ssl_csr_dir }}/janus.csr'
+printnanny_ssl_key_size: 2048
+printnanny_ssl_key_type: DSA
 
-janus_ssl_country_name: 'US'
-janus_ssl_email_address: support@print-nanny.com
-janus_ssl_organization_name: 'Bitsy AI Labs, LLC'
+printnanny_ssl_dir: '{{ printnanny_install_dir }}/ssl'
+printnanny_ssl_crt_dir: '{{ printnanny_install_dir  }}/ssl/crt'
+printnanny_ssl_key_dir: '{{ printnanny_install_dir }}/ssl/private'
+printnanny_ssl_cert: '{{ printnanny_ssl_crt_dir}}/cert.pem'
+printnanny_ssl_key: '{{ printnanny_ssl_key_dir}}/key.pem'
+printnanny_ssl_csr: '{{ printnanny_ssl_crt_dir }}/cert.csr'
+
+printnanny_ssl_country_name: 'US'
+printnanny_ssl_email_address: support@print-nanny.com
+printnanny_ssl_organization_name: 'Bitsy AI Labs, LLC'
 printnanny_variant: desktop
 
 ##
