@@ -48,7 +48,7 @@ jobs:
           uses: leigh-johnson/ansible-test-gh-action@ljohnson-tags
           with:
             ansible-core-version: stable-2.12
-            docker-image: ubuntu2204
+            docker-image: ubuntu2004
             pre-test-cmd: echo This runs before the ansible-test invocation
             python-version: 3.8
             target-python-version: 3.8
