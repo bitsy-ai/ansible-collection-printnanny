@@ -4,16 +4,7 @@
   vars:
     nginx_setup_license: false
     nginx_logrotate_conf_enable: true
-    nginx_logrotate_conf:
-      paths:
-        - /var/log/nginx/*.log
-      options:
-        - daily
-        - missingok
-        - rotate 14
-        - compress
-        - delaycompress
-        - notifempty
+
 
 - name: Configure NGINX
   include_role:
