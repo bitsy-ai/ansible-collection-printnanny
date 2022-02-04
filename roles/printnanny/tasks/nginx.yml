@@ -1,0 +1,31 @@
+- name: Install NGINX
+  include_role:
+    name: ansible-role-nginx
+    vars:
+    nginx_setup_license: false
+    nginx_logrotate_conf_enable: true
+    nginx_logrotate_conf:
+      paths:
+        - /var/log/nginx/*.log
+      options:
+        - daily
+        - missingok
+        - rotate 14
+        - compress
+        - delaycompress
+        - notifempty
+        - sharedscripts
+
+- name: Configure NGINX
+  include_role:
+    name: ansible-role-nginx-config
+    vars:
+    nginx_config_debug_output: true
+    nginx_config_main_template_enable: true
+
+- name: Render /etc/nginx/conf.d/printnanny.conf
+  become: true
+  ansible.builtin.template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/conf.d/printnanny.conf
+    mode: 0644
