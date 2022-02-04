@@ -49,7 +49,7 @@ jobs:
           with:
             ansible-core-version: stable-2.12
             docker-image: ubuntu2004
-            pre-test-cmd: echo This runs before the ansible-test invocation
+            pre-test-cmd: pip3 install --upgrade jinja2
             python-version: 3.8
             target-python-version: 3.8
             target: "${{ matrix.group }}/"
