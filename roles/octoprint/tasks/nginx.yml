@@ -7,7 +7,6 @@
     nginx_modules:
       - njs
 
-
 - name: Configure NGINX
   include_role:
     name: nginxinc.nginx_core.nginx_config
