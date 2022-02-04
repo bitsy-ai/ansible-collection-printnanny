@@ -47,12 +47,9 @@ printnanny_group: printnanny
 printnanny_ssl_key_size: 2048
 printnanny_ssl_key_type: DSA
 
-printnanny_ssl_dir: '{{ printnanny_install_dir }}/ssl'
-printnanny_ssl_crt_dir: '{{ printnanny_install_dir  }}/ssl/crt'
-printnanny_ssl_key_dir: '{{ printnanny_install_dir }}/ssl/private'
-printnanny_ssl_cert: '{{ printnanny_ssl_crt_dir}}/cert.pem'
-printnanny_ssl_key: '{{ printnanny_ssl_key_dir}}/key.pem'
-printnanny_ssl_csr: '{{ printnanny_ssl_crt_dir }}/cert.csr'
+# TODO replace with Print Nanny Network ca-signed cert
+printnanny_ssl_cert: '/etc/ssl/certs/ssl-cert-snakeoil.pem'
+printnanny_ssl_key: '/etc/ss/private/ssl-cert-snakeoil.key'
 
 printnanny_ssl_country_name: 'US'
 printnanny_ssl_email_address: support@print-nanny.com

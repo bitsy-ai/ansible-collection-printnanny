@@ -1,4 +1,1 @@
 ---
-# vars file for ansible-role-janus-gateway
-gstreamer_rtp_host: "127.0.0.1"
-gstreamer_rtp_port: 5004

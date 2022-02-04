@@ -97,8 +97,9 @@ janus_fact: /etc/ansible/facts.d/janus.fact
 janus_admin_secret: null
 janus_token: null
 
-janus_ssl_cert: null
-janus_ssl_key: null
+# TODO replace with Print Nanny Network ca-signed cert
+janus_ssl_cert: '/etc/ssl/certs/ssl-cert-snakeoil.pem'
+janus_ssl_key: '/etc/ss/private/ssl-cert-snakeoil.key'
 
 janus_ssl_ciphers: null
 janus_ssl_enabled: true

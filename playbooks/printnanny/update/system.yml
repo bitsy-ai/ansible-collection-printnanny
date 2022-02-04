@@ -11,6 +11,28 @@
     - bitsyai.rpi.common
     - bitsyai.rpi.metadata
   tasks:
+    - name: Install NGINX
+      include_role: ansible-role-nginx
+      vars:
+        nginx_setup_license: false
+        nginx_logrotate_conf_enable: true
+        nginx_logrotate_conf:
+          paths:
+            - /var/log/nginx/*.log
+          options:
+            - daily
+            - missingok
+            - rotate 14
+            - compress
+            - delaycompress
+            - notifempty
+            - sharedscripts
+    - name: Configure NGINX
+      include_role:
+        name: ansible-role-nginx-config
+      vars:
+        nginx_config_debug_output: true
+
     - name: Include printnanny role (custom profile)
       include_role:
         name: bitsyai.rpi.printnanny
@@ -22,3 +44,9 @@
         name: bitsyai.rpi.printnanny
         public: true
       when: not printnanny_profile is defined
+    - name: Install Janus
+      include_role:
+        name: bitsyai.rpi.janus
+      vars:
+        janus_ssl_cert: '{{ printnanny_ssl_cert }}'
+        janus_ssl_key: '{{ printnanny_ssl_key }}'
