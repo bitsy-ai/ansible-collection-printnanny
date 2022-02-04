@@ -16,9 +16,9 @@ http {
         proxy_set_header        X-Real-IP $remote_addr;
         proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header        X-Forwarded-Proto $scheme;
-        proxy_pass          http://localhost:{{ printnanny_www_port }};
+        proxy_pass          http://localhost:{{ octoprint_port }};
         proxy_read_timeout  90;
-        proxy_redirect      http://localhost:{{ printnanny_www_port }} https://octoprint.$hostname;
+        proxy_redirect      http://localhost:{{ octoprint_port }} https://octoprint.$hostname;
         }
     }
 
