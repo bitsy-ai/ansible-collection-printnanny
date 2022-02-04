@@ -12,7 +12,8 @@
     - bitsyai.rpi.metadata
   tasks:
     - name: Install NGINX
-      include_role: ansible-role-nginx
+      include_role:
+        name: ansible-role-nginx
       vars:
         nginx_setup_license: false
         nginx_logrotate_conf_enable: true
@@ -32,6 +33,7 @@
         name: ansible-role-nginx-config
       vars:
         nginx_config_debug_output: true
+        nginx_config_main_template_enable: true
 
     - name: Include printnanny role (custom profile)
       include_role:
