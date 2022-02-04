@@ -58,5 +58,7 @@ jobs:
               ansible.posix
               community.general
               community.crypto
+              nginxinc.nginx
+              nginxinc.nginx_config
             verbosity: -vvv
             tags: ${{ matrix.tags }}
