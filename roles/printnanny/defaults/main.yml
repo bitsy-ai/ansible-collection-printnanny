@@ -64,6 +64,7 @@ libcamera_version: 7ea52d2b586144fdc033a3ffc1c4a4bbb99b5440
 libcamera_apps_version: 14e32b75ebba9a06c030ef7cb0f2f14cdb74a586
 libcamera_apps_repo: https://github.com/raspberrypi/libcamera-apps.git
 libcamera_installed_version: null
+libcamera_build_source: false
 
 ##
 # gcp_ vars
