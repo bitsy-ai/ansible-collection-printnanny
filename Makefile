@@ -10,6 +10,10 @@ $(VENV):
 	$(VENV)/bin/pip install --upgrade pip setuptools wheel pip-tools
 	$(VENV)/bin/pip install -r requirements.txt
 
+docker-image:
+	docker build --tag bitsyai/ubuntu2004-test-container:3.1.0 -f Dockerfile .
+	docker push bitsyai/ubuntu2004-test-container:3.1.0
+
 requirements.txt: requirements.in
 	$(VENV)/bin/pip-compile
 
