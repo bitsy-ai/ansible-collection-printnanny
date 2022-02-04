@@ -11,6 +11,7 @@
     - bitsyai.rpi.common
     - bitsyai.rpi.metadata
   tasks:
+
     - name: Include printnanny role (custom profile)
       include_role:
         name: bitsyai.rpi.printnanny
@@ -22,3 +23,9 @@
         name: bitsyai.rpi.printnanny
         public: true
       when: not printnanny_profile is defined
+    - name: Install Janus
+      include_role:
+        name: bitsyai.rpi.janus
+      vars:
+        janus_ssl_cert: '{{ printnanny_ssl_cert }}'
+        janus_ssl_key: '{{ printnanny_ssl_key }}'

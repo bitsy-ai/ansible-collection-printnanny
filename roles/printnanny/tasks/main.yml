@@ -28,6 +28,7 @@
     - metadata
 - include_tasks: boot_config.yml
 - include_tasks: apt.yml
+- include_tasks: nginx.yml
 - include_tasks: camera.yml
 - include_tasks: cli.yml
 - include_tasks: www.yml

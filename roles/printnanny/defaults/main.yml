@@ -39,7 +39,6 @@ printnanny_cli_version: 0.13.0
 printnanny_cli_repo: 'https://github.com/bitsy-ai/printnanny-cli'
 printnanny_cli_url: '{{ printnanny_cli_repo }}/releases/download/v{{ printnanny_cli_version }}/printnanny-{{ ansible_architecture }}-unknown-linux-gnu.tar.gz'
 printnanny_www_templates_url: '{{ printnanny_cli_repo }}/releases/download/v{{ printnanny_cli_version }}/printnanny-www-templates.tar.gz'
-printnanny_ansible_version: 'ansible>4,<5'
 printnanny_update_schedule: '*/15 * * * *'
 printnanny_user: printnanny
 printnanny_group: printnanny
@@ -47,17 +46,15 @@ printnanny_group: printnanny
 printnanny_ssl_key_size: 2048
 printnanny_ssl_key_type: DSA
 
-printnanny_ssl_dir: '{{ printnanny_install_dir }}/ssl'
-printnanny_ssl_crt_dir: '{{ printnanny_install_dir  }}/ssl/crt'
-printnanny_ssl_key_dir: '{{ printnanny_install_dir }}/ssl/private'
-printnanny_ssl_cert: '{{ printnanny_ssl_crt_dir}}/cert.pem'
-printnanny_ssl_key: '{{ printnanny_ssl_key_dir}}/key.pem'
-printnanny_ssl_csr: '{{ printnanny_ssl_crt_dir }}/cert.csr'
-
+# TODO replace with Print Nanny Network ca-signed cert
+printnanny_ssl_cert: '/etc/ssl/certs/ssl-cert-snakeoil.pem'
+printnanny_ssl_key: '/etc/ss/private/ssl-cert-snakeoil.key'
+printnanny_ssl_protocols: 'TLSv1 TLSv1.1 TLSv1.2'
+printnanny_ssl_ciphers: 'HIGH:!aNULL:!MD5;'
 printnanny_ssl_country_name: 'US'
 printnanny_ssl_email_address: support@print-nanny.com
 printnanny_ssl_organization_name: 'Bitsy AI Labs, LLC'
-printnanny_variant: desktop
+printnanny_edition: desktop
 
 ##
 # libcamera vars

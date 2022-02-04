@@ -1,3 +1,4 @@
 integration_tests_dependencies:
   - ansible.posix
   - community.general
+  - nginxinc.nginx_core

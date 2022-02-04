@@ -1,11 +1,9 @@
 ---
+- name: Update Print Nanny system
+  import_playbook: update/system.yml
+  vars:
+    printnanny_edition: desktop
 - hosts: printnanny
-  gather_facts: true
-  roles:
-    - bitsyai.rpi.common
-    - bitsyai.rpi.printnanny
-    - bitsyai.rpi.janus
-    - bitsyai.rpi.metadata
   tasks:
     - name: Clean and minimize image
       include_role:

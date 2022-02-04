@@ -1,6 +1,5 @@
 ---
 metadata_apps:
-    - ssl
     - janus
     - www
     - env
@@ -12,13 +11,14 @@ metadata_apps:
 
 updater_app_name: printnanny
 updater_playbooks:
-    - bitsyai.rpi.printnanny.update.system
+    - bitsyai.rpi.printnanny.system
 
 updater_release_channel: '{{ printnanny.release_channel | default("main") }}'
 updater_collection_url: 'git+https://github.com/bitsy-ai/ansible-collection-rpi.git,{{ updater_release_channel }}'
 
 updater_venv: '{{ printnanny_ansible_dir }}/venv'
 
+jinja2_version: 'jinja2>=2.11'
 ansible_updater_version: 'ansible-core>2.11,<2.12'
 ansible_collection_updater: ansible-updater
 updater_tmpfs: '/var/run/{{ updater_app_name }}'

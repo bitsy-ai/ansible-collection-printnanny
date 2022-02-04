@@ -22,7 +22,22 @@
 
 - name: Install ansible into virtual env
   ansible.builtin.pip:
-    name: '{{ ansible_updater_version }}'
+    name:
+      - '{{ ansible_updater_version }}'
+    virtualenv_command: /usr/bin/python3 -m venv
+    virtualenv: '{{ updater_venv }}'
+    extra_args: '--no-cache-dir'
+  tags:
+    - setup
+    - requirements
+    - metadata
+
+# pin jinja2>=2.11 to support nginx_core collection's use of boolean filter
+# https://github.com/nginxinc/ansible-role-nginx-config/issues/195#issuecomment-1009679890
+- name: Upgrade jinja2 version
+  ansible.builtin.pip:
+    name:
+      - '{{ jinja2_version }}'
     virtualenv_command: /usr/bin/python3 -m venv
     virtualenv: '{{ updater_venv }}'
     extra_args: '--no-cache-dir'
