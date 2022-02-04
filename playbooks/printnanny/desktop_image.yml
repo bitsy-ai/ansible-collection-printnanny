@@ -1,6 +1,6 @@
 ---
 - name: Update Print Nanny system
-  import_playbook: update/system.yml
+  import_playbook: system.yml
   vars:
     printnanny_edition: desktop
 - hosts: printnanny
