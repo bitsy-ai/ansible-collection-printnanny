@@ -46,7 +46,7 @@ jobs:
             path: "${{ github.repository }}"
         - uses: actions/setup-python@v2
           with:
-            python-version: '3.9'
+            python-version: '3.8'
             cache: 'pip'
         - run: pip install jinja2>=3
         - name: Perform integration testing with ansible-test
@@ -54,8 +54,8 @@ jobs:
           with:
             ansible-core-version: stable-2.12
             docker-image: ubuntu2004
-            python-version: 3.9
-            target-python-version: 3.9
+            python-version: 3.8
+            target-python-version: 3.8
             target: "${{ matrix.group }}/"
             testing-type: integration
             test-deps: >-
