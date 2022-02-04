@@ -2,6 +2,7 @@
   include_role:
     name: nginxinc.nginx_core.nginx
   vars:
+    nginx_start: false
     nginx_setup_license: false
     nginx_logrotate_conf_enable: false
     nginx_modules:
@@ -20,3 +21,8 @@
     src: nginx.conf.j2
     dest: /etc/nginx/conf.d/octoprint.conf
     mode: 0644
+
+- name: Enable nginx.service
+  ansible.builtin.systemd:
+    name: nginx.service
+    state: enabled
