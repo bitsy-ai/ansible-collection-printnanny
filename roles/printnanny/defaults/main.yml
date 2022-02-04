@@ -39,7 +39,6 @@ printnanny_cli_version: 0.13.0
 printnanny_cli_repo: 'https://github.com/bitsy-ai/printnanny-cli'
 printnanny_cli_url: '{{ printnanny_cli_repo }}/releases/download/v{{ printnanny_cli_version }}/printnanny-{{ ansible_architecture }}-unknown-linux-gnu.tar.gz'
 printnanny_www_templates_url: '{{ printnanny_cli_repo }}/releases/download/v{{ printnanny_cli_version }}/printnanny-www-templates.tar.gz'
-printnanny_ansible_version: 'ansible>4,<5'
 printnanny_update_schedule: '*/15 * * * *'
 printnanny_user: printnanny
 printnanny_group: printnanny
