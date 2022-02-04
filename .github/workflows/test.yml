@@ -53,7 +53,7 @@ jobs:
           uses: leigh-johnson/ansible-test-gh-action@ljohnson-tags
           with:
             ansible-core-version: stable-2.12
-            pre-test-cmd: pip3 install --upgrade jinja2
+            docker-image: ubuntu2004
             python-version: 3.9
             target-python-version: 3.9
             target: "${{ matrix.group }}/"
