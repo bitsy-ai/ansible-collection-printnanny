@@ -3,7 +3,7 @@
     name: nginxinc.nginx_core.nginx
   vars:
     nginx_setup_license: false
-    nginx_logrotate_conf_enable: true
+    nginx_logrotate_conf_enable: false
 
 
 - name: Configure NGINX

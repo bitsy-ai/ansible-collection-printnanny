@@ -3,7 +3,7 @@
     name: nginxinc.nginx_core.nginx
   vars:
     nginx_setup_license: false
-    nginx_logrotate_conf_enable: true
+    nginx_logrotate_conf_enable: false
 
 
 - name: Configure NGINX
@@ -12,6 +12,7 @@
   vars:
     nginx_config_debug_output: true
     nginx_config_main_template_enable: true
+    backup: true
     config:
       main:  # Configure NGINX main core directives
         load_module: []  # String or a list of strings
