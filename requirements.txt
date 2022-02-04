@@ -1,3 +1,0 @@
-ansible-core>=2.12
-wheel
-jinja2>=3
