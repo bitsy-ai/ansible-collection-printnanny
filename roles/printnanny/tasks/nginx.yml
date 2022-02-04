@@ -1,7 +1,7 @@
 - name: Install NGINX
   include_role:
-    name: ansible-role-nginx
-    vars:
+    name: nginx
+  vars:
     nginx_setup_license: false
     nginx_logrotate_conf_enable: true
     nginx_logrotate_conf:
@@ -18,8 +18,8 @@
 
 - name: Configure NGINX
   include_role:
-    name: ansible-role-nginx-config
-    vars:
+    name: nginx_config
+  vars:
     nginx_config_debug_output: true
     nginx_config_main_template_enable: true
 
