@@ -48,7 +48,7 @@ printnanny_ssl_key_type: DSA
 
 # TODO replace with Print Nanny Network ca-signed cert
 printnanny_ssl_cert: '/etc/ssl/certs/ssl-cert-snakeoil.pem'
-printnanny_ssl_key: '/etc/ss/private/ssl-cert-snakeoil.key'
+printnanny_ssl_key: '/etc/ssl/private/ssl-cert-snakeoil.key'
 printnanny_ssl_protocols: 'TLSv1 TLSv1.1 TLSv1.2'
 printnanny_ssl_ciphers: 'HIGH:!aNULL:!MD5;'
 printnanny_ssl_country_name: 'US'
