@@ -1,29 +1,20 @@
-worker_processes auto;
-http {
-    ssl_session_cache   shared:SSL:10m;
-    ssl_session_timeout 10m;
-    server {
-        listen 443;
-        server_name octoprint.$hostname;
-        ssl on;
-        ssl_certificate     {{ octoprint_ssl_cert }};
-        ssl_certificate_key {{ octoprint_ssl_key }};
-        ssl_protocols       {{ octoprint_ssl_protocols }};
-        ssl_ciphers         {{ octoprint_ssl_ciphers }}
-        location / {
 
-        proxy_set_header        Host $host;
-        proxy_set_header        X-Real-IP $remote_addr;
-        proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header        X-Forwarded-Proto $scheme;
-        proxy_pass          http://localhost:{{ octoprint_port }};
-        proxy_read_timeout  90;
-        proxy_redirect      http://localhost:{{ octoprint_port }} https://octoprint.$hostname;
-        }
-    }
+server {
+    listen 443;
+    server_name octoprint.$hostname;
+    ssl on;
+    ssl_certificate     {{ octoprint_ssl_cert }};
+    ssl_certificate_key {{ octoprint_ssl_key }};
+    ssl_protocols       {{ octoprint_ssl_protocols }};
+    ssl_ciphers         {{ octoprint_ssl_ciphers }}
+    location / {
 
-    server {
-        listen 80;
-        return 301 https://$host$request_uri;
+    proxy_set_header        Host $host;
+    proxy_set_header        X-Real-IP $remote_addr;
+    proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header        X-Forwarded-Proto $scheme;
+    proxy_pass          http://localhost:{{ octoprint_port }};
+    proxy_read_timeout  90;
+    proxy_redirect      http://localhost:{{ octoprint_port }} https://octoprint.$hostname;
     }
 }
