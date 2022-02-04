@@ -26,7 +26,7 @@ printnanny_ansible_dir: "{{ printnanny_install_dir }}/ansible"
 printnanny_www_dir: '{{ printnanny_profile_dir }}/www'
 printnanny_www_secret_file: '{{ printnanny_www_dir }}/key'
 printnanny_www_templates_dir: '{{ printnanny_www_dir }}/templates'
-printnanny_www_address: "0.0.0.0"
+printnanny_www_address: "127.0.0.1"
 printnanny_www_port: 9001
 printnanny_www_log_level: "normal"
 
