@@ -16,9 +16,9 @@
       include_role:
         name: bitsyai.rpi.printnanny
         public: true
-        vars_from: '{{ printnanny_profile }}.yml'
+        vars_from: '../../../roles/metadata/vars/{{ printnanny_profile }}.yml'
       when: printnanny_profile is defined
-    - name: Include printnanny role (custom profile)
+    - name: Include printnanny role (default profile)
       include_role:
         name: bitsyai.rpi.printnanny
         public: true
