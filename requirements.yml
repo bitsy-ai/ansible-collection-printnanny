@@ -3,7 +3,4 @@ collections:
   - name: ansible.posix
   - name: community.general
   - name: community.crypto
-
-roles:
-  - name: nginxinc.nginx
-  - name: nginxinc.nginx_config
+  - name: nginxinc.nginx_core
