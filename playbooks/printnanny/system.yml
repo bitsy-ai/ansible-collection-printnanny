@@ -11,8 +11,8 @@
     - bitsyai.rpi.common
     - bitsyai.rpi.metadata
   vars_files:
-    - ../../../roles/metadata/vars/{{ printnanny_profile|default("default", true) }}.yml
-    - ../../../roles/printnanny/vars/{{ printnanny_edition|default("octoprint_desktop", true) }}.yml
+    - ../../roles/metadata/vars/{{ printnanny_profile|default("default", true) }}.yml
+    - ../../roles/printnanny/vars/{{ printnanny_edition|default("octoprint_desktop", true) }}.yml
   tasks:
     - name: Include printnanny role (custom profile)
       include_role:
