@@ -1,3 +1,10 @@
 ---
-- include_role:
+- name: Test release installation
+  include_role:
+    name: bitsyai.printnanny.octoprint
+
+- name: Test developer installation
+  vars:
+    octoprint_printnanny_plugin_dev: true
+  include_role:
     name: bitsyai.printnanny.octoprint

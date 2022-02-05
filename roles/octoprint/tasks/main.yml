@@ -90,57 +90,12 @@
     - system-update
     - octoprint
 
-- name: Install octoprint into venv
-  become_user: '{{ octoprint_user }}'
-  ansible.builtin.pip:
-    name: '{{ octoprint_version }}'
-    virtualenv_command: /usr/bin/python3 -m venv
-    virtualenv: '{{ octoprint_venv }}'
-    extra_args: '--no-cache-dir'
-  tags:
-    - setup
-    - system-update
-    - octoprint
-
-# If OctoPrint is not installed first, plugin installation fails with the following erorr:
-## Could not import OctoPrint's setuptools,
-## are you sure you are running that under the same python installation that OctoPrint is installed under?\n    ----------------------------------------\n
-- name: Install OctoPrint plugin into venv (required to detect OctoPrint setuptools)
-  become_user: '{{ octoprint_user }}'
-  pip:
-    name: '{{ octoprint_printnanny_plugin_version }}'
-    virtualenv_command: /usr/bin/python3 -m venv
-    virtualenv: '{{ octoprint_venv }}'
-    extra_args: '--no-cache-dir'
-  tags:
-    - setup
-    - system-update
-    - octoprint
+- name: Install OctoPrint (release)
+  include_tasks: plugin_release.yml
   when: not octoprint_printnanny_plugin_dev
 
-- name: Clone OctoPrint plugin (developer mode)
-  become_user: '{{ octoprint_user }}'
-  ansible.builtin.git:
-    repo: '{{ octoprint_printnanny_plugin_repo }}'
-    dest: '{{ octoprint_printnanny_plugin_dir }}'
-    version: '{{ octoprint_printnanny_plugin_version }}'
-  tags:
-    - setup
-    - system-update
-    - octoprint
-  when: octoprint_printnanny_plugin_dev
-
-- name: Install OctoPrint plugin (developer mode)
-  become_user: '{{ octoprint_user }}'
-  ansible.builtin.pip:
-    name: '.'
-    virtualenv: '{{ octoprint_venv }}'
-    editable: true
-    chdir: '{{ octoprint_printnanny_plugin_dir }}'
-  tags:
-    - setup
-    - system-update
-    - octoprint
+- name: Install OctoPrint (developer mode)
+  include_tasks: plugin_dev.yml
   when: octoprint_printnanny_plugin_dev
 
 - name: Render octoprint config
@@ -156,32 +111,3 @@
     - setup
     - system-update
     - octoprint
-
-- name: Render octoprint.service template
-  become: true
-  ansible.builtin.template:
-    mode: 0664
-    src: octoprint.service.j2
-    dest: '/etc/systemd/system/octoprint.service'
-    force: true
-  notify:
-    - restart octoprint
-  tags:
-    - setup
-    - system-update
-    - octoprint
-
-- name: Enable octoprint.service
-  become: true
-  ansible.builtin.systemd:
-    name: octoprint.service
-    state: started
-    enabled: true
-    no_block: true
-  tags:
-    - setup
-    - system-update
-    - octoprint
-
-- name: Include nginx tasks
-  include_tasks: nginx.yml
