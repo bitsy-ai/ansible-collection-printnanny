@@ -2,7 +2,7 @@
   become: true
   ansible.builtin.file:
     state: directory
-    dest: /etc/nginx/conf.d/octoprint.locations
+    dest: /etc/nginx/conf.d
     mode: 0755
 
 - name: Render /etc/nginx/conf.d/printnanny.conf
