@@ -7,15 +7,7 @@
       - update
       - printnanny
       - system
-    nginx_start: false
-    nginx_setup_license: false
-    nginx_logrotate_conf_enable: false
-    nginx_modules:
-      - njs
-    nginx_config_debug_output: true
   roles:
-    - nginxinc.nginx_core.nginx
-    - nginxinc.nginx_core.nginx_config
     - bitsyai.rpi.common
     - bitsyai.rpi.metadata
   tasks:
