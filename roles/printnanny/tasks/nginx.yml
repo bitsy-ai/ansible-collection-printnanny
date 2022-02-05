@@ -17,14 +17,14 @@
 - name: Render /etc/nginx/conf.d/printnanny.conf
   become: true
   ansible.builtin.template:
-    src: nginx.conf.j2
+    src: nginx/nginx.conf.j2
     dest: /etc/nginx/conf.d/printnanny.conf
     mode: 0644
 
 - name: Render /etc/nginx/conf.d/printnanny.conf
   become: true
   ansible.builtin.template:
-    src: nginx.locations.j2
+    src: nginx/nginx.locations.j2
     dest: /etc/nginx/conf.d/printnanny.locations
     mode: 0644
 
