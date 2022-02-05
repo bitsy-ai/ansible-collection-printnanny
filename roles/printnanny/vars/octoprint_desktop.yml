@@ -1,0 +1,9 @@
+---
+# vars related to octoprint edition of printnanny
+
+printnanny_log_dir: '{{ octoprint_log_dir|default("/var/log/octoprint", true) }}'
+printnanny_update_log: '{{ printnanny_log_dir }}/printnanny_update.log'
+printnanny_www_log: '{{ printnanny_log_dir }}/printnanny_www.log'
+printnanny_mqtt_log: '{{ printnanny_log_dir }}/printnanny_mqtt.log'
+printnanny_webrtc_log: '{{ printnanny_log_dir }}/printnanny_webrtc.log'
+printnanny_cam_log: '{{ printnanny_log_dir }}/printnanny_cam.log'

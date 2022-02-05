@@ -10,19 +10,20 @@
   roles:
     - bitsyai.rpi.common
     - bitsyai.rpi.metadata
+  vars_files:
+    - ../../../roles/metadata/vars/{{ printnanny_profile|default("default", true) }}.yml
+    - ../../../roles/printnanny/vars/{{ printnanny_edition|default("octoprint_desktop", true) }}.yml
   tasks:
-
     - name: Include printnanny role (custom profile)
       include_role:
         name: bitsyai.rpi.printnanny
         public: true
-        vars_from: '../../../roles/metadata/vars/{{ printnanny_profile }}.yml'
-      when: printnanny_profile is defined
-    - name: Include printnanny role (default profile)
+    - name: Install OctoPrint
       include_role:
-        name: bitsyai.rpi.printnanny
-        public: true
-      when: not printnanny_profile is defined
+        name: bitsyai.rpi.octoprint
+        vars_from: '../../../roles/metadata/vars/{{ printnanny_edition|default("octoprint_desktop", true) }}.yml'
+      when: (printnanny_edition|default("octoprint_desktop", true) == "octoprint_desktop" or
+        printnanny_edition|default("octoprint_lite", true) == "octoprint_lite")
     - name: Install Janus
       include_role:
         name: bitsyai.rpi.janus
