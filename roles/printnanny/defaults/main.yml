@@ -42,6 +42,7 @@ printnanny_www_templates_url: '{{ printnanny_cli_repo }}/releases/download/v{{ p
 printnanny_update_schedule: '*/15 * * * *'
 printnanny_user: printnanny
 printnanny_group: printnanny
+printnanny_release_channel: main
 
 printnanny_ssl_key_size: 2048
 printnanny_ssl_key_type: DSA
@@ -87,7 +88,7 @@ ara_api_server: https://ara.print-nanny.com
 ara_api_timeout: 15
 ara_callback_threads: 4
 ara_ignored_arguments: vault_password_files
-ara_default_labels: 'channel:{{ printnanny_release_channel|default("main", true) }}'
+ara_default_labels: 'channel:{{ printnanny_release_channel }}'
 ara_argument_labels: check,subset,tags
 
 ##
