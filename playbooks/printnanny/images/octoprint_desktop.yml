@@ -2,9 +2,12 @@
 - name: Update Print Nanny system
   import_playbook: system.yml
   vars:
-    printnanny_edition: desktop
+    printnanny_edition: octoprint_desktop
 - hosts: printnanny
   tasks:
+    - name: Octoprint role
+      include_role:
+        name: bitsyai.rpi.octoprint
     - name: Clean and minimize image
       include_role:
         name: bitsyai.rpi.common

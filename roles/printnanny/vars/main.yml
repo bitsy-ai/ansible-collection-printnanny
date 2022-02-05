@@ -1,1 +1,4 @@
 ---
+
+# possible values for printnanny_edition var
+printnanny_editions: ["octoprint_desktop", "octoprint_lite", "mainsail_desktop", "mainsail_lite"]
