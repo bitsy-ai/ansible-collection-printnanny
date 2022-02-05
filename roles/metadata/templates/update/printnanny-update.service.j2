@@ -17,7 +17,6 @@ ExecStart=/usr/bin/flock -F {{ ansible_lockfile }} \
 {% endfor %}
 ExecStartPost=-/usr/bin/flock -F {{ ansible_lockfile }} \
     /usr/bin/rm {{ ansible_lockfile }}
-Restart=on-failure
 
 {% if printnanny_update_log is defined %}
 StandardOutput=file:{{ printnanny_update_log }}.stdout
