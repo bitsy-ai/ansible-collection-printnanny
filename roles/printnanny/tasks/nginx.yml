@@ -1,5 +1,5 @@
 - name: Install NGINX
-  include_role:
+  import_role:
     name: nginxinc.nginx_core.nginx
   vars:
     nginx_start: false
@@ -9,8 +9,8 @@
       - njs
 
 - name: Configure NGINX
-  include_role:
-    name: nginxinc.nginx_core.nginx
+  import_role:
+    name: nginxinc.nginx_core.nginx_config
   vars:
     nginx_config_debug_output: true
 
