@@ -1,6 +1,6 @@
 ---
 - name: Update Print Nanny system
-  import_playbook: system.yml
+  import_playbook: ../system.yml
   vars:
     printnanny_edition: octoprint_desktop
 - hosts: printnanny
