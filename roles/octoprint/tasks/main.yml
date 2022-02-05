@@ -13,12 +13,51 @@
     - system-update
     - octoprint
 
-- name: Make {{ octoprint_dir }}
+- name: Create {{ octoprint_dir }}
   become_user: '{{ octoprint_user }}'
   ansible.builtin.file:
     state: directory
     path: '{{ octoprint_dir }}'
     mode: 0775
+    owner: '{{ octoprint_user }}'
+    group: '{{ octoprint_user }}'
+  tags:
+    - setup
+    - system-update
+    - octoprint
+
+- name: Render config.yaml from template
+  become_user: '{{ octoprint_user }}'
+  ansible.builtin.template:
+    src: config.yml.j2
+    dest: '{{ octoprint_config_file }}'
+    mode: 0664
+    owner: '{{ octoprint_user }}'
+    group: '{{ octoprint_user }}'
+  tags:
+    - setup
+    - system-update
+    - octoprint
+
+- name: Create {{ octoprint_log_dir }}
+  become: true
+  ansible.builtin.file:
+    state: directory
+    path: '{{ octoprint_log_dir }}'
+    mode: 0664
+    owner: '{{ octoprint_user }}'
+    group: '{{ octoprint_user }}'
+  tags:
+    - setup
+    - system-update
+    - octoprint
+
+- name: Create {{ octoprint_watched_dir }}
+  become: true
+  ansible.builtin.file:
+    state: directory
+    path: '{{ octoprint_watched_dir }}'
+    mode: 0664
     owner: '{{ octoprint_user }}'
     group: '{{ octoprint_user }}'
   tags:
@@ -95,7 +134,7 @@
   become_user: '{{ octoprint_user }}'
   ansible.builtin.template:
     mode: 0664
-    src: octoprint.config.j2
+    src: config.yml.j2
     dest: '{{ octoprint_config }}'
     force: true
     owner: '{{ octoprint_user }}'
