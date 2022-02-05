@@ -1,3 +1,10 @@
+- name: Create /etc/nginx/conf.d
+  become: true
+  ansible.builtin.file:
+    state: directory
+    dest: /etc/nginx/conf.d/octoprint.locations
+    mode: 0755
+
 - name: Render /etc/nginx/conf.d/octoprint.locations
   become: true
   ansible.builtin.template:
