@@ -1,0 +1,15 @@
+server {
+    listen 443;
+    server_name $hostname;
+    ssl on;
+    ssl_certificate     {{ printnanny_ssl_cert }};
+    ssl_certificate_key {{ printnanny_ssl_key }};
+    ssl_protocols       {{ printnanny_ssl_protocols }};
+    ssl_ciphers         {{ printnanny_ssl_ciphers }}   
+    include /etc/nginx/conf.d/*.locations;
+}
+server {
+    listen 80;
+    server_name $hostname;
+    include /etc/nginx/conf.d/*.locations;  
+}
