@@ -22,7 +22,7 @@
     - name: Install OctoPrint
       include_role:
         name: bitsyai.rpi.octoprint
-        vars_from: '../../roles/metadata/vars/{{ printnanny_edition|default("octoprint_desktop", true) }}.yml'
+        vars_from: '../../roles/printnanny/vars/{{ printnanny_edition|default("octoprint_desktop", true) }}.yml'
       when: (printnanny_edition|default("octoprint_desktop", true) == "octoprint_desktop" or
         printnanny_edition|default("octoprint_lite", true) == "octoprint_lite")
     - name: Install Janus
