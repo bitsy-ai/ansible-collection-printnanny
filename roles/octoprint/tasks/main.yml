@@ -105,7 +105,7 @@
 # If OctoPrint is not installed first, plugin installation fails with the following erorr:
 ## Could not import OctoPrint's setuptools,
 ## are you sure you are running that under the same python installation that OctoPrint is installed under?\n    ----------------------------------------\n
-- name: Install octoprint plugin into venv (required to detect OctoPrint setuptools)
+- name: Install OctoPrint plugin into venv (required to detect OctoPrint setuptools)
   become_user: '{{ octoprint_user }}'
   pip:
     name: '{{ octoprint_printnanny_plugin_version }}'
@@ -116,6 +116,32 @@
     - setup
     - system-update
     - octoprint
+  when: not octoprint_printnanny_plugin_dev
+
+- name: Clone OctoPrint plugin (developer mode)
+  become_user: '{{ octoprint_user }}'
+  ansible.builtin.git:
+    repo: '{{ octoprint_printnanny_plugin_repo }}'
+    dest: '{{ octoprint_printnanny_plugin_dir }}'
+    version: '{{ octoprint_printnanny_plugin_version }}'
+  tags:
+    - setup
+    - system-update
+    - octoprint
+  when: octoprint_printnanny_plugin_dev
+
+- name: Install OctoPrint plugin (developer mode)
+  become_user: '{{ octoprint_user }}'
+  ansible.builtin.pip:
+    name: '.'
+    virtualenv: '{{ octoprint_venv }}'
+    editable: true
+    chdir: '{{ octoprint_printnanny_plugin_dir }}'
+  tags:
+    - setup
+    - system-update
+    - octoprint
+  when: octoprint_printnanny_plugin_dev
 
 - name: Render octoprint config
   become_user: '{{ octoprint_user }}'
