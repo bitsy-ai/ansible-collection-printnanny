@@ -1,4 +1,7 @@
 ---
+- name: Create pi user
+  ansible.builtin.user:
+    name: pi
 - name: Test release installation
   include_role:
     name: bitsyai.printnanny.octoprint
