@@ -13,13 +13,19 @@
     name: nginxinc.nginx_core.nginx
   vars:
     nginx_config_debug_output: true
-    nginx_config_main_template_enable: true
 
 - name: Render /etc/nginx/conf.d/printnanny.conf
   become: true
   ansible.builtin.template:
     src: nginx.conf.j2
     dest: /etc/nginx/conf.d/printnanny.conf
+    mode: 0644
+
+- name: Render /etc/nginx/conf.d/printnanny.conf
+  become: true
+  ansible.builtin.template:
+    src: nginx.locations.j2
+    dest: /etc/nginx/conf.d/printnanny.locations
     mode: 0644
 
 - name: Enable nginx.service

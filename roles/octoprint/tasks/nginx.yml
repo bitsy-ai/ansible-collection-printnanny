@@ -1,28 +1,6 @@
-- name: Install NGINX
-  include_role:
-    name: nginxinc.nginx_core.nginx
-  vars:
-    nginx_start: false
-    nginx_setup_license: false
-    nginx_logrotate_conf_enable: false
-    nginx_modules:
-      - njs
-
-- name: Configure NGINX
-  include_role:
-    name: nginxinc.nginx_core.nginx_config
-  vars:
-    nginx_config_debug_output: true
-    nginx_config_main_template_enable: true
-
-- name: Render /etc/nginx/conf.d/octoprint.conf
+- name: Render /etc/nginx/conf.d/octoprint.locations
   become: true
   ansible.builtin.template:
-    src: nginx.conf.j2
-    dest: /etc/nginx/conf.d/octoprint.conf
+    src: nginx.locations.j2
+    dest: /etc/nginx/conf.d/octoprint.locations
     mode: 0644
-
-- name: Enable nginx.service
-  ansible.builtin.systemd:
-    name: nginx.service
-    enabled: true
