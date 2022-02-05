@@ -1,9 +1,18 @@
-- name: Create /etc/nginx/conf.d
-  become: true
-  ansible.builtin.file:
-    state: directory
-    dest: /etc/nginx/conf.d
-    mode: 0755
+- name: Install NGINX
+  import_role:
+    name: nginxinc.nginx_core.nginx
+  vars:
+    nginx_start: false
+    nginx_setup_license: false
+    nginx_logrotate_conf_enable: false
+    nginx_modules:
+      - njs
+
+- name: Configure NGINX
+  import_role:
+    name: nginxinc.nginx_core.nginx_config
+  vars:
+    nginx_config_debug_output: true
 
 - name: Render /etc/nginx/conf.d/printnanny.conf
   become: true
