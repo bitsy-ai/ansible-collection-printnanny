@@ -1,26 +1,3 @@
-- name: Install NGINX
-  import_role:
-    name: nginxinc.nginx_core.nginx
-  vars:
-    nginx_start: false
-    nginx_setup_license: false
-    nginx_logrotate_conf_enable: false
-    nginx_modules:
-      - njs
-
-- name: Configure NGINX
-  import_role:
-    name: nginxinc.nginx_core.nginx_config
-  vars:
-    nginx_config_debug_output: true
-
-- name: Render /etc/nginx/conf.d/printnanny.conf
-  become: true
-  ansible.builtin.template:
-    src: nginx/nginx.conf.j2
-    dest: /etc/nginx/conf.d/printnanny.conf
-    mode: 0644
-
 - name: Render /etc/nginx/conf.d/printnanny.conf
   become: true
   ansible.builtin.template:
