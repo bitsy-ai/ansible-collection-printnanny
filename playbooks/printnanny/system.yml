@@ -14,7 +14,7 @@
     - ../../roles/metadata/vars/{{ printnanny_profile|default("default", true) }}.yml
     - ../../roles/printnanny/vars/{{ printnanny_edition|default("octoprint_desktop", true) }}.yml
   tasks:
-    - name: Include printnanny role (custom profile)
+    - name: Install Print Nanny
       include_role:
         name: bitsyai.rpi.printnanny
         public: true
