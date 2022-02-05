@@ -138,6 +138,8 @@
     src: octoprint.service.j2
     dest: '/etc/systemd/system/octoprint.service'
     force: true
+  notify:
+    - restart octoprint
   tags:
     - setup
     - system-update

@@ -47,7 +47,8 @@
     src: 'camera/{{ nn_rtp_service }}.service.j2'
     dest: '/etc/systemd/system/{{ nn_rtp_service }}.service'
     force: true
-  notify: restart {{ nn_rtp_service }}
+  notify:
+    - restart {{ nn_rtp_service }}
 
 - name: Render printnanny-monitor
   become: true

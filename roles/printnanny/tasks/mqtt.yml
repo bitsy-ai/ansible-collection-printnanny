@@ -6,7 +6,7 @@
     dest: /etc/systemd/system/mqtt.service
     force: true
   notify:
-    - systemctl daemon-reload
+    - restart mqtt
 
 - name: Enable mqtt service
   become: true
