@@ -153,3 +153,13 @@
     mode: 0775
   tags:
     - metadata
+
+- name: Render printnanny-release-channel.sh
+  become: true
+  ansible.builtin.template:
+    src: printnanny-release-channel.sh.j2
+    dest: /usr/local/bin/printnanny-release-channel
+    force: true
+    mode: 0775
+  tags:
+    - metadata
