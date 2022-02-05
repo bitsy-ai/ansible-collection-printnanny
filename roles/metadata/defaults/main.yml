@@ -13,7 +13,7 @@ updater_app_name: printnanny
 updater_playbooks:
     - bitsyai.rpi.printnanny.system
 
-printnanny_release_channel: '{{ printnanny_release_channel | default("main") }}'
+printnanny_release_channel: '{{ printnanny_release_channel | default("main", true) }}'
 updater_collection_url: 'git+https://github.com/bitsy-ai/ansible-collection-rpi.git,{{ printnanny_release_channel }}'
 
 updater_venv: '{{ printnanny_ansible_dir }}/venv'
