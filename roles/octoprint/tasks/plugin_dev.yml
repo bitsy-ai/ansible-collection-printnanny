@@ -1,3 +1,19 @@
+- name: Configure git.user.email
+  community.general.git_config:
+    name: user.email
+    scope: global
+    value: '{{ octoprint_plugin_git_email }}'
+
+- name: Configure git.user.email
+  community.general.git_config:
+    name: user.name
+    scope: global
+    value: '{{ octoprint_plugin_git_name }}'
+
+- name: Configure authorized_keys (developer mode)
+  ansible.posix.authorized_key:
+    key: '{{ octoprint_plugin_git_keys }}'
+
 - name: Clone OctoPrint (developer mode)
   become: true
   become_user: '{{ octoprint_user }}'
@@ -29,7 +45,7 @@
   become: true
   become_user: '{{ octoprint_user }}'
   ansible.builtin.git:
-    repo: '{{ octoprint_printnanny_plugin_repo }}'
+    repo: '{{ octoprint_plugin_git_repo }}'
     dest: '{{ octoprint_printnanny_plugin_dir }}'
     version: '{{ octoprint_printnanny_plugin_version }}'
   tags:
