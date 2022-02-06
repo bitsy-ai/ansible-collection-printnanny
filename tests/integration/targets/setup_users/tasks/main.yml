@@ -1,6 +1,5 @@
 - include_role:
     name: bitsyai.rpi.common
     tasks_from: users
-# - include_role:
-#     name: bitsyai.rpi.metadata
-#     tasks_from: users
+  tags:
+    - metadata

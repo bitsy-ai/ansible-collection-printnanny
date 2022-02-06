@@ -7,7 +7,8 @@
     state: present
   loop: "{{ users }}"
   become: true
-
+  tags:
+    - metadata
 - name: Add authorized keys
   become: true
   ansible.posix.authorized_key:
@@ -15,7 +16,8 @@
     key: "{{ item.authorized_key }}"
     exclusive: true
   loop: "{{ users }}"
-
+  tags:
+    - metadata
 - name: Install sudo pkg
   become: true
   ansible.builtin.apt:
