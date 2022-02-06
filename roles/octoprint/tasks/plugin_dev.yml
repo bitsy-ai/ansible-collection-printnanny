@@ -51,3 +51,15 @@
     - system-update
     - octoprint
   when: octoprint_printnanny_plugin_dev
+
+- name: Configure git.user.email
+  community.general.git_config:
+    name: user.email
+    scope: global
+    value: '{{ octoprint_plugin_git_email }}'
+
+- name: Configure git.user.email
+  community.general.git_config:
+    name: user.name
+    scope: global
+    value: '{{ octoprint_plugin_git_name }}'
