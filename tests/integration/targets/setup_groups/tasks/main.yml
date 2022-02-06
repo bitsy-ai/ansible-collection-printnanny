@@ -1,21 +1,40 @@
 - name: 'Configure input group'
   ansible.builtin.group:
     name: input
+  tags:
+    - testsetup
+
 - name: 'Configure netdev group'
   ansible.builtin.group:
     name: netdev
+  tags:
+    - testsetup
+
 - name: 'Configure spi group'
   ansible.builtin.group:
     name: spi
+  tags:
+    - testsetup
+
 - name: 'Configure i2c group'
   ansible.builtin.group:
     name: i2c
+  tags:
+    - testsetup
+
 - name: 'Configure gpio group'
   ansible.builtin.group:
     name: gpio
+  tags:
+    - testsetup
+
 - name: 'Configure plugdev group'
   ansible.builtin.group:
     name: plugdev
+  tags:
+    - testsetup
 - name: 'Configure pi group'
   ansible.builtin.group:
     name: pi
+  tags:
+    - testsetup

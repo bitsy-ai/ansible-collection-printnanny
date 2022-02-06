@@ -29,3 +29,10 @@ ansible_config:
     fact_caching_timeout: 86400
     fact_caching: jsonfile
     fact_caching_connection: /etc/ansible/facts.json
+
+## janus vars
+janus_conf_dir: /etc/janus
+janus_admin_secret_file: '{{ janus_conf_dir }}/janus_admin_secret'
+janus_token_file: '{{ janus_conf_dir }}/janus_token'
+janus_admin_secret: "{{ lookup('password', janus_admin_secret_file, length=32 ) }}"
+janus_token: "{{ lookup('password', janus_token_file, length=32 ) }}"

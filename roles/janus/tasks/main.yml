@@ -8,6 +8,7 @@
     append: true
   tags:
     - metadata
+
 - name: Stat janus binary
   ansible.builtin.stat:
     path: /opt/janus/bin/janus
