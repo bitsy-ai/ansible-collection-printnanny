@@ -18,7 +18,7 @@
     name: '.[develop,plugins]'
     virtualenv: '{{ octoprint_venv }}'
     editable: true
-    chdir: '{{ octoprint_printnanny_plugin_dir }}'
+    chdir: '{{ octoprint_repo_dir }}'
   tags:
     - setup
     - system-update
