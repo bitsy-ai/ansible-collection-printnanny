@@ -1,3 +1,4 @@
 dependencies:
   - setup_users
+  - setup_groups
   - setup_nginx

@@ -75,7 +75,7 @@
 - name: Enable ansible-collection unit
   become: true
   ansible.builtin.systemd:
-    name: ansible-collection
+    name: ansible-collection.service
     enabled: true
     no_block: true
   tags:

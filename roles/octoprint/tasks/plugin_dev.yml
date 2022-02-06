@@ -1,0 +1,49 @@
+- name: Clone OctoPrint (developer mode)
+  become_user: '{{ octoprint_user }}'
+  ansible.builtin.git:
+    repo: '{{ octoprint_repo }}'
+    dest: '{{ octoprint_repo_dir }}'
+    version: '{{ octoprint_git_version }}'
+  tags:
+    - setup
+    - system-update
+    - octoprint
+  when: octoprint_printnanny_plugin_dev
+
+- name: Install OctoPrint (developer mode)
+  become_user: '{{ octoprint_user }}'
+  ansible.builtin.pip:
+    name: '.[develop,plugins]'
+    virtualenv: '{{ octoprint_venv }}'
+    editable: true
+    chdir: '{{ octoprint_printnanny_plugin_dir }}'
+  tags:
+    - setup
+    - system-update
+    - octoprint
+  when: octoprint_printnanny_plugin_dev
+
+- name: Clone OctoPrint plugin (developer mode)
+  become_user: '{{ octoprint_user }}'
+  ansible.builtin.git:
+    repo: '{{ octoprint_printnanny_plugin_repo }}'
+    dest: '{{ octoprint_printnanny_plugin_dir }}'
+    version: '{{ octoprint_printnanny_plugin_version }}'
+  tags:
+    - setup
+    - system-update
+    - octoprint
+  when: octoprint_printnanny_plugin_dev
+
+- name: Install OctoPrint plugin (developer mode)
+  become_user: '{{ octoprint_user }}'
+  ansible.builtin.pip:
+    name: '.'
+    virtualenv: '{{ octoprint_venv }}'
+    editable: true
+    chdir: '{{ octoprint_printnanny_plugin_dir }}'
+  tags:
+    - setup
+    - system-update
+    - octoprint
+  when: octoprint_printnanny_plugin_dev
