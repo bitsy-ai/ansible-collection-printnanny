@@ -13,6 +13,7 @@
 - name: Configure authorized_keys (developer mode)
   ansible.posix.authorized_key:
     key: '{{ octoprint_plugin_git_keys }}'
+    user: '{{ octoprint_user }}'
 
 - name: Clone OctoPrint (developer mode)
   become: true
