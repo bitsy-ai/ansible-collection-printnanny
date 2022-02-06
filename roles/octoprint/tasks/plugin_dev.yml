@@ -46,10 +46,26 @@
   become: true
   become_user: '{{ octoprint_user }}'
   ansible.builtin.git:
+    repo: '{{ octoprint_printnanny_plugin_repo }}'
+    dest: '{{ octoprint_printnanny_plugin_dir }}'
+    version: '{{ octoprint_printnanny_plugin_version }}'
+    accept_hostkey: true
+  tags:
+    - setup
+    - system-update
+    - octoprint
+  when: octoprint_printnanny_plugin_dev
+
+- name: Add git-ssh remote (developer mode)
+  become: true
+  become_user: '{{ octoprint_user }}'
+  ansible.builtin.git:
     repo: '{{ octoprint_plugin_git_repo }}'
     dest: '{{ octoprint_printnanny_plugin_dir }}'
     version: '{{ octoprint_printnanny_plugin_version }}'
     accept_hostkey: true
+    remote: gitssh
+    update: false
   tags:
     - setup
     - system-update
