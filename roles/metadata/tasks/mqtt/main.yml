@@ -40,6 +40,9 @@
   ansible.builtin.set_fact:
     printnanny_ec_fingerprint: "{{ printnanny_ec_public_key_output.fingerprint.md5 }}"
     cacheable: true
+  tags:
+    - secret
+    - metadata
 
 - name: Create '{{ printnanny_cacerts_dir }}'
   become: true
