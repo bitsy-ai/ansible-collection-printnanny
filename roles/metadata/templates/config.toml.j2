@@ -5,8 +5,8 @@ path = "{{ printnanny_profile_dir }}"
 base_path = "{{ printnanny_api_url }}"
 
 [janus]
-admin_secret = "{{ janus_admin_secret }}"
-token = "{{ janus_token }}"
+admin_secret = "{{ lookup('password', janus_admin_secret_file, length=32, errors='warn' ) }}"
+token = "{{ lookup('password', janus_token_file, length=32, errors='warn') }}"
 admin_base_path = "{{ janus_conf['janus.transport.http'].admin_base_path }}"
 admin_http_port = {{ janus_conf['janus.transport.http'].admin_http_port }}
 admin_https_port = {{ janus_conf['janus.transport.http'].admin_https_port }}
@@ -19,9 +19,9 @@ private_key = "{{ printnanny_ec_private_key }}"
 public_key = "{{ printnanny_ec_public_key }}"
 ca_certs = [
     "{{ printnanny_cacerts }}/{{ gcp_lts_ca_primary | basename }}",
-    "{{ printnanny_cacerts }}/{{ gcp_lts_ca_backup| basename }}"
+    "{{ printnanny_cacerts }}/{{ gcp_lts_ca_backup | basename }}"
 ]
-fingerprint = "{{ printnanny_ec_fingerprint|default('', true) }}"
+fingerprint = "{{ lookup('file', printnanny_ec_fingerprint_md5, errors='warn') }}"
 fingerprint_algorithm = "md5"
 cipher = "secp256r1"
 length = 4096

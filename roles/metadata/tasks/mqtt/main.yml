@@ -36,9 +36,18 @@
     - metadata
   register: printnanny_ec_public_key_output
 
+- name: Write md5 fingerprint to file
+  become: true
+  ansible.builtin.copy:
+    content: '{{ printnanny_ec_public_key_output.fingerprint.md5 }}'
+    dest: '{{ printnanny_ec_fingerprint_md5 }}'
+    mode: 0644
+    group: '{{ printnanny_user }}'
+    owner: '{{ printnanny_user }}'
+
 - name: Set printnanny_ec_fingerprint
   ansible.builtin.set_fact:
-    printnanny_ec_fingerprint: "{{ printnanny_ec_public_key_output.fingerprint.md5 }}"
+    printnanny_ec_fingerprint_md5_content: "{{ printnanny_ec_public_key_output.fingerprint.md5 }}"
     cacheable: true
   tags:
     - secret
