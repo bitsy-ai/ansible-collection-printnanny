@@ -17,7 +17,7 @@
 - name: Install OctoPrint plugin into venv (required to detect OctoPrint setuptools)
   become_user: '{{ octoprint_user }}'
   pip:
-    name: '{{ octoprint_printnanny_plugin_version }}'
+    name: '{{ octoprint_printnanny_pip_install }}'
     virtualenv_command: /usr/bin/python3 -m venv
     virtualenv: '{{ octoprint_venv }}'
     extra_args: '--no-cache-dir'
