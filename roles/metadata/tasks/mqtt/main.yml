@@ -44,6 +44,9 @@
     mode: 0644
     group: '{{ printnanny_user }}'
     owner: '{{ printnanny_user }}'
+  tags:
+    - secret
+    - metadata
 
 - name: Set printnanny_ec_fingerprint
   ansible.builtin.set_fact:
