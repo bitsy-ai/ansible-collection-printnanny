@@ -1,6 +1,6 @@
 ---
 - name: Setup OctoPrint Plugin Developer Environment
-  hosts: octoprint_plugin_dev
+  hosts: octoprint
   vars:
     octoprint_plugin_dev: true
   tasks:
