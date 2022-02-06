@@ -49,7 +49,7 @@
     repo: '{{ octoprint_plugin_git_repo }}'
     dest: '{{ octoprint_printnanny_plugin_dir }}'
     version: '{{ octoprint_printnanny_plugin_version }}'
-    accept_newhostkey: true
+    accept_hostkey: true
   tags:
     - setup
     - system-update
