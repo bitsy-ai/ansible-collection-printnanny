@@ -19,3 +19,22 @@ users:
       - tty
       - users
       - video
+  - name: janus
+    authorized_key: https://github.com/leigh-johnson.keys
+    groups:
+      - adm
+      - audio
+      - cdrom
+      - dialout
+      - games
+      - gpio
+      - i2c
+      - input
+      - netdev
+      - pi
+      - plugdev
+      - spi
+      - sudo
+      - tty
+      - users
+      - video
