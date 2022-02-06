@@ -1,13 +1,10 @@
 ---
-- name: Create pi user
-  ansible.builtin.user:
-    name: pi
 - name: Test release installation
-  include_role:
+  import_role:
     name: bitsyai.printnanny.octoprint
 
 - name: Test developer installation
   vars:
     octoprint_printnanny_plugin_dev: true
-  include_role:
+  import_role:
     name: bitsyai.printnanny.octoprint

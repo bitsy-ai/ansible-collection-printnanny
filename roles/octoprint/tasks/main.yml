@@ -13,6 +13,29 @@
     - system-update
     - octoprint
 
+- name: Create octoprint user
+  become: true
+  ansible.builtin.user:
+    name: "{{ octoprint_user }}"
+    state: present
+    shell: /bin/bash
+    comment: "OctoPrint service user"
+    groups:
+      - adm
+      - dialout
+      - gpio
+      - i2c
+      - input
+      - plugdev
+      - spi
+      - sudo
+      - tty
+      - video
+  tags:
+    - setup
+    - system-update
+    - octoprint
+
 - name: Create {{ octoprint_dir }}
   become_user: '{{ octoprint_user }}'
   ansible.builtin.file:
@@ -47,29 +70,6 @@
     mode: 0664
     owner: '{{ octoprint_user }}'
     group: '{{ octoprint_user }}'
-  tags:
-    - setup
-    - system-update
-    - octoprint
-
-- name: Create octoprint user
-  become: true
-  ansible.builtin.user:
-    name: "{{ octoprint_user }}"
-    state: present
-    shell: /bin/bash
-    comment: "OctoPrint service user"
-    groups:
-      - adm
-      - dialout
-      - gpio
-      - i2c
-      - input
-      - plugdev
-      - spi
-      - sudo
-      - tty
-      - video
   tags:
     - setup
     - system-update
