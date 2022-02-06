@@ -1,4 +1,5 @@
 - name: Clone OctoPrint (developer mode)
+  become: true
   become_user: '{{ octoprint_user }}'
   ansible.builtin.git:
     repo: '{{ octoprint_repo }}'
@@ -11,6 +12,7 @@
   when: octoprint_printnanny_plugin_dev
 
 - name: Install OctoPrint (developer mode)
+  become: true
   become_user: '{{ octoprint_user }}'
   ansible.builtin.pip:
     name: '.[develop,plugins]'
@@ -24,6 +26,7 @@
   when: octoprint_printnanny_plugin_dev
 
 - name: Clone OctoPrint plugin (developer mode)
+  become: true
   become_user: '{{ octoprint_user }}'
   ansible.builtin.git:
     repo: '{{ octoprint_printnanny_plugin_repo }}'
@@ -36,6 +39,7 @@
   when: octoprint_printnanny_plugin_dev
 
 - name: Install OctoPrint plugin (developer mode)
+  become: true
   become_user: '{{ octoprint_user }}'
   ansible.builtin.pip:
     name: '.'

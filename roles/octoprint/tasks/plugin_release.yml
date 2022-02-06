@@ -1,4 +1,5 @@
 - name: Install octoprint into venv
+  become: true
   become_user: '{{ octoprint_user }}'
   ansible.builtin.pip:
     name: '{{ octoprint_pip_version }}'
@@ -14,6 +15,7 @@
 ## Could not import OctoPrint's setuptools,
 ## are you sure you are running that under the same python installation that OctoPrint is installed under?\n    ----------------------------------------\n
 - name: Install OctoPrint plugin into venv (required to detect OctoPrint setuptools)
+  become: true
   become_user: '{{ octoprint_user }}'
   pip:
     name: '{{ octoprint_printnanny_pip_install }}'

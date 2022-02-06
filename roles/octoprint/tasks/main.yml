@@ -37,6 +37,7 @@
     - octoprint
 
 - name: Create {{ octoprint_dir }}
+  become: true
   become_user: '{{ octoprint_user }}'
   ansible.builtin.file:
     state: directory
@@ -76,6 +77,7 @@
     - octoprint
 
 - name: 'Create Octoprint virtualenv'
+  become: true
   become_user: '{{ octoprint_user }}'
   ansible.builtin.pip:
     name:
