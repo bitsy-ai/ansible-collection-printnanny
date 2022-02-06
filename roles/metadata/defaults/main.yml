@@ -19,7 +19,7 @@ updater_collection_url: 'git+https://github.com/bitsy-ai/ansible-collection-rpi.
 updater_venv: '{{ printnanny_ansible_dir }}/venv'
 
 jinja2_version: 'jinja2>=2.11'
-ansible_updater_version: 'ansible-core>2.11,<2.12'
+ansible_updater_version: 'ansible-core>2.12,<2.13'
 ansible_collection_updater: ansible-updater
 updater_tmpfs: '/var/run/{{ updater_app_name }}'
 ansible_lockfile: '/var/run/{{ updater_app_name }}/ansible.lock'
