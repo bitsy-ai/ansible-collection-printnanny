@@ -1,9 +1,9 @@
 ---
 - name: Setup OctoPrint Plugin Developer Environment
   hosts: octoprint
-  vars:
-    octoprint_plugin_dev: true
   tasks:
     - name: Install OctoPrint (developer mode)
       include_role:
         name: bitsyai.rpi.octoprint
+      vars:
+        octoprint_printnanny_plugin_dev: true
