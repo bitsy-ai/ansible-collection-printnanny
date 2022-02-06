@@ -36,6 +36,10 @@
     - metadata
   register: printnanny_ec_public_key_output
 
+- name: Set printnanny_ec_fingerprint
+  ansible.builtin.set_fact:
+    printnanny_ec_fingerprint: "{{ printnanny_ec_public_key_output.fingerprint.md5 }}"
+    cacheable: true
 
 - name: Create '{{ printnanny_cacerts_dir }}'
   become: true
@@ -67,4 +71,18 @@
     group: '{{ printnanny_user }}'
     owner: '{{ printnanny_user }}'
   tags:
+    - metadata
+
+- name: Render config.toml
+  ansible.builtin.template:
+    src: config.toml.j2
+    dest: '{{ printnanny_config_toml }}'
+    mode: 0644
+    force: true
+    owner: '{{ printnanny_user }}'
+  notify:
+    - restart printnanny-dash
+    - restart mqtt
+  tags:
+    - secret
     - metadata
