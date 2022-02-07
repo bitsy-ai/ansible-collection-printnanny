@@ -6,19 +6,20 @@
     state: present
     codename: focal
 
-- name: Ensure ca-certificates package up-to-date
-  become: true
+- name: Install systemd-cron (allow uninstall cron)
   ansible.builtin.apt:
-    update_cache: true
-    state: latest
+    install_recommends: true
     name:
-      - ca-certificates
+      - systemd
+      - systemd-cron
+    state: present
 
 - name: Install apt dependencies
   ansible.builtin.apt:
     update_cache: true
     name:
       # common
+      - ca-certificates
       - cron
       - git
       - jq

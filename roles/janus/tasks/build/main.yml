@@ -22,8 +22,6 @@
       - libtool
       - ninja-build
       - pkg-config
-      - systemd
-      - systemd-cron
       - wget
     state: present
   tags:
