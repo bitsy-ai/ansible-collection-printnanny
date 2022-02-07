@@ -46,3 +46,15 @@
     force: true
   tags:
     - metadata
+
+- name: Enable printnanny.target
+  become: true
+  ansible.builtin.systemd:
+    enabled: true
+    name: printnanny.target
+
+- name: Enable printnanny-metadata.taret
+  become: true
+  ansible.builtin.systemd:
+    enabled: true
+    name: printnanny-metadata.target
