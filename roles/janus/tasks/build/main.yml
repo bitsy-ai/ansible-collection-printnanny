@@ -118,6 +118,9 @@
     chdir: "{{ janus_build_dir.path }}/build"
   when: janus_version != janus_installed_version
 
+- name: Create ldconfig conf
+  include_tasks: build/ld.yml
+
 - name: "Delete {{ janus_build_dir.path }} build directory"
   become: true
   ansible.builtin.file:
