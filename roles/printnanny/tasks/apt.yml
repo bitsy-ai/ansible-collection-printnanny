@@ -6,12 +6,12 @@
     state: present
     codename: focal
 
-- name: Remove cron-daemon
+- name: Remove cron
   ansible.builtin.apt:
     autoclean: true
     purge: true
     name:
-      - cron-daemon
+      - cron
     state: absent
 
 - name: Install apt dependencies
