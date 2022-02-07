@@ -1,9 +1,47 @@
 ---
 - name: Setup OctoPrint Plugin Developer Environment
   hosts: octoprint
+  vars_prompt:
+    - name: octoprint_printnanny_plugin_version
+      prompt: Enter a branch to checkout (git@github.com:bitsy-ai/octoprint-nanny-plugin.git)
+      private: false
+      default: 'main'
+
+    - name: printnanny_profile
+      prompt: Which profile should be activated? (local, sandbox, default)
+      default: 'local'
+      private: false
   tasks:
+    - name: Set prompts as facts
+      ansible.builtin.set_fact:
+        printnanny_profile: '{{ printnanny_profile }}'
+        octoprint_printnanny_plugin_version: '{{ octoprint_printnanny_plugin_version }}'
+        cacheable: true
+    - name: Set /var/run/printnanny/env metadata
+      include_role:
+        name: bitsyai.rpi.metadata
+        tasks_from: env/main.yml
+        vars_from: '{{ printnanny_profile }}.yml'
+    - name: Set janus metadata
+      include_role:
+        name: bitsyai.rpi.metadata
+        tasks_from: janus/main.yml
+        vars_from: '{{ printnanny_profile }}.yml'
+    - name: Set mqtt metadata
+      include_role:
+        name: bitsyai.rpi.metadata
+        tasks_from: mqtt/main.yml
+        vars_from: '{{ printnanny_profile }}.yml'
+    - name: Set www metadata
+      include_role:
+        name: bitsyai.rpi.metadata
+        tasks_from: www/main.yml
+        vars_from: '{{ printnanny_profile }}.yml'
     - name: Install OctoPrint (developer mode)
       include_role:
         name: bitsyai.rpi.octoprint
       vars:
         octoprint_printnanny_plugin_dev: true
+  handlers:
+    - include: ../../../roles/printnanny/handlers/main.yml
+    - include: ../../../roles/janus/handlers/main.yml
