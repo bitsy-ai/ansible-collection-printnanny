@@ -8,7 +8,7 @@
 
 - name: Install systemd
   become: true
-  apt:
+  ansible.builtin.apt:
     update_cache: true
     name:
       - libsystemd-dev

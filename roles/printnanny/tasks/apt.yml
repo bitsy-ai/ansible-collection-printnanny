@@ -6,19 +6,13 @@
     state: present
     codename: focal
 
-- name: Ensure ca-certificates package up-to-date
-  become: true
-  ansible.builtin.apt:
-    update_cache: true
-    state: latest
-    name:
-      - ca-certificates
-
 - name: Install apt dependencies
   ansible.builtin.apt:
     update_cache: true
+    autoclean: true
     name:
       # common
+      - ca-certificates
       - cron
       - git
       - jq
@@ -34,6 +28,10 @@
       - rustc
       - sudo
       - vim
+      # systemd
+      - systemd-cron
+      - systemd
+      - libsystemd-dev
       # required by ansible.builtin.package_facts
       - python3-apt
       # gstreamer
