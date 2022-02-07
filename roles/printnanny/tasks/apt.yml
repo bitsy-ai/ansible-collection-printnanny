@@ -6,13 +6,13 @@
     state: present
     codename: focal
 
-- name: Remove cron
+- name: Install systemd-cron (allow uninstall cron)
   ansible.builtin.apt:
-    autoclean: true
-    purge: true
+    install_recommends: true
     name:
-      - cron
-    state: absent
+      - systemd
+      - systemd-cron
+    state: present
 
 - name: Install apt dependencies
   ansible.builtin.apt:
@@ -35,10 +35,6 @@
       - rustc
       - sudo
       - vim
-      # systemd
-      - systemd-cron
-      - systemd
-      - libsystemd-dev
       # required by ansible.builtin.package_facts
       - python3-apt
       # gstreamer
