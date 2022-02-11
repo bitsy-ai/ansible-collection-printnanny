@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
+set +x
 {{ updater_venv }}/bin/ansible printnanny \
     -m ansible.builtin.set_fact -a "printnanny_profile=$1 cacheable=true"
 
-{{ updater_venv }}/bin/ansible-playbook bitsyai.rpi.printnanny.metadata
+systemctl restart printnanny-metadata.target &
+journalctl {% for app in metadata_apps%}-u printnanny-metadata@{{app}}.service {% endfor %} --follow
