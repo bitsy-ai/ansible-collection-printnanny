@@ -5,11 +5,5 @@ template_dir = "{{ printnanny_www_templates_dir }}"
 log_level = "{{ printnanny_www_log_level }}"
 secret_key = "{{ printnanny_www_secret_key }}"
 
-[default.shutdown]
-ctrlc = true
-signals = ["term", "hup"]
-grace = 3
-mercy = 3
-
 [debug]
 log_level = "debug"
