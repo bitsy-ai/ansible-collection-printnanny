@@ -9,9 +9,9 @@ server {
     include /etc/nginx/conf.d/*.locations;
 
     error_log stderr;
-    proxy_busy_buffers_size   512k;
-    proxy_buffers   4 512k;
-    proxy_buffer_size   256k;
+    proxy_busy_buffers_size {{ nginx_proxy_busy_buffers_size }};
+    proxy_buffers {{ nginx_proxy_buffers_num }} {{ nginx_proxy_busy_buffers_size }};
+    proxy_buffer_size {{ nginx_buffer_size }};
     {% if printnanny_nginx_log is defined %}
     access_log {{ printnanny_nginx_log }};
     error_log {{ printnanny_nginx_log }}.error;
@@ -21,9 +21,9 @@ server {
     listen 80;
     server_name $hostname;
     include /etc/nginx/conf.d/*.locations;
-    proxy_busy_buffers_size   512k;
-    proxy_buffers   4 512k;
-    proxy_buffer_size   256k;
+    proxy_busy_buffers_size {{ nginx_proxy_busy_buffers_size }};
+    proxy_buffers {{ nginx_proxy_buffers_num }} {{ nginx_proxy_busy_buffers_size }};
+    proxy_buffer_size {{ nginx_buffer_size }};
     error_log stderr;
     {% if printnanny_nginx_log is defined %}
     access_log {{ printnanny_nginx_log }};
