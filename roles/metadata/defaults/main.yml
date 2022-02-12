@@ -57,3 +57,14 @@ janus_conf:
     https_port: 8089
     http: true
     http_port: 8088
+  janus.transport.http:
+    admin_base_path: "/admin"
+    admin_http_port: 7088
+    admin_https_port: 7089
+    admin_http: true
+    admin_https: false
+    base_path: "/janus"
+    https: false
+    https_port: 8089
+    http: true
+    http_port: 8088
