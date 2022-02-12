@@ -7,8 +7,11 @@ Wants=network.service network-online.target
 [Service]
 SyslogIdentifier=ansible-collection
 Type=oneshot
-ExecStart={{ updater_venv }}/bin/ansible-galaxy \
+ExecStart=/usr/bin/flock -F {{ ansible_lockfile }} \
+    {{ updater_venv }}/bin/ansible-galaxy \
     collection install --upgrade {{ updater_collection_url }}
+ExecStartPost=-/usr/bin/flock -F {{ ansible_lockfile }} \
+    /usr/bin/rm {{ ansible_lockfile }}
 Restart=on-failure
 
 [Install]
