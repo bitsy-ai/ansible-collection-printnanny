@@ -25,38 +25,12 @@
       include_role:
         name: bitsyai.rpi.metadata
         public: true
-
-- name: Install Janus
-  hosts: printnanny
-  vars:
-    ara_playbook_name: 'update printnanny system janus'
-    ara_playbook_labels:
-      - update
-      - printnanny
-      - system
-      - janus
-  tasks:
     - name: Install Janus
       include_role:
         name: bitsyai.rpi.janus
       vars:
         janus_ssl_cert: '{{ printnanny_ssl_cert }}'
         janus_ssl_key: '{{ printnanny_ssl_key }}'
-
-- name: Install OctoPrint
-  hosts: printnanny
-  vars:
-    ara_playbook_name: 'update printnanny system octoprint'
-    ara_playbook_labels:
-      - update
-      - printnanny
-      - system
-      - octoprint
-  tasks:
-    - name: Include PrintNanny Profile Vars
-      include_vars: ../../roles/metadata/vars/{{ printnanny_profile|default("default", true) }}.yml
-    - name: Include PrintNanny Edition vars
-      include_vars: ../../roles/printnanny/vars/{{ printnanny_edition|default("octoprint_desktop", true) }}.yml
     - name: Install OctoPrint
       include_role:
         name: bitsyai.rpi.octoprint
