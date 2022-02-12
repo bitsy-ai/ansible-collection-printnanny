@@ -1,13 +1,12 @@
 # {{ ansible_managed }}
 [Unit]
-Description=Print Nanny Metadata Service for %i
+Description=Print Nanny Metadata Service
 After=network.target network-online.target ansible-collection.service
 Wants=network.service network-online.target ansible-collection.service
-PartOf=printnanny-metadata.target
 
 [Service]
 Type=oneshot
-SyslogIdentifier=printnanny-metadata-%i
+SyslogIdentifier=printnanny-metadata
 RuntimeDirectory={{ printnanny_user }}
 RuntimeDirectoryPreserve=yes
 ConfigurationDirectory={{ printnanny_user }}

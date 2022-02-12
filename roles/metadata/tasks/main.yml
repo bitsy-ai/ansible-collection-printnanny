@@ -18,38 +18,24 @@
   with_items: '{{ metadata_apps }}'
   tags:
     - metadata
-- name: Render printnanny-metadata@.service template
+
+- name: Render printnanny-metadata.service template
   ansible.builtin.template:
-    src: printnanny-metadata@.service.j2
-    dest: /etc/systemd/system/printnanny-metadata@.service
+    src: printnanny-metadata.service.j2
+    dest: /etc/systemd/system/printnanny-metadata.service
     mode: 0664
     force: true
   tags:
     - metadata
-- name: Render printnanny-metadata.target
-  ansible.builtin.template:
-    src: printnanny-metadata.target.j2
-    dest: /etc/systemd/system/printnanny-metadata.target
-    mode: 0664
-    force: true
-  tags:
-    - metadata
-- name: Enable metadata services
+
+- name: Enable metadata service
   ansible.builtin.systemd:
-    name: 'printnanny-metadata.target'
+    name: 'printnanny-metadata.service'
     enabled: true
     no_block: true
-  with_items: '{{ metadata_apps }}'
   tags:
     - metadata
-- name: Enable metadata services
-  ansible.builtin.systemd:
-    name: 'printnanny-metadata@{{ item }}.service'
-    enabled: true
-    no_block: true
-  with_items: '{{ metadata_apps }}'
-  tags:
-    - metadata
+
 - name: Setup printnanny-update service
   include_tasks: update/main.yml
   tags:
