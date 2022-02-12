@@ -5,6 +5,7 @@
     daemon_reload: true
     name: printnanny-janus
     enabled: true
+    state: restarted
     no_block: true
 
 - name: ldconfig

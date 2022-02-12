@@ -30,3 +30,4 @@ janus_admin_secret_file: '{{ janus_conf_dir }}/janus_admin_secret'
 janus_token_file: '{{ janus_conf_dir }}/janus_token'
 janus_admin_secret: "{{ lookup('password', janus_admin_secret_file, length=32 ) }}"
 janus_token: "{{ lookup('password', janus_token_file, length=32 ) }}"
+
