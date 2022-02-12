@@ -1,11 +1,5 @@
 ---
 # handlers file for metadata
-- name: systemctl daemon-reload
-  become: true
-  ansible.builtin.systemd:
-    daemon_reload: true
-    no_block: true
-
 - name: restart printnanny-monitor
   become: true
   ansible.builtin.systemd:
