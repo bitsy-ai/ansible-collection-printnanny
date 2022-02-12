@@ -6,7 +6,7 @@
     dest: /etc/systemd/system/printnanny-mqtt.service
     force: true
   notify:
-    - restart mqtt
+    - restart printnanny-mqtt
 
 - name: Enable mqtt service
   become: true
