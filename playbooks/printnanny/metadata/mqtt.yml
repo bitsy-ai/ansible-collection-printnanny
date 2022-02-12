@@ -8,7 +8,6 @@
       - env
       - metadata
       - mqtt
-    printnanny_profile: default
   roles:
     - bitsyai.rpi.printnanny
   tasks:
