@@ -13,8 +13,6 @@
     name: nginxinc.nginx_core.nginx_config
   vars:
     nginx_config_debug_output: true
-  notify:
-    - restart nginx
 
 - name: Render /etc/nginx/conf.d/servers.conf
   become: true
@@ -23,7 +21,7 @@
     dest: /etc/nginx/conf.d/servers.conf
     mode: 0644
   notify:
-    - restart nginx
+    - reload nginx
 
 - name: Render /etc/nginx/conf.d/printnanny.locations
   become: true
@@ -32,7 +30,7 @@
     dest: /etc/nginx/conf.d/printnanny.locations
     mode: 0644
   notify:
-    - restart nginx
+    - reload nginx
 
 - name: Enable nginx.service
   ansible.builtin.systemd:

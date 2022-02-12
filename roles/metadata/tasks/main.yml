@@ -13,10 +13,10 @@
   ansible.builtin.debug:
     var: hostvars[inventory_hostname]
 
-- include_tasks: janus/main.yml
-- include_tasks: env/main.yml
-- include_tasks: www/main.yml
-- include_tasks: mqtt/main.yml
+- import_tasks: janus/main.yml
+- import_tasks: env/main.yml
+- import_tasks: www/main.yml
+- import_tasks: mqtt/main.yml
 
 - name: Render printnanny-metadata.service template
   ansible.builtin.template:
@@ -36,7 +36,7 @@
     - metadata
 
 - name: Setup printnanny-update service
-  include_tasks: update/main.yml
+  import_tasks: update/main.yml
   tags:
     - metadata
 
