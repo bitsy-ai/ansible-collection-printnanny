@@ -9,7 +9,6 @@
       - system
   roles:
     - bitsyai.rpi.common
-    - bitsyai.rpi.metadata
   tasks:
     - name: Include PrintNanny Profile Vars
       include_vars: ../../roles/metadata/vars/{{ printnanny_profile|default("default", true) }}.yml
@@ -18,6 +17,10 @@
     - name: Install Print Nanny
       include_role:
         name: bitsyai.rpi.printnanny
+        public: true
+    - name: Install Print Nanny Metadata
+      include_role:
+        name: bitsyai.rpi.metadata
         public: true
     - name: Install OctoPrint
       include_role:
