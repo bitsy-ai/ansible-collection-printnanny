@@ -53,6 +53,8 @@ printnanny_www_templates_url: '{{ printnanny_cli_repo }}/releases/download/v{{ p
 printnanny_update_schedule: '*/15 * * * *'
 printnanny_user: printnanny
 printnanny_group: printnanny
+printnanny_groups:
+  - ssl-cert
 printnanny_release_channel: main
 
 printnanny_ssl_key_size: 2048
