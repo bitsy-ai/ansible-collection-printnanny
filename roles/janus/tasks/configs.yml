@@ -19,4 +19,4 @@
     - metadata
     - secret
   notify:
-    - restart janus
+    - restart printnanny-janus

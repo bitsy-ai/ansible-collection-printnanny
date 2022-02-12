@@ -9,7 +9,7 @@
     state: restarted
     enabled: true
 
-- name: restart janus
+- name: restart printnanny-janus
   become: true
   ansible.builtin.systemd:
     daemon_reload: true

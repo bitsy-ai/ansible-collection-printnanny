@@ -9,7 +9,7 @@
     state: restarted
     enabled: true
 
-- name: restart janus
+- name: restart printnanny-janus
   ignore_errors: true
   become: true
   ansible.builtin.systemd:
