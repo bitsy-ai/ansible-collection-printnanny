@@ -8,9 +8,11 @@
       - update
       - printnanny
       - system
-  roles:
-    - bitsyai.rpi.common
   tasks:
+    - name: Install common
+      include_role:
+        name: bitsyai.rpi.common
+        public: true
     - name: Include PrintNanny Profile Vars
       include_vars: ../../roles/metadata/vars/{{ printnanny_profile|default("default", true) }}.yml
     - name: Include PrintNanny Edition vars
