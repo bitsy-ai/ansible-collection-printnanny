@@ -13,11 +13,10 @@
   ansible.builtin.debug:
     var: hostvars[inventory_hostname]
 
-- name: Include tasks for each app in service_apps
-  include_tasks: '{{ item }}/main.yml'
-  with_items: '{{ metadata_apps }}'
-  tags:
-    - metadata
+- include_tasks: janus/main.yml
+- include_tasks: env/main.yml
+- include_tasks: www/main.yml
+- include_tasks: mqtt/main.yml
 
 - name: Render printnanny-metadata.service template
   ansible.builtin.template:

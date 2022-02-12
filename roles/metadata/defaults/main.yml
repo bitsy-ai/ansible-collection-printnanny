@@ -1,10 +1,4 @@
 ---
-metadata_apps:
-    - janus
-    - www
-    - env
-    - mqtt
-
 ##
 # updater_ vars
 ##
