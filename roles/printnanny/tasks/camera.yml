@@ -58,7 +58,7 @@
     dest: /usr/local/bin/printnanny-monitor
     force: true
   notify:
-    restart '{{ nn_rtp_service }}'
+    - restart {{ nn_rtp_service }}
 
 - name: Enble rpt service
   ansible.builtin.systemd:
