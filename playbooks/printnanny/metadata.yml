@@ -11,31 +11,9 @@
   roles:
     - bitsyai.rpi.printnanny
   tasks:
-    - name: Set /var/run/printnanny/env metadata
+    - name: Update Print Nanny metadata
       include_role:
         name: bitsyai.rpi.metadata
-        tasks_from: env/main.yml
-        vars_from: '{{ printnanny_profile }}.yml'
-      tags:
-        - metadata
-    - name: Set janus metadata
-      include_role:
-        name: bitsyai.rpi.metadata
-        tasks_from: janus/main.yml
-        vars_from: '{{ printnanny_profile }}.yml'
-      tags:
-        - metadata
-    - name: Set mqtt metadata
-      include_role:
-        name: bitsyai.rpi.metadata
-        tasks_from: mqtt/main.yml
-        vars_from: '{{ printnanny_profile }}.yml'
-      tags:
-        - metadata
-    - name: Set www metadata
-      include_role:
-        name: bitsyai.rpi.metadata
-        tasks_from: www/main.yml
         vars_from: '{{ printnanny_profile }}.yml'
       tags:
         - metadata
