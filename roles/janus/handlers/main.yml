@@ -1,9 +1,9 @@
 ---
-- name: restart janus
+- name: restart printnanny-janus
   become: true
   ansible.builtin.systemd:
     daemon_reload: true
-    name: janus
+    name: printnanny-janus
     enabled: true
     no_block: true
 

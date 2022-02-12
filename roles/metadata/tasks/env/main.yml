@@ -55,7 +55,7 @@
     - metadata
   notify:
     - restart printnanny-dash
-    - restart mqtt
+    - restart printnanny-mqtt
 
 
 - name: Render printnanny.sh
@@ -73,7 +73,7 @@
     - metadata
   notify:
     - restart printnanny-dash
-    - restart mqtt
+    - restart printnanny-mqtt
 
 - name: Render config.toml
   ansible.builtin.template:
@@ -84,7 +84,7 @@
     owner: '{{ printnanny_user }}'
   notify:
     - restart printnanny-dash
-    - restart mqtt
+    - restart printnanny-mqtt
   tags:
     - secret
     - metadata

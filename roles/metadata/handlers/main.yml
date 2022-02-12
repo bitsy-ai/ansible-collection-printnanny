@@ -9,7 +9,7 @@
     state: restarted
     enabled: true
 
-- name: restart janus
+- name: restart printnanny-janus
   ignore_errors: true
   become: true
   ansible.builtin.systemd:
@@ -19,12 +19,12 @@
     state: restarted
     enabled: true
 
-- name: restart mqtt
+- name: restart printnanny-mqtt
   ignore_errors: true
   become: true
   ansible.builtin.systemd:
     daemon_reload: true
-    name: mqtt
+    name: printnanny-mqtt
     no_block: true
     state: restarted
     enabled: true

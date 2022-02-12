@@ -34,7 +34,7 @@
     owner: '{{ printnanny_user }}'
   notify:
     - restart printnanny-dash
-    - restart mqtt
+    - restart printnanny-mqtt
   tags:
     - secret
     - metadata
