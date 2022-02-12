@@ -13,6 +13,13 @@ ConfigurationDirectory={{ updater_app_name }}
 {% for playbook in updater_playbooks %}
 ExecStart=/usr/bin/flock -F {{ ansible_lockfile }} \
     {{ updater_venv }}/bin/ansible-playbook \
+    {% if printnanny_loglevel == 'info' %}
+    -vv \
+    {% elif printnanny_loglevel == 'debug' %}
+    -vvv \
+    {% else %}
+    -v \
+    {% endif %}
     {{ playbook }}
 {% endfor %}
 ExecStartPost=-/usr/bin/flock -F {{ ansible_lockfile }} \
