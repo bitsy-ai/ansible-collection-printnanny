@@ -7,6 +7,16 @@
   tags:
     - metadata
 
+- name: 'Configure {{ printnanny_profile_dir }}'
+  become: true
+  ansible.builtin.file:
+    state: directory
+    owner: '{{ printnanny_user }}'
+    group: '{{ printnanny_group }}'
+    mode: 0755
+  tags:
+    - metadata
+
 - name: 'Configure {{ printnanny_user }} groups'
   become: true
   ignore_errors: true
