@@ -88,5 +88,3 @@
   tags:
     - secret
     - metadata
-
-- name: restart printnanny-dash
