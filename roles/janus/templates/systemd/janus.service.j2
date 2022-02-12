@@ -18,9 +18,7 @@ ExecStart={{janus_install_dir}}/bin/janus \
     --pid-file={{ janus_pid_file }}
 
 ExecStartPost=/usr/bin/sleep {{ janus_startup_delay }}
-{% if janus_unit_extra is not none %}
-{{ janus_unit_extra }}
-{% endif %}
+ExecStartPost=printnanny janus-admin add-token
 Restart=on-failure
 RestartSec=30
 LimitNOFILE=65536

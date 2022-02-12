@@ -14,7 +14,7 @@
   become: true
   ansible.builtin.systemd:
     daemon_reload: true
-    name: janus
+    name: printnanny-janus
     no_block: true
     state: restarted
     enabled: true
