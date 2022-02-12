@@ -13,7 +13,6 @@ RuntimeDirectoryPreserve=yes
 ConfigurationDirectory={{ printnanny_user }}
 ExecStart={{ updater_venv }}/bin/ansible-playbook \
     bitsyai.rpi.printnanny.metadata.%i --tags metadata
-Restart=on-failure
 RemainAfterExit=yes
 
 [Install]
