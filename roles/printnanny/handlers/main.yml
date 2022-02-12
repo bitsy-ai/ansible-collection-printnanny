@@ -1,6 +1,5 @@
 ---
 # handlers file for setup
-
 - name: systemctl daemon-reload
   become: true
   ansible.builtin.systemd:
@@ -57,5 +56,13 @@
   ansible.builtin.systemd:
     daemon_reload: true
     name: '{{ nn_rtp_service }}'
+    state: restarted
+    no_block: true
+
+- name: restart nginx
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: nginx
     state: restarted
     no_block: true
