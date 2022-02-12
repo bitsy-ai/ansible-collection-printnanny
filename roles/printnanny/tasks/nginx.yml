@@ -8,6 +8,16 @@
     nginx_modules:
       - njs
 
+- name: Ensure log dir exists
+  become: true
+  ansible.builtin.file:
+    state: directory
+    path: '{{ printnanny_log_dir }}'
+    owner: '{{ printnanny_user }}'
+    group: '{{ printnanny_user }}'
+    mode: 0755
+  when: printnanny_log_dir is defined
+
 - name: Configure NGINX
   import_role:
     name: nginxinc.nginx_core.nginx_config
