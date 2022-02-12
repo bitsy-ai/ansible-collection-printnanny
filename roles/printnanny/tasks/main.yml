@@ -11,6 +11,7 @@
   become: true
   ansible.builtin.file:
     state: directory
+    path: '{{ printnanny_profile_dir }}'
     owner: '{{ printnanny_user }}'
     group: '{{ printnanny_group }}'
     mode: 0755
