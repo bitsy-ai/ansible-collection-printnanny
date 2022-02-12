@@ -65,5 +65,6 @@
     enabled: true
     name: printnanny.target
     no_block: true
+    daemon_reload: true
   tags:
     - metadata
