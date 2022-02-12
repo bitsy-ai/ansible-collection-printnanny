@@ -37,13 +37,13 @@
       - video
   tags:
     - metadata
-- include_tasks: boot_config.yml
-- include_tasks: apt.yml
-- include_tasks: nginx.yml
-- include_tasks: camera.yml
-- include_tasks: cli.yml
-- include_tasks: www.yml
-- include_tasks: mqtt.yml
+- import_tasks: boot_config.yml
+- import_tasks: apt.yml
+- import_tasks: nginx.yml
+- import_tasks: camera.yml
+- import_tasks: cli.yml
+- import_tasks: www.yml
+- import_tasks: mqtt.yml
 - name: Clean ansible_async dir
   ansible.builtin.file:
     path: "{{ lookup('env','HOME') }}/.ansible_async"
