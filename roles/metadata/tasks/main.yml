@@ -14,9 +14,9 @@
     var: hostvars[inventory_hostname]
 
 - import_tasks: janus/main.yml
+- import_tasks: mqtt/main.yml
 - import_tasks: env/main.yml
 - import_tasks: www/main.yml
-- import_tasks: mqtt/main.yml
 
 - name: Render printnanny-metadata.service template
   ansible.builtin.template:
