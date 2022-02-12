@@ -40,5 +40,5 @@
       tags:
         - metadata
   handlers:
-    - include: ../../roles/printnanny/handlers/main.yml
-    - include: ../../roles/janus/handlers/main.yml
+    - import_tasks: ../../roles/printnanny/handlers/main.yml
+    - import_tasks: ../../roles/janus/handlers/main.yml
