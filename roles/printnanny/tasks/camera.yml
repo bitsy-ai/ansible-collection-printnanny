@@ -57,6 +57,8 @@
     src: camera/printnanny-monitor.sh.j2
     dest: /usr/local/bin/printnanny-monitor
     force: true
+  notify:
+    restart '{{ nn_rtp_service }}'
 
 - name: Enble rpt service
   ansible.builtin.systemd:
