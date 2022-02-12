@@ -1,0 +1,44 @@
+---
+- hosts: printnanny
+  gather_facts: true
+  vars:
+    ara_playbook_name: 'render printnanny metadata for env app'
+    ara_playbook_labels:
+      - printnanny
+      - env
+      - metadata
+      - env
+  roles:
+    - bitsyai.rpi.printnanny
+  tasks:
+    - name: Set /var/run/printnanny/env metadata
+      include_role:
+        name: bitsyai.rpi.metadata
+        tasks_from: env/main.yml
+        vars_from: '{{ printnanny_profile }}.yml'
+      tags:
+        - metadata
+    - name: Set janus metadata
+      include_role:
+        name: bitsyai.rpi.metadata
+        tasks_from: janus/main.yml
+        vars_from: '{{ printnanny_profile }}.yml'
+      tags:
+        - metadata
+    - name: Set mqtt metadata
+      include_role:
+        name: bitsyai.rpi.metadata
+        tasks_from: mqtt/main.yml
+        vars_from: '{{ printnanny_profile }}.yml'
+      tags:
+        - metadata
+    - name: Set www metadata
+      include_role:
+        name: bitsyai.rpi.metadata
+        tasks_from: www/main.yml
+        vars_from: '{{ printnanny_profile }}.yml'
+      tags:
+        - metadata
+  handlers:
+    - include: ../../../roles/printnanny/handlers/main.yml
+    - include: ../../../roles/janus/handlers/main.yml

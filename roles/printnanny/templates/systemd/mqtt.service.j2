@@ -1,7 +1,7 @@
 [Unit]
 Description=Print Nanny MQTT Client
-After=network.target network-online.target printnanny-metadata@mqtt.service printnanny-metadata@env.service
-Wants=network.target network-online.target printnanny-metadata@mqtt.service printnanny-metadata@env.service
+After=network.target network-online.target printnanny-metadata.service
+Wants=network.target network-online.target printnanny-metadata.service
 PartOf=printnanny.target
 
 
