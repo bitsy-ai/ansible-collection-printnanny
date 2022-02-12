@@ -48,6 +48,7 @@
   ansible.builtin.file:
     path: "{{ lookup('env','HOME') }}/.ansible_async"
     state: absent
+
 - name: Render printnanny.target
   become: true
   ansible.builtin.template:
@@ -63,3 +64,7 @@
   ansible.builtin.systemd:
     enabled: true
     name: printnanny.target
+    no_block: true
+    daemon_reload: true
+  tags:
+    - metadata
