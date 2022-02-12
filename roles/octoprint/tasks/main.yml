@@ -112,3 +112,6 @@
     - setup
     - system-update
     - octoprint
+
+- name: Include nginx tasks
+  include_tasks: nginx.yml
