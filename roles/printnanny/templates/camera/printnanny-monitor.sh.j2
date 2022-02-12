@@ -7,8 +7,13 @@ gst-launch-1.0 libcamerasrc ! capsfilter caps=video/x-raw,width={{ gstreamer_vid
         ! "video/x-raw,format=RGB,width={{ nn_tensor_width }},height={{ nn_tensor_height }}" \
         ! tensor_converter \
         ! tensor_transform mode=arithmetic option=typecast:uint8,add:0,div:1 \
-        ! tensor_filter framework=tensorflow2-lite model=/opt/printnanny/default/nn/model.tflite \
-        ! tensor_decoder mode=bounding_boxes option1=mobilenet-ssd-postprocess option2=/opt/printnanny/default/nn/dict.txt option3=0:1:2:3,{{ nn_threshold }} option4={{ gstreamer_video_w }}:{{ gstreamer_video_h}} option5={{ nn_tensor_width}}:{{ nn_tensor_height}} \
+        ! tensor_filter framework=tensorflow2-lite model={{ nn_model_file }} \
+        ! tensor_decoder mode=bounding_boxes \
+            option1=mobilenet-ssd-postprocess \
+            option2={{ nn_label_file }} \
+            option3=0:1:2:3,{{ nn_threshold }} \
+            option4={{ gstreamer_video_w }}:{{ gstreamer_video_h }} \
+            option5={{ nn_tensor_width }}:{{ nn_tensor_height }} \
         ! capssetter caps="video/x-raw,format=RGB,width={{ gstreamer_video_w }},height={{ gstreamer_video_h }}" \
         ! v4l2convert \
         ! v4l2h264enc extra-controls="controls,repeat_sequence_header=1" \
