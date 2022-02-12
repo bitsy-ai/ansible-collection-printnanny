@@ -63,3 +63,5 @@
   ansible.builtin.systemd:
     enabled: true
     name: printnanny.target
+  tags:
+    - metadata
