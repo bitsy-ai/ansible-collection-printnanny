@@ -7,6 +7,7 @@ Wants=network.service network-online.target
 [Service]
 SyslogIdentifier=ansible-collection
 Type=oneshot
+RuntimeDirectoryPreserve=yes
 RuntimeDirectory={{ updater_app_name }}
 ConfigurationDirectory={{ updater_app_name }}
 ExecStart=/usr/bin/flock -F {{ ansible_lockfile }} \
