@@ -4,7 +4,7 @@
   tags:
     - testsetup
 
-- name: 'Configure input group'
+- name: 'Configure ssl-cert group'
   ansible.builtin.group:
     name: ssl-cert
   tags:
