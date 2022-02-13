@@ -20,4 +20,4 @@ jobs:
             🥧 **New Print Nanny OS Version**
             `{{ EVENT_PAYLOAD.repository.full_name }}@{{ GITHUB_SHA }}`
             **Version**: `${{ github.ref }}`
-            **Release Notes** https://github.com/bitsy-ai/ansible-collection-rpi/releases/tag/${{ github.ref }}
+            **Release Notes** https://github.com/bitsy-ai/ansible-collection-rpi/releases/tag/${{ github.event.release.html_url }}
