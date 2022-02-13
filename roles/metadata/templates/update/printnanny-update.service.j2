@@ -7,9 +7,9 @@ Wants=network.target network-online.target ansible-collection.service printnanny
 [Service]
 SyslogIdentifier=printnanny-update
 Type=oneshot
-RuntimeDirectory={{ updater_app_name }}
-ConfigurationDirectory={{ updater_app_name }}
-
+RuntimeDirectory={{ printnanny_user }}
+ConfigurationDirectory={{ printnanny_user }}
+RuntimeDirectoryPreserve=yes
 {% for playbook in updater_playbooks %}
 ExecStart=/usr/bin/flock -F {{ ansible_lockfile }} \
     {{ updater_venv }}/bin/ansible-playbook \
