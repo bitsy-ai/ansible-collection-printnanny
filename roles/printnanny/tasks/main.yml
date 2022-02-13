@@ -4,6 +4,8 @@
   become: true
   ansible.builtin.user:
     name: '{{ printnanny_user }}'
+    groups: '{{ printnanny_groups }}'
+    append: true
   tags:
     - metadata
 

@@ -4,6 +4,12 @@
   tags:
     - testsetup
 
+- name: 'Configure ssl-cert group'
+  ansible.builtin.group:
+    name: ssl-cert
+  tags:
+    - testsetup
+
 - name: 'Configure netdev group'
   ansible.builtin.group:
     name: netdev
