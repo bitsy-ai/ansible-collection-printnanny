@@ -153,4 +153,5 @@ honeycomb_api_key: '22ffab0ec6af32b2be565bc831555e44'
 ##
 # janus vars
 ##
+janus_hostname: janus.print-nanny.com
 janus_rtp_port: 5105

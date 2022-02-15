@@ -1,4 +1,5 @@
 ---
-printnanny_profile: local
+printnanny_profile: sandbox
 printnanny_api_url: https://webapp.sandbox.print-nanny.com
 ara_api_server: https://ara.sandbox.print-nanny.com
+janus_hostname: janus.sandbox.print-nanny.com
