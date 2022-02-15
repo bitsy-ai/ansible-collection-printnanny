@@ -25,13 +25,23 @@
       include_role:
         name: bitsyai.rpi.metadata
         public: true
-    - name: Install Janus
+    - name: Install local Janus Gateway
       include_role:
         name: bitsyai.rpi.janus
       vars:
         janus_ssl_cert: '{{ printnanny_ssl_cert }}'
         janus_ssl_key: '{{ printnanny_ssl_key }}'
         janus_env_file: '{{ printnanny_env }}'
+      when: janus_local_enabled
+    - name: Install local Janus Gateway
+      include_role:
+        name: bitsyai.rpi.janus
+        tasks_from: remote.yml
+      vars:
+        janus_ssl_cert: '{{ printnanny_ssl_cert }}'
+        janus_ssl_key: '{{ printnanny_ssl_key }}'
+        janus_env_file: '{{ printnanny_env }}'
+      when: janus_remote_enabled
     - name: Install OctoPrint
       include_role:
         name: bitsyai.rpi.octoprint

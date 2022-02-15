@@ -14,6 +14,7 @@
     var: hostvars[inventory_hostname]
 
 - import_tasks: janus/main.yml
+  when: janus_local_enabled
 - import_tasks: mqtt/main.yml
 - import_tasks: env/main.yml
 - import_tasks: www/main.yml

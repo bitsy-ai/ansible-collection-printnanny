@@ -3,6 +3,8 @@
   import_playbook: ../system.yml
   vars:
     printnanny_edition: octoprint_desktop
+    janus_remote_enabled: true
+    janus_local_enabled: false
 - hosts: printnanny
   tasks:
     - name: Octoprint role

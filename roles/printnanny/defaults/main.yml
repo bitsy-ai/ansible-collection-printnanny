@@ -149,3 +149,8 @@ nn_metadata_file: '{{ nn_install_dir }}/tflite_metadata.json'
 ##
 honeycomb_dataset: 'printnanny_os'
 honeycomb_api_key: '22ffab0ec6af32b2be565bc831555e44'
+
+##
+# janus vars
+##
+janus_rtp_port: 5105

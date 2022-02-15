@@ -1,7 +1,17 @@
 ---
-# defaults file for ansible-role-janus-gateway
-janus_auth: {}
 
+##
+# Remote Janus gateway
+##
+janus_remote_enabled: true
+janus_hostname: janus.print-nanny.com
+
+##
+# Local Janus Installation
+##
+janus_local_enabled: false
+
+janus_auth: {}
 cam_rtp_port: 5104
 nn_rtp_port: 5105
 janus_build_extras:
@@ -44,7 +54,7 @@ janus_libsrtp_version: "2.2.0"
 janus_libsrtp_tarball: "https://github.com/cisco/libsrtp/archive/v{{ janus_libsrtp_version }}.tar.gz"
 
 janus_repo: https://github.com/meetecho/janus-gateway.git
-janus_version: 0.11.6
+janus_version: 0.11.8
 janus_conf:
   janus:
     plugins_folder: "{{ janus_install_dir }}/lib/janus/plugins"
