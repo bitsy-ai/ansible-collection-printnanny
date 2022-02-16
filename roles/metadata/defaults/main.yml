@@ -25,6 +25,8 @@ ansible_config:
   fact_caching_connection: /etc/ansible/facts.json
 
 ## janus vars
+janus_local_enabled: false
+local_remote_enabled: true
 janus_conf_dir: /etc/janus
 janus_admin_secret_file: '{{ janus_conf_dir }}/janus_admin_secret'
 janus_token_file: '{{ janus_conf_dir }}/janus_token'

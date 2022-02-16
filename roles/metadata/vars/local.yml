@@ -2,3 +2,4 @@
 printnanny_profile: local
 printnanny_api_url: http://aurora:8000
 ara_enabled: false
+janus_hostname: '{{ inventory_hostname }}'
