@@ -3,9 +3,10 @@
 # updater_ vars
 ##
 
+printnanny_edition: octoprint_desktop
 updater_app_name: printnanny
 updater_playbooks:
-  - bitsyai.rpi.printnanny.system
+  - 'bitsyai.rpi.printnanny.images.{{ printnanny_edition }}'
 
 printnanny_release_channel: 'main'
 updater_collection_url: 'git+https://github.com/bitsy-ai/ansible-collection-rpi.git,{{ printnanny_release_channel }}'
