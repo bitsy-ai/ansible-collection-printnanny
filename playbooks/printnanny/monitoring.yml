@@ -1,8 +1,6 @@
 ---
 - hosts: printnanny
   tasks:
-    - name: Include roles/printnanny/vars
-      include_vars: ../../roles/printnanny/vars/main.yml
     - name: Enable {{ gstreamer_service_name }}
       ansible.builtin.systemd:
         name: '{{ gstreamer_service_name }}'
