@@ -8,6 +8,7 @@
 
 - name: Install systemd-cron (allow uninstall cron)
   ansible.builtin.apt:
+    update_cache: true
     install_recommends: true
     name:
       - systemd
@@ -16,7 +17,6 @@
 
 - name: Install apt dependencies
   ansible.builtin.apt:
-    update_cache: true
     name:
       # common
       - ca-certificates
