@@ -16,8 +16,7 @@ server {
     access_log {{ printnanny_nginx_log }};
     error_log {{ printnanny_nginx_log }}.error;
     {% endif %}
-
-    proxy_cookie_path / "/; HTTPOnly";
+    proxy_cookie_domain localhost $host;
 }
 server {
     listen 80;
@@ -31,5 +30,5 @@ server {
     access_log {{ printnanny_nginx_log }};
     error_log {{ printnanny_nginx_log }}.error;
     {% endif %}
-    proxy_cookie_path / "/; HTTPOnly";
+    proxy_cookie_domain localhost $host;
 }
