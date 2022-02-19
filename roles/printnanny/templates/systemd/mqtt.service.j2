@@ -12,11 +12,6 @@ EnvironmentFile=-{{ printnanny_env }}
 ExecStart=/usr/local/bin/printnanny mqtt subscribe
 User={{ printnanny_user }}
 
-{% if printnanny_mqtt_log is defined %}
-StandardOutput=file:{{ printnanny_mqtt_log }}.stdout
-StandardError=file:{{ printnanny_mqtt_log }}.stderr
-{% endif %}
-
 Restart=on-failure
 RestartSec=10
 

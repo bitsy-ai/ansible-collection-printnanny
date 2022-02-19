@@ -12,10 +12,5 @@ ExecStart=/usr/local/bin/printnanny-monitor
 Restart=on-failure
 RestartSec=10
 
-{% if printnanny_cam_log is defined %}
-StandardOutput=file:{{ printnanny_cam_log }}.stdout
-StandardError=file:{{ printnanny_cam_log }}.stderr
-{% endif %}
-
 [Install]
 WantedBy=multi-user.target
