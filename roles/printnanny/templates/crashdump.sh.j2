@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 echo "Writing printnanny-update.service logs to {{ printnanny_update_log }}"
 journalctl -u printnanny-update > {{ printnanny_update_log }}
