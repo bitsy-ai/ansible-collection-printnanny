@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
-set +x
+set +x\
 
+echo "Stopping printnanny-update.service"
+systemctl stop printnanny.update.service
 echo "Stopping printnany-metadata.service"
 systemctl stop printnanny-metadata.service
 echo "Stopping printnanny-update.service"
