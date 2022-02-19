@@ -90,11 +90,11 @@
   tags:
     - metadata
 
-- name: Enable printnanny-update unit
+- name: Configure printnanny-update.service
   become: true
   ansible.builtin.systemd:
     name: 'printnanny-update'
-    enabled: true
+    enabled: false
     no_block: true
   tags:
     - metadata
