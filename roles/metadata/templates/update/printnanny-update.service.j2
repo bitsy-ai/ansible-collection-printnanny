@@ -22,10 +22,5 @@ ExecStart=/usr/bin/flock -F {{ ansible_lockfile }} \
 ExecStartPost=-/usr/bin/flock -F {{ ansible_lockfile }} \
     /usr/bin/rm {{ ansible_lockfile }}
 
-{% if printnanny_update_log is defined %}
-StandardOutput=file:{{ printnanny_update_log }}.stdout
-StandardError=file:{{ printnanny_update_log }}.stderr
-{% endif %}
-
 [Install]
 WantedBy=multi-user.target

@@ -71,6 +71,17 @@ printnanny_ssl_organization_name: 'Bitsy AI Labs, LLC'
 printnanny_edition: octoprint_desktop
 
 ##
+# log dirs
+##
+printnanny_log_dir: "/var/log/printnanny"
+printnanny_update_log: '{{ printnanny_log_dir }}/printnanny_update.log'
+printnanny_www_log: '{{ printnanny_log_dir }}/printnanny_www.log'
+printnanny_mqtt_log: '{{ printnanny_log_dir }}/printnanny_mqtt.log'
+printnanny_webrtc_log: '{{ printnanny_log_dir }}/printnanny_webrtc.log'
+printnanny_cam_log: '{{ printnanny_log_dir }}/printnanny_cam.log'
+printnanny_nginx_log: '{{ printnanny_log_dir }}/printnanny_nginx.log'
+
+##
 # libcamera vars
 ##
 libcamera_repo: https://git.libcamera.org/libcamera/libcamera.git

@@ -70,3 +70,10 @@
     daemon_reload: true
   tags:
     - metadata
+
+- name: Render crashdump script
+  become: true
+  ansible.builtin.template:
+    src: crashdump.sh.j2
+    dest: /usr/local/bin/printnanny-crashdump
+    mode: 0755
