@@ -1,6 +1,9 @@
 name = "{{ printnanny_profile }}"
 path = "{{ printnanny_profile_dir }}"
 
+[ansible]
+venv = "{{ printnanny_ansible_dir }}/venv"
+
 [api]
 base_path = "{{ printnanny_api_url }}"
 
