@@ -19,7 +19,7 @@
       include_vars: ../../roles/printnanny/vars/{{ printnanny_edition|default("octoprint_desktop", true) }}.yml
     - name: Install Print Nanny
       include_role:
-        name: bitsyai.printnanny.main
+        name: bitsyai.printnanny.install
         public: true
     - name: Install Print Nanny Metadata
       include_role:

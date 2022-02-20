@@ -1,4 +1,4 @@
 ---
 - include_role:
-    name: bitsyai.printnanny.main
+    name: bitsyai.printnanny.install
     tasks_from: camera.yml

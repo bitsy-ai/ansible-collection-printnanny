@@ -1,4 +1,6 @@
 galaxy_info:
+  namespace: bitsyai.printnanny
+  role_name: metadata
   author: Leigh Johnson
   description: Print Nanny Metadata
   company: Bitsy AI Labs
@@ -48,4 +50,4 @@ galaxy_info:
     #       Maximum 20 tags per role.
 
 dependencies:
-  - role: bitsyai.printnanny.main
+  - role: bitsyai.printnanny.install
