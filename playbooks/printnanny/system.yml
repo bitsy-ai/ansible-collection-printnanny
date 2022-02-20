@@ -11,7 +11,7 @@
   tasks:
     - name: Install common
       include_role:
-        name: bitsyai.rpi.common
+        name: bitsyai.printnanny.common
         public: true
     - name: Include PrintNanny Profile Vars
       include_vars: ../../roles/metadata/vars/{{ printnanny_profile|default("default", true) }}.yml
@@ -19,15 +19,15 @@
       include_vars: ../../roles/printnanny/vars/{{ printnanny_edition|default("octoprint_desktop", true) }}.yml
     - name: Install Print Nanny
       include_role:
-        name: bitsyai.rpi.printnanny
+        name: bitsyai.printnanny.printnanny
         public: true
     - name: Install Print Nanny Metadata
       include_role:
-        name: bitsyai.rpi.metadata
+        name: bitsyai.printnanny.metadata
         public: true
     - name: Install local Janus Gateway
       include_role:
-        name: bitsyai.rpi.janus
+        name: bitsyai.printnanny.janus
       vars:
         janus_ssl_cert: '{{ printnanny_ssl_cert }}'
         janus_ssl_key: '{{ printnanny_ssl_key }}'
@@ -35,7 +35,7 @@
       when: janus_local_enabled
     - name: Install local Janus Gateway
       include_role:
-        name: bitsyai.rpi.janus
+        name: bitsyai.printnanny.janus
         tasks_from: remote.yml
       vars:
         janus_ssl_cert: '{{ printnanny_ssl_cert }}'
@@ -44,6 +44,6 @@
       when: janus_remote_enabled
     - name: Install OctoPrint
       include_role:
-        name: bitsyai.rpi.octoprint
+        name: bitsyai.printnanny.octoprint
       when: (printnanny_edition|default("octoprint_desktop", true) == "octoprint_desktop" or
         printnanny_edition|default("octoprint_lite", true) == "octoprint_lite")

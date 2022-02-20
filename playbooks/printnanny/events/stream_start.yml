@@ -21,5 +21,5 @@
         var: printnanny_event
     - name: Run monitor tasks
       ansible.builtin.include_role:
-        name: bitsyai.rpi.printnanny
+        name: bitsyai.printnanny.printnanny
         tasks_from: monitor

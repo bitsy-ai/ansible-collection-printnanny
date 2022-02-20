@@ -1,4 +1,4 @@
-bitsyai.rpi.metadata
+bitsyai.printnanny.metadata
 
 =========
 
