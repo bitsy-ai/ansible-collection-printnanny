@@ -18,7 +18,7 @@ systemctl stop printnanny-gst.service
 {{ updater_venv }}/bin/ansible printnanny \
     -m ansible.builtin.set_fact -a "printnanny_profile=$1 cacheable=true"
 
-{{ updater_venv }}/bin/ansible-playbook bitsyai.printnanny.main.metadata
+{{ updater_venv }}/bin/ansible-playbook bitsyai.printnanny.metadata
 
 systemctl start printnanny-metadata
 systemctl start printnanny-dash
