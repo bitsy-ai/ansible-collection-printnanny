@@ -9,7 +9,7 @@
       - metadata
       - env
   roles:
-    - bitsyai.printnanny.printnanny
+    - bitsyai.printnanny.main
   tasks:
     - name: Set /var/run/printnanny/env metadata
       include_role:

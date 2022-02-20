@@ -14,6 +14,6 @@ Documentation for the collection.
 
 ## `bitsyai.printnanny.octoprint`
 
-## `bitsyai.printnanny.printnanny`
+## `bitsyai.printnanny.main`
 
 ## `bitsyai.printnanny.common`
