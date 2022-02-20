@@ -1,3 +1,3 @@
 ---
 - include_role:
-    name: bitsyai.rpi.honeycomb
+    name: bitsyai.printnanny.honeycomb

@@ -9,8 +9,8 @@
   tasks:
     - name: Octoprint role
       include_role:
-        name: bitsyai.rpi.octoprint
+        name: bitsyai.printnanny.octoprint
     - name: Clean and minimize image
       include_role:
-        name: bitsyai.rpi.common
+        name: bitsyai.printnanny.common
         tasks_from: clean_image

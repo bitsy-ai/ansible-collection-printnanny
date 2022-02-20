@@ -13,4 +13,4 @@
         var: ansible_local
     - name: Include janus role
       include_role:
-        name: bitsyai.rpi.janus
+        name: bitsyai.printnanny.janus

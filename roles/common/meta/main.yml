@@ -1,4 +1,6 @@
 galaxy_info:
+  namespace: bitsyai.printnanny
+  role_name: common
   author: Leigh Johnson
   description: Setup user accounts
   company: Bitsy AI Labs

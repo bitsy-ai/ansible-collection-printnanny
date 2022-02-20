@@ -9,11 +9,11 @@
       - metadata
       - env
   roles:
-    - bitsyai.rpi.printnanny
+    - bitsyai.printnanny.install
   tasks:
     - name: Set /var/run/printnanny/env metadata
       include_role:
-        name: bitsyai.rpi.metadata
+        name: bitsyai.printnanny.metadata
         vars_from: '{{ printnanny_profile|default("default", true) }}.yml'
       tags:
         - metadata

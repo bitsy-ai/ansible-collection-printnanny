@@ -1,5 +1,5 @@
 ---
 - name: Import updater role
   include_role:
-    name: bitsyai.rpi.common
+    name: bitsyai.printnanny.common
     tasks_from: slim

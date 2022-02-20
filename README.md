@@ -1,19 +1,19 @@
-# Ansible Collection - bitsyai.rpi
+# Ansible Collection - bitsyai.printnanny
 
 Documentation for the collection.
 
 # Roles
 
-## `bitsyai.rpi.honeycomb`
+## `bitsyai.printnanny.honeycomb`
 
-## `bitsyai.rpi.janus`
+## `bitsyai.printnanny.janus`
 
-## `bitsyai.rpi.metadata`
+## `bitsyai.printnanny.metadata`
 
-## `bitsyai.rpi.nebula`
+## `bitsyai.printnanny.nebula`
 
-## `bitsyai.rpi.octoprint`
+## `bitsyai.printnanny.octoprint`
 
-## `bitsyai.rpi.printnanny`
+## `bitsyai.printnanny.install`
 
-## `bitsyai.rpi.common`
+## `bitsyai.printnanny.common`

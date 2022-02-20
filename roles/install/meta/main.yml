@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   namespace: bitsyai.printnanny
-  role_name: setup
+  role_name: install
   author: Leigh Johnson
   description: An Ansible role to install & configure Print Nanny on a Raspberry Pi
   company: Bitsy AI Labs

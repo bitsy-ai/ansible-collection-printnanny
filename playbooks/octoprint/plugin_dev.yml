@@ -19,27 +19,27 @@
         cacheable: true
     - name: Set /var/run/printnanny/env metadata
       include_role:
-        name: bitsyai.rpi.metadata
+        name: bitsyai.printnanny.metadata
         tasks_from: env/main.yml
         vars_from: '{{ printnanny_profile }}.yml'
     - name: Set janus metadata
       include_role:
-        name: bitsyai.rpi.metadata
+        name: bitsyai.printnanny.metadata
         tasks_from: janus/main.yml
         vars_from: '{{ printnanny_profile }}.yml'
     - name: Set mqtt metadata
       include_role:
-        name: bitsyai.rpi.metadata
+        name: bitsyai.printnanny.metadata
         tasks_from: mqtt/main.yml
         vars_from: '{{ printnanny_profile }}.yml'
     - name: Set www metadata
       include_role:
-        name: bitsyai.rpi.metadata
+        name: bitsyai.printnanny.metadata
         tasks_from: www/main.yml
         vars_from: '{{ printnanny_profile }}.yml'
     - name: Install OctoPrint (developer mode)
       include_role:
-        name: bitsyai.rpi.octoprint
+        name: bitsyai.printnanny.octoprint
       vars:
         octoprint_printnanny_plugin_dev: true
   handlers:

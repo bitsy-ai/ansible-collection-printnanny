@@ -12,7 +12,7 @@
     janus_admin_secret: "{{ lookup('password', janus_admin_secret_file, length=32 ) }}"
     janus_token: "{{ lookup('password', janus_token_file, length=32 ) }}"
   include_role:
-    name: bitsyai.rpi.janus
+    name: bitsyai.printnanny.janus
     tasks_from: configs.yml
   tags:
     - secrets
