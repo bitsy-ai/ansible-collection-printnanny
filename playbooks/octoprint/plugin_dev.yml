@@ -43,5 +43,5 @@
       vars:
         octoprint_printnanny_plugin_dev: true
   handlers:
-    - include: ../../../roles/printnanny/handlers/main.yml
+    - include: ../../../roles/install/handlers/main.yml
     - include: ../../../roles/janus/handlers/main.yml

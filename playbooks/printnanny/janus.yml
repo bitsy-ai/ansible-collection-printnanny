@@ -9,8 +9,8 @@
       - janus
       - system
   tasks:
-    - name: Include roles/printnanny/defaults
-      include_vars: ../../../roles/printnanny/defaults/main.yml
+    - name: Include roles/install/defaults
+      include_vars: ../../../roles/install/defaults/main.yml
     - name: Include janus role
       include_role:
         name: bitsyai.printnanny.janus
