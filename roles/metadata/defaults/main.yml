@@ -9,7 +9,7 @@ updater_playbooks:
   - 'bitsyai.printnanny.install.images.{{ printnanny_edition }}'
 
 printnanny_release_channel: 'main'
-updater_collection_url: 'git+https://github.com/bitsy-ai/ansible-collection-rpi.git,{{ printnanny_release_channel }}'
+updater_collection_url: 'git+https://github.com/bitsy-ai/ansible-collection-printnanny.git,{{ printnanny_release_channel }}'
 
 updater_venv: '{{ printnanny_ansible_dir }}/venv'
 
