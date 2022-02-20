@@ -1,0 +1,25 @@
+---
+- hosts: printnanny
+  gather_facts: true
+  vars:
+    ara_playbook_name: 'printnanny events stream_start'
+    ara_playbook_labels:
+      - printnanny
+      - events
+      - commands
+      - stream_start
+  tasks:
+    - name: Assert printnanny_event_json is defined
+      ansible.builtin.assert:
+        that:
+          - printnanny_event_json is defined
+    - name: Parse printnanny_event_json
+      ansible.builtin.set_fact:
+        printnanny_event: "{{ printnanny_event_json | from_json }}"
+    - name: Debug parsed event_json
+      ansible.builtin.debug:
+        var: printnanny_event
+    - name: Run monitor tasks
+      ansible.builtin.include_role:
+        name: bitsyai.rpi.printnanny
+        tasks_from: monitor

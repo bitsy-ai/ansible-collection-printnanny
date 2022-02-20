@@ -1,0 +1,15 @@
+---
+- hosts: printnanny
+  gather_facts: true
+  vars:
+    ara_playbook_name: 'printnanny events stream_stop'
+    ara_playbook_labels:
+      - printnanny
+      - events
+      - commands
+      - stream_stop
+  tasks:
+    - name: Stop printnanny monitor
+      ansible.builtin.systemd:
+        name: printnanny-gst
+        state: stopped

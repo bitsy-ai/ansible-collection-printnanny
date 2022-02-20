@@ -43,6 +43,7 @@
 - import_tasks: apt.yml
 - import_tasks: nginx.yml
 - import_tasks: camera.yml
+- import_tasks: monitor.yml
 - import_tasks: cli.yml
 - import_tasks: www.yml
 - import_tasks: mqtt.yml
