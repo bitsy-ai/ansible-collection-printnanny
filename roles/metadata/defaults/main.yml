@@ -6,7 +6,7 @@
 printnanny_edition: octoprint_desktop
 updater_app_name: printnanny
 updater_playbooks:
-  - 'bitsyai.printnanny.install.images.{{ printnanny_edition }}'
+  - 'bitsyai.printnanny.images.{{ printnanny_edition }}'
 
 printnanny_release_channel: 'main'
 updater_collection_url: 'git+https://github.com/bitsy-ai/ansible-collection-printnanny.git,{{ printnanny_release_channel }}'
