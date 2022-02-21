@@ -5,6 +5,7 @@ After=network.target network-online.target
 Wants=network.service network-online.target
 
 [Service]
+User={{ printnanny_user }}
 SyslogIdentifier=ansible-collection
 Type=oneshot
 RuntimeDirectoryPreserve=yes

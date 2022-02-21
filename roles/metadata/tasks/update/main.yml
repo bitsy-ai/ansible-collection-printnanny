@@ -7,6 +7,18 @@
   tags:
     - setup
     - metadata
+
+- name: Create {{ printnanny_ansible_dir }}/collections
+  become: true
+  ansible.builtin.file:
+    path: '{{ printnanny_ansible_dir }}/collections'
+    state: directory
+    mode: 0755
+    owner: '{{ printnanny_user }}'
+    group: '{{ printnanny_group }}'
+  tags:
+    - setup
+    - metadata
 - name: 'Update ansible virtualenv pip, setuptools'
   ansible.builtin.pip:
     name:
