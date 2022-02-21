@@ -9,7 +9,7 @@ PartOf=printnanny.target
 Type=simple
 SyslogIdentifier=printnanny-mqtt
 EnvironmentFile=-{{ printnanny_env }}
-ExecStart=/usr/local/bin/printnanny mqtt subscribe
+ExecStart=/usr/local/bin/printnanny -v mqtt subscribe
 User={{ printnanny_user }}
 
 Restart=on-failure
