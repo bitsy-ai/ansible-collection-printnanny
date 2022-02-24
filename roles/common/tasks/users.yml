@@ -25,6 +25,7 @@
       - sudo
 
 - name: Configure sudoers
+  become: true
   ansible.builtin.copy:
     dest: "{{ item.file }}"
     content: "{{ item.content }}"
