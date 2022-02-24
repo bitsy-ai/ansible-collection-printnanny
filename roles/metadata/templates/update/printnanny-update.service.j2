@@ -18,6 +18,7 @@ ExecStart=/usr/bin/flock -F {{ ansible_lockfile }} \
     {% else %}
     -v \
     {% endif %}
+    --skip-tags "packer" \
     {{ playbook }}
 {% endfor %}
 ExecStartPost=-/usr/bin/flock -F {{ ansible_lockfile }} \
