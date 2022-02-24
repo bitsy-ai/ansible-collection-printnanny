@@ -1,7 +1,7 @@
 name = "{{ printnanny_profile }}"
 install_dir = "{{ printnanny_profile_dir }}"
 runtime_dir = "{{ printnanny_runtime_dir }}"
-events_socket = {{ printnanny_runtime_dir }}/events.sock"
+events_socket = "{{ printnanny_runtime_dir }}/events.sock"
 
 [ansible]
 venv = "{{ printnanny_ansible_dir }}/venv"
