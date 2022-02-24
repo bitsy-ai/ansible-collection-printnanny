@@ -1,4 +1,5 @@
 - name: Install NGINX
+  become: true
   include_role:
     name: nginxinc.nginx_core.nginx
   vars:
@@ -19,6 +20,7 @@
   when: printnanny_log_dir is defined
 
 - name: Configure NGINX
+  become: true
   include_role:
     name: nginxinc.nginx_core.nginx_config
   vars:
@@ -43,6 +45,7 @@
     - reload nginx
 
 - name: Enable nginx.service
+  become: true
   ansible.builtin.systemd:
     name: nginx.service
     enabled: true
