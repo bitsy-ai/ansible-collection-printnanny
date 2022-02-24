@@ -8,8 +8,8 @@ echo "Stopping printnanny-update.service"
 systemctl stop printnanny-update.service
 echo "Stopping printnanny-dash.service"
 systemctl stop printnanny-dash.service
-echo "Stopping printnanny-mqtt.service"
-systemctl stop printnanny-mqtt.service
+echo "Stopping printnanny-events.service"
+systemctl stop printnanny-events.service
 echo "Stopping printnanny-gst.service"
 systemctl stop printnanny-gst.service
 
@@ -21,4 +21,4 @@ systemctl stop printnanny-gst.service
 systemctl start printnanny-metadata
 systemctl start printnanny-dash
 systemctl start printnanny-gst
-systemctl start printnanny-mqtt
+systemctl start printnanny-events

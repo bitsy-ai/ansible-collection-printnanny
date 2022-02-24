@@ -18,11 +18,11 @@
     state: restarted
     enabled: true
 
-- name: restart printnanny-mqtt
+- name: restart printnanny-events
   become: true
   ansible.builtin.systemd:
     daemon_reload: true
-    name: printnanny-mqtt
+    name: printnanny-events
     no_block: true
     state: restarted
     enabled: true
