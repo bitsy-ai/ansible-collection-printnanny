@@ -1,5 +1,4 @@
 - name: Install NGINX
-  become: true
   include_role:
     name: nginxinc.nginx_core.nginx
   vars:
