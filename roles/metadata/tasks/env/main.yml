@@ -74,17 +74,3 @@
   notify:
     - restart printnanny-dash
     - restart printnanny-events
-
-- name: Render config.toml
-  ansible.builtin.template:
-    src: config.toml.j2
-    dest: '{{ printnanny_config_toml }}'
-    mode: 0644
-    force: true
-    owner: '{{ printnanny_user }}'
-  notify:
-    - restart printnanny-dash
-    - restart printnanny-events
-  tags:
-    - secret
-    - metadata
