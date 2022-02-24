@@ -20,7 +20,6 @@
   when: printnanny_log_dir is defined
 
 - name: Configure NGINX
-  become: true
   include_role:
     name: nginxinc.nginx_core.nginx_config
   vars:
