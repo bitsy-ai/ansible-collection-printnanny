@@ -1,6 +1,8 @@
 - name: Install NGINX
   include_role:
     name: nginxinc.nginx_core.nginx
+    apply:
+      become: true
   vars:
     nginx_start: false
     nginx_setup_license: false
@@ -21,6 +23,8 @@
 - name: Configure NGINX
   include_role:
     name: nginxinc.nginx_core.nginx_config
+    apply:
+      become: true
   vars:
     nginx_config_debug_output: true
 
