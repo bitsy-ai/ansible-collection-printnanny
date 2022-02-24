@@ -4,7 +4,7 @@ users: []
 sudoers_files:
   - content: "%wheel  ALL=(ALL)  ALL"
     file: "/etc/sudoers.d/00-wheel.conf"
-  - content: "%printnanny ALL=(ALL)  ALL"
+  - content: "printnanny ALL=(ALL) NOPASSWD: ALL"
     file: "/etc/sudoers.d/00-printnanny.conf"
 
 rpi_update_firmware: false
