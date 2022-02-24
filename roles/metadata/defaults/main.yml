@@ -23,7 +23,7 @@ ansible_hosts_file: /etc/ansible/hosts
 ansible_config:
   fact_caching_timeout: 86400
   fact_caching: jsonfile
-  fact_caching_connection: /etc/ansible/facts.json
+  fact_caching_connection: /opt/printnanny/ansible/facts.json
 
 ## janus vars
 janus_local_enabled: false
