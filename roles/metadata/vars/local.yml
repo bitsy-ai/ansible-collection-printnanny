@@ -3,3 +3,6 @@ printnanny_profile: local
 printnanny_api_url: http://aurora:8000
 ara_enabled: false
 janus_hostname: aurora
+
+janus_admin_secret_file: /opt/printnanny/profiles/local/janus/janus_admin_secret
+janus_token_file: /opt/printnanny/profiles/local/janus/janus_admin_secret
