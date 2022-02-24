@@ -7,6 +7,7 @@
     codename: focal
 
 - name: Install systemd-cron (allow uninstall cron)
+  become: true
   ansible.builtin.apt:
     update_cache: true
     install_recommends: true
@@ -16,6 +17,7 @@
     state: present
 
 - name: Install apt dependencies
+  become: true
   ansible.builtin.apt:
     name:
       # common
