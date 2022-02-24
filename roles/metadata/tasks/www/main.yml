@@ -1,5 +1,4 @@
 - name: Create set fact printnanny_www_secret_key
-  become: true
   ansible.builtin.set_fact:
     cacheable: true
     printnanny_www_secret_key: "{{ lookup('password', printnanny_www_secret_file + ' chars=hexdigits length=64') }}"
