@@ -8,7 +8,6 @@
     - metadata
 
 - name: Render Print Nanny Dashboard Rocket.toml
-  become: true
   ansible.builtin.template:
     mode: 0660
     src: www/Rocket.toml.j2
