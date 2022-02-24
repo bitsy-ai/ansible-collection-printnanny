@@ -19,6 +19,22 @@
 - import_tasks: env/main.yml
 - import_tasks: www/main.yml
 
+- name: Render config.toml
+  become: true
+  ansible.builtin.template:
+    src: config.toml.j2
+    dest: '{{ printnanny_config_toml }}'
+    mode: 0644
+    force: true
+    owner: '{{ printnanny_user }}'
+    group: '{{ printnanny_user }}'
+  notify:
+    - restart printnanny-dash
+    - restart printnanny-events
+  tags:
+    - secret
+    - metadata
+
 - name: Render printnanny-metadata.service template
   ansible.builtin.template:
     src: printnanny-metadata.service.j2
