@@ -1,16 +1,16 @@
-- name: Create printnanny-mqtt.service unit
+- name: Create printnanny-events.service unit
   become: true
   ansible.builtin.template:
     mode: 0664
     src: systemd/mqtt.service.j2
-    dest: /etc/systemd/system/printnanny-mqtt.service
+    dest: /etc/systemd/system/printnanny-events.service
     force: true
   notify:
-    - restart printnanny-mqtt
+    - restart printnanny-events
 
 - name: Enable mqtt service
   become: true
   ansible.builtin.systemd:
-    service: printnanny-mqtt
+    service: printnanny-events
     enabled: true
     no_block: true
