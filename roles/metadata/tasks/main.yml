@@ -36,6 +36,7 @@
     - metadata
 
 - name: Render printnanny-metadata.service template
+  become: true
   ansible.builtin.template:
     src: printnanny-metadata.service.j2
     dest: /etc/systemd/system/printnanny-metadata.service
@@ -45,6 +46,7 @@
     - metadata
 
 - name: Enable metadata service
+  become: true
   ansible.builtin.systemd:
     name: 'printnanny-metadata.service'
     enabled: true
