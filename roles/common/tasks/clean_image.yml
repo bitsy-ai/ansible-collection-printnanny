@@ -1,20 +1,34 @@
 - name: Remove dependencies that are no longer required
   ansible.builtin.apt:
     autoremove: true
+  tags:
+    - packer
+
 - name: Clean apt cache
   become: true
   ansible.builtin.command: apt clean
+  tags:
+    - packer
+
 - name: Remove package lists
   become: true
   ansible.builtin.shell: rm -rf /var/lib/apt/lists/*
+  tags:
+    - packer
+
 - name: Ensure machine-id uninitialized
   become: true
   ansible.builtin.copy:
     content: "uninitialized\n"
     mode: '0444'
     dest: /etc/machine-id
+  tags:
+    - packer
+
 - name: Remove dbus machine-id
   become: true
   ansible.builtin.file:
     state: absent
     path: /var/lib/dbus/machine-id
+  tags:
+    - packer
