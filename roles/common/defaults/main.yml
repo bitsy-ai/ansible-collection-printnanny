@@ -2,10 +2,13 @@
 # defaults file for setup role
 users: []
 sudoers_files:
-  - content: "%wheel  ALL=(ALL)  ALL"
-    file: "/etc/sudoers.d/00-wheel.conf"
-  - content: "printnanny ALL=(ALL) NOPASSWD: ALL"
-    file: "/etc/sudoers.d/00-printnanny.conf"
+  - content: |
+      %wheel  ALL=(ALL)  ALL
+    file: /etc/sudoers.d/010-wheel
+  - content: |
+      printnanny ALL=(ALL) NOPASSWD: ALL
+
+    file: /etc/sudoers.d/010-printnanny
 
 rpi_update_firmware: false
 rpi_firmware_version: 992de83e0ea01a9765196349abb386c5c8ea8944

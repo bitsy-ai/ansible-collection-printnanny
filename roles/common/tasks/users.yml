@@ -29,5 +29,5 @@
     dest: "{{ item.file }}"
     content: "{{ item.content }}"
     validate: visudo -cf %s
-    mode: "0644"
+    mode: 0440
   with_items: "{{ sudoers_files }}"
