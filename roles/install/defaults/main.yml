@@ -136,7 +136,7 @@ gstreamer_rtp_host: "127.0.0.1"
 
 nn_threshold: 50
 nn_rtp_port: 5105
-nn_rtp_service: printnanny-gst
+nn_rtp_service: printnanny-monitor
 nn_capture_framerate: 30
 
 nn_tensor_height: 320
