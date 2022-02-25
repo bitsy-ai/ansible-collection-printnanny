@@ -164,5 +164,6 @@ honeycomb_api_key: '22ffab0ec6af32b2be565bc831555e44'
 ##
 # janus vars
 ##
-janus_api_domain: janus.print-nanny.com
-janus_rtp_port: 5105
+janus_api_domain: janus.beta.print-nanny.com
+janus_rtp_domain: rtp.beta.print-nanny.com
+janus_rtp_port: 5005
