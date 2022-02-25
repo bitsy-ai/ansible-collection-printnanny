@@ -10,8 +10,8 @@ echo "Stopping printnanny-dash.service"
 systemctl stop printnanny-dash.service
 echo "Stopping printnanny-events.service"
 systemctl stop printnanny-events.service
-echo "Stopping printnanny-gst.service"
-systemctl stop printnanny-gst.service
+echo "Stopping printnanny-monitor.service"
+systemctl stop printnanny-monitor.service
 
 {{ updater_venv }}/bin/ansible printnanny \
     -m ansible.builtin.set_fact -a "printnanny_profile=$1 cacheable=true"
@@ -20,5 +20,5 @@ systemctl stop printnanny-gst.service
 
 systemctl start printnanny-metadata
 systemctl start printnanny-dash
-systemctl start printnanny-gst
+systemctl start printnanny-monitor
 systemctl start printnanny-events

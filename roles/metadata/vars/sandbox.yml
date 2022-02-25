@@ -2,7 +2,8 @@
 printnanny_profile: sandbox
 printnanny_api_url: https://webapp.sandbox.print-nanny.com
 ara_api_server: https://ara.sandbox.print-nanny.com
-janus_hostname: janus.sandbox.print-nanny.com
-
+janus_api_domain: janus.sandbox.print-nanny.com
+janus_rtp_domain: rtp.sandbox.print-nanny.com
+janus_rtp_port: 5000
 janus_admin_secret_file: /opt/printnanny/profiles/sandbox/janus/janus_admin_secret
 janus_token_file: /opt/printnanny/profiles/sandbox/janus/janus_admin_secret

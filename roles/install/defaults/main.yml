@@ -46,7 +46,7 @@ printnanny_device_fact: /etc/ansible/facts.d/device.fact
 printnanny_license_fact: /etc/ansible/facts.d/license.fact
 printnanny_janus_fact: /etc/ansible/facts.d/janus.fact
 
-printnanny_cli_version: 0.16.6
+printnanny_cli_version: 0.16.7
 printnanny_cli_repo: 'https://github.com/bitsy-ai/printnanny-cli'
 printnanny_cli_url: '{{ printnanny_cli_repo }}/releases/download/v{{ printnanny_cli_version }}/printnanny-{{ ansible_architecture }}-unknown-linux-gnu.tar.gz'
 printnanny_www_templates_url: '{{ printnanny_cli_repo }}/releases/download/v{{ printnanny_cli_version }}/printnanny-www-templates.tar.gz'
@@ -136,7 +136,7 @@ gstreamer_rtp_host: "127.0.0.1"
 
 nn_threshold: 50
 nn_rtp_port: 5105
-nn_rtp_service: printnanny-gst
+nn_rtp_service: printnanny-monitor
 nn_capture_framerate: 30
 
 nn_tensor_height: 320
@@ -164,5 +164,6 @@ honeycomb_api_key: '22ffab0ec6af32b2be565bc831555e44'
 ##
 # janus vars
 ##
-janus_hostname: janus.print-nanny.com
-janus_rtp_port: 5105
+janus_api_domain: janus.beta.print-nanny.com
+janus_rtp_domain: rtp.beta.print-nanny.com
+janus_rtp_port: 5005

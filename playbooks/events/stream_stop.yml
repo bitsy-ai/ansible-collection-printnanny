@@ -11,5 +11,5 @@
   tasks:
     - name: Stop printnanny monitor
       ansible.builtin.systemd:
-        name: printnanny-gst
+        name: printnanny-monitor
         state: stopped

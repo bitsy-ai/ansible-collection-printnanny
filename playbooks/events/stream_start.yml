@@ -15,7 +15,8 @@
           - printnanny_event_json is defined
     - name: Parse printnanny_event_json
       ansible.builtin.set_fact:
-        printnanny_event: "{{ printnanny_event_json | from_json }}"
+        webrtc_stream_start_event: "{{ (printnanny_event_json | from_json).stream }}"
+        webrtc_stream: "{{ (printnanny_event_json | from_json).stream }}"
     - name: Debug parsed event_json
       ansible.builtin.debug:
         var: printnanny_event
@@ -23,3 +24,11 @@
       ansible.builtin.include_role:
         name: bitsyai.printnanny.install
         tasks_from: monitor
+      vars:
+        janus_api_domain: '{{ webrtc_stream.api_domain }}'
+        janus_rtp_domain: '{{ webrtc_stream.rtp_domain }}'
+        janus_rtp_port: '{{ webrtc_stream.rtp_port }}'
+    - name: Start monitor service
+      ansible.builtin.systemd:
+        name: printnanny-monitor
+        state: started
