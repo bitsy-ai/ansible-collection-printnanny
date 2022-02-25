@@ -23,4 +23,4 @@ gst-launch-1.0 libcamerasrc ! capsfilter caps=video/x-raw,width={{ gstreamer_vid
         ! v4l2convert \
         ! v4l2h264enc extra-controls="controls,repeat_sequence_header=1" \
         ! 'video/x-h264,width={{ gstreamer_video_w }},height={{ gstreamer_video_h }},level=(string)4' \
-        ! h264parse ! rtph264pay ! udpsink host={{ janus_rpt_domain }} port={{ janus_rtp_port }}
+        ! h264parse ! rtph264pay ! udpsink host={{ janus_rtp_domain }} port={{ janus_rtp_port }}
