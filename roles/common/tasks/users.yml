@@ -45,7 +45,7 @@
 - name: Configure {{ update_user }} user
   become: true
   ansible.builtin.user:
-    name: "{{ update_name }}"
+    name: "{{ update_user }}"
     state: present
     shell: /bin/bash
     comment: "Ansible service user"
