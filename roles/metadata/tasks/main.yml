@@ -20,7 +20,6 @@
 - import_tasks: www/main.yml
 
 - name: Render config.toml
-  become: true
   ansible.builtin.template:
     src: config.toml.j2
     dest: '{{ printnanny_config_toml }}'
