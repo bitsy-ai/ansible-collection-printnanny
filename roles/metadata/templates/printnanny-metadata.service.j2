@@ -6,6 +6,7 @@ Wants=network.service network-online.target ansible-collection.service
 
 [Service]
 Type=oneshot
+User={{ printnanny_user }}
 SyslogIdentifier=printnanny-metadata
 RuntimeDirectory={{ printnanny_user }}
 RuntimeDirectoryPreserve=yes
