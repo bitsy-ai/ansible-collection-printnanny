@@ -4,7 +4,7 @@
 # Remote Janus gateway
 ##
 janus_remote_enabled: true
-janus_hostname: janus.print-nanny.com
+janus_api_domain: janus.print-nanny.com
 
 ##
 # Local Janus Installation
