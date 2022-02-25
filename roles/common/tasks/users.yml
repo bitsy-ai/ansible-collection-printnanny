@@ -59,6 +59,6 @@
     src: sudoers.d/
     dest: /etc/sudoers.d/
     force: true
-    check: visudo -c
+    validate: visudo -c
   tags:
     - setup
