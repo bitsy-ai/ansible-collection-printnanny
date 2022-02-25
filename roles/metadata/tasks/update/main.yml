@@ -87,11 +87,12 @@
 - name: Enable ansible-collection unit
   become: true
   ansible.builtin.systemd:
-    name: ansible-collection.service
+    name: ansible-collection
     enabled: true
     no_block: true
   tags:
     - metadata
+
 - name: Create printnanny-update service
   become: true
   ansible.builtin.template:
