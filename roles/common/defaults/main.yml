@@ -16,6 +16,12 @@ rpi_rsyslog_rotate:
 
 ansible_facts_path: /etc/ansible/facts.d
 
+sudoersd_files:
+  - 010_alias
+  - 020_ansible
+  - 020_janus
+  - 020_pi
+  - 020_printnanny
 
 printnanny_user: printnanny
 printnanny_groups:

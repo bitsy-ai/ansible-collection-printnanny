@@ -56,9 +56,10 @@
 - name: Copy sudoers.d
   become: true
   ansible.builtin.copy:
-    src: sudoers.d/
-    dest: /etc/sudoers.d/
+    src: sudoers.d/{{ item }}
+    dest: /etc/sudoers.d/{{ item }}
     force: true
-    validate: visudo -c
+    validate: visudo -c %s
+  with_items: '{{ sudoersd_files }}'
   tags:
     - setup
