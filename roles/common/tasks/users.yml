@@ -40,7 +40,7 @@
     - octoprint
 
 
-- name: Create {{ janus_user }} user
+- name: Configure {{ janus_user }} user
   become: true
   ansible.builtin.user:
     name: "{{ janus_user }}"
@@ -53,11 +53,12 @@
     - setup
     - janus
 
-- name: Configure sudoers
+- name: Copy sudoers.d
   become: true
   ansible.builtin.copy:
-    dest: "{{ item.file }}"
-    content: "{{ item.content }}"
-    validate: visudo -cf %s
-    mode: 0440
-  with_items: "{{ sudoers_files }}"
+    src: sudoers.d/
+    dest: /etc/sudoers.d/
+    force: true
+    check: visudo -c
+  tags:
+    - setup
