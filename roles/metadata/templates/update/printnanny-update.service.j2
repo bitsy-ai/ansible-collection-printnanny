@@ -5,7 +5,6 @@ After=network.target network-online.target ansible-collection.service printnanny
 Wants=network.target network-online.target ansible-collection.service printnanny-metadata.target
 
 [Service]
-User={{ printnanny_user }}
 SyslogIdentifier=printnanny-update
 Type=oneshot
 {% for playbook in updater_playbooks %}

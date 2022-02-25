@@ -1,6 +1,7 @@
 # {{ ansible_managed }}
 {% if ara_plugin_setup.stdout is defined %}
 {{ ara_plugin_setup.stdout }}
+ansible_user={{ updater_user }}
 ansible_connection=local
 ansible_python_intepreter={{updater_venv}}/bin/python3
 collections_paths={{ printnanny_ansible_dir }}/collections:~/.ansible/collections:/usr/share/ansible/collections
@@ -21,6 +22,7 @@ argument_labels = {{ ara_argument_labels }}
 
 {% else %}
 [defaults]
+ansible_user={{ updater_user }}
 ansible_connection=local
 ansible_python_intepreter={{updater_venv}}/bin/python3
 collections_paths={{ printnanny_ansible_dir }}/collections:~/.ansible/collections:/usr/share/ansible/collections
