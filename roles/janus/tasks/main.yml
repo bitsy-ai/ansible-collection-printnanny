@@ -1,14 +1,4 @@
 ---
-- name: Create janus user
-  become: true
-  ansible.builtin.user:
-    name: '{{ janus_user }}'
-    shell: /bin/bash
-    groups: '{{ janus_groups }}'
-    append: true
-  tags:
-    - metadata
-
 - name: Stat janus binary
   ansible.builtin.stat:
     path: /opt/janus/bin/janus

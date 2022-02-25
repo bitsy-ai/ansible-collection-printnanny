@@ -1,14 +1,4 @@
 ---
-# metadata available to tasks beyond this point
-- name: 'Configure {{ printnanny_user }} user'
-  become: true
-  ansible.builtin.user:
-    name: '{{ printnanny_user }}'
-    groups: '{{ printnanny_groups }}'
-    append: true
-  tags:
-    - metadata
-
 - name: 'Configure {{ printnanny_profile_dir }}'
   become: true
   ansible.builtin.file:
@@ -20,25 +10,6 @@
   tags:
     - metadata
 
-- name: 'Configure {{ printnanny_user }} groups'
-  become: true
-  ignore_errors: true
-  ansible.builtin.user:
-    name: '{{ printnanny_user }}'
-    groups:
-      - adm
-      - dialout
-      - gpio
-      - i2c
-      - input
-      - netdev
-      - plugdev
-      - spi
-      - sudo
-      - tty
-      - video
-  tags:
-    - metadata
 - import_tasks: boot_config.yml
 - import_tasks: apt.yml
 - import_tasks: nginx.yml
