@@ -10,8 +10,6 @@ Documentation for the collection.
 
 ## `bitsyai.printnanny.metadata`
 
-## `bitsyai.printnanny.nebula`
-
 ## `bitsyai.printnanny.octoprint`
 
 ## `bitsyai.printnanny.install`
