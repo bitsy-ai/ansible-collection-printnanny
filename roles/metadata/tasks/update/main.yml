@@ -84,15 +84,6 @@
   tags:
     - metadata
 
-- name: Enable ansible-collection unit
-  become: true
-  ansible.builtin.systemd:
-    name: ansible-collection
-    enabled: true
-    no_block: true
-  tags:
-    - metadata
-
 - name: Create printnanny-update service
   become: true
   ansible.builtin.template:
@@ -102,17 +93,6 @@
     force: true
   tags:
     - metadata
-
-- name: Configure printnanny-update.service
-  become: true
-  ansible.builtin.systemd:
-    name: 'printnanny-update'
-    enabled: false
-    no_block: true
-  tags:
-    - metadata
-  notify:
-    - restart printnanny-update
 
 - name: Create ansible pull hosts
   become: true
@@ -167,3 +147,24 @@
     mode: 0775
   tags:
     - metadata
+
+- name: Enable ansible-collection unit
+  become: true
+  ansible.builtin.systemd:
+    name: ansible-collection
+    enabled: true
+    no_block: true
+  tags:
+    - metadata
+
+
+- name: Configure printnanny-update.service
+  become: true
+  ansible.builtin.systemd:
+    name: 'printnanny-update'
+    enabled: false
+    no_block: true
+  tags:
+    - metadata
+  notify:
+    - restart printnanny-update
