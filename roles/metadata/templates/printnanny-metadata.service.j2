@@ -1,8 +1,8 @@
 # {{ ansible_managed }}
 [Unit]
 Description=Print Nanny Metadata Service
-After=network.target network-online.target ansible-collection.service
-Wants=network.service network-online.target ansible-collection.service
+After=network.target network-online.target
+Wants=network.service network-online.target
 
 [Service]
 Type=oneshot
@@ -10,8 +10,12 @@ SyslogIdentifier=printnanny-metadata
 RuntimeDirectory={{ printnanny_user }}
 RuntimeDirectoryPreserve=yes
 ConfigurationDirectory={{ printnanny_user }}
-ExecStart=/usr/bin/flock -F {{ ansible_lockfile }} \
-    {{ updater_venv }}/bin/ansible-playbook \
+ExecStartPre=/usr/bin/flock {{ ansible_lockfile }}
+ExecStartPre={{ updater_venv }}/bin/ansible-galaxy \
+    collection install --upgrade {{ updater_collection_url }} \
+    --collections-path {{ printnanny_ansible_dir }}/collections
+
+ExecStart={{ updater_venv }}/bin/ansible-playbook \
     {% if printnanny_loglevel == 'info' %}
     -vv \
     {% elif printnanny_loglevel == 'debug' %}
@@ -20,8 +24,7 @@ ExecStart=/usr/bin/flock -F {{ ansible_lockfile }} \
     -v \
     {% endif %}
     bitsyai.printnanny.metadata --tags metadata
-ExecStartPost=-/usr/bin/flock -F {{ ansible_lockfile }} \
-    /usr/bin/rm {{ ansible_lockfile }}
+ExecStartPost=-/usr/bin/flock -u {{ ansible_lockfile }}
 RemainAfterExit=yes
 
 [Install]
