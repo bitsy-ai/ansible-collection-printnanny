@@ -4,7 +4,7 @@
 ansible_user={{ update_user }}
 ansible_connection=local
 ansible_python_intepreter={{updater_venv}}/bin/python3
-collections_paths={{ printnanny_ansible_dir }}/collections:~/.ansible/collections:/usr/share/ansible/collections
+collections_paths={{ printnanny_ansible_dir }}:~/.ansible/collections:/usr/share/ansible/collections
 fact_caching_connection={{ ansible_config.fact_caching_connection }}
 fact_caching_timeout={{ ansible_config.fact_caching_timeout }}
 fact_caching={{ ansible_config.fact_caching }}
@@ -25,7 +25,7 @@ argument_labels = {{ ara_argument_labels }}
 ansible_user={{ update_user }}
 ansible_connection=local
 ansible_python_intepreter={{updater_venv}}/bin/python3
-collections_paths={{ printnanny_ansible_dir }}/collections:~/.ansible/collections:/usr/share/ansible/collections
+collections_paths={{ printnanny_ansible_dir }}:~/.ansible/collections:/usr/share/ansible/collections
 fact_caching_connection={{ ansible_config.fact_caching_connection }}
 fact_caching_timeout={{ ansible_config.fact_caching_timeout }}
 fact_caching={{ ansible_config.fact_caching }}

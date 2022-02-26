@@ -4,8 +4,9 @@ runtime_dir = "{{ printnanny_runtime_dir }}"
 events_socket = "{{ printnanny_runtime_dir }}/events.sock"
 
 [ansible]
-venv = "{{ printnanny_ansible_dir }}/venv"
-
+venv_dir = "{{ printnanny_ansible_dir }}/venv"
+collection_name = "bitsyai.printnanny"
+collection_version = "{{ lookup('file', '{{ printnanny_ansible_dir }}/ansible_collections/bitsyai/printnanny/version.txt') }}"
 [api]
 base_path = "{{ printnanny_api_url }}"
 
