@@ -59,7 +59,7 @@
     src: sudoers.d/{{ item }}
     dest: /etc/sudoers.d/{{ item }}
     force: true
-    validate: visudo -c %s
+    validate: visudo -cf %s
     owner: root
     group: root
     mode: 0640
