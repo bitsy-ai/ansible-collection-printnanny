@@ -3,7 +3,7 @@
 # updater_ vars
 ##
 
-printnanny_collection_version: 1.4.1
+printnanny_collection_version: 1.4.2
 printnanny_edition: octoprint_desktop
 updater_app_name: printnanny
 updater_playbooks:
