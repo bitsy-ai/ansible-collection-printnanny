@@ -7,4 +7,4 @@ Cmnd_Alias OCTOPRINT_SERVICES = /usr/bin/systemctl start octoprint*,/usr/bin/sys
 # alias all nginx commands
 Cmnd_Alias WEB_SERVICES = /usr/bin/systemctl start nginx*,/usr/bin/systemctl stop nginx*,/usr/bin/systemctl restart nginx*
 # generic system admin commands
-Cmnd_Alias REBOOT = /usr/sbin/reboot*
+Cmnd_Alias REBOOT = /usr/sbin/reboot
