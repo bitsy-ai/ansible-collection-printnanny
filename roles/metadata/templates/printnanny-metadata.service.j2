@@ -26,7 +26,8 @@ ExecStart=/usr/bin/flock -F {{ ansible_lockfile }} \
     -v \
     {% endif %}
     bitsyai.printnanny.metadata
-
+ExecStartPost=-/usr/bin/flock -F {{ ansible_lockfile }} \
+    /usr/bin/rm {{ ansible_lockfile }}
 RemainAfterExit=yes
 
 [Install]
