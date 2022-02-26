@@ -2,7 +2,7 @@
 [Unit]
 Description=Update Ansible Collection {{ updater_collection_url }}
 After=network.target network-online.target
-Wants=network.service network-online.target
+Wants=network.target network-online.target
 
 [Service]
 SyslogIdentifier=ansible-collection
