@@ -11,7 +11,7 @@ updater_playbooks:
 printnanny_release_channel: 'main'
 updater_collection_url: 'git+https://github.com/bitsy-ai/ansible-collection-printnanny.git,{{ printnanny_release_channel }}'
 
-updater_user: ansible
+update_user: ansible
 updater_venv: '{{ printnanny_ansible_dir }}/venv'
 
 jinja2_version: 'jinja2>=2.11'
