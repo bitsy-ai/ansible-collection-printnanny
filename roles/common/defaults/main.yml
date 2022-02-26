@@ -25,6 +25,7 @@ sudoersd_files:
 
 printnanny_user: printnanny
 printnanny_groups:
+  - adm
   - dialout
   - gpio
   - i2c
@@ -38,11 +39,13 @@ printnanny_groups:
 
 update_user: ansible
 update_groups:
+  - adm
   - sudo
   - printnanny
 
 octoprint_user: pi
 octoprint_groups:
+  - adm
   - dialout
   - gpio
   - i2c
@@ -55,4 +58,5 @@ octoprint_groups:
 
 janus_user: janus
 janus_groups:
+  - adm
   - ssl-cert
