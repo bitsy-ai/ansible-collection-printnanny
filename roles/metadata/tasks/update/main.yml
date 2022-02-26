@@ -14,11 +14,12 @@
     path: '{{ printnanny_ansible_dir }}/collections'
     state: directory
     mode: 0755
-    owner: '{{ printnanny_user }}'
-    group: '{{ printnanny_group }}'
+    owner: '{{ update_user }}'
+    group: '{{ update_user }}'
   tags:
     - setup
     - metadata
+
 - name: 'Update ansible virtualenv pip, setuptools'
   ansible.builtin.pip:
     name:
@@ -74,24 +75,6 @@
   tags:
     - metadata
 
-- name: Create ansible-collection service
-  become: true
-  ansible.builtin.template:
-    mode: 0644
-    src: update/ansible-collection.service.j2
-    dest: /etc/systemd/system/ansible-collection.service
-    force: true
-  tags:
-    - metadata
-
-- name: Enable ansible-collection unit
-  become: true
-  ansible.builtin.systemd:
-    name: ansible-collection.service
-    enabled: true
-    no_block: true
-  tags:
-    - metadata
 - name: Create printnanny-update service
   become: true
   ansible.builtin.template:
@@ -101,17 +84,6 @@
     force: true
   tags:
     - metadata
-
-- name: Configure printnanny-update.service
-  become: true
-  ansible.builtin.systemd:
-    name: 'printnanny-update'
-    enabled: false
-    no_block: true
-  tags:
-    - metadata
-  notify:
-    - restart printnanny-update
 
 - name: Create ansible pull hosts
   become: true
@@ -166,3 +138,14 @@
     mode: 0775
   tags:
     - metadata
+
+- name: Configure printnanny-update.service
+  become: true
+  ansible.builtin.systemd:
+    name: 'printnanny-update'
+    enabled: false
+    no_block: true
+  tags:
+    - metadata
+  notify:
+    - restart printnanny-update

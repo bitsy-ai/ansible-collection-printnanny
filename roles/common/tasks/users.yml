@@ -1,34 +1,65 @@
 ---
-# tasks file for users
-- name: Create users and groups
-  ansible.builtin.user:
-    name: "{{ item.name }}"
-    groups: "{{ item.groups }}"
-    state: present
-  loop: "{{ users }}"
-  become: true
-  tags:
-    - metadata
-- name: Add authorized keys
-  become: true
-  ansible.posix.authorized_key:
-    user: "{{ item.name }}"
-    key: "{{ item.authorized_key }}"
-    exclusive: true
-  loop: "{{ users }}"
-  tags:
-    - metadata
 - name: Install sudo pkg
   become: true
   ansible.builtin.apt:
     name:
       - sudo
 
-- name: Configure sudoers
+- name: 'Configure {{ printnanny_user }} user'
+  become: true
+  ansible.builtin.user:
+    state: present
+    shell: /bin/bash
+    comment: "PrintNanny service user"
+    name: '{{ printnanny_user }}'
+    groups: '{{ printnanny_groups }}'
+    append: true
+  tags:
+    - setup
+
+- name: Create {{ octoprint_user }} user
+  become: true
+  ansible.builtin.user:
+    name: "{{ octoprint_user }}"
+    state: present
+    shell: /bin/bash
+    comment: "OctoPrint service user"
+    groups: "{{ octoprint_groups }}"
+  tags:
+    - setup
+    - octoprint
+
+
+- name: Configure {{ janus_user }} user
+  become: true
+  ansible.builtin.user:
+    name: "{{ janus_user }}"
+    state: present
+    shell: /bin/bash
+    comment: "Janus WebRTC Gateway service user"
+    groups: "{{ janus_groups }}"
+  tags:
+    - setup
+    - janus
+
+- name: Configure {{ update_user }} user
+  become: true
+  ansible.builtin.user:
+    name: "{{ update_user }}"
+    state: present
+    shell: /bin/bash
+    comment: "Ansible service user"
+    groups: "{{ update_groups }}"
+  tags:
+    - setup
+
+- name: Copy sudoers.d
   become: true
   ansible.builtin.copy:
-    dest: "{{ item.file }}"
-    content: "{{ item.content }}"
-    validate: visudo -cf %s
-    mode: 0440
-  with_items: "{{ sudoers_files }}"
+    src: sudoers.d/{{ item }}
+    dest: /etc/sudoers.d/{{ item }}
+    force: true
+    validate: visudo -c %s
+  with_items: '{{ sudoersd_files }}'
+  tags:
+    - setup

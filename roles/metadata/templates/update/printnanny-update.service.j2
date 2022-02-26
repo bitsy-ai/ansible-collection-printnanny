@@ -1,16 +1,19 @@
 # {{ ansible_managed }}
 [Unit]
 Description=Print Nanny Update Service
-After=network.target network-online.target ansible-collection.service printnanny-metadata.target
-Wants=network.target network-online.target ansible-collection.service printnanny-metadata.target
+After=network.target network-online.target printnanny-metadata.target
+Wants=network.target network-online.target printnanny-metadata.target
 
 [Service]
-User={{ printnanny_user }}
 SyslogIdentifier=printnanny-update
 Type=oneshot
+
+
+ExecStartPre=/usr/bin/flock {{ ansible_lockfile }}
+ExecStartPre={{ updater_venv }}/bin/ansible-galaxy \
+    collection install --upgrade {{ updater_collection_url }}
 {% for playbook in updater_playbooks %}
-ExecStart=/usr/bin/flock -F {{ ansible_lockfile }} \
-    {{ updater_venv }}/bin/ansible-playbook \
+ExecStart={{ updater_venv }}/bin/ansible-playbook \
     {% if printnanny_loglevel == 'info' %}
     -vv \
     {% elif printnanny_loglevel == 'debug' %}
@@ -21,8 +24,7 @@ ExecStart=/usr/bin/flock -F {{ ansible_lockfile }} \
     --skip-tags "packer" \
     {{ playbook }}
 {% endfor %}
-ExecStartPost=-/usr/bin/flock -F {{ ansible_lockfile }} \
-    /usr/bin/rm {{ ansible_lockfile }}
+ExecStartPost=-/usr/bin/flock -u {{ ansible_lockfile }}
 
 [Install]
 WantedBy=multi-user.target

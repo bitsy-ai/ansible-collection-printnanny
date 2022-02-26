@@ -1,15 +1,5 @@
 ---
 # defaults file for setup role
-users: []
-sudoers_files:
-  - content: |
-      %wheel  ALL=(ALL)  ALL
-    file: /etc/sudoers.d/010-wheel
-  - content: |
-      printnanny ALL=(ALL) NOPASSWD: ALL
-
-    file: /etc/sudoers.d/010-printnanny
-
 rpi_update_firmware: false
 rpi_firmware_version: 992de83e0ea01a9765196349abb386c5c8ea8944
 
@@ -25,3 +15,44 @@ rpi_rsyslog_rotate:
   maxage: 14 # days
 
 ansible_facts_path: /etc/ansible/facts.d
+
+sudoersd_files:
+  - 010_alias
+  - 020_ansible
+  - 020_janus
+  - 020_pi
+  - 020_printnanny
+
+printnanny_user: printnanny
+printnanny_groups:
+  - dialout
+  - gpio
+  - i2c
+  - input
+  - netdev
+  - plugdev
+  - spi
+  - sudo
+  - tty
+  - video
+
+update_user: ansible
+update_groups:
+  - sudo
+  - printnanny
+
+octoprint_user: pi
+octoprint_groups:
+  - dialout
+  - gpio
+  - i2c
+  - input
+  - plugdev
+  - spi
+  - sudo
+  - tty
+  - video
+
+janus_user: janus
+janus_groups:
+  - ssl-cert
