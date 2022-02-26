@@ -6,6 +6,8 @@
     state: directory
     path: '{{ nn_install_dir }}'
     mode: 0775
+    owner: '{{ printnanny_user }}'
+    group: '{{ printnanny_user }}'
 
 - name: Download {{ nn_model_url }}
   become: true
