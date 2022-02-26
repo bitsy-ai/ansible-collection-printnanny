@@ -24,7 +24,8 @@ ExecStart=/usr/bin/flock --verbose -n {{ ansible_lockfile }} \
     {% else %}
     -v \
     {% endif %}
-    bitsyai.printnanny.metadata
+    bitsyai.printnanny.metadata \
+    --tags "metadata"
 RemainAfterExit=yes
 
 [Install]

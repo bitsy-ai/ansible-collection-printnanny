@@ -39,9 +39,9 @@ jobs:
             - group5
             - group6
             - group7
-          # include:
-          #   - group: group7
-          #     tags: metadata,testsetup
+          include:
+            - group: group7
+              tags: metadata,testsetup
       steps:
         - uses: actions/checkout@v2
           with:
