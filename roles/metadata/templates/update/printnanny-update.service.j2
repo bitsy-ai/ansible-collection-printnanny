@@ -14,7 +14,7 @@ ExecStartPre=/usr/bin/flock --verbose -n {{ ansible_lockfile }} \
 
 {% for playbook in updater_playbooks %}
 ExecStart=/usr/bin/flock --verbose -n {{ ansible_lockfile }} \
-    {{ updater_venv }}/bin/ansible-playbook
+    {{ updater_venv }}/bin/ansible-playbook \
     {% if printnanny_loglevel == 'info' %}
     -vv \
     {% elif printnanny_loglevel == 'debug' %}
