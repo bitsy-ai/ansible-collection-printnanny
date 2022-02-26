@@ -10,13 +10,12 @@ SyslogIdentifier=printnanny-metadata
 RuntimeDirectory={{ printnanny_user }}
 RuntimeDirectoryPreserve=yes
 ConfigurationDirectory={{ printnanny_user }}
-ExecStartPre=/usr/bin/flock -F {{ ansible_lockfile }} \
+ExecStartPre=/usr/bin/flock --verbose -n {{ ansible_lockfile }} \
     {{ updater_venv }}/bin/ansible-galaxy \
     collection install --upgrade {{ updater_collection_url }} \
     --collections-path {{ printnanny_ansible_dir }}/collections
 
-ExecStart=/usr/bin/flock -F {{ ansible_lockfile }} \
-    /usr/bin/flock -F {{ ansible_lockfile }} \
+ExecStart=/usr/bin/flock --verbose -n {{ ansible_lockfile }} \
     {{ updater_venv }}/bin/ansible-playbook \
     {% if printnanny_loglevel == 'info' %}
     -vv \
@@ -26,8 +25,6 @@ ExecStart=/usr/bin/flock -F {{ ansible_lockfile }} \
     -v \
     {% endif %}
     bitsyai.printnanny.metadata
-ExecStartPost=-/usr/bin/flock -F {{ ansible_lockfile }} \
-    /usr/bin/rm {{ ansible_lockfile }}
 RemainAfterExit=yes
 
 [Install]
