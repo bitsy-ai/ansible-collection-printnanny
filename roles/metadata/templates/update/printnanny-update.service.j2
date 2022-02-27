@@ -1,8 +1,8 @@
 # {{ ansible_managed }}
 [Unit]
 Description=Print Nanny Update Service
-After=network.target network-online.target printnanny-metadata.target
-Wants=network.target network-online.target printnanny-metadata.target
+After=network.target network-online.target printnanny-ansible-collection.service printnanny-metadata.target
+Wants=network.target network-online.target printnanny-ansible-collection.service printnanny-metadata.target
 
 [Service]
 SyslogIdentifier=printnanny-update

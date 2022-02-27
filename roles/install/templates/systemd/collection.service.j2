@@ -1,0 +1,18 @@
+[Unit]
+Description=Install PrintNanny Ansible Collection
+After=network.target network-online.target
+Wants=network.target network-online.target
+PartOf=printnanny.target
+
+[Service]
+Type=simple
+SyslogIdentifier=printnanny-ansible-collection
+ExecStart=/usr/bin/flock --verbose -n {{ ansible_lockfile }} \
+    {{ updater_venv }}/bin/ansible-galaxy \
+    collection install --upgrade {{ updater_collection_url }} \
+    --collections-path {{ printnanny_ansible_dir }}
+Restart=on-failure
+RestartSec=10
+RemainAfterExit=yes
+[Install]
+WantedBy=multi-user.target
