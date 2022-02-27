@@ -1,0 +1,10 @@
+[Unit]
+Description="Monitor {{ printnanny_cmd_pending_dir }} for remote commands"
+
+[Path]
+DirectoryNotEmpty={{ printnanny_cmd_pending_dir }} 
+Unit=printnanny-cmd.service
+MakeDirectory=true
+
+[Install]
+WantedBy=multi-user.target
