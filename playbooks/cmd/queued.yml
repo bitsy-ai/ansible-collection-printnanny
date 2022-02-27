@@ -13,13 +13,19 @@
       ansible.builtin.find:
         paths: '{{ printnanny_cmd_queue_dir }}'
       register: queued_cmds
-
+      tags:
+        - cmd
     - name: Debug event files
       ansible.builtin.debug:
         var: queued_cmds
-
+      tags:
+        - cmd
     - name: Handle {{ item }}
-      include_tasks: handle.yml
+      include_tasks:
+        file: handle.yml
+        apply:
+          tags:
+            - cmd
       vars:
         printnanny_cmdfile: '{{ item }}'
       with_items: queued_cmds.files
