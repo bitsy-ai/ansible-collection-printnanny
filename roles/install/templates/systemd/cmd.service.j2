@@ -21,7 +21,7 @@ ExecStart=/usr/bin/flock --verbose -n {{ ansible_lockfile }} \
     {% else %}
     -v \
     {% endif %}
-    bitsyai.printnanny.cmd \
+    bitsyai.printnanny.cmd.queued \
      --tags "cmd"
 Restart=on-failure
 RestartSec=10
