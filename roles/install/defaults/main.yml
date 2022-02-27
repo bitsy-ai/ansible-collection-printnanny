@@ -22,7 +22,14 @@ printnanny_env: '{{ printnanny_runtime_dir }}/env'
 printnanny_env_sh: '{{ printnanny_runtime_dir }}/env.sh'
 
 printnanny_install_dir: '/opt/printnanny'
+
 printnanny_profile_dir: '{{ printnanny_install_dir }}/profiles/{{ printnanny_profile }}'
+printnanny_cmd_dir: '{{ printnanny_runtime_dir }}/cmd'
+printnanny_cmd_queue_dir: '{{ printnanny_cmd_dir }}/queue'
+printnanny_cmd_success_dir: '{{ printnanny_cmd_dir }}/success'
+printnanny_cmd_error_dir: '{{ printnanny_cmd_dir }}/error'
+
+
 printnanny_cacerts: '{{ printnanny_profile_dir }}/ca-certificates'
 printnanny_data_dir: '{{ printnanny_profile_dir }}/data'
 printnanny_keys_dir: '{{ printnanny_profile_dir }}/keys'
@@ -33,6 +40,8 @@ printnanny_ec_fingerprint_md5: '{{ printnanny_keys_dir }}/ec_fingerprint.md5'
 printnanny_config_toml: '{{ printnanny_profile_dir }}/PrintNanny.toml'
 printnanny_backups_dir: "{{ printnanny_profile_dir }}/backups"
 printnanny_ansible_dir: "{{ printnanny_install_dir }}/ansible"
+updater_venv: '{{ printnanny_ansible_dir }}/venv'
+updater_collection_url: 'git+https://github.com/bitsy-ai/ansible-collection-printnanny.git,{{ printnanny_release_channel }}'
 
 printnanny_www_dir: '{{ printnanny_install_dir }}/www'
 printnanny_www_secret_file: '{{ printnanny_www_dir }}/key'
@@ -42,6 +51,7 @@ printnanny_www_port: 9001
 printnanny_www_log_level: "normal"
 
 ansible_facts_path: /etc/ansible/facts.d
+ansible_lockfile: '/var/run/printnanny/ansible.lock'
 printnanny_device_fact: /etc/ansible/facts.d/device.fact
 printnanny_license_fact: /etc/ansible/facts.d/license.fact
 printnanny_janus_fact: /etc/ansible/facts.d/janus.fact

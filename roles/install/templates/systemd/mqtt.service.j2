@@ -1,5 +1,5 @@
 [Unit]
-Description=Print Nanny MQTT Client
+Description=PrintNanny MQTT Client
 After=network.target network-online.target printnanny-metadata.service
 Wants=network.target network-online.target printnanny-metadata.service
 PartOf=printnanny.target
@@ -7,7 +7,7 @@ PartOf=printnanny.target
 
 [Service]
 Type=simple
-SyslogIdentifier=printnanny-events
+SyslogIdentifier=printnanny-mqtt
 RuntimeDirectory={{ printnanny_user }}
 RuntimeDirectoryPreserve=yes
 ConfigurationDirectory={{ printnanny_user }}

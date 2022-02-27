@@ -1,0 +1,32 @@
+[Unit]
+Description=PrintNanny Remote Command Handler
+After=network.target network-online.target printnanny-metadata.service
+Wants=network.target network-online.target printnanny-metadata.service
+PartOf=printnanny.target
+
+[Service]
+Type=simple
+SyslogIdentifier=printnanny-cmd
+RuntimeDirectory={{ printnanny_user }}
+RuntimeDirectoryPreserve=yes
+ConfigurationDirectory={{ printnanny_user }}
+EnvironmentFile=-{{ printnanny_env }}
+User={{ printnanny_user }}
+ExecStartPre=/usr/bin/flock --verbose -n {{ ansible_lockfile }} \
+    {{ updater_venv }}/bin/ansible-galaxy \
+    collection install --upgrade {{ updater_collection_url }} \
+    --collections-path {{ printnanny_ansible_dir }}
+ExecStart=/usr/bin/flock --verbose -n {{ ansible_lockfile }} \
+    {{ updater_venv }}/bin/ansible-playbook \
+    {% if printnanny_loglevel == 'info' %}
+    -vv \
+    {% elif printnanny_loglevel == 'debug' %}
+    -vvv \
+    {% else %}
+    -v \
+    {% endif %}
+    bitsyai.printnanny.cmd \
+     --tags "cmd"
+
+[Install]
+WantedBy=multi-user.target

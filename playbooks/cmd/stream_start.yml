@@ -1,0 +1,25 @@
+- hosts: printnanny
+  gather_facts: true
+  vars:
+    ara_playbook_name: 'printnanny cmd stream_start'
+    ara_playbook_labels:
+      - printnanny
+      - cmd
+      - stream_start
+  tasks:
+    - name: Assert printnanny_cmd is defined
+      ansible.builtin.assert:
+        that:
+          - printnanny_cmd is defined
+    - name: Run monitor tasks
+      ansible.builtin.include_role:
+        name: bitsyai.printnanny.install
+        tasks_from: monitor
+      vars:
+        janus_api_domain: '{{ printnanny_cmd.stream.api_domain }}'
+        janus_rtp_domain: '{{ printnanny_cmd.stream.rtp_domain }}'
+        janus_rtp_port: '{{ printnanny_cmd.stream.rtp_port }}'
+    - name: Start monitor service
+      ansible.builtin.systemd:
+        name: printnanny-monitor
+        state: started

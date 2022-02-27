@@ -29,7 +29,7 @@
     group: '{{ printnanny_user }}'
   notify:
     - restart printnanny-dash
-    - restart printnanny-events
+    - restart printnanny-mqtt
   tags:
     - secret
     - metadata

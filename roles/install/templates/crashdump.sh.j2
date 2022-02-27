@@ -9,6 +9,6 @@ journalctl -u printnanny-monitor.service > {{ printnanny_cam_log }}
 echo "Writing printnanny-monitor.service logs to {{ printnanny_www_log }}"
 journalctl -u printnanny-dash.service > {{ printnanny_www_log }}
 
-echo "Writing printnanny-events.service logs to {{ printnanny_www_log }}"
-journalctl -u printnanny-events.service > {{ printnanny_mqtt_log }}
+echo "Writing printnanny-mqtt.service logs to {{ printnanny_www_log }}"
+journalctl -u printnanny-mqtt.service > {{ printnanny_mqtt_log }}
 
