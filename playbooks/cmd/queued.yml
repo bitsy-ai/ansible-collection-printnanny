@@ -22,7 +22,7 @@
         - cmd
     - name: 'Handle {{ item.path }}'
       include_tasks:
-        file: handle.yml
+        file: wrapper.yml
         apply:
           tags:
             - cmd
