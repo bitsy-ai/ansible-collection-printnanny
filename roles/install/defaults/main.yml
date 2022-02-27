@@ -40,6 +40,7 @@ printnanny_ec_fingerprint_md5: '{{ printnanny_keys_dir }}/ec_fingerprint.md5'
 printnanny_config_toml: '{{ printnanny_profile_dir }}/PrintNanny.toml'
 printnanny_backups_dir: "{{ printnanny_profile_dir }}/backups"
 printnanny_ansible_dir: "{{ printnanny_install_dir }}/ansible"
+updater_venv: '{{ printnanny_ansible_dir }}/venv'
 
 printnanny_www_dir: '{{ printnanny_install_dir }}/www'
 printnanny_www_secret_file: '{{ printnanny_www_dir }}/key'
