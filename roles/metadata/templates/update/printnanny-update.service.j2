@@ -10,7 +10,7 @@ Type=oneshot
 ExecStartPre=/usr/bin/flock --verbose -n {{ ansible_lockfile }} \
     {{ updater_venv }}/bin/ansible-galaxy \
     collection install --upgrade {{ updater_collection_url }} \
-    --collections-path {{ printnanny_ansible_dir }}/collections
+    --collections-path {{ printnanny_ansible_dir }}
 
 {% for playbook in updater_playbooks %}
 ExecStart=/usr/bin/flock --verbose -n {{ ansible_lockfile }} \
