@@ -27,6 +27,7 @@ ExecStart=/usr/bin/flock --verbose -n {{ ansible_lockfile }} \
     {% endif %}
     bitsyai.printnanny.cmd \
      --tags "cmd"
-
+Restart=on-failure
+RestartSec=10
 [Install]
 WantedBy=multi-user.target
