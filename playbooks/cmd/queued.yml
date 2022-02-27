@@ -20,14 +20,14 @@
         var: queued_cmds
       tags:
         - cmd
-    - name: 'Handle {{ item }}'
+    - name: 'Handle {{ item.path }}'
       include_tasks:
         file: handle.yml
         apply:
           tags:
             - cmd
       vars:
-        printnanny_cmdfile: '{{ item }}'
+        printnanny_cmdfile: '{{ item.path }}'
       with_items: '{{ queued_cmds.files }}'
       tags:
         - cmd
