@@ -1,0 +1,9 @@
+- name: Read '{{ printnanny_cmdfile }}'
+  ansible.builtin.include_vars:
+    file: '{{ printnanny_cmdfile }}'
+    name: printnanny_cmd
+- name: Debug printnanny_cmd
+  ansible.builtin.debug:
+    var: printnanny_cmd
+- name: include {{ printnanny_cmd.event_name }} tasks
+  include_tasks: '{{ printnanny_cmd.event_name }}.yml'

@@ -1,0 +1,25 @@
+---
+- hosts: printnanny
+  gather_facts: true
+  vars:
+    ara_playbook_name: 'run printnanny queued cmds'
+    ara_playbook_labels:
+      - printnanny
+      - cmd
+  roles:
+    - bitsyai.printnanny.install
+  tasks:
+    - name: List event files waiting to be processed
+      ansible.builtin.find:
+        paths: '{{ printnanny_cmd_queue_dir }}'
+      register: queued_cmds
+
+    - name: Debug event files
+      ansible.builtin.debug:
+        var: queued_cmds
+
+    - name: Handle {{ item }}
+      include_tasks: handle.yml
+      vars:
+        printnanny_cmdfile: '{{ item }}'
+      with_items: queued_cmds.files
