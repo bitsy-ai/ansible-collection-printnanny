@@ -59,3 +59,10 @@
     name: nginx
     state: reloaded
     no_block: true
+
+- name: restart printnanny.target
+  become: true
+  ansible.builtin.systemd:
+    name: printnanny.target
+    state: restarted
+    no_block: true
