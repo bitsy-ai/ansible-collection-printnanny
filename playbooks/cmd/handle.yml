@@ -7,3 +7,18 @@
     var: printnanny_cmd
 - name: include {{ printnanny_cmd.event_name }} tasks
   include_tasks: '{{ printnanny_cmd.event_name }}.yml'
+
+- name: Move {{ printnanny_cmdfile }} to done
+  become: true
+  ansible.builtin.copy:
+    remote_src: true
+    src: '{{ printnanny_cmdfile }}'
+    dest: '{{ printnanny_cmd_done_dir}}/{{ printnanny_cmdfile | basename }}'
+    owner: '{{ printnanny_user }}'
+    group: '{{ printnanny_user }}'
+
+- name: Delete {{ printnanny_cmdfile }}
+  become: true
+  ansible.builtin.file:
+    state: abscent
+    path: '{{ printnanny_cmdfile }}'
