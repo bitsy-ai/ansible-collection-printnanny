@@ -24,8 +24,8 @@ printnanny_env_sh: '{{ printnanny_runtime_dir }}/env.sh'
 printnanny_install_dir: '/opt/printnanny'
 printnanny_profile_dir: '{{ printnanny_install_dir }}/profiles/{{ printnanny_profile }}'
 printnanny_cmd_dir: '{{ printnanny_install_dir }}/cmd'
-printnanny_cmd_pending_dir: '{{ printnanny_cmd_dir }}/pending'
-printnanny_cmd_done_dir: '{{ printnanny_cmd_dir }}/done'
+printnanny_cmd_queue_dir: '{{ printnanny_cmd_dir }}/queue'
+printnanny_cmd_success_dir: '{{ printnanny_cmd_dir }}/success'
 printnanny_cmd_error_dir: '{{ printnanny_cmd_dir }}/error'
 
 

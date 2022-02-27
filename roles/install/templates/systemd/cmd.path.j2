@@ -1,8 +1,8 @@
 [Unit]
-Description="Monitor {{ printnanny_cmd_pending_dir }} for remote commands"
+Description="Monitor {{ printnanny_cmd_queue_dir }} for remote commands"
 
 [Path]
-DirectoryNotEmpty={{ printnanny_cmd_pending_dir }} 
+DirectoryNotEmpty={{ printnanny_cmd_queue_dir }} 
 Unit=printnanny-cmd.service
 MakeDirectory=true
 
