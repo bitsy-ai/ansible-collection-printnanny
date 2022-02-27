@@ -14,6 +14,8 @@
   when: installed_version.stdout != printnanny_cli_version
   tags:
     - auto_update
+  notify:
+    - restart printnanny.target
 
 - name: Create a symlink for printnanny-cli
   become: true
