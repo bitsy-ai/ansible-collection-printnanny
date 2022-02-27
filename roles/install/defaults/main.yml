@@ -22,8 +22,9 @@ printnanny_env: '{{ printnanny_runtime_dir }}/env'
 printnanny_env_sh: '{{ printnanny_runtime_dir }}/env.sh'
 
 printnanny_install_dir: '/opt/printnanny'
+
 printnanny_profile_dir: '{{ printnanny_install_dir }}/profiles/{{ printnanny_profile }}'
-printnanny_cmd_dir: '{{ printnanny_install_dir }}/cmd'
+printnanny_cmd_dir: '{{ printnanny_runtime_dir }}/cmd'
 printnanny_cmd_queue_dir: '{{ printnanny_cmd_dir }}/queue'
 printnanny_cmd_success_dir: '{{ printnanny_cmd_dir }}/success'
 printnanny_cmd_error_dir: '{{ printnanny_cmd_dir }}/error'
@@ -48,6 +49,7 @@ printnanny_www_port: 9001
 printnanny_www_log_level: "normal"
 
 ansible_facts_path: /etc/ansible/facts.d
+ansible_lockfile: '/var/run/printnanny/ansible.lock'
 printnanny_device_fact: /etc/ansible/facts.d/device.fact
 printnanny_license_fact: /etc/ansible/facts.d/license.fact
 printnanny_janus_fact: /etc/ansible/facts.d/janus.fact
