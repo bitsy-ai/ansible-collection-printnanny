@@ -8,10 +8,22 @@
     - setup
     - metadata
 
-- name: Create {{ printnanny_ansible_dir }}/collections
+- name: Create {{ printnanny_ansible_dir }}
   become: true
   ansible.builtin.file:
-    path: '{{ printnanny_ansible_dir }}/collections'
+    path: '{{ printnanny_ansible_dir }}'
+    state: directory
+    mode: 0755
+    owner: '{{ update_user }}'
+    group: '{{ update_user }}'
+  tags:
+    - setup
+    - metadata
+
+- name: Create {{ printnanny_ansible_dir }}/facts.json/
+  become: true
+  ansible.builtin.file:
+    path: '{{ printnanny_ansible_dir }}/facts.json/'
     state: directory
     mode: 0755
     owner: '{{ update_user }}'
