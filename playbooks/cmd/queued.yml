@@ -29,3 +29,5 @@
       vars:
         printnanny_cmdfile: '{{ item }}'
       with_items: queued_cmds.files
+      tags:
+        - cmd
