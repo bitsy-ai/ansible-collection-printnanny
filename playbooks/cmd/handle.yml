@@ -2,12 +2,19 @@
   ansible.builtin.include_vars:
     file: '{{ printnanny_cmdfile }}'
     name: printnanny_cmd
+  tags:
+    - cmd
 - name: Debug printnanny_cmd
   ansible.builtin.debug:
     var: printnanny_cmd
+  tags:
+    - cmd
 - name: include {{ printnanny_cmd.event_name }} tasks
-  include_tasks: '{{ printnanny_cmd.event_name }}.yml'
-
+  include_tasks: 
+    file: '{{ printnanny_cmd.event_name }}.yml'
+    apply:
+      tags:
+        - cmd
 - name: Move {{ printnanny_cmdfile }} to done
   become: true
   ansible.builtin.copy:
@@ -16,9 +23,12 @@
     dest: '{{ printnanny_cmd_done_dir}}/{{ printnanny_cmdfile | basename }}'
     owner: '{{ printnanny_user }}'
     group: '{{ printnanny_user }}'
-
+  tags:
+    - cmd
 - name: Delete {{ printnanny_cmdfile }}
   become: true
   ansible.builtin.file:
     state: abscent
     path: '{{ printnanny_cmdfile }}'
+  tags:
+    - cmd
