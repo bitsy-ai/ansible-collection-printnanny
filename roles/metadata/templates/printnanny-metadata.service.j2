@@ -1,8 +1,8 @@
 # {{ ansible_managed }}
 [Unit]
 Description=Print Nanny Metadata Service
-After=network.target network-online.target
-Wants=network.service network-online.target
+After=network.target network-online.target printnanny-ansible-collection.service
+Wants=network.service network-online.target printnanny-ansible-collection.service
 
 [Service]
 Type=oneshot

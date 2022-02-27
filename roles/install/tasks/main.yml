@@ -23,6 +23,25 @@
     path: "{{ lookup('env','HOME') }}/.ansible_async"
     state: absent
 
+- name: Render printnanny-ansible-collection.service
+  become: true
+  ansible.builtin.template:
+    mode: 0644
+    src: systemd/collection.service.j2
+    dest: /etc/systemd/system/printnanny-ansible-collection.service
+    force: true
+  tags:
+    - metadata
+
+- name: Enable printnanny-ansible-collection.service
+  become: true
+  ansible.builtin.systemd:
+    enabled: true
+    name: printnanny-ansible-collection.service
+    no_block: true
+  tags:
+    - metadata
+
 - name: Render printnanny-cmd.service
   become: true
   ansible.builtin.template:
