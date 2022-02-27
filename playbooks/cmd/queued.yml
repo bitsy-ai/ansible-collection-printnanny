@@ -20,7 +20,7 @@
         var: queued_cmds
       tags:
         - cmd
-    - name: Handle {{ item }}
+    - name: 'Handle {{ item }}'
       include_tasks:
         file: handle.yml
         apply:
@@ -28,6 +28,6 @@
             - cmd
       vars:
         printnanny_cmdfile: '{{ item }}'
-      with_items: queued_cmds.files
+      with_items: '{{ queued_cmds.files }}'
       tags:
         - cmd
