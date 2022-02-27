@@ -7,11 +7,6 @@ Wants=network.target network-online.target printnanny-ansible-collection.service
 [Service]
 SyslogIdentifier=printnanny-update
 Type=oneshot
-ExecStartPre=/usr/bin/flock --verbose -n {{ ansible_lockfile }} \
-    {{ updater_venv }}/bin/ansible-galaxy \
-    collection install --upgrade {{ updater_collection_url }} \
-    --collections-path {{ printnanny_ansible_dir }}
-
 {% for playbook in updater_playbooks %}
 ExecStart=/usr/bin/flock --verbose -n {{ ansible_lockfile }} \
     {{ updater_venv }}/bin/ansible-playbook \
