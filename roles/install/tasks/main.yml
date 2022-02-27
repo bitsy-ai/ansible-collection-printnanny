@@ -43,6 +43,25 @@
   tags:
     - metadata
 
+- name: Enable printnanny-cmd.service
+  become: true
+  ansible.builtin.systemd:
+    enabled: true
+    name: printnanny-cmd.service
+    no_block: true
+  tags:
+    - metadata
+
+- name: Enable printnanny-cmd.path
+  become: true
+  ansible.builtin.systemd:
+    enabled: true
+    name: printnanny-cmd.path
+    no_block: true
+  tags:
+    - metadata
+
+
 - name: Render printnanny.target
   become: true
   ansible.builtin.template:
