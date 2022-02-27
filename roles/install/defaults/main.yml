@@ -41,6 +41,7 @@ printnanny_config_toml: '{{ printnanny_profile_dir }}/PrintNanny.toml'
 printnanny_backups_dir: "{{ printnanny_profile_dir }}/backups"
 printnanny_ansible_dir: "{{ printnanny_install_dir }}/ansible"
 updater_venv: '{{ printnanny_ansible_dir }}/venv'
+updater_collection_url: 'git+https://github.com/bitsy-ai/ansible-collection-printnanny.git,{{ printnanny_release_channel }}'
 
 printnanny_www_dir: '{{ printnanny_install_dir }}/www'
 printnanny_www_secret_file: '{{ printnanny_www_dir }}/key'
