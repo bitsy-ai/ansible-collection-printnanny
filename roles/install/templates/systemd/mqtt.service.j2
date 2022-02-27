@@ -8,6 +8,9 @@ PartOf=printnanny.target
 [Service]
 Type=simple
 SyslogIdentifier=printnanny-events
+RuntimeDirectory={{ printnanny_user }}
+RuntimeDirectoryPreserve=yes
+ConfigurationDirectory={{ printnanny_user }}
 EnvironmentFile=-{{ printnanny_env }}
 ExecStart=/usr/local/bin/printnanny -v event subscribe
 User={{ printnanny_user }}
