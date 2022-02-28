@@ -107,30 +107,3 @@
     src: crashdump.sh.j2
     dest: /usr/local/bin/printnanny-crashdump
     mode: 0755
-
-- name: Create cmd queue dir
-  become: true
-  ansible.builtin.file:
-    path: '{{ printnanny_cmd_queue_dir }}'
-    state: directory
-    mode: 0755
-    owner: '{{ printnanny_user }}'
-    group: '{{ printnanny_group }}'
-
-- name: Create cmd success dir
-  become: true
-  ansible.builtin.file:
-    path: '{{ printnanny_cmd_success_dir }}'
-    state: directory
-    mode: 0755
-    owner: '{{ printnanny_user }}'
-    group: '{{ printnanny_group }}'
-
-- name: Create cmd error dir
-  become: true
-  ansible.builtin.file:
-    path: '{{ printnanny_cmd_error_dir }}'
-    state: directory
-    mode: 0755
-    owner: '{{ printnanny_user }}'
-    group: '{{ printnanny_group }}'

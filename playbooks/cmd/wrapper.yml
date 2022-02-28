@@ -9,6 +9,26 @@
     var: printnanny_cmd
   tags:
     - cmd
+- name: Create cmd success dir
+  become: true
+  ansible.builtin.file:
+    path: '{{ printnanny_cmd_success_dir }}'
+    state: directory
+    mode: 0755
+    owner: '{{ printnanny_user }}'
+    group: '{{ printnanny_group }}'
+  tags:
+    - cmd
+- name: Create cmd error dir
+  become: true
+  ansible.builtin.file:
+    path: '{{ printnanny_cmd_error_dir }}'
+    state: directory
+    mode: 0755
+    owner: '{{ printnanny_user }}'
+    group: '{{ printnanny_group }}'
+  tags:
+    - cmd
 - name: include {{ printnanny_cmd.event_name }} tasks
   include_tasks: 
     file: 'handlers/{{ printnanny_cmd.event_name }}.yml'
