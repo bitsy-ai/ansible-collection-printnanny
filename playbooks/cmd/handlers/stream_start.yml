@@ -14,4 +14,4 @@
 - name: Start monitor service
   ansible.builtin.systemd:
     name: printnanny-monitor
-    state: started
+    state: restarted
