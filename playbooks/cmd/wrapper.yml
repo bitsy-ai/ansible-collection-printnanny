@@ -11,7 +11,8 @@
     - cmd
 - name: include {{ printnanny_cmd.event_name }} tasks
   include_tasks: 
-    file: 'handlers/{{ printnanny_cmd.event_name }}.yml'
+    file: 'handlers/machin4rum
+    {{ printnanny_cmd.event_name }}.yml'
     apply:
       tags:
         - cmd
@@ -20,7 +21,7 @@
   ansible.builtin.copy:
     remote_src: true
     src: '{{ printnanny_cmdfile }}'
-    dest: '{{ printnanny_cmd_done_dir}}/{{ printnanny_cmdfile | basename }}'
+    dest: '{{ printnanny_cmd_success_dir}}/{{ printnanny_cmdfile | basename }}'
     owner: '{{ printnanny_user }}'
     group: '{{ printnanny_user }}'
   tags:
