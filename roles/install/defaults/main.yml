@@ -143,7 +143,7 @@ gstreamer_rtp_host: "127.0.0.1"
 ##
 # nnstreamer vars
 ##
-
+nn_edge_enabled: false
 nn_threshold: 50
 nn_rtp_port: 5105
 nn_rtp_service: printnanny-monitor
