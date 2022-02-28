@@ -11,8 +11,7 @@
     - cmd
 - name: include {{ printnanny_cmd.event_name }} tasks
   include_tasks: 
-    file: 'handlers/machin4rum
-    {{ printnanny_cmd.event_name }}.yml'
+    file: 'handlers/{{ printnanny_cmd.event_name }}.yml'
     apply:
       tags:
         - cmd
