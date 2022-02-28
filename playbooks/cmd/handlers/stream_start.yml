@@ -1,4 +1,4 @@
-
+---
 - name: Assert printnanny_cmd is defined
   ansible.builtin.assert:
     that:
