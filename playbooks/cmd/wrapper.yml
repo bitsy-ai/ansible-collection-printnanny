@@ -28,7 +28,7 @@
 - name: Delete {{ printnanny_cmdfile }}
   become: true
   ansible.builtin.file:
-    state: abscent
+    state: absent
     path: '{{ printnanny_cmdfile }}'
   tags:
     - cmd
