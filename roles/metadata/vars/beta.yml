@@ -1,0 +1,8 @@
+---
+printnanny_profile: beta
+printnanny_api_url: https://beta.printnanny.ai
+ara_api_server: https://ara.beta.printnanny.ai
+janus_api_domain: janus.beta.printnanny.ai
+janus_rtp_domain: rtp.beta.printnanny.ai
+janus_admin_secret_file: /opt/printnanny/profiles/beta/janus/janus_admin_secret
+janus_token_file: /opt/printnanny/profiles/beta/janus/janus_admin_secret

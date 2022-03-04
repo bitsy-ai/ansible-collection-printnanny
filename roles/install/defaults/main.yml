@@ -15,7 +15,7 @@ nginx_buffer_size: '256k'
 printnanny_profile: default
 printnanny_loglevel: info
 
-printnanny_api_url: https://print-nanny.com
+printnanny_api_url: https://live.printnanny.ai
 printnanny_service_dir: /etc/systemd/printnanny.d
 printnanny_runtime_dir: /var/run/printnanny
 printnanny_env: '{{ printnanny_runtime_dir }}/env'
@@ -76,7 +76,7 @@ printnanny_ssl_key: '/etc/ssl/private/ssl-cert-snakeoil.key'
 printnanny_ssl_protocols: 'TLSv1 TLSv1.1 TLSv1.2'
 printnanny_ssl_ciphers: 'HIGH:!aNULL:!MD5'
 printnanny_ssl_country_name: 'US'
-printnanny_ssl_email_address: support@print-nanny.com
+printnanny_ssl_email_address: support@printnanny.ai
 printnanny_ssl_organization_name: 'Bitsy AI Labs, LLC'
 printnanny_edition: octoprint_desktop
 
@@ -118,7 +118,7 @@ ara_version: 'ara>1.5,<1.6'
 
 # ara configuration values: https://ara.readthedocs.io/en/latest/ansible-plugins-and-use-cases.html
 ara_api_client: http
-ara_api_server: https://ara.print-nanny.com
+ara_api_server: https://ara.live.printnanny.ai
 ara_api_timeout: 15
 ara_callback_threads: 4
 ara_ignored_arguments: vault_password_files
@@ -174,6 +174,6 @@ honeycomb_api_key: '22ffab0ec6af32b2be565bc831555e44'
 ##
 # janus vars
 ##
-janus_api_domain: janus.beta.print-nanny.com
-janus_rtp_domain: rtp.beta.print-nanny.com
-janus_rtp_port: 5005
+janus_api_domain: janus.live.printnanny.ai
+janus_rtp_domain: rtp.live.printnanny.ai
+janus_rtp_port: null
