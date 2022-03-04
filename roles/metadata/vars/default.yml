@@ -1,8 +1,7 @@
 ---
 janus_admin_secret_file: /opt/printnanny/profiles/default/janus/janus_admin_secret
 janus_token_file: /opt/printnanny/profiles/default/janus/janus_admin_secret
-janus_api_domain: janus.beta.print-nanny.com
-janus_rtp_domain: rtp.beta.print-nanny.com
-janus_rtp_port: 5000
+janus_api_domain: janus.live.printnanny.ai
+janus_rtp_domain: rtp.live.printnanny.ai
 printnanny_profile: default
-printnanny_api_url: https://print-nanny.com
+printnanny_api_url: https://live.printnanny.ai
