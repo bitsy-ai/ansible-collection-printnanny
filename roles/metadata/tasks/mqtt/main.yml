@@ -87,3 +87,8 @@
     owner: '{{ printnanny_user }}'
   tags:
     - metadata
+
+- name: Re-install MQTT Service
+  include_role: 
+    name: bitsyai.printnanny.install
+    tasks_from: mqtt
