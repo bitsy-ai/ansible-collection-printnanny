@@ -1,5 +1,8 @@
 ---
+printnanny_install_dir: '/opt/printnanny'
 printnanny_profile: local
+printnanny_profile_dir: '{{ printnanny_install_dir }}/profiles/{{ printnanny_profile }}'
+printnanny_license_file: '{{ printnanny_profile_dir }}/PrintNannyLicense.json'
 printnanny_api_url: http://aurora:8000
 ara_enabled: false
 janus_api_domain: aurora
