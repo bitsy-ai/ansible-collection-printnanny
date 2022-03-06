@@ -1,5 +1,8 @@
 ---
 printnanny_profile: beta
+printnanny_install_dir: '/opt/printnanny'
+printnanny_profile_dir: '{{ printnanny_install_dir }}/profiles/{{ printnanny_profile }}'
+printnanny_license_file: '{{ printnanny_profile_dir }}/PrintNannyLicense.json'
 printnanny_api_url: https://beta.printnanny.ai
 ara_api_server: https://ara.beta.printnanny.ai
 janus_api_domain: janus.beta.printnanny.ai
