@@ -17,7 +17,7 @@ jobs:
       uses: Ilshidur/action-discord@master
       with:
         args: |
-            🥧 **New Print Nanny OS Version**
+            🥧 **Fresh Ansible Collection**
             `{{ EVENT_PAYLOAD.repository.full_name }}@{{ GITHUB_SHA }}`
             **Version**: `${{ github.ref }}`
             **Release Notes**: ${{ github.event.release.html_url }}
