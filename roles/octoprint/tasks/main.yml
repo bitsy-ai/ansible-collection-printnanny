@@ -81,7 +81,7 @@
   become_user: '{{ octoprint_user }}'
   ansible.builtin.template:
     mode: 0664
-    src: config.yml.j2
+    src: config.yaml.j2
     dest: '{{ octoprint_config }}'
     force: true
     owner: '{{ octoprint_user }}'
