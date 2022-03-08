@@ -8,4 +8,5 @@ location /octoprint/ {
     proxy_set_header X-Scheme $scheme;
     proxy_set_header X-Script-Name /octoprint;
     proxy_http_version 1.1;
+    client_max_body_size {{ octoprint_file_upload_max }};
 }
