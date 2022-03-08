@@ -8,7 +8,7 @@ octoprint_dir: '/home/{{ octoprint_user }}/.octoprint'
 octoprint_log_dir: '/var/log/octoprint'
 octoprint_watched_dir: '/var/run/octoprint/watched'
 octoprint_venv: '{{ octoprint_dir }}/venv'
-octoprint_config: '{{ octoprint_dir }}/config.yml'
+octoprint_config: '{{ octoprint_dir }}/config.yaml'
 
 # plugin
 octoprint_git_version: 1.7.3
