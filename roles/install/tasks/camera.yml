@@ -52,12 +52,6 @@
   notify:
     - restart {{ nn_rtp_service }}
 
-- name: Enble rpt service
-  ansible.builtin.systemd:
-    name: '{{ nn_rtp_service }}.service'
-    enabled: true
-    no_block: true
-
 - name: Debug libcamera_version
   ansible.builtin.debug:
     var: libcamera_version
