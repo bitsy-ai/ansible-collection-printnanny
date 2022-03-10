@@ -18,5 +18,5 @@ systemctl stop printnanny-monitor.service
 
 systemctl start printnanny-metadata
 systemctl start printnanny-dash
-systemctl start printnanny-monitor
 systemctl start printnanny-mqtt
+journalctl -u printnanny-metadata -u printnanny-dash -u printnanny-mqtt --follow
