@@ -10,3 +10,10 @@ server:
 folder:
   logs: {{ octoprint_log_dir }}
   watched: {{ octoprint_watched_dir }}
+
+system:
+  actions:
+  - name: Update PrintNanny OS
+    action: update_printnanny_os
+    command: sudo systemctl restart printnanny-update
+    confirm: You are about to update PrintNanny OS.
