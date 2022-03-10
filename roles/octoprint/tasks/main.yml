@@ -40,19 +40,6 @@
     - system-update
     - octoprint
 
-- name: Create {{ octoprint_watched_dir }}
-  become: true
-  ansible.builtin.file:
-    state: directory
-    path: '{{ octoprint_watched_dir }}'
-    mode: 0664
-    owner: '{{ octoprint_user }}'
-    group: '{{ octoprint_user }}'
-  tags:
-    - setup
-    - system-update
-    - octoprint
-
 - name: 'Create Octoprint virtualenv'
   become: true
   become_user: '{{ octoprint_user }}'
