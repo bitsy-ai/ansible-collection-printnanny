@@ -1,0 +1,10 @@
+[Unit]
+Description="Watch {{ printnanny_license_file }}"
+
+[Path]
+PathExists={{ printnanny_license_file }}
+Unit=printnanny-mqtt.service
+MakeDirectory=true
+
+[Install]
+WantedBy=multi-user.target

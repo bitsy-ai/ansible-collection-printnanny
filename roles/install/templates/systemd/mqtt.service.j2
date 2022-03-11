@@ -3,7 +3,6 @@ Description=PrintNanny MQTT Client
 After=network.target network-online.target printnanny-metadata.service
 Wants=network.target network-online.target printnanny-metadata.service
 PartOf=printnanny.target
-ConditionPathExists={{ printnanny_license_file }}
 
 
 [Service]
