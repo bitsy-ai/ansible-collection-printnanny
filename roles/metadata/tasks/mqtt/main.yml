@@ -89,6 +89,9 @@
     - metadata
 
 - name: Re-install MQTT Service
-  include_role: 
+  include_role:
     name: bitsyai.printnanny.install
     tasks_from: mqtt
+    apply:
+      tags:
+        - metadata
