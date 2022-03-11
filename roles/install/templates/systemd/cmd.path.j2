@@ -5,6 +5,7 @@ Description="Monitor {{ printnanny_cmd_queue_dir }} for remote commands"
 DirectoryNotEmpty={{ printnanny_cmd_queue_dir }} 
 Unit=printnanny-cmd.service
 MakeDirectory=true
+DirectoryMode=0775
 
 [Install]
 WantedBy=multi-user.target
