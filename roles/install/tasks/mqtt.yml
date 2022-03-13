@@ -1,3 +1,4 @@
+- name: 
 - name: Create printnanny-mqtt.service unit
   become: true
   ansible.builtin.template:
@@ -5,8 +6,6 @@
     src: systemd/mqtt.service.j2
     dest: /etc/systemd/system/printnanny-mqtt.service
     force: true
-  notify:
-    - restart printnanny-mqtt
 
 - name: Create printnanny-mqtt.service unit
   become: true

@@ -22,8 +22,6 @@
     - metadata
   notify:
     - restart printnanny-dash
-    - restart printnanny-mqtt
-
 
 - name: Render printnanny.sh
   become_user: '{{ printnanny_user }}'
@@ -40,4 +38,3 @@
     - metadata
   notify:
     - restart printnanny-dash
-    - restart printnanny-mqtt
