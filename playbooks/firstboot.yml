@@ -2,17 +2,19 @@
 - hosts: printnanny
   gather_facts: true
   vars:
-    ara_playbook_name: 'render printnanny metadata for env app'
+    ara_playbook_name: 'bitsyai.printnanny.firstboot'
     ara_playbook_labels:
       - printnanny
-      - env
+      - firstboot
       - metadata
   roles:
     - bitsyai.printnanny.install
   tasks:
-    - name: Set /var/run/printnanny/env metadata
+    - name: Run firstboot tasks
       include_role:
         name: bitsyai.printnanny.metadata
+        tasks_from: firstboot/main.yml
         vars_from: '{{ printnanny_profile|default("default", true) }}.yml'
       tags:
         - metadata
+        - firstboot

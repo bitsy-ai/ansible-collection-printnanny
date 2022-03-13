@@ -1,0 +1,23 @@
+- name: www firstbook tasks
+  import_tasks: www.yml
+- name: janus firstbook tasks
+  import_tasks: janus.yml
+  when: janus_local_enabled
+- name: mqtt firstbook tasks
+  import_tasks: mqtt.yml
+
+- name: Render config.toml
+  ansible.builtin.template:
+    src: config.toml.j2
+    dest: '{{ printnanny_config_toml }}'
+    mode: 0644
+    force: true
+    owner: '{{ printnanny_user }}'
+    group: '{{ printnanny_user }}'
+  notify:
+    - restart printnanny-dash
+    - restart printnanny-mqtt
+  tags:
+    - secret
+    - firstboot
+    - metadata

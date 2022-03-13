@@ -4,8 +4,7 @@
     printnanny_www_secret_key: "{{ lookup('password', printnanny_www_secret_file + ' chars=hexdigits length=64') }}"
   tags:
     - secret
-    - env
-    - metadata
+    - firstboot
 
 - name: Render Print Nanny Dashboard Rocket.toml
   ansible.builtin.template:
@@ -18,7 +17,6 @@
   when: printnanny_www_secret_key is defined
   tags:
     - secret
-    - env
-    - metadata
+    - firstboot
   notify:
     - restart printnanny-dash
