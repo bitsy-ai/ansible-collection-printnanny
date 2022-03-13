@@ -7,12 +7,6 @@
     janus_local_enabled: false
 - hosts: printnanny
   tasks:
-    - name: Install firstboot service
-      include_role:
-        name: bitsyai.printnanny.metadata
-        tasks_from: install/firstboot.yml
-      tags:
-        - packer
     - name: Clean and minimize image
       include_role:
         name: bitsyai.printnanny.common

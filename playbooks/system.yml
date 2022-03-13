@@ -21,10 +21,14 @@
       include_role:
         name: bitsyai.printnanny.install
         public: true
-    - name: Install PrintNanny Metadata
+    - name: Install firstboot service
       include_role:
         name: bitsyai.printnanny.metadata
-        public: true
+        tasks_from: install/firstboot.yml
+    - name: Install metadata service
+      include_role:
+        name: bitsyai.printnanny.metadata
+        tasks_from: install/metadata.yml
     - name: Install local Janus Gateway
       include_role:
         name: bitsyai.printnanny.janus
