@@ -71,4 +71,4 @@
     name: printnanny-metrics.path
     daemon_reload: true
     state: started
-    enabled: true 
+    enabled: true
