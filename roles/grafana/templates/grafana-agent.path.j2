@@ -1,0 +1,9 @@
+[Unit]
+Description="Watch {{ grafana_config_file }}"
+
+[Path]
+PathExists={{ grafana_config_file }}
+Unit=printnanny-metrics.service
+
+[Install]
+WantedBy=multi-user.target

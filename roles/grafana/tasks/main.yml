@@ -1,0 +1,74 @@
+---
+# tasks file for grafana
+- name: Install apt dependencies
+  become: true
+  ansible.builtin.apt:
+    name:
+      - python3-dev
+      - python3-pip
+      - python3-venv
+      # required by ansible.builtin.package_facts
+      - python3-apt
+- name: Gather package facts
+  package_facts:
+    manager: apt
+
+- name: Download grafana-agent package
+  ansible.builtin.get_url:
+    url: "{{ grafana_agent_deb_url }}"
+    dest: "/tmp/{{ grafana_agent_deb_file }}"
+  when: (ansible_facts.packages.grafana_agent is not defined) or
+    (ansible_facts.packages.grafana_agent[0].version != grafana_agent_version)
+
+- name: Install grafana-agent
+  become: true
+  ansible.builtin.apt:
+    deb: "/tmp/{{ grafana_agent_deb_file }}"
+  when: (ansible_facts.packages.grafana_agent is not defined) or
+    (ansible_facts.packages.grafana_agent[0].version != grafana_agent_version)
+
+- name: Clean up grafana-agent package
+  ansible.builtin.file:
+    name: "/tmp/{{ grafana_agent_deb_file  }}"
+    state: absent
+
+- name: Create config dir
+  ansible.builtin.file:
+    state: directory
+    path: '{{ grafana_dir }}'
+    owner: '{{ printnanny_user }}'
+    group: '{{ printnanny_user }}'
+    mode: 0775
+
+- name: Render grafana-agent.yml
+  become: true
+  ansible.builtin.template:
+    src: agent.yml.j2
+    dest: '{{ grafana_config_file }}'
+    mode: 0664
+    force: true
+  when: grafana_cloud_username is not none and grafana_cloud_token is not none
+
+- name: Render systemd path unit
+  become: true
+  ansible.builtin.template:
+    src: grafana-agent.path.j2
+    dest: /etc/systemd/system/printnanny-metrics.path
+    mode: 0664
+    force: true
+
+- name: Render systemd service unit
+  become: true
+  ansible.builtin.template:
+    src: grafana-agent.service.j2
+    dest: /etc/systemd/system/printnanny-metrics.service
+    mode: 0664
+    force: true
+
+- name: Enable path unit
+  become: true
+  ansible.builtin.systemd:
+    name: printnanny-metrics.path
+    daemon_reload: true
+    state: started
+    enabled: true
