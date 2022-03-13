@@ -28,7 +28,7 @@
     - name: Install metadata service
       include_role:
         name: bitsyai.printnanny.metadata
-        tasks_from: install/firstboot.yml
+        tasks_from: install/metadata.yml
     - name: Install local Janus Gateway
       include_role:
         name: bitsyai.printnanny.janus
