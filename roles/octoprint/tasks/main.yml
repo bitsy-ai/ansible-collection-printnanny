@@ -82,7 +82,7 @@
   include_tasks: nginx.yml
 
 # symlink creates an alias in systemd, allowing printnanny* to be used in systemctl and journalctl filters
-- name: symlink nginx.service to printnanny-nginx.service
+- name: symlink octoprint.service to printnanny-octoprint.service
   become: true
   ansible.builtin.file:
     src: /etc/systemd/system/octoprint.service
