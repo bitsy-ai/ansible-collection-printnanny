@@ -51,3 +51,11 @@
   ansible.builtin.systemd:
     name: nginx.service
     enabled: true
+
+# symlink creates an alias in systemd, allowing printnanny* to be used in systemctl and journalctl filters
+- name: symlink nginx.service to printnanny-nginx.service
+  become: true
+  ansible.builtin.file:
+    src: /lib/systemd/system/nginx.service
+    dest: /etc/systemd/system/printnanny-nginx.service
+    state: link
