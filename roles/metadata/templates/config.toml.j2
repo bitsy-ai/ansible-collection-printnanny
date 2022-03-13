@@ -8,13 +8,13 @@ venv_dir = "{{ printnanny_ansible_dir }}/venv"
 collection_name = "bitsyai.printnanny"
 collection_version = "{{ printnanny_collection_version }}"
 
+[api]
+base_path = "{{ printnanny_api_url }}"
+
 [cmd]
 queue_dir = "{{ printnanny_cmd_queue_dir }}"
 success_dir = "{{ printnanny_cmd_success_dir }}"
 error_dir = "{{ printnanny_cmd_error_dir }}"
-
-[api]
-base_path = "{{ printnanny_api_url }}"
 
 [_janus_local]
 admin_secret = "{{ lookup('password', janus_admin_secret_file, length=32 ) }}"
