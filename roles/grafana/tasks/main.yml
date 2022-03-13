@@ -70,4 +70,5 @@
   ansible.builtin.systemd:
     name: printnanny-metrics.path
     daemon_reload: true
-    state: enabled
+    state: started
+    enabled: true 
