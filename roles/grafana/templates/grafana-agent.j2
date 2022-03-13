@@ -1,0 +1,11 @@
+metrics:
+  wal_directory: {{ grafana_wal_dir }}
+  global:
+    remote_write:
+      - url: {{ grafana_cloud_remote_write_url }}
+        basic_auth:
+            username: {{ grafana_cloud_username }}
+            password: {{ grafana_cloud_toke }}
+integrations:
+  agent:
+    enabled: true
