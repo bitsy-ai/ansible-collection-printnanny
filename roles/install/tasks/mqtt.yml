@@ -1,4 +1,3 @@
-- name: 
 - name: Create printnanny-mqtt.service unit
   become: true
   ansible.builtin.template:
