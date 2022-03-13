@@ -8,7 +8,8 @@
     group: '{{ printnanny_user }}'
     owner: '{{ printnanny_user }}'
   tags:
-    - metadata
+    - firstboot
+
 - name: Create provisional private key
   become: true
   community.crypto.openssl_privatekey:
@@ -22,6 +23,7 @@
     format: pkcs8
   tags:
     - secret
+    - firstboot
     - metadata
 
 - name: Extract provisional public key
@@ -33,6 +35,7 @@
     path: '{{ printnanny_ec_public_key }}'
   tags:
     - secret
+    - firstboot
     - metadata
   register: printnanny_ec_public_key_output
 
@@ -46,6 +49,7 @@
     owner: '{{ printnanny_user }}'
   tags:
     - secret
+    - firstboot
     - metadata
 
 - name: Set printnanny_ec_fingerprint
@@ -54,6 +58,7 @@
     cacheable: true
   tags:
     - secret
+    - firstboot
     - metadata
 
 - name: Create '{{ printnanny_cacerts_dir }}'
@@ -65,7 +70,8 @@
     group: '{{ printnanny_user }}'
     owner: '{{ printnanny_user }}'
   tags:
-    - metadata
+    - firstboot
+
 - name: Download GCP LTS CA Certificate {{ gcp_lts_ca_primary }}
   become: true
   ansible.builtin.get_url:
@@ -75,7 +81,7 @@
     group: '{{ printnanny_user }}'
     owner: '{{ printnanny_user }}'
   tags:
-    - metadata
+    - firstboot
 
 - name: Download GCP LTS CA Certificate {{ gcp_lts_ca_backup }}
   become: true
@@ -86,7 +92,7 @@
     group: '{{ printnanny_user }}'
     owner: '{{ printnanny_user }}'
   tags:
-    - metadata
+    - firstboot
 
 - name: Re-install MQTT Service
   include_role:
@@ -94,4 +100,4 @@
     tasks_from: mqtt
     apply:
       tags:
-        - metadata
+        - firstboot

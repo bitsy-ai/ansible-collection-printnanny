@@ -7,9 +7,12 @@
     janus_local_enabled: false
 - hosts: printnanny
   tasks:
-    - name: Octoprint role
+    - name: Install firstboot service
       include_role:
-        name: bitsyai.printnanny.octoprint
+        name: bitsyai.printnanny.metadata
+        tasks_from: firstboot/install.yml
+      tags:
+        - packer
     - name: Clean and minimize image
       include_role:
         name: bitsyai.printnanny.common

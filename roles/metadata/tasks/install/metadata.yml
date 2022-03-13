@@ -1,0 +1,33 @@
+- name: Render printnanny-metadata.service template
+  become: true
+  ansible.builtin.template:
+    src: printnanny-metadata.service.j2
+    dest: /etc/systemd/system/printnanny-metadata.service
+    mode: 0664
+    force: true
+  tags:
+    - metadata
+
+- name: Enable metadata service
+  become: true
+  ansible.builtin.systemd:
+    name: 'printnanny-metadata.service'
+    enabled: true
+    no_block: true
+  tags:
+    - metadata
+
+- name: Setup printnanny-update service
+  import_tasks: ../update/main.yml
+  tags:
+    - metadata
+
+- name: Render octoprint-plugin-dev script
+  become: true
+  ansible.builtin.template:
+    src: develop/octoprint-plugin-dev.sh.j2
+    dest: /usr/local/bin/octoprint-plugin-dev
+    mode: 0755
+    force: true
+  tags:
+    - firstboot

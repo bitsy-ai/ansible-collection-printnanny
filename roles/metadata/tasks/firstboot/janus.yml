@@ -4,8 +4,8 @@
     janus_admin_secret: "{{ lookup('password', janus_admin_secret_file, length=32 ) }}"
     janus_token: "{{ lookup('password', janus_token_file, length=32 ) }}"
   tags:
-    - secrets
-    - metadata
+    - secret
+    - firstboot
 
 - name: Render janus configs
   vars:
@@ -15,5 +15,5 @@
     name: bitsyai.printnanny.janus
     tasks_from: configs.yml
   tags:
-    - secrets
-    - metadata
+    - secret
+    - firstboot

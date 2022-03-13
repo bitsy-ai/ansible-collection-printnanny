@@ -1,44 +1,11 @@
-- name: Create '{{ printnanny_profile_dir }}'
-  ansible.builtin.file:
-    state: directory
-    path: '{{ printnanny_profile_dir }}'
-    mode: 0755
-    owner: '{{ printnanny_user }}'
-
-- name: Create {{ printnanny_data_dir }}
-  become: true
-  ansible.builtin.file:
-    path: "{{ printnanny_data_dir }}"
-    state: directory
-    owner: "{{ printnanny_user }}"
-    group: "{{ printnanny_group }}"
-    mode: 0775
-    recurse: true
-
-- name: Create {{ printnanny_keys_dir }}
-  become: true
-  ansible.builtin.file:
-    path: "{{ printnanny_keys_dir }}"
-    state: directory
-    owner: "{{ printnanny_user }}"
-    group: "{{ printnanny_group }}"
-    mode: 0771
-
-- name: Create {{ printnanny_backups_dir }}
-  become: true
-  ansible.builtin.file:
-    path: "{{ printnanny_backups_dir }}"
-    state: directory
-    owner: "{{ printnanny_user }}"
-    group: "{{ printnanny_group }}"
-    mode: 0775
-
 - name: Runtime cache
   ansible.builtin.stat:
     path: '{{ printnanny_runtime_dir }}'
   register: printnanny_cache
   tags:
+    - firstboot
     - metadata
+
 
 - name: Render printnanny.env
   become_user: '{{ printnanny_user }}'

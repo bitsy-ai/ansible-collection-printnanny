@@ -1,12 +1,13 @@
 # {{ ansible_managed }}
 [Unit]
-Description=Print Nanny Metadata Service
-After=network.target network-online.target printnanny-firstboot.service printnanny-ansible-collection.service
-Wants=network.service network-online.target printnanny-firstboot.service printnanny-ansible-collection.service
+Description=Create a unique PrintNanny device identity on first boot
+After=network.target network-online.target printnanny-ansible-collection.service
+Wants=network.service network-online.target printnanny-ansible-collection.service
+ConditionFirstBoot=yes
 
 [Service]
 Type=oneshot
-SyslogIdentifier=printnanny-metadata
+SyslogIdentifier=printnanny-firstboot
 RuntimeDirectory={{ printnanny_user }}
 RuntimeDirectoryPreserve=yes
 ConfigurationDirectory={{ printnanny_user }}
@@ -20,7 +21,7 @@ ExecStart=/usr/bin/flock --verbose -n {{ ansible_lockfile }} \
     -v \
     {% endif %}
     bitsyai.printnanny.metadata \
-    --tags "metadata"
+    --tags "firstboot"
 RemainAfterExit=yes
 
 [Install]

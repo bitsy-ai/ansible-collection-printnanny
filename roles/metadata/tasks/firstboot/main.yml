@@ -1,0 +1,70 @@
+- name: Create '{{ printnanny_profile_dir }}'
+  ansible.builtin.file:
+    state: directory
+    path: '{{ printnanny_profile_dir }}'
+    mode: 0755
+    owner: '{{ printnanny_user }}'
+  tags:
+    - firstboot
+    - metadata
+
+- name: Create {{ printnanny_data_dir }}
+  become: true
+  ansible.builtin.file:
+    path: "{{ printnanny_data_dir }}"
+    state: directory
+    owner: "{{ printnanny_user }}"
+    group: "{{ printnanny_group }}"
+    mode: 0775
+    recurse: true
+  tags:
+    - firstboot
+    - metadata
+
+- name: Create {{ printnanny_keys_dir }}
+  become: true
+  ansible.builtin.file:
+    path: "{{ printnanny_keys_dir }}"
+    state: directory
+    owner: "{{ printnanny_user }}"
+    group: "{{ printnanny_group }}"
+    mode: 0771
+  tags:
+    - firstboot
+    - metadata
+
+- name: Create {{ printnanny_backups_dir }}
+  become: true
+  ansible.builtin.file:
+    path: "{{ printnanny_backups_dir }}"
+    state: directory
+    owner: "{{ printnanny_user }}"
+    group: "{{ printnanny_group }}"
+    mode: 0775
+  tags:
+    - firstboot
+    - metadata
+
+- name: www firstbook tasks
+  import_tasks: www.yml
+- name: janus firstbook tasks
+  import_tasks: janus.yml
+  when: janus_local_enabled
+- name: mqtt firstbook tasks
+  import_tasks: mqtt.yml
+
+- name: Render config.toml
+  ansible.builtin.template:
+    src: config.toml.j2
+    dest: '{{ printnanny_config_toml }}'
+    mode: 0644
+    force: true
+    owner: '{{ printnanny_user }}'
+    group: '{{ printnanny_user }}'
+  notify:
+    - restart printnanny-dash
+    - restart printnanny-mqtt
+  tags:
+    - secret
+    - firstboot
+    - metadata

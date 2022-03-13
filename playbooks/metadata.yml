@@ -7,7 +7,6 @@
       - printnanny
       - env
       - metadata
-      - env
   roles:
     - bitsyai.printnanny.install
   tasks:
@@ -17,3 +16,4 @@
         vars_from: '{{ printnanny_profile|default("default", true) }}.yml'
       tags:
         - metadata
+        - firstboot
