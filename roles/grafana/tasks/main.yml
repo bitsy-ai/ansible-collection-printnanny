@@ -47,7 +47,7 @@
     dest: '{{ grafana_config_file }}'
     mode: 0664
     force: true
-  when: grafana_cloud_username is not None and grafana_cloud_token is not None
+  when: grafana_cloud_username is not none and grafana_cloud_token is not none
 
 - name: Render systemd path unit
   become: true
