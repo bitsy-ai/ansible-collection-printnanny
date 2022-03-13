@@ -48,6 +48,7 @@
   tags:
     - secret
     - firstboot
+    - metadata
 
 - name: Set printnanny_ec_fingerprint
   ansible.builtin.set_fact:
@@ -56,6 +57,7 @@
   tags:
     - secret
     - firstboot
+    - metadata
 
 - name: Create '{{ printnanny_cacerts_dir }}'
   become: true
