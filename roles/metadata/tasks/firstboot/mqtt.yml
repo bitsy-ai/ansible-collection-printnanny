@@ -24,6 +24,7 @@
   tags:
     - secret
     - firstboot
+    - metadata
 
 - name: Extract provisional public key
   become: true
