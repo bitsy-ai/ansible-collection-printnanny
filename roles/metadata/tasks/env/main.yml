@@ -4,6 +4,9 @@
     path: '{{ printnanny_profile_dir }}'
     mode: 0755
     owner: '{{ printnanny_user }}'
+  tags:
+    - firstboot
+    - metadata
 
 - name: Create {{ printnanny_data_dir }}
   become: true
@@ -14,6 +17,9 @@
     group: "{{ printnanny_group }}"
     mode: 0775
     recurse: true
+  tags:
+    - firstboot
+    - metadata
 
 - name: Create {{ printnanny_keys_dir }}
   become: true
@@ -23,6 +29,9 @@
     owner: "{{ printnanny_user }}"
     group: "{{ printnanny_group }}"
     mode: 0771
+  tags:
+    - firstboot
+    - metadata
 
 - name: Create {{ printnanny_backups_dir }}
   become: true
@@ -32,13 +41,18 @@
     owner: "{{ printnanny_user }}"
     group: "{{ printnanny_group }}"
     mode: 0775
+  tags:
+    - firstboot
+    - metadata
 
 - name: Runtime cache
   ansible.builtin.stat:
     path: '{{ printnanny_runtime_dir }}'
   register: printnanny_cache
   tags:
+    - firstboot
     - metadata
+
 
 - name: Render printnanny.env
   become_user: '{{ printnanny_user }}'
