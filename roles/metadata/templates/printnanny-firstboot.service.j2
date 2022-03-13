@@ -20,7 +20,7 @@ ExecStart=/usr/bin/flock --verbose -n {{ ansible_lockfile }} \
     {% else %}
     -v \
     {% endif %}
-    bitsyai.printnanny.firstboot \
+    bitsyai.printnanny.metadata \
     --tags "firstboot"
 RemainAfterExit=yes
 

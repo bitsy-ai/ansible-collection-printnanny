@@ -16,3 +16,4 @@
         vars_from: '{{ printnanny_profile|default("default", true) }}.yml'
       tags:
         - metadata
+        - firstboot
