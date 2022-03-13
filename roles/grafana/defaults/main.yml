@@ -1,12 +1,15 @@
 ---
 # defaults file for grafana
+printnanny_user: printnanny
+grafana_dir: /opt/printnanny/metrics
+grafana_config_file: '{{ grafana_dir }}/grafana-agent.yml'
 grafana_arch: '{% if ansible_architecture == "x86_64" %}amd64{% else %}arm64{% endif %}'
 grafana_agent_pkg_name: grafana-agent
 grafana_agent_version: 0.23.0
 grafana_agent_deb_file: 'grafana-agent-{{ grafana_agent_version }}-1.{{ grafana_arch }}.deb'
 grafana_agent_deb_url: 'https://github.com/grafana/agent/releases/download/v{{ grafana_agent_version }}/{{ grafana_agent_deb_file }}'
 
-grafana_wal_dir: /var/run/grafana/wal
+grafana_wal_dir: /var/run/grafana
 # write-only PublishMetrics token. create separate tokens for free trial / paid subscribers if this becomes problematic.
 grafana_cloud_token: null
 grafana_cloud_username: null

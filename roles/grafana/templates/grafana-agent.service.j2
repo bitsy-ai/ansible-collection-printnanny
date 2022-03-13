@@ -1,0 +1,20 @@
+[Unit]
+Description=PrintNanny Metrics Agent
+After=network.target network-online.target printnanny-metadata.service
+Wants=network.target network-online.target printnanny-metadata.service
+PartOf=printnanny.target
+
+[Service]
+Type=simple
+SyslogIdentifier=printnanny-metrics
+RuntimeDirectory={{ grafana_dir }}
+RuntimeDirectoryPreserve=yes
+ConfigurationDirectory={{ grafana_dir }}
+ExecStart=/usr/bin/grafana-agent -config.file {{ grafana_config_file }}
+User={{ printnanny_user }}
+
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
