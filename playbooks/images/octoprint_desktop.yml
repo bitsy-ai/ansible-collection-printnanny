@@ -1,5 +1,5 @@
 ---
-- name: Update Print Nanny system
+- name: Update PrintNanny system
   import_playbook: ../system.yml
   vars:
     printnanny_edition: octoprint_desktop

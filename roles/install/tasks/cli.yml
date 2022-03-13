@@ -5,7 +5,7 @@
   tags:
     - auto_update
 
-- name: Download Print Nanny Binaries
+- name: Download PrintNanny Binaries
   become: true
   ansible.builtin.unarchive:
     src: '{{ printnanny_cli_url }}'

@@ -1,4 +1,4 @@
-- name: Create Print Nanny www dir
+- name: Create PrintNanny www dir
   become: true
   ansible.builtin.file:
     path: '{{ printnanny_www_dir }}'
@@ -7,7 +7,7 @@
     owner: '{{ printnanny_user }}'
     group: '{{ printnanny_user }}'
 
-- name: Create Print Nanny www templates dir
+- name: Create PrintNanny www templates dir
   become: true
   ansible.builtin.file:
     path: '{{ printnanny_www_templates_dir }}'
@@ -16,7 +16,7 @@
     owner: '{{ printnanny_user }}'
     group: '{{ printnanny_user }}'
 
-- name: Download Print Nanny www templates
+- name: Download PrintNanny www templates
   become: true
   ansible.builtin.unarchive:
     src: '{{ printnanny_www_templates_url }}'
@@ -28,7 +28,7 @@
   notify:
     - restart printnanny-dash
 
-- name: Render Print Nanny Dashboard service from template
+- name: Render PrintNanny Dashboard service from template
   become: true
   ansible.builtin.template:
     mode: 0664
@@ -38,7 +38,7 @@
   notify:
     - restart printnanny-dash
 
-- name: Enable Print Nanny Dashboard service
+- name: Enable PrintNanny Dashboard service
   become: true
   ansible.builtin.systemd:
     service: printnanny-dash

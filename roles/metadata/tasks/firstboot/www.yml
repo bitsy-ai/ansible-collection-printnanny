@@ -6,7 +6,7 @@
     - secret
     - firstboot
 
-- name: Render Print Nanny Dashboard Rocket.toml
+- name: Render PrintNanny Dashboard Rocket.toml
   ansible.builtin.template:
     mode: 0660
     src: www/Rocket.toml.j2

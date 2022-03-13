@@ -1,5 +1,5 @@
 ---
-- name: Install Print Nanny components
+- name: Install PrintNanny components
   hosts: printnanny
   gather_facts: true
   vars:
@@ -17,11 +17,11 @@
       include_vars: ../roles/metadata/vars/{{ printnanny_profile|default("default", true) }}.yml
     - name: Include PrintNanny Edition vars
       include_vars: ../roles/install/vars/{{ printnanny_edition|default("octoprint_desktop", true) }}.yml
-    - name: Install Print Nanny
+    - name: Install PrintNanny
       include_role:
         name: bitsyai.printnanny.install
         public: true
-    - name: Install Print Nanny Metadata
+    - name: Install PrintNanny Metadata
       include_role:
         name: bitsyai.printnanny.metadata
         public: true
