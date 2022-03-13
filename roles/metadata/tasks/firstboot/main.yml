@@ -63,7 +63,6 @@
     group: '{{ printnanny_user }}'
   notify:
     - restart printnanny-dash
-    - restart printnanny-mqtt
   tags:
     - secret
     - firstboot
