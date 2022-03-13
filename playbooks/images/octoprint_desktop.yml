@@ -10,7 +10,7 @@
     - name: Install firstboot service
       include_role:
         name: bitsyai.printnanny.metadata
-        tasks_from: firstboot/install.yml
+        tasks_from: install/firstboot.yml
       tags:
         - packer
     - name: Clean and minimize image
