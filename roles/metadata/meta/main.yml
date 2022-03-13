@@ -2,7 +2,7 @@ galaxy_info:
   namespace: bitsyai.printnanny
   role_name: metadata
   author: Leigh Johnson
-  description: Print Nanny Metadata
+  description: PrintNanny Metadata
   company: Bitsy AI Labs
 
   # If the issue tracker for your role is not on github, uncomment the

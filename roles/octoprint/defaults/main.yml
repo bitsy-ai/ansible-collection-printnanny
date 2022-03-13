@@ -32,7 +32,7 @@ octoprint_port: 5000
 # used to set nginx's client_max_body_size for /octoprint/ location
 octoprint_file_upload_max: 1G
 
-# TODO replace with Print Nanny Network ca-signed cert
+# TODO replace with PrintNanny Network ca-signed cert
 octoprint_ssl_cert: '/etc/ssl/certs/ssl-cert-snakeoil.pem'
 octoprint_ssl_key: '/etc/ssl/private/ssl-cert-snakeoil.key'
 octoprint_ssl_protocols: 'TLSv1 TLSv1.1 TLSv1.2'
