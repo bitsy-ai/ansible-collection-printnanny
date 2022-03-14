@@ -73,7 +73,7 @@
 
 # get ara configuration before rendering ansible.cfg (if enabled)
 - name: Configure ara
-  ansible.builtin.include_tasks: update/ara.yml
+  ansible.builtin.include_tasks: install/ara.yml
   when: ara_enabled
   tags:
     - metadata
