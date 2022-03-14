@@ -1,0 +1,3 @@
+- import_tasks: update.yml
+- import_tasks: firstboot.yml
+- import_tasks: metadata.yml

@@ -17,11 +17,6 @@
   tags:
     - metadata
 
-- name: Setup printnanny-update service
-  import_tasks: ../update/main.yml
-  tags:
-    - metadata
-
 - name: Render octoprint-plugin-dev script
   become: true
   ansible.builtin.template:
