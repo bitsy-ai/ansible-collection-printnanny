@@ -2,6 +2,6 @@
   ansible.builtin.debug:
     var: hostvars[inventory_hostname]
 
+- import_tasks: install/main.yml
 - import_tasks: firstboot/main.yml
 - import_tasks: env/main.yml
-- import_tasks: update/main.yml
