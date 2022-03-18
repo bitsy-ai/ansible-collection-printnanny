@@ -13,6 +13,5 @@ ExecStart=/usr/bin/flock --verbose -n {{ ansible_lockfile }} \
     --collections-path {{ printnanny_ansible_dir }}
 Restart=on-failure
 RestartSec=10
-RemainAfterExit=yes
 [Install]
 WantedBy=multi-user.target
