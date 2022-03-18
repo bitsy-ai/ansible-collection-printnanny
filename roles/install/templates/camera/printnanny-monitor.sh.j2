@@ -18,12 +18,12 @@ gst-launch-1.0 libcamerasrc ! capsfilter caps=video/x-raw,width={{ gstreamer_vid
         ! v4l2convert \
         ! v4l2h264enc extra-controls="controls,repeat_sequence_header=1" \
         ! 'video/x-h264,width={{ gstreamer_video_w }},height={{ gstreamer_video_h }},level=(string)4' \
-        ! h264parse ! rtph264pay ! udpsink host={{ janus_rtp_domain }} port={{ janus_rtp_port }} \
+        ! h264parse ! rtph264pay ! udpsink host={{ janus_local_rtp_domain }} port={{ janus_local_rtp_port }} \
         t. ! queue leaky=2 \
         ! v4l2convert \
         ! v4l2h264enc extra-controls="controls,repeat_sequence_header=1" \
         ! 'video/x-h264,width={{ gstreamer_video_w }},height={{ gstreamer_video_h }},level=(string)4' \
-        ! h264parse ! rtph264pay ! udpsink host={{ janus_rtp_domain }} port={{ janus_rtp_port }}
+        ! h264parse ! rtph264pay ! udpsink host={{ janus_local_rtp_domain }} port={{ janus_local_rtp_port }}
 {% else %}
 gst-launch-1.0 libcamerasrc \
     ! capsfilter caps=video/x-raw,width=1280,height=720,format=NV12 \
@@ -32,5 +32,12 @@ gst-launch-1.0 libcamerasrc \
     ! 'video/x-h264,level=(string)4' \
     ! h264parse \
     ! rtph264pay \
-    ! udpsink host={{ janus_rtp_domain }} port={{ janus_rtp_port }}
+    ! queue \
+    {% if janus_remote_enabled and janus_local_enabled %}
+    ! multiudpsink clients={{ janus_local_rtp_domain }}:{{ janus_local_rtp_port }},{{ janus_cloud_rtp_domain }}:{{ janus_cloud_rtp_port }}
+    {% elif janus_remote_enabled %}
+    ! udpsink host={{ janus_remote_rtp_domain }} port={{ janus_remote_rtp_port }}
+    {% else %}
+    ! udpsink host={{ janus_local_rtp_domain }} port={{ janus_local_rtp_port }}
+    {% endif %}
 {% endif %}

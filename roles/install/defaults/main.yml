@@ -132,7 +132,6 @@ ara_argument_labels: check,subset,tags
 # gstreamer vars
 ##
 
-cam_rtp_port: 5104
 gstreamer_num_buffers: 3
 gstreamer_config_interval: 1
 gstreamer_video_src: 'v4l2src'
@@ -177,6 +176,11 @@ honeycomb_api_key: '22ffab0ec6af32b2be565bc831555e44'
 ##
 # janus vars
 ##
-janus_api_domain: janus.live.printnanny.ai
-janus_rtp_domain: rtp.live.printnanny.ai
-janus_rtp_port: null
+janus_remote_enabled: true
+janus_local_enabled: true
+janus_local_rtp_domain: localhost
+janus_local_api_domain: localhost
+janus_cloud_api_domain: janus.live.printnanny.ai
+janus_cloud_rtp_domain: rtp.live.printnanny.ai
+janus_local_rtp_port: 5101
+janus_cloud_rtp_port: 5102
