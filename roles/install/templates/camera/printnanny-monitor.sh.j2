@@ -37,7 +37,7 @@ gst-launch-1.0 libcamerasrc \
     ! multiudpsink clients={{ janus_local_rtp_domain }}:{{ janus_local_rtp_port }},{{ janus_cloud_rtp_domain }}:{{ janus_cloud_rtp_port }}
     {% elif janus_remote_enabled %}
     ! udpsink host={{ janus_remote_rtp_domain }} port={{ janus_remote_rtp_port }}
-    {% else janus_local_enabled %}
+    {% else %}
     ! udpsink host={{ janus_local_rtp_domain }} port={{ janus_local_rtp_port }}
     {% endif %}
 {% endif %}
