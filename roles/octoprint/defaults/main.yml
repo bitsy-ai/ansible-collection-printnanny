@@ -2,7 +2,7 @@
 # defaults file for octoprint
 
 octoprint_user: pi
-octoprint_pip_version: 'octoprint>1.7,<2'
+octoprint_pip_version: 'OctoPrint==1.8.0rc2'
 # dirs
 octoprint_dir: '/home/{{ octoprint_user }}/.octoprint'
 octoprint_log_dir: '/var/log/octoprint'
@@ -11,7 +11,7 @@ octoprint_venv: '{{ octoprint_dir }}/venv'
 octoprint_config: '{{ octoprint_dir }}/config.yaml'
 
 # plugin
-octoprint_git_version: 1.7.3
+octoprint_git_version: 1.8.0rc2
 octoprint_repo: https://github.com/OctoPrint/OctoPrint
 octoprint_repo_dir: '/home/{{ octoprint_user }}/octoprint-src'
 octoprint_printnanny_plugin_repo: https://github.com/bitsy-ai/octoprint-nanny-plugin.git
