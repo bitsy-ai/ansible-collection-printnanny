@@ -114,18 +114,18 @@
 
 h264-video: {
    	type = "rtp"
-   	id = 123
+   	id = 100
 	video = true
 	audio = false
 	data = false
 	videortpmap = "H264/90000"
 	videopt = 100
-	videoport = {{ cam_rtp_port }}
+	videoport = {{ janus_local_rtp_port }}
    	description = "h264 encoded video stream"
 }
 h264-nn: {
    	type = "rtp"
-   	id = 124
+   	id = 200
 	video = true
 	audio = false
 	data = false

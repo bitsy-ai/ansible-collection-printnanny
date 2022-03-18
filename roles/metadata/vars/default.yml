@@ -4,7 +4,7 @@ printnanny_install_dir: '/opt/printnanny'
 printnanny_profile_dir: '{{ printnanny_install_dir }}/profiles/{{ printnanny_profile }}'
 printnanny_license_file: '{{ printnanny_profile_dir }}/PrintNannyLicense.json'
 printnanny_api_url: https://live.printnanny.ai
-janus_admin_secret_file: /opt/printnanny/profiles/default/janus/janus_admin_secret
-janus_token_file: /opt/printnanny/profiles/default/janus/janus_admin_secret
-janus_api_domain: janus.live.printnanny.ai
-janus_rtp_domain: rtp.live.printnanny.ai
+janus_local_admin_secret_file: /opt/printnanny/profiles/default/janus/janus_local_admin_secret
+janus_local_token_file: /opt/printnanny/profiles/default/janus/janus_local_admin_secret
+janus_cloud_api_domain: janus.live.printnanny.ai
+janus_cloud_rtp_domain: rtp.live.printnanny.ai
