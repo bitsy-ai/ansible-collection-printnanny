@@ -33,10 +33,10 @@ gst-launch-1.0 libcamerasrc \
     ! h264parse \
     ! rtph264pay \
     ! queue \
-    {% if janus_remote_enabled and janus_local_enabled %}
+    {% if janus_cloud_enabled and janus_local_enabled %}
     ! multiudpsink clients={{ janus_local_rtp_domain }}:{{ janus_local_rtp_port }},{{ janus_cloud_rtp_domain }}:{{ janus_cloud_rtp_port }}
-    {% elif janus_remote_enabled %}
-    ! udpsink host={{ janus_remote_rtp_domain }} port={{ janus_remote_rtp_port }}
+    {% elif janus_cloud_enabled %}
+    ! udpsink host={{ janus_cloud_rtp_domain }} port={{ janus_cloud_rtp_port }}
     {% else %}
     ! udpsink host={{ janus_local_rtp_domain }} port={{ janus_local_rtp_port }}
     {% endif %}

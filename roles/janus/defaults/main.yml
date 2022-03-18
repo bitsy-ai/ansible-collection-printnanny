@@ -3,7 +3,7 @@
 ##
 # Remote Janus gateway
 ##
-janus_remote_enabled: true
+janus_cloud_enabled: true
 janus_cloud_api_domain: janus.live.printnanny.ai
 janus_cloud_rtp_domain: rtp.live.printnanny.ai
 

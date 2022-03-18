@@ -40,7 +40,7 @@
         janus_ssl_cert: '{{ printnanny_ssl_cert }}'
         janus_ssl_key: '{{ printnanny_ssl_key }}'
         janus_env_file: '{{ printnanny_env }}'
-      when: janus_remote_enabled
+      when: janus_cloud_enabled
     - name: Install OctoPrint
       include_role:
         name: bitsyai.printnanny.octoprint
