@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
+set -x
+
 {{ updater_venv }}/bin/ansible printnanny \
     -m ansible.builtin.set_fact -a "printnanny_release_channel=$1 cacheable=true"
 
-echo "Set printnanny_release_channel=$1"
-echo "Running printnanny-update"
+systemctl restart --no-block printnanny-firstboot
 systemctl restart --no-block printnanny-update
-journalctl -u printnanny-update --follow --no-pager
-
+journalctl -u printnanny-firstboot -u printnanny-update --follow --no-pager
