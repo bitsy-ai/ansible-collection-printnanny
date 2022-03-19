@@ -7,6 +7,9 @@ PartOf=printnanny.target
 [Service]
 Type=simple
 SyslogIdentifier=printnanny-ansible-collection
+RuntimeDirectory={{ printnanny_user }}
+RuntimeDirectoryPreserve=yes
+ConfigurationDirectory={{ printnanny_user }}
 ExecStart=/usr/bin/flock --verbose -n {{ ansible_lockfile }} \
     {{ updater_venv }}/bin/ansible-galaxy \
     collection install --upgrade {{ updater_collection_url }} \
