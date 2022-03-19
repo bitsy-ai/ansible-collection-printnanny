@@ -1,7 +1,7 @@
 [Unit]
 Description=PrintNanny Dashboard
-After=network.target network-online.target printnanny-firstboot.service
-Wants=network.target network-online.target printnanny-firstboot.service
+After=network.target network-online.target printnanny-setup.target
+Wants=network.target network-online.target printnanny-setup.target
 PartOf=printnanny.target
 
 [Service]

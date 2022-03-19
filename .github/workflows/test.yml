@@ -39,12 +39,9 @@ jobs:
             - group5
             - group6
             - group7
-            - group8
           include:
             - group: group7
-              tags: metadata,testsetup
-            - group: group8
-              tags: firstboot,testsetup
+              tags: firstboot,metadata,testsetup
       steps:
         - uses: actions/checkout@v2
           with:

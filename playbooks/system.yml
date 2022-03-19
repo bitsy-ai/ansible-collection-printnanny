@@ -21,7 +21,7 @@
       include_role:
         name: bitsyai.printnanny.install
         public: true
-    - name: Install metadata/firstboot/update services
+    - name: Install firstboot/update services
       include_role:
         name: bitsyai.printnanny.metadata
     - name: Install local Janus Gateway
