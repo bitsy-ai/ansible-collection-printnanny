@@ -1,8 +1,8 @@
 # {{ ansible_managed }}
 [Unit]
 Description=Expose environment & configuration data used by other PrintNanny services.
-After=network.target network-online.target printnanny-firstboot.service printnanny-ansible-collection.service
-Wants=network.service network-online.target printnanny-firstboot.service printnanny-ansible-collection.service
+After=network.target network-online.target printnanny-firstboot.service
+Wants=network.service network-online.target printnanny-firstboot.service
 
 [Service]
 Type=oneshot
