@@ -6,6 +6,7 @@
     path: '{{ janus_conf_dir }}'
   tags:
     - metadata
+
 - name: Render janus configs
   ansible.builtin.template:
     src: '{{ item }}'

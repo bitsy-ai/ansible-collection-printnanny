@@ -1,0 +1,94 @@
+---
+- name: gather service_facts
+  ansible.builtin.service_facts:
+
+- name: restart printnanny-janus if running
+  ansible.builtin.debug:
+    var: ansible_facts.services["printnanny-janus.service"]
+  notify:
+    - gather service_facts
+    - check printnanny-janus running
+
+- name: check printnanny-janus running
+  ansible.builtin.debug:
+    var: ansible_facts.services["printnanny-janus.service"]
+  when: ansible_facts.services["printnanny-janus.service"].state == "running"
+  notify:
+    - restart printnanny-janus
+
+- name: restart printnanny-janus
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: printnanny-janus
+    no_block: true
+    state: restarted
+
+- name: restart printnanny-dash
+  ignore_errors: true
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: printnanny-dash
+    no_block: true
+    state: restarted
+    enabled: true
+
+- name: restart printnanny.target
+  become: true
+  ansible.builtin.systemd:
+    name: printnanny.target
+    state: restarted
+    no_block: true
+    enabled: true
+
+- name: reload nginx
+  become: true
+  ansible.builtin.systemd:
+    name: nginx
+    state: reloaded
+    no_block: true
+
+- name: restart printnanny-monitor
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: printnanny-monitor
+    state: restarted
+    no_block: true
+
+- name: restart printnanny-monitor if running
+  ansible.builtin.debug:
+    var: ansible_facts.services["printnanny-monitor.service"]
+  notify:
+    - gather service_facts
+    - check printnanny-monitor running
+
+- name: check printnanny-monitor running
+  ansible.builtin.debug:
+    var: ansible_facts.services["printnanny-monitor.service"]
+  when: ansible_facts.services["printnanny-monitor.service"].state == "running"
+  notify:
+    - restart printnanny-monitor
+
+- name: restart printnanny-monitor
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: printnanny-janus
+    no_block: true
+    state: restarted
+
+- name: restart printnanny-update
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: printnanny-update
+    no_block: true
+    state: restarted
+    enabled: true
+
+- name: ldconfig
+  become: true
+  ansible.builtin.command:
+    cmd: ldconfig

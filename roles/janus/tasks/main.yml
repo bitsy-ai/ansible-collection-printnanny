@@ -22,6 +22,7 @@
 
 - include_tasks: configs.yml
 - include_tasks: factsd.yml
+
 - name: Update /etc/systemd/system/printnanny-janus.service
   become: true
   ansible.builtin.template:
