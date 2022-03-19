@@ -31,4 +31,4 @@ galaxy_info:
     - rabbitmq
     - mqtt
 dependencies:
-  role: bitsyai.printnanny.handlers
+  - role: bitsyai.printnanny.handlers
