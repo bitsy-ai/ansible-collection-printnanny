@@ -11,7 +11,7 @@ RuntimeDirectoryPreserve=yes
 ConfigurationDirectory={{ printnanny_user }}
 ExecStart=/usr/bin/flock --verbose -n {{ ansible_lockfile }} \
     {{ updater_venv }}/bin/ansible-galaxy \
-    collection install --upgrade {{ updater_collection_url }} \
+    collection install --upgrade {{ updater_collection_url }},${PRINTNANNY_RELEASE_CHANNEL} \
     --collections-path {{ printnanny_ansible_dir }}
 Restart=on-failure
 RestartSec=10
