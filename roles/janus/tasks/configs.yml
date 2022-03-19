@@ -6,6 +6,7 @@
     path: '{{ janus_conf_dir }}'
   tags:
     - metadata
+
 - name: Render janus configs
   ansible.builtin.template:
     src: '{{ item }}'
@@ -18,5 +19,15 @@
   tags:
     - metadata
     - secret
+  register: janus_config_updated
+
+- name: Populate Ansible service_facts
+  ansible.builtin.service_facts:
+
+
+- name: Notify restart printnanny-janus if running
+  ansible.builtin.debug:
+    var: ansible_facts.services["printnanny-janus.service"]
+  when: ansible_facts.services["printnanny-janus.service"].state == "running"
   notify:
     - restart printnanny-janus
