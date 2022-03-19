@@ -1,7 +1,7 @@
 [Unit]
 Description=PrintNanny Metrics Agent
-After=network.target network-online.target printnanny-metadata.service
-Wants=network.target network-online.target printnanny-metadata.service
+After=network.target network-online.target printnanny-firstboot.service.service
+Wants=network.target network-online.target printnanny-firstboot.service.service
 PartOf=printnanny.target
 
 [Service]

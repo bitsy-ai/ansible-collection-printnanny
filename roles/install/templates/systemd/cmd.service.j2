@@ -1,7 +1,7 @@
 [Unit]
 Description=Execute Ansible playbook to handle remote command
-After=network.target network-online.target printnanny-ansible-collection.service printnanny-firstboot.service printnanny-metadata.service
-Wants=network.target network-online.target printnanny-ansible-collection.service printnanny-firstboot.service printnanny-metadata.service
+After=network.target network-online.target printnanny-ansible-collection.service printnanny-firstboot.service printnanny-firstboot.service.service
+Wants=network.target network-online.target printnanny-ansible-collection.service printnanny-firstboot.service printnanny-firstboot.service.service
 PartOf=printnanny.target
 
 [Service]

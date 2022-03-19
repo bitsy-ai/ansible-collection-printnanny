@@ -1,8 +1,9 @@
 # {{ ansible_managed }}
 [Unit]
 Description=Janus Gateway
-After=syslog.target network.target network-online.target printnanny-metadata.service
-Wants=syslog.target network.target network-online.target printnanny-metadata.service
+After=syslog.target network.target network-online.target printnanny-firstboot.service.service
+Wants=syslog.target network.target network-online.target printnanny-firstboot.service.service
+PartOf=printnanny.target
 
 [Service]
 Type=simple

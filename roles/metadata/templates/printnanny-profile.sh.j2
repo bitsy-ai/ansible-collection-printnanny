@@ -3,7 +3,7 @@
 set +x\
 
 echo "Stopping printnany-metadata.service"
-systemctl stop printnanny-metadata.service
+systemctl stop printnanny-firstboot.service.service
 echo "Stopping printnanny-update.service"
 systemctl stop printnanny-update.service
 echo "Stopping printnanny-dash.service"
@@ -16,7 +16,7 @@ systemctl stop printnanny-monitor.service
 {{ updater_venv }}/bin/ansible printnanny \
     -m ansible.builtin.set_fact -a "printnanny_profile=$1 cacheable=true"
 
-systemctl start printnanny-metadata
+systemctl start printnanny-firstboot.service
 systemctl start printnanny-dash
 systemctl start printnanny-mqtt
-journalctl -u printnanny-metadata -u printnanny-dash -u printnanny-mqtt --follow
+journalctl -u printnanny-firstboot.service -u printnanny-dash -u printnanny-mqtt --follow
