@@ -30,14 +30,5 @@
     src: systemd/janus.service.j2
     dest: /etc/systemd/system/printnanny-janus.service
     force: true
-  register: janus_config_updated
-- name: Populate Ansible service_facts
-  ansible.builtin.service_facts:
-
-
-- name: Notify restart printnanny-janus if running
-  ansible.builtin.debug:
-    var: ansible_facts.services["printnanny-janus.service"]
-  when: ansible_facts.services["printnanny-janus.service"].state == "running" and janus_config_updated.changed
   notify:
     - restart printnanny-janus

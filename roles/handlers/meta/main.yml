@@ -3,7 +3,7 @@ galaxy_info:
   namespace: bitsyai.printnanny
   role_name: install
   author: Leigh Johnson
-  description: An Ansible role to install & configure PrintNanny on a Raspberry Pi
+  description: An Ansible role containing shared handlers
   company: Bitsy AI Labs
 
 
@@ -33,5 +33,4 @@ galaxy_info:
     - octoprint
     - mainsail
 
-dependencies:
-  - role: bitsyai.printnanny.handlers
+dependencies: []

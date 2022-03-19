@@ -10,7 +10,6 @@
     enabled: true
 
 - name: restart printnanny-dash
-  ignore_errors: true
   become: true
   ansible.builtin.systemd:
     daemon_reload: true
