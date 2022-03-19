@@ -107,3 +107,18 @@
     src: crashdump.sh.j2
     dest: /usr/local/bin/printnanny-crashdump
     mode: 0755
+
+- name: 'Configure /etc/printnanny'
+  become: true
+  ansible.builtin.file:
+    state: directory
+    path: '/etc/printnanny'
+    mode: 0755
+
+
+- name: Render /etc/printnanny-os-release
+  become: true
+  ansible.builtin.template:
+    src: os-release.j2
+    dest: /etc/printnanny/os-release
+    mode: 0755

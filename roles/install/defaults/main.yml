@@ -9,9 +9,11 @@ nginx_proxy_buffers_num: 4
 nginx_buffer_size: '256k'
 
 ##
-##
 # printnanny_ vars
 ##
+printnanny_os_major_version: '{{ ansible_distribution_major_version }}'
+printnanny_os_version: '11.0.0'
+
 printnanny_profile: default
 printnanny_loglevel: info
 
