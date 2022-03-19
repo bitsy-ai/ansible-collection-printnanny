@@ -21,7 +21,6 @@ ExecStart=/usr/bin/flock --verbose -n {{ ansible_lockfile }} \
     {% endif %}
     bitsyai.printnanny.metadata \
     --tags "firstboot"
-RemainAfterExit=yes
 Restart=on-failure
 RestartSec=10
 [Install]
