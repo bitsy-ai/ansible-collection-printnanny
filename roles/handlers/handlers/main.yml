@@ -78,3 +78,17 @@
     name: printnanny-janus
     no_block: true
     state: restarted
+
+- name: restart printnanny-update
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: printnanny-update
+    no_block: true
+    state: restarted
+    enabled: true
+
+- name: ldconfig
+  become: true
+  ansible.builtin.command:
+    cmd: ldconfig
