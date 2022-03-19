@@ -3,7 +3,6 @@
 Description=PrintNanny Update Service
 After=network.target network-online.target printnanny-ansible-collection.service
 Wants=network.target network-online.target printnanny-ansible-collection.service
-Conflicts=printnanny.target printnanny-setup.target
 
 [Service]
 SyslogIdentifier=printnanny-update
