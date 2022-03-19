@@ -5,7 +5,7 @@ Wants=network.target network-online.target
 PartOf=printnanny.target
 
 [Service]
-Type=simple
+Type=oneshot
 SyslogIdentifier=printnanny-ansible-collection
 RuntimeDirectory={{ printnanny_user }}
 RuntimeDirectoryPreserve=yes
