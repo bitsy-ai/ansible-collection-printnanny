@@ -64,13 +64,8 @@ cors: {
 # Examples of recommended cipher strings at https://cheatsheetseries.owasp.org/cheatsheets/TLS_Cipher_String_Cheat_Sheet.html
 {% if janus_ssl_enabled %}
 certificates: {
-	cert_pem = "{{ janus_ssl_cert }}"
-	cert_key = "{{ janus_ssl_key }}"
-	{% if janus_ssl_passphrase is not none %}
-	cert_pwd = "{{ janus_ssl_passphrase }}"
-	{% endif %}
-	{% if janus_ssl_ciphers is not none %}
-	ciphers = "{{ janus_ssl_ciphers }}"
-	{% endif %}
+	#cert_pem = ""
+	#cert_key = ""
+	#ciphers = ""
 }
 {% endif %}

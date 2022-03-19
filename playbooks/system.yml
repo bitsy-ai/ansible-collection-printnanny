@@ -27,20 +27,6 @@
     - name: Install local Janus Gateway
       include_role:
         name: bitsyai.printnanny.janus
-      vars:
-        janus_ssl_cert: '{{ printnanny_ssl_cert }}'
-        janus_ssl_key: '{{ printnanny_ssl_key }}'
-        janus_env_file: '{{ printnanny_env }}'
-      when: janus_local_enabled
-    - name: Install local Janus Gateway
-      include_role:
-        name: bitsyai.printnanny.janus
-        tasks_from: remote.yml
-      vars:
-        janus_ssl_cert: '{{ printnanny_ssl_cert }}'
-        janus_ssl_key: '{{ printnanny_ssl_key }}'
-        janus_env_file: '{{ printnanny_env }}'
-      when: janus_cloud_enabled
     - name: Install OctoPrint
       include_role:
         name: bitsyai.printnanny.octoprint

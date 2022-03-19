@@ -126,6 +126,6 @@ janus_ssl_cert: '/etc/ssl/certs/ssl-cert-snakeoil.pem'
 janus_ssl_key: '/etc/ssl/private/ssl-cert-snakeoil.key'
 
 janus_ssl_ciphers: null
-janus_ssl_enabled: true
+janus_ssl_enabled: false
 janus_ssl_passphrase: null
 janus_upgrade_available: true
