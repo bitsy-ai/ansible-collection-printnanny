@@ -36,6 +36,7 @@
 - name: Enable printnanny-setup.target
   become: true
   ansible.builtin.systemd:
+
     enabled: true
     name: printnanny-setup.target
     no_block: true
