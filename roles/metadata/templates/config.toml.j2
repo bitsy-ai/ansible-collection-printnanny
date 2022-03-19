@@ -17,6 +17,7 @@ success_dir = "{{ printnanny_cmd_success_dir }}"
 error_dir = "{{ printnanny_cmd_error_dir }}"
 
 [janus_local]
+id = 0
 admin_secret = "{{ lookup('password', janus_local_admin_secret_file, length=32 ) }}"
 token = "{{ lookup('password', janus_local_token_file, length=32 ) }}"
 admin_base_path = "{{ janus_conf['janus.transport.http'].admin_base_path }}"
