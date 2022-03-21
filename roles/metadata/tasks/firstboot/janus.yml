@@ -3,8 +3,8 @@
     cacheable: true
     janus_local_admin_secret: "{{ lookup('password', janus_local_admin_secret_file, length=32 ) }}"
     janus_local_token: "{{ lookup('password', janus_local_token_file, length=32 ) }}"
-    janus_local_videoroom_admin_key: "{{ lookup('password', janus_local_videoroom_admin_key_file, length=32 ) }}"
-    janus_local_videoroom_secret: "{{ lookup('password', janus_local_videoroom_secret_file, length=32 ) }}"
+    janus_local_streaming_secret: "{{ lookup('password', janus_local_streaming_secret_file, length=32 ) }}"
+    janus_local_streaming_pin: "{{ lookup('password', janus_local_streaming_pin_file, length=32 ) }}"
   tags:
     - secret
     - firstboot
@@ -13,8 +13,8 @@
   vars:
     janus_local_admin_secret: "{{ lookup('password', janus_local_admin_secret_file, length=32 ) }}"
     janus_local_token: "{{ lookup('password', janus_local_token_file, length=32 ) }}"
-    janus_local_videoroom_admin_key: "{{ lookup('password', janus_local_videoroom_admin_key_file, length=32 ) }}"
-    janus_local_videoroom_secret: "{{ lookup('password', janus_local_videoroom_secret_file, length=32 ) }}"
+    janus_local_streaming_secret: "{{ lookup('password', janus_local_streaming_secret_file, length=32 ) }}"
+    janus_local_streaming_pin: "{{ lookup('password', janus_local_streaming_pin_file, length=32 ) }}"
   include_role:
     name: bitsyai.printnanny.janus
     tasks_from: configs.yml
