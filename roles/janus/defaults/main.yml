@@ -47,13 +47,13 @@ janus_local_admin_secret_file: '{{ janus_conf_dir }}/janus_local_admin_secret'
 # authenticate janus API requests, /janus endpoint
 janus_local_token_file: '{{ janus_conf_dir }}/janus_local_token'
 # authenticate videoroom plugin create requests, also required to initiate rtp forwarding
-janus_local_videoroom_admin_key_file: '{{ janus_conf_dir }}/janus_videoroom_admin_key'
+janus_local_streaming_secret_file: '{{ janus_conf_dir }}/janus_streaming_secret'
 # authenticate videoroom plugin join requests / sign requests
-janus_local_videoroom_secret_file: '{{ janus_conf_dir }}/janus_vieoroom_secret'
+janus_local_streaming_pin_file: '{{ janus_conf_dir }}/janus_streaming_pin'
 
 janus_local_admin_secret: null
 janus_local_token: null
-janus_local_videoroom_admin_key: null
+janus_local_streaming_secret: null
 
 janus_libwebsockets_repo: https://github.com/warmcat/libwebsockets.git
 janus_libwebsockets_version: v3.2-stable

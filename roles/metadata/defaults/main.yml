@@ -28,8 +28,8 @@ ansible_config:
   fact_caching_connection: /opt/printnanny/ansible/facts.json
 
 ## janus vars
-janus_local_enabled: false
-local_remote_enabled: true
+janus_local_enabled: true
+janus_cloud_enabled: true
 janus_conf_dir: /etc/janus
 janus_local_admin_secret_file: '{{ janus_conf_dir }}/janus_local_admin_secret'
 janus_local_token_file: '{{ janus_conf_dir }}/janus_local_token'
@@ -73,3 +73,5 @@ janus_conf:
     https_port: 8089
     http: true
     http_port: 8088
+  janus.transport.websockets:
+    ws_port: 8188
