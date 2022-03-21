@@ -21,7 +21,6 @@ ExecStartPre={{ updater_venv }}/bin/ansible-playbook \
     --tags "dash"
 ExecStart=/usr/local/bin/printnanny-dash
 User={{ printnanny_user }}
-
 Restart=on-failure
 RestartSec=10
 

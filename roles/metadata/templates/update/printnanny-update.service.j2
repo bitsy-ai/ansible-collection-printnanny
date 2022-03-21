@@ -22,6 +22,7 @@ ExecStart=/usr/bin/flock --verbose -n {{ ansible_lockfile }} \
     {% endif %}
     --skip-tags "packer" \
     {{ playbook }}
+RemainAfterExit=yes
 {% endfor %}
 [Install]
 WantedBy=multi-user.target
