@@ -57,4 +57,4 @@ jobs:
               community.general
               community.crypto
               nginxinc.nginx_core
-            tags: ${{ matrix.tags }}
+            # tags: ${{ matrix.tags }}

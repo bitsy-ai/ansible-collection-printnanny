@@ -8,16 +8,16 @@
     group: '{{ printnanny_group }}'
     mode: 0755
 
-- import_tasks: boot_config.yml
-- import_tasks: apt.yml
-- import_tasks: nginx.yml
-- import_tasks: camera.yml
-- import_tasks: monitor.yml
-- import_tasks: cli.yml
-- import_tasks: www.yml
-- import_tasks: mqtt.yml
-- import_tasks: update.yml
-- import_tasks: firstboot/main.yml
+- include_tasks: boot_config.yml
+- include_tasks: apt.yml
+- include_tasks: nginx.yml
+- include_tasks: camera.yml
+- include_tasks: monitor.yml
+- include_tasks: cli.yml
+- include_tasks: www.yml
+- include_tasks: mqtt.yml
+- include_tasks: update.yml
+- include_tasks: firstboot/main.yml
 
 - name: Render printnanny-ansible-collection.service
   become: true

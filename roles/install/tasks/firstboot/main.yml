@@ -42,15 +42,15 @@
     - firstboot
 
 - name: env firstbook tasks
-  import_tasks: env.yml
+  include_tasks: env.yml
 
 - name: www firstbook tasks
-  import_tasks: www.yml
+  include_tasks: www.yml
 - name: janus firstbook tasks
-  import_tasks: janus.yml
+  include_tasks: janus.yml
   when: janus_local_enabled
 - name: mqtt firstbook tasks
-  import_tasks: mqtt.yml
+  include_tasks: mqtt.yml
 
 - name: Render config.toml
   vars:
