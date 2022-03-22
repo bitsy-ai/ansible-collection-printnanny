@@ -6,7 +6,6 @@
     owner: '{{ printnanny_user }}'
   tags:
     - firstboot
-    - metadata
 
 - name: Create {{ printnanny_data_dir }}
   become: true
@@ -19,7 +18,6 @@
     recurse: true
   tags:
     - firstboot
-    - metadata
 
 - name: Create {{ printnanny_keys_dir }}
   become: true
@@ -31,7 +29,6 @@
     mode: 0771
   tags:
     - firstboot
-    - metadata
 
 - name: Create {{ printnanny_backups_dir }}
   become: true
@@ -43,32 +40,15 @@
     mode: 0775
   tags:
     - firstboot
-    - metadata
+
+- name: env firstbook tasks
+  include_tasks: firstboot/env.yml
 
 - name: www firstbook tasks
-  import_tasks: www.yml
+  include_tasks: firstboot/www.yml
 - name: janus firstbook tasks
-  import_tasks: janus.yml
+  include_tasks: firstboot/janus.yml
   when: janus_local_enabled
-- name: mqtt firstbook tasks
-  import_tasks: mqtt.yml
 
-- name: Render config.toml
-  vars:
-    janus_local_admin_secret: "{{ lookup('password', janus_local_admin_secret_file, length=32 ) }}"
-    janus_local_token: "{{ lookup('password', janus_local_token_file, length=32 ) }}"
-    janus_local_streaming_secret: "{{ lookup('password', janus_local_streaming_secret_file, length=32 ) }}"
-    janus_local_streaming_pin: "{{ lookup('password', janus_local_streaming_pin_file, length=32 ) }}"
-  ansible.builtin.template:
-    src: config.toml.j2
-    dest: '{{ printnanny_config_toml }}'
-    mode: 0644
-    force: true
-    owner: '{{ printnanny_user }}'
-    group: '{{ printnanny_user }}'
-  notify:
-    - restart printnanny-dash
-  tags:
-    - secret
-    - firstboot
-    - metadata
+- name: certs
+  include_tasks: firstboot/certs.yml

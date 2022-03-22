@@ -5,7 +5,6 @@
   tags:
     - secret
     - firstboot
-    - dash
 
 - name: Render PrintNanny Dashboard Rocket.toml
   ansible.builtin.template:
@@ -19,6 +18,5 @@
   tags:
     - secret
     - firstboot
-    - dash
   notify:
     - restart printnanny-dash

@@ -38,10 +38,6 @@ jobs:
             - group3
             - group5
             - group6
-            - group7
-          include:
-            - group: group7
-              tags: firstboot,metadata,testsetup
       steps:
         - uses: actions/checkout@v2
           with:
@@ -61,4 +57,4 @@ jobs:
               community.general
               community.crypto
               nginxinc.nginx_core
-            tags: ${{ matrix.tags }}
+            # tags: ${{ matrix.tags }}

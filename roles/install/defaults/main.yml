@@ -45,8 +45,6 @@ printnanny_ec_fingerprint_md5: '{{ printnanny_keys_dir }}/ec_fingerprint.md5'
 printnanny_config_toml: '{{ printnanny_profile_dir }}/PrintNanny.toml'
 printnanny_backups_dir: "{{ printnanny_profile_dir }}/backups"
 printnanny_ansible_dir: "{{ printnanny_install_dir }}/ansible"
-updater_venv: '{{ printnanny_ansible_dir }}/venv'
-updater_collection_url: 'git+https://github.com/bitsy-ai/ansible-collection-printnanny.git'
 
 printnanny_www_dir: '{{ printnanny_install_dir }}/www'
 printnanny_www_secret_file: '{{ printnanny_www_dir }}/key'
@@ -56,7 +54,6 @@ printnanny_www_port: 9001
 printnanny_www_log_level: "normal"
 
 ansible_facts_path: /etc/ansible/facts.d
-ansible_lockfile: '/var/run/printnanny/ansible.lock'
 printnanny_device_fact: /etc/ansible/facts.d/device.fact
 printnanny_license_fact: /etc/ansible/facts.d/license.fact
 printnanny_janus_fact: /etc/ansible/facts.d/janus.fact
@@ -70,10 +67,41 @@ printnanny_user: printnanny
 printnanny_group: printnanny
 printnanny_groups:
   - ssl-cert
-printnanny_release_channel: main
 
 printnanny_ssl_key_size: 2048
 printnanny_ssl_key_type: DSA
+
+##
+# ansible_ vars
+##
+
+ansible_hosts_file: /etc/ansible/hosts
+ansible_config:
+  fact_caching_timeout: 86400
+  fact_caching: jsonfile
+  fact_caching_connection: /opt/printnanny/ansible/facts.json
+
+
+# updater_ vars
+##
+
+printnanny_collection_version: 1.6.0
+printnanny_release_channel: main
+printnanny_edition: octoprint_desktop
+updater_app_name: printnanny
+updater_playbooks:
+  - 'bitsyai.printnanny.images.{{ printnanny_edition }}'
+
+jinja2_version: 'jinja2>=2.11'
+ansible_updater_version: 'ansible-core>2.12,<2.13'
+ansible_collection_updater: ansible-updater
+updater_tmpfs: '/var/run/{{ updater_app_name }}'
+ansible_lockfile: '/var/run/{{ updater_app_name }}/ansible.lock'
+
+update_user: ansible
+updater_venv: '{{ printnanny_ansible_dir }}/venv'
+updater_collection_url: 'git+https://github.com/bitsy-ai/ansible-collection-printnanny.git'
+
 
 # TODO replace with PrintNanny Network ca-signed cert
 printnanny_ssl_cert: '/etc/ssl/certs/ssl-cert-snakeoil.pem'
@@ -83,7 +111,6 @@ printnanny_ssl_ciphers: 'HIGH:!aNULL:!MD5'
 printnanny_ssl_country_name: 'US'
 printnanny_ssl_email_address: support@printnanny.ai
 printnanny_ssl_organization_name: 'Bitsy AI Labs, LLC'
-printnanny_edition: octoprint_desktop
 
 ##
 # log dirs
@@ -180,9 +207,62 @@ honeycomb_api_key: '22ffab0ec6af32b2be565bc831555e44'
 ##
 janus_cloud_enabled: true
 janus_local_enabled: true
+
 janus_local_rtp_domain: localhost
 janus_local_api_domain: localhost
 janus_cloud_api_domain: janus.live.printnanny.ai
 janus_cloud_rtp_domain: rtp.live.printnanny.ai
 janus_local_rtp_port: 5101
 janus_cloud_rtp_port: 5102
+
+janus_conf_dir: /etc/janus
+# authenticate gateway-level admin requests, /admin endpoint
+janus_local_admin_secret_file: '{{ janus_conf_dir }}/janus_local_admin_secret'
+# authenticate janus API requests, /janus endpoint
+janus_local_token_file: '{{ janus_conf_dir }}/janus_local_token'
+# authenticate videoroom plugin create requests, also required to initiate rtp forwarding
+janus_local_streaming_secret_file: '{{ janus_conf_dir }}/janus_streaming_secret'
+# authenticate videoroom plugin join requests / sign requests
+janus_local_streaming_pin_file: '{{ janus_conf_dir }}/janus_streaming_pin'
+janus_local_admin_secret: "{{ lookup('password', janus_local_admin_secret_file, length=32 ) }}"
+janus_local_token: "{{ lookup('password', janus_local_token_file, length=32 ) }}"
+janus_install_dir: /opt/janus
+
+janus_conf:
+  janus:
+    plugins_folder: "{{ janus_install_dir }}/lib/janus/plugins"
+    transports_folder: "{{ janus_install_dir }}/lib/janus/transports"
+    events_folder: "{{ janus_install_dir }}/lib/janus/events"
+    loggers_folder: "{{ janus_install_dir }}/lib/janus/loggers"
+    log_to_stdout: true
+    debug_level: 7
+    pid_file: "/var/run/janus.pid"
+    session_timeout: 60
+    candidates_timeout: 45
+    reclaim_session_timeout: 0
+    no_webrtc_encryption: false
+    ignore_unreachable_ice_server: true
+    janus.transport.http:
+    admin_base_path: "/admin"
+    admin_http_port: 7088
+    admin_https_port: 7089
+    admin_http: true
+    admin_https: false
+    base_path: "/janus"
+    https: false
+    https_port: 8089
+    http: true
+    http_port: 8088
+  janus.transport.http:
+    admin_base_path: "/admin"
+    admin_http_port: 7088
+    admin_https_port: 7089
+    admin_http: true
+    admin_https: false
+    base_path: "/janus"
+    https: false
+    https_port: 8089
+    http: true
+    http_port: 8088
+  janus.transport.websockets:
+    ws_port: 8188

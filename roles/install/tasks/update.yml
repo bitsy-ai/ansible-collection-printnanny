@@ -73,10 +73,9 @@
 
 # get ara configuration before rendering ansible.cfg (if enabled)
 - name: Configure ara
-  ansible.builtin.include_tasks: install/ara.yml
+  ansible.builtin.include_tasks: ara.yml
   when: ara_enabled
-  tags:
-    - metadata
+
 - name: Create ansible.cfg
   become: true
   ansible.builtin.template:
@@ -84,8 +83,6 @@
     src: update/ansible.cfg.j2
     dest: /etc/ansible/ansible.cfg
     force: true
-  tags:
-    - metadata
 
 - name: Create printnanny-update service
   become: true
@@ -94,8 +91,6 @@
     src: update/printnanny-update.service.j2
     dest: /etc/systemd/system/printnanny-update.service
     force: true
-  tags:
-    - metadata
 
 - name: Create ansible pull hosts
   become: true
@@ -103,8 +98,6 @@
     src: files/hosts
     dest: '{{ ansible_hosts_file }}'
     mode: 0755
-  tags:
-    - metadata
 
 - name: Create {{ ansible_facts_path }}
   become: true
@@ -112,16 +105,14 @@
     path: '{{ ansible_facts_path }}'
     state: directory
     mode: 0755
-  tags:
-    - metadata
+
 - name: Render /etc/ansible/facts.d/device.fact
   become: true
   ansible.builtin.copy:
     src: facts.d/device.fact
     dest: '{{ printnanny_device_fact }}'
     mode: 0755
-  tags:
-    - metadata
+
 - name: Render printnanny-update.sh
   become: true
   ansible.builtin.template:
@@ -129,8 +120,7 @@
     dest: /usr/local/bin/printnanny-update
     force: true
     mode: 0775
-  tags:
-    - metadata
+
 - name: Render printnanny-profile.sh
   become: true
   ansible.builtin.template:
@@ -138,8 +128,7 @@
     dest: /usr/local/bin/printnanny-profile
     force: true
     mode: 0775
-  tags:
-    - metadata
+
 
 - name: Render printnanny-release-channel.sh
   become: true
@@ -148,8 +137,7 @@
     dest: /usr/local/bin/printnanny-release-channel
     force: true
     mode: 0775
-  tags:
-    - metadata
+
 
 - name: Configure printnanny-update.service
   become: true
@@ -157,7 +145,5 @@
     name: 'printnanny-update'
     enabled: false
     no_block: true
-  tags:
-    - metadata
   notify:
     - restart printnanny-update
