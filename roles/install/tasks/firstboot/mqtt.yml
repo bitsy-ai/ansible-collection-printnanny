@@ -24,7 +24,6 @@
   tags:
     - secret
     - firstboot
-    - metadata
 
 - name: Extract provisional public key
   become: true
@@ -36,7 +35,6 @@
   tags:
     - secret
     - firstboot
-    - metadata
   register: printnanny_ec_public_key_output
 
 - name: Write md5 fingerprint to file
@@ -50,7 +48,6 @@
   tags:
     - secret
     - firstboot
-    - metadata
 
 - name: Set printnanny_ec_fingerprint
   ansible.builtin.set_fact:
@@ -59,7 +56,6 @@
   tags:
     - secret
     - firstboot
-    - metadata
 
 - name: Create '{{ printnanny_cacerts_dir }}'
   become: true
@@ -92,4 +88,23 @@
     group: '{{ printnanny_user }}'
     owner: '{{ printnanny_user }}'
   tags:
+    - firstboot
+
+- name: Render config.toml
+  vars:
+    janus_local_admin_secret: "{{ lookup('password', janus_local_admin_secret_file, length=32 ) }}"
+    janus_local_token: "{{ lookup('password', janus_local_token_file, length=32 ) }}"
+    janus_local_streaming_secret: "{{ lookup('password', janus_local_streaming_secret_file, length=32 ) }}"
+    janus_local_streaming_pin: "{{ lookup('password', janus_local_streaming_pin_file, length=32 ) }}"
+  ansible.builtin.template:
+    src: config.toml.j2
+    dest: '{{ printnanny_config_toml }}'
+    mode: 0644
+    force: true
+    owner: '{{ printnanny_user }}'
+    group: '{{ printnanny_user }}'
+  notify:
+    - restart printnanny-dash
+  tags:
+    - secret
     - firstboot
