@@ -9,16 +9,6 @@ Type=simple
 SyslogIdentifier=printnanny-www
 EnvironmentFile=-{{ printnanny_env }}
 WorkingDirectory={{ printnanny_www_dir }}
-ExecStartPre={{ updater_venv }}/bin/ansible-playbook \
-    {% if printnanny_loglevel == 'info' %}
-    -vv \
-    {% elif printnanny_loglevel == 'debug' %}
-    -vvv \
-    {% else %}
-    -v \
-    {% endif %}
-    bitsyai.printnanny.system \
-    --tags "dash"
 ExecStart=/usr/local/bin/printnanny-dash
 User={{ printnanny_user }}
 Restart=on-failure

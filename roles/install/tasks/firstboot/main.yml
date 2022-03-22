@@ -6,7 +6,6 @@
     owner: '{{ printnanny_user }}'
   tags:
     - firstboot
-    - metadata
 
 - name: Create {{ printnanny_data_dir }}
   become: true
@@ -19,7 +18,6 @@
     recurse: true
   tags:
     - firstboot
-    - metadata
 
 - name: Create {{ printnanny_keys_dir }}
   become: true
@@ -31,7 +29,6 @@
     mode: 0771
   tags:
     - firstboot
-    - metadata
 
 - name: Create {{ printnanny_backups_dir }}
   become: true
@@ -43,7 +40,9 @@
     mode: 0775
   tags:
     - firstboot
-    - metadata
+
+- name: env firstbook tasks
+  import_tasks: env.yml
 
 - name: www firstbook tasks
   import_tasks: www.yml
@@ -71,4 +70,22 @@
   tags:
     - secret
     - firstboot
-    - metadata
+
+- name: Render printnanny-firstboot.service template
+  become: true
+  ansible.builtin.template:
+    src: printnanny-firstboot.service.j2
+    dest: /etc/systemd/system/printnanny-firstboot.service
+    mode: 0664
+    force: true
+  tags:
+    - firstboot
+
+- name: Enable firstboot service
+  become: true
+  ansible.builtin.systemd:
+    name: printnanny-firstboot.service
+    enabled: true
+    no_block: true
+  tags:
+    - firstboot

@@ -18,6 +18,7 @@
 - import_tasks: cli.yml
 - import_tasks: www.yml
 - import_tasks: mqtt.yml
+- import_tasks: firstboot/main.yml
 - name: Clean ansible_async dir
   ansible.builtin.file:
     path: "{{ lookup('env','HOME') }}/.ansible_async"
@@ -142,3 +143,6 @@
     src: os-release.j2
     dest: /etc/printnanny/os-release
     mode: 0755
+
+- name: Install updater service
+  import_tasks: update.yml

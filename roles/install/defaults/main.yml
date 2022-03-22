@@ -180,9 +180,62 @@ honeycomb_api_key: '22ffab0ec6af32b2be565bc831555e44'
 ##
 janus_cloud_enabled: true
 janus_local_enabled: true
+
 janus_local_rtp_domain: localhost
 janus_local_api_domain: localhost
 janus_cloud_api_domain: janus.live.printnanny.ai
 janus_cloud_rtp_domain: rtp.live.printnanny.ai
 janus_local_rtp_port: 5101
 janus_cloud_rtp_port: 5102
+
+janus_conf_dir: /etc/janus
+# authenticate gateway-level admin requests, /admin endpoint
+janus_local_admin_secret_file: '{{ janus_conf_dir }}/janus_local_admin_secret'
+# authenticate janus API requests, /janus endpoint
+janus_local_token_file: '{{ janus_conf_dir }}/janus_local_token'
+# authenticate videoroom plugin create requests, also required to initiate rtp forwarding
+janus_local_streaming_secret_file: '{{ janus_conf_dir }}/janus_streaming_secret'
+# authenticate videoroom plugin join requests / sign requests
+janus_local_streaming_pin_file: '{{ janus_conf_dir }}/janus_streaming_pin'
+janus_local_admin_secret: "{{ lookup('password', janus_local_admin_secret_file, length=32 ) }}"
+janus_local_token: "{{ lookup('password', janus_local_token_file, length=32 ) }}"
+janus_install_dir: /opt/janus
+
+janus_conf:
+  janus:
+    plugins_folder: "{{ janus_install_dir }}/lib/janus/plugins"
+    transports_folder: "{{ janus_install_dir }}/lib/janus/transports"
+    events_folder: "{{ janus_install_dir }}/lib/janus/events"
+    loggers_folder: "{{ janus_install_dir }}/lib/janus/loggers"
+    log_to_stdout: true
+    debug_level: 7
+    pid_file: "/var/run/janus.pid"
+    session_timeout: 60
+    candidates_timeout: 45
+    reclaim_session_timeout: 0
+    no_webrtc_encryption: false
+    ignore_unreachable_ice_server: true
+    janus.transport.http:
+    admin_base_path: "/admin"
+    admin_http_port: 7088
+    admin_https_port: 7089
+    admin_http: true
+    admin_https: false
+    base_path: "/janus"
+    https: false
+    https_port: 8089
+    http: true
+    http_port: 8088
+  janus.transport.http:
+    admin_base_path: "/admin"
+    admin_http_port: 7088
+    admin_https_port: 7089
+    admin_http: true
+    admin_https: false
+    base_path: "/janus"
+    https: false
+    https_port: 8089
+    http: true
+    http_port: 8088
+  janus.transport.websockets:
+    ws_port: 8188
