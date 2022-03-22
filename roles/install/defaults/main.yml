@@ -45,8 +45,6 @@ printnanny_ec_fingerprint_md5: '{{ printnanny_keys_dir }}/ec_fingerprint.md5'
 printnanny_config_toml: '{{ printnanny_profile_dir }}/PrintNanny.toml'
 printnanny_backups_dir: "{{ printnanny_profile_dir }}/backups"
 printnanny_ansible_dir: "{{ printnanny_install_dir }}/ansible"
-updater_venv: '{{ printnanny_ansible_dir }}/venv'
-updater_collection_url: 'git+https://github.com/bitsy-ai/ansible-collection-printnanny.git'
 
 printnanny_www_dir: '{{ printnanny_install_dir }}/www'
 printnanny_www_secret_file: '{{ printnanny_www_dir }}/key'
@@ -56,7 +54,6 @@ printnanny_www_port: 9001
 printnanny_www_log_level: "normal"
 
 ansible_facts_path: /etc/ansible/facts.d
-ansible_lockfile: '/var/run/printnanny/ansible.lock'
 printnanny_device_fact: /etc/ansible/facts.d/device.fact
 printnanny_license_fact: /etc/ansible/facts.d/license.fact
 printnanny_janus_fact: /etc/ansible/facts.d/janus.fact
@@ -70,10 +67,41 @@ printnanny_user: printnanny
 printnanny_group: printnanny
 printnanny_groups:
   - ssl-cert
-printnanny_release_channel: main
 
 printnanny_ssl_key_size: 2048
 printnanny_ssl_key_type: DSA
+
+##
+# ansible_ vars
+##
+
+ansible_hosts_file: /etc/ansible/hosts
+ansible_config:
+  fact_caching_timeout: 86400
+  fact_caching: jsonfile
+  fact_caching_connection: /opt/printnanny/ansible/facts.json
+
+
+# updater_ vars
+##
+
+printnanny_collection_version: 1.6.0
+printnanny_release_channel: main
+printnanny_edition: octoprint_desktop
+updater_app_name: printnanny
+updater_playbooks:
+  - 'bitsyai.printnanny.images.{{ printnanny_edition }}'
+
+jinja2_version: 'jinja2>=2.11'
+ansible_updater_version: 'ansible-core>2.12,<2.13'
+ansible_collection_updater: ansible-updater
+updater_tmpfs: '/var/run/{{ updater_app_name }}'
+ansible_lockfile: '/var/run/{{ updater_app_name }}/ansible.lock'
+
+update_user: ansible
+updater_venv: '{{ printnanny_ansible_dir }}/venv'
+updater_collection_url: 'git+https://github.com/bitsy-ai/ansible-collection-printnanny.git'
+
 
 # TODO replace with PrintNanny Network ca-signed cert
 printnanny_ssl_cert: '/etc/ssl/certs/ssl-cert-snakeoil.pem'
@@ -83,7 +111,6 @@ printnanny_ssl_ciphers: 'HIGH:!aNULL:!MD5'
 printnanny_ssl_country_name: 'US'
 printnanny_ssl_email_address: support@printnanny.ai
 printnanny_ssl_organization_name: 'Bitsy AI Labs, LLC'
-printnanny_edition: octoprint_desktop
 
 ##
 # log dirs
