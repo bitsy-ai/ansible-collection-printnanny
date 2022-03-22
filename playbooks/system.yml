@@ -13,8 +13,6 @@
       include_role:
         name: bitsyai.printnanny.common
         public: true
-    - name: Include PrintNanny Profile Vars
-      include_vars: ../roles/metadata/vars/{{ printnanny_profile|default("default", true) }}.yml
     - name: Include PrintNanny Edition vars
       include_vars: ../roles/install/vars/{{ printnanny_edition|default("octoprint_desktop", true) }}.yml
     - name: Install PrintNanny
