@@ -88,14 +88,6 @@
     dest: /etc/systemd/system/printnanny-setup.target
     force: true
 
-- name: Enable printnanny-setup.target
-  become: true
-  ansible.builtin.systemd:
-
-    enabled: true
-    name: printnanny-setup.target
-    no_block: true
-
 - name: Render crashdump script
   become: true
   ansible.builtin.template:
@@ -116,6 +108,14 @@
     src: os-release.j2
     dest: /etc/printnanny/os-release
     mode: 0755
+
+- name: Enable printnanny-setup.target
+  become: true
+  ansible.builtin.systemd:
+
+    enabled: true
+    name: printnanny-setup.target
+    no_block: true
 
 - name: Clean ansible_async dir
   ansible.builtin.file:
