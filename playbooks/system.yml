@@ -15,10 +15,14 @@
         public: true
     - name: Include PrintNanny Edition vars
       include_vars: ../roles/install/vars/{{ printnanny_edition|default("octoprint_desktop", true) }}.yml
+      tags:
+        - firstboot
     - name: Install PrintNanny
       include_role:
         name: bitsyai.printnanny.install
         public: true
+      tags:
+        - firstboot
     - name: Install local Janus Gateway
       include_role:
         name: bitsyai.printnanny.janus
