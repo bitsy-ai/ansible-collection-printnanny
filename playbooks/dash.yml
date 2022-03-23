@@ -9,7 +9,15 @@
       - printnanny
       - dash
   tasks:
-    - name: Install PrintNanny
+    - name: Include PrintNanny Edition vars
+      include_vars: ../roles/install/vars/{{ printnanny_edition|default("octoprint_desktop", true) }}.yml
+    - name: Include PrintNanny Profile Vars
+      include_vars: ../roles/install/vars/{{ printnanny_profile|default("default", true) }}.yml
+    - name: Install PrintNanny www
       include_role:
         name: bitsyai.printnanny.install
         tasks_from: firstboot/www.yml
+    - name: Install PrintNanny certs
+      include_role:
+        name: bitsyai.printnanny.install
+        tasks_from: firstboot/certs.yml
