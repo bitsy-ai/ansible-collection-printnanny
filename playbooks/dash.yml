@@ -1,0 +1,15 @@
+---
+- name: Install PrintNanny components
+  hosts: printnanny
+  gather_facts: true
+  vars:
+    ara_playbook_name: 'execstartpre printnanny dash'
+    ara_playbook_labels:
+      - execstartpre
+      - printnanny
+      - dash
+  tasks:
+    - name: Install PrintNanny
+      include_role:
+        name: bitsyai.printnanny.install
+        tasks_from: firstboot/www.yml
