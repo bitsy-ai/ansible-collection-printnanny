@@ -17,6 +17,10 @@
       include_vars: ../roles/install/vars/{{ printnanny_edition|default("octoprint_desktop", true) }}.yml
       tags:
         - firstboot
+    - name: Include PrintNanny Profile Vars
+      include_vars: ../roles/install/vars/{{ printnanny_profile|default("default", true) }}.yml
+      tags:
+        - firstboot
     - name: Install PrintNanny
       include_role:
         name: bitsyai.printnanny.install
