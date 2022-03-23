@@ -9,5 +9,4 @@ Documentation for the collection.
 ## `bitsyai.printnanny.install`
 ## `bitsyai.printnanny.janus`
 ## `bitsyai.printnanny.grafana`
-## `bitsyai.printnanny.metadata`
 ## `bitsyai.printnanny.octoprint`
