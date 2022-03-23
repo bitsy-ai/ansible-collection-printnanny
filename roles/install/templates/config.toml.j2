@@ -18,7 +18,7 @@ error_dir = "{{ printnanny_cmd_error_dir }}"
 
 [janus_local]
 id = 0
-device_id = 0
+device = 0
 api_domain = "{{ janus_local_api_domain }}"
 rtp_domain = "{{ janus_local_api_domain }}"
 admin_secret = "{{ lookup('password', janus_local_admin_secret_file, length=32 ) }}"
@@ -28,15 +28,19 @@ admin_port = {{ janus_conf['janus.transport.http'].admin_http_port }}
 admin_url = "http://{{ janus_local_api_domain }}:{{ janus_conf['janus.transport.http'].admin_http_port }}{{ janus_conf['janus.transport.http'].admin_base_path }}"
 api_port = {{ janus_conf['janus.transport.http'].http_port }}
 api_url = "http://{{ janus_local_api_domain }}:{{ janus_conf['janus.transport.http'].http_port}}{{ janus_conf['janus.transport.http'].base_path }}"
-websockets_url = "ws://{{ janus_local_api_domain }}:{{ janus_conf['janus.transport.websockets'].ws_port }}"
+websocket_url = "ws://{{ janus_local_api_domain }}:{{ janus_conf['janus.transport.websockets'].ws_port }}"
 websocket_port = {{ janus_conf['janus.transport.websockets'].ws_port }}
 created_dt = "{{ ansible_date_time.iso8601 }}"
 updated_dt = "{{ ansible_date_time.iso8601 }}"
-config_type = "local"
-active = "{{ janus_local_enabled }}"
+config_type = "edge"
+{% if janus_local_enabled %}
+active = true
+{% else %}
+active = false
+{% endif %}
 secret = "{{ janus_local_streaming_secret }}"
 pin = "{{ janus_local_streaming_pin }}"
-info = "{}"
+info = {}
 rtp_port = {{ janus_local_rtp_port }}
 
 [mqtt]
