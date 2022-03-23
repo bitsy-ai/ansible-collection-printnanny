@@ -97,3 +97,21 @@
   become: true
   ansible.builtin.systemd:
     daemon_reload: true
+
+- name: enable printnanny-firstboot.service
+  become: true
+  ansible.builtin.systemd:
+    enabled: true
+    name: printnanny-firstboot.service
+
+- name: enable printnanny-setup.target
+  become: true
+  ansible.builtin.systemd:
+    enabled: true
+    name: printnanny-setup.target
+
+- name: enable printnanny.target
+  become: true
+  ansible.builtin.systemd:
+    enabled: true
+    name: printnanny.target

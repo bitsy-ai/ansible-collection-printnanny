@@ -71,14 +71,8 @@
     src: systemd/printnanny.target.j2
     dest: /etc/systemd/system/printnanny.target
     force: true
-
-- name: Enable printnanny.target
-  become: true
-  ansible.builtin.systemd:
-    enabled: true
-    name: printnanny.target
-    no_block: true
-    daemon_reload: true
+  notify:
+    - enable printnanny.target
 
 - name: Render printnanny-firstboot.service template
   become: true
@@ -89,15 +83,8 @@
     force: true
   tags:
     - firstboot
-
-- name: Enable firstboot service
-  become: true
-  ansible.builtin.systemd:
-    name: printnanny-firstboot.service
-    enabled: true
-    no_block: true
-  tags:
-    - firstboot
+  notify:
+    - enable printnanny-firstboot.service
 
 - name: Render printnanny-setup.target
   become: true
@@ -106,6 +93,8 @@
     src: systemd/printnanny-setup.target.j2
     dest: /etc/systemd/system/printnanny-setup.target
     force: true
+  notify:
+    - enable printnanny-setup.target
 
 - name: Render crashdump script
   become: true
@@ -127,14 +116,6 @@
     src: os-release.j2
     dest: /etc/printnanny/os-release
     mode: 0755
-
-- name: Enable printnanny-setup.target
-  become: true
-  ansible.builtin.systemd:
-
-    enabled: true
-    name: printnanny-setup.target
-    no_block: true
 
 - name: Clean ansible_async dir
   ansible.builtin.file:
