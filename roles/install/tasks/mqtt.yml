@@ -14,13 +14,13 @@
     dest: /etc/systemd/system/printnanny-mqtt.path
     force: true
 
-- name: Enable mqtt service
-  become: true
-  ansible.builtin.systemd:
-    service: printnanny-mqtt.service
-    enabled: true
-    no_block: true
-    daemon_reload: true
+# - name: Enable mqtt service
+#   become: true
+#   ansible.builtin.systemd:
+#     service: printnanny-mqtt.service
+#     enabled: true
+#     no_block: true
+#     daemon_reload: true
 
 - name: Enable mqtt.path
   become: true
@@ -28,4 +28,3 @@
     service: printnanny-mqtt.path
     enabled: true
     no_block: true
-    daemon_reload: true
