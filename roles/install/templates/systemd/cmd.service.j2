@@ -11,7 +11,6 @@ RuntimeDirectory={{ printnanny_user }}
 RuntimeDirectoryPreserve=yes
 ConfigurationDirectory={{ printnanny_user }}
 EnvironmentFile=-{{ printnanny_env }}
-User={{ printnanny_user }}
 ExecStart={{ updater_venv }}/bin/ansible-playbook \
     {% if printnanny_loglevel == 'info' %}
     -vv \
