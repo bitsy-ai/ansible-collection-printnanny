@@ -1,7 +1,7 @@
 [Unit]
 Description=PrintNanny Dashboard
-After=network.target network-online.target printnanny-setup.target printnanny-ansible-collection.service
-Wants=network.target network-online.target printnanny-setup.target printnanny-ansible-collection.service
+After=network.target network-online.target printnanny-setup.target
+Wants=network.target network-online.target printnanny-setup.target
 PartOf=printnanny.target
 
 [Service]
@@ -9,15 +9,6 @@ Type=simple
 SyslogIdentifier=printnanny-www
 EnvironmentFile=-{{ printnanny_env }}
 WorkingDirectory={{ printnanny_www_dir }}
-ExecStartPre={{ updater_venv }}/bin/ansible-playbook \
-    {% if printnanny_loglevel == 'info' %}
-    -vv \
-    {% elif printnanny_loglevel == 'debug' %}
-    -vvv \
-    {% else %}
-    -v \
-    {% endif %}
-    bitsyai.printnanny.dash
 ExecStart=/usr/local/bin/printnanny-dash
 User={{ printnanny_user }}
 Restart=on-failure

@@ -46,6 +46,15 @@
   notify:
     - reload nginx
 
+- name: Render /usr/share/html/502.html
+  become: true
+  ansible.builtin.template:
+    src: nginx/502.html.j2
+    dest: /usr/share/html/502.html
+    mode: 0644
+  notify:
+    - reload nginx
+
 - name: Enable nginx.service
   become: true
   ansible.builtin.systemd:
