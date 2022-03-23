@@ -18,6 +18,8 @@
 - include_tasks: mqtt.yml
 - include_tasks: update.yml
 - include_tasks: firstboot/main.yml
+  tags:
+    - firstboot
 
 - name: Render printnanny-ansible-collection.service
   become: true
