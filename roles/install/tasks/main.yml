@@ -17,11 +17,11 @@
 - include_tasks: www.yml
 - include_tasks: mqtt.yml
 - include_tasks: update.yml
-- include_tasks: 
+- include_tasks:
     file: firstboot/main.yml
     apply:
-          tags:
-            - cmd
+      tags:
+        - firstboot
   tags:
     - firstboot
 
