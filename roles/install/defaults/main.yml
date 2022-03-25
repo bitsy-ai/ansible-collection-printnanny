@@ -11,6 +11,9 @@ nginx_buffer_size: '256k'
 ##
 # printnanny_ vars
 ##
+printnanny_target: printnanny.target
+printnanny_setup_target: printnanny-setup.target
+
 printnanny_os_major_version: '{{ ansible_distribution_major_version }}'
 printnanny_os_version: '11.0.0'
 

@@ -3,7 +3,7 @@
 Description=Create a unique device identity on first boot
 After=network.target network-online.target printnanny-ansible-collection.service
 Wants=network.service network-online.target printnanny-ansible-collection.service
-PartOf=printnanny-setup.target
+PartOf={{ printnanny_setup_target }}
 
 [Service]
 Type=oneshot

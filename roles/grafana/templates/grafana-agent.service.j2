@@ -1,8 +1,8 @@
 [Unit]
 Description=PrintNanny Metrics Agent
-After=network.target network-online.target printnanny-setup.target
-Wants=network.target network-online.target printnanny-setup.target
-PartOf=printnanny.target
+After=network.target network-online.target {{ printnanny_setup_target }}
+Wants=network.target network-online.target {{ printnanny_setup_target }}
+PartOf={{ printnanny_target }}
 
 [Service]
 Type=simple
@@ -17,4 +17,4 @@ Restart=on-failure
 RestartSec=10
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=multi-user.target {{ printnanny_target }}
