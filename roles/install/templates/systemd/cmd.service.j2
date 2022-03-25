@@ -1,8 +1,9 @@
 [Unit]
 Description=Execute Ansible playbook to handle remote command
-After=network.target network-online.target printnanny-ansible-collection.service printnanny-setup.target
-Wants=network.target network-online.target printnanny-ansible-collection.service printnanny-setup.target
-PartOf=printnanny.target
+After=network.target network-online.target printnanny-ansible-collection.service {{ printnanny_setup_target }}
+Wants=network.target network-online.target printnanny-ansible-collection.service {{ printnanny_setup_target }}
+PartOf={{ printnanny_target }}
+ReloadPropagatedFrom={{ printnanny_target }}
 
 [Service]
 Type=simple
@@ -22,4 +23,4 @@ ExecStart={{ updater_venv }}/bin/ansible-playbook \
 Restart=on-failure
 RestartSec=10
 [Install]
-WantedBy=multi-user.target
+WantedBy=multi-user.target {{ printnanny_target }}

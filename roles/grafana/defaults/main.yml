@@ -1,6 +1,9 @@
 ---
 # defaults file for grafana
 printnanny_user: printnanny
+printnanny_target: printnanny.target
+printnanny_setup_target: printnanny-setup.target
+
 grafana_dir: /opt/printnanny/metrics
 grafana_config_file: '{{ grafana_dir }}/grafana-agent.yml'
 grafana_arch: '{% if ansible_architecture == "x86_64" %}amd64{% else %}arm64{% endif %}'
