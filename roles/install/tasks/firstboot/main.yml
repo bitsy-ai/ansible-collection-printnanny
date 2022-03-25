@@ -48,7 +48,7 @@
   include_tasks: firstboot/www.yml
 - name: janus firstbook tasks
   include_tasks: firstboot/janus.yml
-  when: janus_local_enabled
+  when: janus_edge_enabled
 
 - name: certs
   include_tasks: firstboot/certs.yml

@@ -120,7 +120,7 @@ h264-video: {
 	data = false
 	videortpmap = "H264/90000"
 	videopt = 100
-	videoport = {{ janus_local_rtp_port }}
+	videoport = {{ janus_edge_rtp_port }}
    	description = "h264 encoded video stream"
 }
 h264-nn: {

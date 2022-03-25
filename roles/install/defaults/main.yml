@@ -206,26 +206,26 @@ honeycomb_api_key: '22ffab0ec6af32b2be565bc831555e44'
 # janus vars
 ##
 janus_cloud_enabled: true
-janus_local_enabled: true
+janus_edge_enabled: true
 
-janus_local_rtp_domain: localhost
-janus_local_api_domain: localhost
+janus_edge_rtp_domain: localhost
+janus_edge_api_domain: localhost
 janus_cloud_api_domain: janus.live.printnanny.ai
 janus_cloud_rtp_domain: rtp.live.printnanny.ai
-janus_local_rtp_port: 5101
+janus_edge_rtp_port: 5101
 janus_cloud_rtp_port: 5102
 
 janus_conf_dir: /etc/janus
 # authenticate gateway-level admin requests, /admin endpoint
-janus_local_admin_secret_file: '{{ janus_conf_dir }}/janus_local_admin_secret'
+janus_edge_admin_secret_file: '{{ janus_conf_dir }}/janus_edge_admin_secret'
 # authenticate janus API requests, /janus endpoint
-janus_local_token_file: '{{ janus_conf_dir }}/janus_local_token'
+janus_edge_token_file: '{{ janus_conf_dir }}/janus_edge_token'
 # authenticate videoroom plugin create requests, also required to initiate rtp forwarding
-janus_local_streaming_secret_file: '{{ janus_conf_dir }}/janus_streaming_secret'
+janus_edge_streaming_secret_file: '{{ janus_conf_dir }}/janus_streaming_secret'
 # authenticate videoroom plugin join requests / sign requests
-janus_local_streaming_pin_file: '{{ janus_conf_dir }}/janus_streaming_pin'
-janus_local_admin_secret: "{{ lookup('password', janus_local_admin_secret_file, length=32 ) }}"
-janus_local_token: "{{ lookup('password', janus_local_token_file, length=32 ) }}"
+janus_edge_streaming_pin_file: '{{ janus_conf_dir }}/janus_streaming_pin'
+janus_edge_admin_secret: "{{ lookup('password', janus_edge_admin_secret_file, length=32 ) }}"
+janus_edge_token: "{{ lookup('password', janus_edge_token_file, length=32 ) }}"
 janus_install_dir: /opt/janus
 
 janus_conf:

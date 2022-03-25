@@ -7,5 +7,5 @@ printnanny_api_url: http://aurora:8000
 ara_enabled: false
 janus_cloud_api_domain: aurora
 janus_cloud_rtp_domain: aurora
-janus_local_admin_secret_file: /opt/printnanny/profiles/local/janus/janus_local_admin_secret
-janus_local_token_file: /opt/printnanny/profiles/local/janus/janus_local_admin_secret
+janus_edge_admin_secret_file: /opt/printnanny/profiles/local/janus/janus_edge_admin_secret
+janus_edge_token_file: /opt/printnanny/profiles/local/janus/janus_edge_admin_secret
