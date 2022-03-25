@@ -5,26 +5,3 @@
     src: systemd/mqtt.service.j2
     dest: /etc/systemd/system/printnanny-mqtt.service
     force: true
-
-- name: Create printnanny-mqtt.service unit
-  become: true
-  ansible.builtin.template:
-    mode: 0664
-    src: systemd/mqtt.path.j2
-    dest: /etc/systemd/system/printnanny-mqtt.path
-    force: true
-
-# - name: Enable mqtt service
-#   become: true
-#   ansible.builtin.systemd:
-#     service: printnanny-mqtt.service
-#     enabled: true
-#     no_block: true
-#     daemon_reload: true
-
-- name: Enable mqtt.path
-  become: true
-  ansible.builtin.systemd:
-    service: printnanny-mqtt.path
-    enabled: true
-    no_block: true
