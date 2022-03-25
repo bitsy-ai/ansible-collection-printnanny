@@ -14,8 +14,8 @@ general: {
 	#ws_interface = "eth0"			# Whether we should bind this server to a specific interface only
 	#ws_ip = "192.168.0.1"			# Whether we should bind this server to a specific IP address only
 	#ws_unix = "/run/ws.sock"		# Use WebSocket server over UNIX socket instead of TCP
-	wss = true						# Whether to enable secure WebSockets
-	wss_port = 8989					# WebSockets server secure port, if enabled
+	#wss = true						# Whether to enable secure WebSockets
+	#wss_port = 8989					# WebSockets server secure port, if enabled
 	#wss_interface = "eth0"			# Whether we should bind this server to a specific interface only
 	#wss_ip = "192.168.0.1"			# Whether we should bind this server to a specific IP address only
 	#wss_unix = "/run/wss.sock"		# Use WebSocket server over UNIX socket instead of TCP
@@ -62,10 +62,8 @@ cors: {
 # You can also disable insecure protocols and ciphers by configuring the
 # 'ciphers' property accordingly (no limitation by default).
 # Examples of recommended cipher strings at https://cheatsheetseries.owasp.org/cheatsheets/TLS_Cipher_String_Cheat_Sheet.html
-{% if janus_ssl_enabled %}
 certificates: {
 	#cert_pem = ""
 	#cert_key = ""
 	#ciphers = ""
 }
-{% endif %}
