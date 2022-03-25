@@ -1,20 +1,20 @@
 - name: Create janus secrets
   ansible.builtin.set_fact:
     cacheable: true
-    janus_local_admin_secret: "{{ lookup('password', janus_local_admin_secret_file, length=32 ) }}"
-    janus_local_token: "{{ lookup('password', janus_local_token_file, length=32 ) }}"
-    janus_local_streaming_secret: "{{ lookup('password', janus_local_streaming_secret_file, length=32 ) }}"
-    janus_local_streaming_pin: "{{ lookup('password', janus_local_streaming_pin_file, length=32 ) }}"
+    janus_edge_admin_secret: "{{ lookup('password', janus_edge_admin_secret_file, length=32 ) }}"
+    janus_edge_token: "{{ lookup('password', janus_edge_token_file, length=32 ) }}"
+    janus_edge_streaming_secret: "{{ lookup('password', janus_edge_streaming_secret_file, length=32 ) }}"
+    janus_edge_streaming_pin: "{{ lookup('password', janus_edge_streaming_pin_file, length=32 ) }}"
   tags:
     - secret
     - firstboot
 
 - name: Render janus configs
   vars:
-    janus_local_admin_secret: "{{ lookup('password', janus_local_admin_secret_file, length=32 ) }}"
-    janus_local_token: "{{ lookup('password', janus_local_token_file, length=32 ) }}"
-    janus_local_streaming_secret: "{{ lookup('password', janus_local_streaming_secret_file, length=32 ) }}"
-    janus_local_streaming_pin: "{{ lookup('password', janus_local_streaming_pin_file, length=32 ) }}"
+    janus_edge_admin_secret: "{{ lookup('password', janus_edge_admin_secret_file, length=32 ) }}"
+    janus_edge_token: "{{ lookup('password', janus_edge_token_file, length=32 ) }}"
+    janus_edge_streaming_secret: "{{ lookup('password', janus_edge_streaming_secret_file, length=32 ) }}"
+    janus_edge_streaming_pin: "{{ lookup('password', janus_edge_streaming_pin_file, length=32 ) }}"
   include_role:
     name: bitsyai.printnanny.janus
     tasks_from: configs.yml

@@ -3,7 +3,7 @@ Description=PrintNanny MQTT Client
 After=network.target network-online.target printnanny-setup.target
 Wants=network.target network-online.target printnanny-setup.target
 PartOf=printnanny.target
-
+ReloadPropagatedFrom=printnanny.target
 
 [Service]
 Type=simple
@@ -18,4 +18,4 @@ Restart=on-failure
 RestartSec=10
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=multi-user.target printnanny.target

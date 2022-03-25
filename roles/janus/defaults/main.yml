@@ -10,12 +10,12 @@ janus_cloud_rtp_domain: rtp.live.printnanny.ai
 ##
 # Local Janus Installation
 ##
-janus_local_enabled: true
-janus_local_api_domain: localhost
-janus_local_rtp_domain: localhost
+janus_edge_enabled: true
+janus_edge_api_domain: localhost
+janus_edge_rtp_domain: localhost
 
 janus_auth: {}
-janus_local_rtp_port: 5104
+janus_edge_rtp_port: 5104
 janus_cloud_rtp_port: 5000
 nn_rtp_port: 5105
 janus_build_extras:
@@ -43,17 +43,17 @@ janus_env_file: /etc/janus/janus.env
 
 janus_installed_version: null
 # authenticate gateway-level admin requests, /admin endpoint
-janus_local_admin_secret_file: '{{ janus_conf_dir }}/janus_local_admin_secret'
+janus_edge_admin_secret_file: '{{ janus_conf_dir }}/janus_edge_admin_secret'
 # authenticate janus API requests, /janus endpoint
-janus_local_token_file: '{{ janus_conf_dir }}/janus_local_token'
+janus_edge_token_file: '{{ janus_conf_dir }}/janus_edge_token'
 # authenticate videoroom plugin create requests, also required to initiate rtp forwarding
-janus_local_streaming_secret_file: '{{ janus_conf_dir }}/janus_streaming_secret'
+janus_edge_streaming_secret_file: '{{ janus_conf_dir }}/janus_streaming_secret'
 # authenticate videoroom plugin join requests / sign requests
-janus_local_streaming_pin_file: '{{ janus_conf_dir }}/janus_streaming_pin'
+janus_edge_streaming_pin_file: '{{ janus_conf_dir }}/janus_streaming_pin'
 
-janus_local_admin_secret: null
-janus_local_token: null
-janus_local_streaming_secret: null
+janus_edge_admin_secret: null
+janus_edge_token: null
+janus_edge_streaming_secret: null
 
 janus_libwebsockets_repo: https://github.com/warmcat/libwebsockets.git
 janus_libwebsockets_version: v3.2-stable

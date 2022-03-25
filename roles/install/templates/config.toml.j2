@@ -1,4 +1,5 @@
 name = "{{ printnanny_profile }}"
+config_file = "{{ printnanny_config_toml }}"
 install_dir = "{{ printnanny_profile_dir }}"
 runtime_dir = "{{ printnanny_runtime_dir }}"
 events_socket = "{{ printnanny_runtime_dir }}/events.sock"
@@ -16,32 +17,30 @@ queue_dir = "{{ printnanny_cmd_queue_dir }}"
 success_dir = "{{ printnanny_cmd_success_dir }}"
 error_dir = "{{ printnanny_cmd_error_dir }}"
 
-[janus_local]
-id = 0
+{% if janus_edge_enabled %}
+[janus_edge_request]
 device = 0
-api_domain = "{{ janus_local_api_domain }}"
-rtp_domain = "{{ janus_local_api_domain }}"
-admin_secret = "{{ lookup('password', janus_local_admin_secret_file, length=32 ) }}"
-token = "{{ lookup('password', janus_local_token_file, length=32 ) }}"
-admin_base_path = "{{ janus_conf['janus.transport.http'].admin_base_path }}"
+api_domain = "{{ janus_edge_api_domain }}"
+rtp_domain = "{{ janus_edge_api_domain }}"
 admin_port = {{ janus_conf['janus.transport.http'].admin_http_port }}
-admin_url = "http://{{ janus_local_api_domain }}:{{ janus_conf['janus.transport.http'].admin_http_port }}{{ janus_conf['janus.transport.http'].admin_base_path }}"
+admin_url = "http://{{ janus_edge_api_domain }}:{{ janus_conf['janus.transport.http'].admin_http_port }}{{ janus_conf['janus.transport.http'].admin_base_path }}"
 api_port = {{ janus_conf['janus.transport.http'].http_port }}
-api_url = "http://{{ janus_local_api_domain }}:{{ janus_conf['janus.transport.http'].http_port}}{{ janus_conf['janus.transport.http'].base_path }}"
-websocket_url = "ws://{{ janus_local_api_domain }}:{{ janus_conf['janus.transport.websockets'].ws_port }}"
+api_url = "http://{{ janus_edge_api_domain }}:{{ janus_conf['janus.transport.http'].http_port}}{{ janus_conf['janus.transport.http'].base_path }}"
+websocket_url = "ws://{{ janus_edge_api_domain }}:{{ janus_conf['janus.transport.websockets'].ws_port }}"
 websocket_port = {{ janus_conf['janus.transport.websockets'].ws_port }}
-created_dt = "{{ ansible_date_time.iso8601 }}"
-updated_dt = "{{ ansible_date_time.iso8601 }}"
 config_type = "edge"
-{% if janus_local_enabled %}
-active = true
-{% else %}
 active = false
-{% endif %}
-secret = "{{ janus_local_streaming_secret }}"
-pin = "{{ janus_local_streaming_pin }}"
+secret = "{{ janus_edge_streaming_secret }}"
+pin = "{{ janus_edge_streaming_pin }}"
 info = {}
-rtp_port = {{ janus_local_rtp_port }}
+rtp_port = {{ janus_edge_rtp_port }}
+
+[janus_edge_request.auth]
+api_token = "{{ lookup('password', janus_edge_token_file, length=32 ) }}"
+admin_secret = "{{ lookup('password', janus_edge_admin_secret_file, length=32 ) }}"
+config_type = "edge"
+user = 0
+{% endif %}
 
 [mqtt]
 private_key = "{{ printnanny_ec_private_key }}"

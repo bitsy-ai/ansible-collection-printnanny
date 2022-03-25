@@ -52,8 +52,8 @@ general: {
                                     # without this, the Admin API MUST
                                     # be enabled, as tokens are added and removed
                                     # through messages sent there.
-    {% if janus_local_admin_secret is defined %}
-    admin_secret = "{{ janus_local_admin_secret }}"
+    {% if janus_edge_admin_secret is defined %}
+    admin_secret = "{{ janus_edge_admin_secret }}"
     {% endif %}
                                     # String that all Janus requests must contain
                                     # to be accepted/authorized by the admin/monitor.
@@ -377,7 +377,7 @@ nat: {
 # enabled or not. Use the 'disable' directive to prevent Janus from
 # loading one or more plugins: use a comma separated list of plugin file
 # names to identify the plugins to disable. By default all available
-# plugins are enabled and loaded at startup.
+# plugins are enabled and loaded at startup.8
 plugins: {
     disable = "libjanus_voicemail.so,libjanus_recordplay.so,libjanus_audiobridge.so,libjanus_nosip.so,libjanus_textroom.so"
 }
