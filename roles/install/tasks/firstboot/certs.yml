@@ -102,8 +102,6 @@
     mode: 0644
     owner: '{{ printnanny_user }}'
     group: '{{ printnanny_user }}'
-  notify:
-    - restart printnanny-dash
   tags:
     - secret
     - firstboot
