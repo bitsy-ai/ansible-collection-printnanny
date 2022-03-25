@@ -1,0 +1,10 @@
+[Unit]
+Description="Watch {{ printnanny_config_toml }}"
+
+[Path]
+PathChanged={{ printnanny_config_toml }}
+Unit=printnanny-config-watcher.service
+
+
+[Install]
+WantedBy=multi-user.target

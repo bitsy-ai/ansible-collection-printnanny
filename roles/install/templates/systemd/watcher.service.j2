@@ -1,0 +1,13 @@
+[Unit]
+Description=Restart PrintNanny services when {{ printnanny_config_toml }} changes
+After=network.target network-online.target
+Wants=network.target network-online.target
+
+
+[Service]
+Type=oneshot
+SyslogIdentifier=printnanny-config-watcher
+ExecStart=/usr/bin/systemctl restart printnanny.target
+
+[Install]
+WantedBy=multi-user.target
