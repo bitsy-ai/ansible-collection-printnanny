@@ -100,7 +100,6 @@
     src: config.toml.j2
     dest: '{{ printnanny_config_toml }}'
     mode: 0644
-    force: true
     owner: '{{ printnanny_user }}'
     group: '{{ printnanny_user }}'
   notify:

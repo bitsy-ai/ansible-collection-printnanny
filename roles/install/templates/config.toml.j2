@@ -1,4 +1,5 @@
 name = "{{ printnanny_profile }}"
+config_file = "{{ printnanny_config_toml }}"
 install_dir = "{{ printnanny_profile_dir }}"
 runtime_dir = "{{ printnanny_runtime_dir }}"
 events_socket = "{{ printnanny_runtime_dir }}/events.sock"
@@ -28,7 +29,7 @@ api_url = "http://{{ janus_edge_api_domain }}:{{ janus_conf['janus.transport.htt
 websocket_url = "ws://{{ janus_edge_api_domain }}:{{ janus_conf['janus.transport.websockets'].ws_port }}"
 websocket_port = {{ janus_conf['janus.transport.websockets'].ws_port }}
 config_type = "edge"
-active = true
+active = false
 secret = "{{ janus_edge_streaming_secret }}"
 pin = "{{ janus_edge_streaming_pin }}"
 info = {}
