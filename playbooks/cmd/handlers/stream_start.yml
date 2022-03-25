@@ -7,7 +7,7 @@
   ansible.builtin.set_fact:
     janus_cloud_api_domain: '{{ printnanny_cmd.stream.api_domain }}'
     janus_cloud_rtp_domain: '{{ printnanny_cmd.stream.rtp_domain }}'
-    janus_local_rtp_port: '{{ printnanny_cmd.stream.rtp_port }}'
+    janus_cloud_rtp_port: '{{ printnanny_cmd.stream.rtp_port }}'
     cacheable: true
 - name: Run monitor tasks
   ansible.builtin.include_role:
