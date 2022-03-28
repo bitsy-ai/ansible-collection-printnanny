@@ -15,7 +15,7 @@ EnvironmentFile=-{{ printnanny_env }}
 ExecStart=/usr/local/bin/printnanny -v event subscribe
 User={{ printnanny_user }}
 Restart=on-failure
-RestartSec=10
+RestartSec={{ printnanny_systemd_restart_sec }}
 
 [Install]
 WantedBy=multi-user.target {{ printnanny_target }}

@@ -74,6 +74,9 @@ printnanny_groups:
 printnanny_ssl_key_size: 2048
 printnanny_ssl_key_type: DSA
 
+# grace period before restarting systemd services
+printnanny_systemd_restart_sec: 20
+
 ##
 # ansible_ vars
 ##
