@@ -24,7 +24,7 @@ ExecStart=/usr/bin/flock --verbose -n {{ ansible_lockfile }} \
     --tags "firstboot"
 ExecStart=rm -f {{ ansible_lockfile }}
 Restart=on-failure
-RestartSec=10
+RestartSec={{ printnanny_systemd_restart_sec }}
 RemainAfterExit=yes
 [Install]
 WantedBy=multi-user.target
