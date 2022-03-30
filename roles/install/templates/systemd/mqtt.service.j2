@@ -4,8 +4,6 @@ After=network.target network-online.target {{ printnanny_setup_target }}
 Wants=network.target network-online.target {{ printnanny_setup_target }}
 PartOf={{ printnanny_target }}
 ReloadPropagatedFrom={{ printnanny_target }}
-StartLimitInterval=200
-StartLimitBurst=5
 
 [Service]
 Type=simple
