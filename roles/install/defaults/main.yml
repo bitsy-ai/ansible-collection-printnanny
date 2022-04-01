@@ -61,7 +61,7 @@ printnanny_device_fact: /etc/ansible/facts.d/device.fact
 printnanny_license_fact: /etc/ansible/facts.d/license.fact
 printnanny_janus_fact: /etc/ansible/facts.d/janus.fact
 
-printnanny_cli_version: 0.19.6
+printnanny_cli_version: 0.19.7
 printnanny_cli_repo: 'https://github.com/bitsy-ai/printnanny-cli'
 printnanny_cli_url: '{{ printnanny_cli_repo }}/releases/download/v{{ printnanny_cli_version }}/printnanny-{{ ansible_architecture }}-unknown-linux-gnu.tar.gz'
 printnanny_www_templates_url: '{{ printnanny_cli_repo }}/releases/download/v{{ printnanny_cli_version }}/printnanny-www-templates.tar.gz'
