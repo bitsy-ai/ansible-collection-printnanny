@@ -9,6 +9,8 @@
     janus_cloud_rtp_domain: '{{ printnanny_cmd.stream.rtp_domain }}'
     janus_cloud_rtp_port: '{{ printnanny_cmd.stream.rtp_port }}'
     cacheable: true
+- ansible.builtin.debug:
+    var: printnanny_cmd
 - name: Run monitor tasks
   ansible.builtin.include_role:
     name: bitsyai.printnanny.install
