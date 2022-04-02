@@ -37,3 +37,7 @@ octoprint_ssl_cert: '/etc/ssl/certs/ssl-cert-snakeoil.pem'
 octoprint_ssl_key: '/etc/ssl/private/ssl-cert-snakeoil.key'
 octoprint_ssl_protocols: 'TLSv1 TLSv1.1 TLSv1.2'
 octoprint_ssl_ciphers: 'HIGH:!aNULL:!MD5'
+
+printnanny_install_dir: '/opt/printnanny'
+printnanny_ansible_dir: "{{ printnanny_install_dir }}/ansible"
+updater_venv: '{{ printnanny_ansible_dir }}/venv'

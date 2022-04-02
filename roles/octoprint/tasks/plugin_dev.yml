@@ -1,19 +1,29 @@
+- name: Render printnanny-octoprint-plugin-dev
+  become: true
+  ansible.builtin.template:
+    src: octoprint-plugin-dev.sh.j2
+    mode: 0775
+    dest: /usr/local/bin/printnanny-octoprint-plugin-dev
+
 - name: Configure git.user.email
   community.general.git_config:
     name: user.email
     scope: global
     value: '{{ octoprint_plugin_git_email }}'
+  when: octoprint_printnanny_plugin_dev
 
 - name: Configure git.user.email
   community.general.git_config:
     name: user.name
     scope: global
     value: '{{ octoprint_plugin_git_name }}'
+  when: octoprint_printnanny_plugin_dev
 
 - name: Configure authorized_keys (developer mode)
   ansible.posix.authorized_key:
     key: '{{ octoprint_plugin_git_keys }}'
     user: '{{ octoprint_user }}'
+  when: octoprint_printnanny_plugin_dev
 
 - name: Clone OctoPrint (developer mode)
   become: true
