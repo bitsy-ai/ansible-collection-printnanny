@@ -9,7 +9,7 @@
     - setup
     - system-update
     - octoprint
-  when: not octoprint_printnanny_plugin_dev
+  when: not octoprint_plugin_dev
 
 # If OctoPrint is not installed first, plugin installation fails with the following erorr:
 ## Could not import OctoPrint's setuptools,
@@ -25,7 +25,7 @@
     - setup
     - system-update
     - octoprint
-  when: not octoprint_printnanny_plugin_dev
+  when: not octoprint_plugin_dev
 
 - name: Render octoprint.service template
   become: true

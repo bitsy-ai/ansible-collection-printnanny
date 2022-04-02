@@ -16,8 +16,9 @@
       ansible.builtin.set_fact:
         printnanny_profile: '{{ printnanny_profile }}'
         octoprint_printnanny_plugin_version: '{{ octoprint_printnanny_plugin_version }}'
+        octoprint_plugin_dev: true
         cacheable: true
-    - name: Re-run installer
+    - name: Setup plugin developer environment
       include_role:
-        name: bitsyai.printnanny.install
-        vars_from: '{{ printnanny_profile }}.yml'
+        name: bitsyai.printnanny.octoprint
+        tasks_from: plugin_dev.yml

@@ -24,7 +24,7 @@ octoprint_plugin_git_email: 'leigh@bitsy.ai'
 octoprint_plugin_git_name: 'Leigh Johnson'
 # install plugin in editable mode
 octoprint_printnanny_plugin_dir: '/home/{{ octoprint_user }}/octoprint-nanny-plugin'
-octoprint_printnanny_plugin_dev: false
+octoprint_plugin_dev: false
 # octoprint defaults
 octoprint_host: 127.0.0.1
 octoprint_port: 5000
