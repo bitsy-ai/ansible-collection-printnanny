@@ -5,6 +5,6 @@
 
 - name: Test developer installation
   vars:
-    octoprint_printnanny_plugin_dev: true
+    octoprint_plugin_dev: true
   import_role:
     name: bitsyai.printnanny.octoprint

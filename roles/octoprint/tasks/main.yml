@@ -58,11 +58,11 @@
 
 - name: Install OctoPrint (release)
   include_tasks: plugin_release.yml
-  when: not octoprint_printnanny_plugin_dev
+  when: not octoprint_plugin_dev
 
 - name: Install OctoPrint (developer mode)
   include_tasks: plugin_dev.yml
-  when: octoprint_printnanny_plugin_dev
+  when: octoprint_plugin_dev
 
 - name: Render octoprint config
   become_user: '{{ octoprint_user }}'
