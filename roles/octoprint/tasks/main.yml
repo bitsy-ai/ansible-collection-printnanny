@@ -32,7 +32,7 @@
   ansible.builtin.file:
     state: directory
     path: '{{ octoprint_log_dir }}'
-    mode: 0664
+    mode: 0775
     owner: '{{ octoprint_user }}'
     group: '{{ octoprint_user }}'
   tags:
