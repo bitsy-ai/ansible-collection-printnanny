@@ -91,3 +91,24 @@
 
 - name: Include plugin dev tasks
   include_tasks: plugin_dev.yml
+
+- name: Get installed python_version
+  ansible.builtin.command:
+    cmd: "{{ octoprint_venv }}/bin/python3 -c 'import platform; print(platform.python_version())'"
+  when: printnanny_edition == "octoprint_desktop" or printnanny_edition == "octoprint_lite"
+  register: octoprint_python_version
+
+- name: Get installed pip version
+  ansible.builtin.command:
+    cmd: "{{ octoprint_venv }}/bin/python3 -c 'import pip; print(pip.__version__)'"
+  when: printnanny_edition == "octoprint_desktop" or printnanny_edition == "octoprint_lite"
+  register: octoprint_pip_version
+
+- name: Set OctoPrint version facts
+  ansible.builtin.set_fact:
+    octoprint_pip_version: '{{ octoprint_pip_version }}'
+    octoprint_python_version: '{{ octoprint_python_version }}'
+    octoprint_git_version: '{{ octoprint_git_version }}'
+    octoprint_printnanny_plugin_version: '{{ octoprint_printnanny_plugin_version }}'
+    octoprint_venv: '{{ octoprint_venv }}'
+    cacheable: true

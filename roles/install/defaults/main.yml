@@ -272,11 +272,3 @@ janus_conf:
     http_port: 8088
   janus.transport.websockets:
     ws_port: 8188
-
-##
-# octoprint vars
-##
-octoprint_user: pi
-octoprint_git_version: 1.8.0rc2
-octoprint_dir: '/home/{{ octoprint_user }}/.octoprint'
-octoprint_venv: '{{ octoprint_dir }}/venv'

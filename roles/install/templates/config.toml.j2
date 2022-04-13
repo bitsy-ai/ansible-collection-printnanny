@@ -18,7 +18,7 @@ queue_dir = "{{ printnanny_cmd_queue_dir }}"
 success_dir = "{{ printnanny_cmd_success_dir }}"
 error_dir = "{{ printnanny_cmd_error_dir }}"
 
-{% if "octoprint" in printnany_edition %}
+{% if octoprint_git_version is defined and octoprint_pip_version is defined and octoprint_python_version is defined and  octoprint_printnanny_plugin_version is defined %}
 [octoprint_install_request]
 device = 0
 octoprint_version = "{{ octoprint_git_version }}"
