@@ -21,6 +21,13 @@
       include_vars: ../roles/install/vars/{{ printnanny_profile|default("default", true) }}.yml
       tags:
         - firstboot
+    - name: Install OctoPrint
+      include_role:
+        name: bitsyai.printnanny.octoprint
+      when: (printnanny_edition|default("octoprint_desktop", true) == "octoprint_desktop" or
+        printnanny_edition|default("octoprint_lite", true) == "octoprint_lite")
+      tags:
+        - firstboot
     - name: Install PrintNanny
       include_role:
         name: bitsyai.printnanny.install
@@ -30,8 +37,3 @@
     - name: Install local Janus Gateway
       include_role:
         name: bitsyai.printnanny.janus
-    - name: Install OctoPrint
-      include_role:
-        name: bitsyai.printnanny.octoprint
-      when: (printnanny_edition|default("octoprint_desktop", true) == "octoprint_desktop" or
-        printnanny_edition|default("octoprint_lite", true) == "octoprint_lite")
