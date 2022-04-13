@@ -95,7 +95,12 @@
     name: bitsyai.printnanny.octoprint
     tasks_from: facts.yml
     public: true
+    apply:
+      tags:
+        - firstboot
   when: octoprint_python_version is not defined
+  tags:
+    - firstboot
 
 - name: Render config.toml
   vars:
