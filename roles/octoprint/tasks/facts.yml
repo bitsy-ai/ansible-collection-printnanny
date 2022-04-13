@@ -1,0 +1,8 @@
+- name: Set OctoPrint version facts
+  ansible.builtin.set_fact:
+    octoprint_pip_version: '{{ octoprint_pip_version }}'
+    octoprint_python_version: '{{ octoprint_python_version }}'
+    octoprint_git_version: '{{ octoprint_git_version }}'
+    octoprint_printnanny_plugin_version: '{{ octoprint_printnanny_plugin_version }}'
+    octoprint_venv: '{{ octoprint_venv }}'
+    cacheable: true

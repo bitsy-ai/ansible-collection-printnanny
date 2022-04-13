@@ -3,6 +3,7 @@ config_file = "{{ printnanny_config_toml }}"
 install_dir = "{{ printnanny_profile_dir }}"
 runtime_dir = "{{ printnanny_runtime_dir }}"
 events_socket = "{{ printnanny_runtime_dir }}/events.sock"
+edition = "{{ printnanny_edition }}"
 
 [ansible]
 venv_dir = "{{ printnanny_ansible_dir }}/venv"
@@ -16,6 +17,15 @@ base_path = "{{ printnanny_api_url }}"
 queue_dir = "{{ printnanny_cmd_queue_dir }}"
 success_dir = "{{ printnanny_cmd_success_dir }}"
 error_dir = "{{ printnanny_cmd_error_dir }}"
+
+{% if octoprint_git_version is defined and octoprint_pip_version is defined and octoprint_python_version is defined and  octoprint_printnanny_plugin_version is defined %}
+[octoprint_install_request]
+device = 0
+octoprint_version = "{{ octoprint_git_version }}"
+pip_version = "{{ octoprint_pip_version }}"
+python_version = "{{ octoprint_python_version }}"
+printnanny_plugin_version = "{{ octoprint_printnanny_plugin_version }}"
+{% endif %}
 
 {% if janus_edge_enabled %}
 [janus_edge_request]

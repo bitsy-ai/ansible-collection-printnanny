@@ -91,3 +91,15 @@
 
 - name: Include plugin dev tasks
   include_tasks: plugin_dev.yml
+
+- name: Get installed python_version
+  ansible.builtin.command:
+    cmd: "{{ octoprint_venv }}/bin/python3 -c 'import platform; print(platform.python_version())'"
+  register: octoprint_python_version
+
+- name: Get installed pip version
+  ansible.builtin.command:
+    cmd: "{{ octoprint_venv }}/bin/python3 -c 'import pip; print(pip.__version__)'"
+  register: octoprint_pip_version
+
+- include_tasks: facts.yml
