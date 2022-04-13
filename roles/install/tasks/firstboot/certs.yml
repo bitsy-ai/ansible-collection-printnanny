@@ -90,6 +90,18 @@
   tags:
     - firstboot
 
+- name: Include OctoPrint vars
+  ansible.builtin.include_role:
+    name: bitsyai.printnanny.octoprint
+    tasks_from: facts.yml
+    public: true
+    apply:
+      tags:
+        - firstboot
+  when: octoprint_python_version is not defined
+  tags:
+    - firstboot
+
 - name: Render config.toml
   vars:
     janus_edge_admin_secret: "{{ lookup('password', janus_edge_admin_secret_file, length=32 ) }}"
