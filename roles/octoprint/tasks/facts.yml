@@ -1,3 +1,13 @@
+- name: Get installed python_version
+  ansible.builtin.command:
+    cmd: "{{ octoprint_venv }}/bin/python3 -c 'import platform; print(platform.python_version())'"
+  register: octoprint_python_version
+
+- name: Get installed pip version
+  ansible.builtin.command:
+    cmd: "{{ octoprint_venv }}/bin/python3 -c 'import pip; print(pip.__version__)'"
+  register: octoprint_pip_version
+
 - name: Set OctoPrint version facts
   ansible.builtin.set_fact:
     octoprint_pip_version: '{{ octoprint_pip_version }}'
