@@ -3,6 +3,7 @@ config_file = "{{ printnanny_config_toml }}"
 install_dir = "{{ printnanny_profile_dir }}"
 runtime_dir = "{{ printnanny_runtime_dir }}"
 events_socket = "{{ printnanny_runtime_dir }}/events.sock"
+edition = "{{ printnanny_edition }}"
 
 [ansible]
 venv_dir = "{{ printnanny_ansible_dir }}/venv"
