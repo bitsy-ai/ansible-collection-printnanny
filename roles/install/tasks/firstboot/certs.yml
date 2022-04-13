@@ -90,6 +90,19 @@
   tags:
     - firstboot
 
+- name: Get installed python_version
+  ansible.builtin.command:
+    cmd: "{{ octoprint_venv }}/bin/python3 -c 'import platform; print(platform.python_version())'"
+  when: {{  "octoprint" in printnanny_edition }}
+  register: octoprint_python_version
+
+- name: Get installed pip version
+  ansible.builtin.command:
+    cmd: "{{ octoprint_venv }}/bin/python3 -c 'import pip; print(pip.__version__)'"
+  when: {{  "octoprint" in printnanny_edition }}
+  register: octoprint_pip_version
+
+
 - name: Render config.toml
   vars:
     janus_edge_admin_secret: "{{ lookup('password', janus_edge_admin_secret_file, length=32 ) }}"
