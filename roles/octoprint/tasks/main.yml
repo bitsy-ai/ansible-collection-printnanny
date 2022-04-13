@@ -102,11 +102,4 @@
     cmd: "{{ octoprint_venv }}/bin/python3 -c 'import pip; print(pip.__version__)'"
   register: octoprint_pip_version
 
-- name: Set OctoPrint version facts
-  ansible.builtin.set_fact:
-    octoprint_pip_version: '{{ octoprint_pip_version }}'
-    octoprint_python_version: '{{ octoprint_python_version }}'
-    octoprint_git_version: '{{ octoprint_git_version }}'
-    octoprint_printnanny_plugin_version: '{{ octoprint_printnanny_plugin_version }}'
-    octoprint_venv: '{{ octoprint_venv }}'
-    cacheable: true
+- include_tasks: facts.yml
