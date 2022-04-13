@@ -91,8 +91,11 @@
     - firstboot
 
 - name: Include OctoPrint vars
-  include_vars: "{{ role_path }}/../octoprint/defaults/main.yml"
-  when: octoprint_venv not defined
+  ansible.builtin.include_role:
+    name: bitsyai.printnanny.octoprint
+    tasks_from: facts.yml
+    public: true
+  when: octoprint_python_version not defined
 
 - name: Render config.toml
   vars:
