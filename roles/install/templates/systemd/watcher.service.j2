@@ -1,5 +1,5 @@
 [Unit]
-Description=Restart PrintNanny services when {{ printnanny_config_toml }} changes
+Description=Restart PrintNanny services when {{ printnanny_firstboot_toml }} changes
 After=network.target network-online.target
 Wants=network.target network-online.target
 

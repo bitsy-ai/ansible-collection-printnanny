@@ -1,8 +1,8 @@
 [Unit]
-Description="Watch {{ printnanny_config_toml }}"
+Description="Watch {{ printnanny_data_dir }}, starts printnanny-config-watcher.service"
 
 [Path]
-PathChanged={{ printnanny_config_toml }}
+PathChanged={{ printnanny_data_dir }}
 Unit=printnanny-config-watcher.service
 
 

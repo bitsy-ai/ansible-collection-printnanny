@@ -45,7 +45,7 @@ printnanny_ec_private_key: '{{ printnanny_keys_dir }}/ec_private.pem'
 printnanny_ec_public_key: '{{ printnanny_keys_dir }}/ec_public.pem'
 printnanny_ec_fingerprint_md5: '{{ printnanny_keys_dir }}/ec_fingerprint.md5'
 
-printnanny_config_toml: '{{ printnanny_profile_dir }}/PrintNanny.toml'
+printnanny_firstboot_toml: '{{ printnanny_data_dir }}/firstboot.toml'
 printnanny_backups_dir: "{{ printnanny_profile_dir }}/backups"
 printnanny_ansible_dir: "{{ printnanny_install_dir }}/ansible"
 

@@ -110,7 +110,7 @@
     janus_edge_streaming_pin: "{{ lookup('password', janus_edge_streaming_pin_file, length=32 ) }}"
   ansible.builtin.template:
     src: config.toml.j2
-    dest: '{{ printnanny_config_toml }}'
+    dest: '{{ printnanny_firstboot_toml }}'
     mode: 0644
     owner: '{{ printnanny_user }}'
     group: '{{ printnanny_user }}'
