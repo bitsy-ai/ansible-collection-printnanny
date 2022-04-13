@@ -90,6 +90,10 @@
   tags:
     - firstboot
 
+- name: Include OctoPrint vars
+  include_vars: "{{ role_path }}/../octoprint/defaults/main.yml"
+  when: octoprint_venv not defined
+
 - name: Render config.toml
   vars:
     janus_edge_admin_secret: "{{ lookup('password', janus_edge_admin_secret_file, length=32 ) }}"
