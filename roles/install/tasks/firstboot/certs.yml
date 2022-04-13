@@ -95,7 +95,7 @@
     name: bitsyai.printnanny.octoprint
     tasks_from: facts.yml
     public: true
-  when: octoprint_python_version not defined
+  when: octoprint_python_version is not defined
 
 - name: Render config.toml
   vars:
