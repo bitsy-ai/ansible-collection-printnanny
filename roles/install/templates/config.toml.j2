@@ -22,8 +22,8 @@ error_dir = "{{ printnanny_cmd_error_dir }}"
 [octoprint_install_request]
 device = 0
 octoprint_version = "{{ octoprint_git_tag }}"
-pip_version = "{{ octoprint_pip_version.stdout }}"
-python_version = "{{ octoprint_python_version.stdout }}"
+pip_version = "{{ octoprint_pip_version }}"
+python_version = "{{ octoprint_python_version }}"
 printnanny_plugin_version = "{{ octoprint_printnanny_plugin_version }}"
 
 {% if janus_edge_enabled %}
