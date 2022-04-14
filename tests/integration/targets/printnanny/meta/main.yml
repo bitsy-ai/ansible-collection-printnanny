@@ -1,2 +1,3 @@
 dependencies:
     - setup_groups
+    - setup_octoprint
