@@ -2,7 +2,7 @@
   become: true
   become_user: '{{ octoprint_user }}'
   ansible.builtin.pip:
-    name: '{{ octoprint_pip_version }}'
+    name: '{{ octoprint_version }}'
     virtualenv: '{{ octoprint_venv }}'
     extra_args: '--no-cache-dir'
   tags:
