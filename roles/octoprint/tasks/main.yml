@@ -81,14 +81,6 @@
 - name: Include nginx tasks
   include_tasks: nginx.yml
 
-# symlink creates an alias in systemd, allowing printnanny* to be used in systemctl and journalctl filters
-- name: symlink octoprint.service to printnanny-octoprint.service
-  become: true
-  ansible.builtin.file:
-    src: /etc/systemd/system/octoprint.service
-    dest: /etc/systemd/system/printnanny-octoprint.service
-    state: link
-
 - name: Include plugin dev tasks
   include_tasks: plugin_dev.yml
 
