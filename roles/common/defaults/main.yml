@@ -36,6 +36,7 @@ printnanny_groups:
   - sudo
   - tty
   - video
+  - octoprint
 
 update_user: ansible
 update_groups:

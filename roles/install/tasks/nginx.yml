@@ -68,3 +68,11 @@
     src: /lib/systemd/system/nginx.service
     dest: /etc/systemd/system/printnanny-nginx.service
     state: link
+
+# add nginx user to octoprint group to allow writes to /var/log/octoprint
+- name: Add nginx user to octoprint group
+  become: true
+  ansible.builtin.user:
+    name: nginx
+    groups: '{{ octoprint_user }}'
+    append: true

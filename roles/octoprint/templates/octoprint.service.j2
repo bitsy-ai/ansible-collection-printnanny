@@ -10,6 +10,7 @@ SyslogIdentifier=octoprint
 Type=simple
 User={{ octoprint_user }}
 RuntimeDirectory=octoprint
+LogsDirectory=octoprint
 ExecStart={{ octoprint_venv }}/bin/octoprint serve --host={{ octoprint_host }} --port={{ octoprint_port }}
 
 [Install]
