@@ -6,6 +6,11 @@ runtime_dir = "{{ printnanny_runtime_dir }}"
 events_socket = "{{ printnanny_runtime_dir }}/events.sock"
 edition = "{{ printnanny_edition }}"
 
+[printnanny_cloud_proxy]
+hostname = "{{ printnanny_cloud_proxy.hostname }}"
+base_path = "{{ printnanny_cloud_proxy.base_path }}"
+url = "{{ printnanny_cloud_proxy.url }}"
+
 [ansible]
 venv_dir = "{{ printnanny_ansible_dir }}/venv"
 collection_name = "bitsyai.printnanny"
