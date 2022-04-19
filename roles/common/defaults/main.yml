@@ -43,7 +43,7 @@ update_groups:
   - sudo
   - printnanny
 
-octoprint_user: pi
+octoprint_user: octoprint
 octoprint_groups:
   - adm
   - dialout

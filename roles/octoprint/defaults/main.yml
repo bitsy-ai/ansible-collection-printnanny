@@ -1,7 +1,7 @@
 ---
 # defaults file for octoprint
 
-octoprint_user: pi
+octoprint_user: octoprint
 # dirs
 octoprint_dir: '/home/{{ octoprint_user }}/.octoprint'
 octoprint_log_dir: '/var/log/octoprint'
