@@ -36,6 +36,7 @@ printnanny_groups:
   - sudo
   - tty
   - video
+  - octoprint
 
 update_user: ansible
 update_groups:
@@ -43,7 +44,7 @@ update_groups:
   - sudo
   - printnanny
 
-octoprint_user: pi
+octoprint_user: octoprint
 octoprint_groups:
   - adm
   - dialout

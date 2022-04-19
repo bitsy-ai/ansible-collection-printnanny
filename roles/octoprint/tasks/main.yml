@@ -27,19 +27,6 @@
     - system-update
     - octoprint
 
-- name: Create {{ octoprint_log_dir }}
-  become: true
-  ansible.builtin.file:
-    state: directory
-    path: '{{ octoprint_log_dir }}'
-    mode: 0775
-    owner: '{{ octoprint_user }}'
-    group: '{{ octoprint_user }}'
-  tags:
-    - setup
-    - system-update
-    - octoprint
-
 - name: 'Create Octoprint virtualenv'
   become: true
   become_user: '{{ octoprint_user }}'

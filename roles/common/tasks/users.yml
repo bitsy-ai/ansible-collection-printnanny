@@ -5,18 +5,6 @@
     name:
       - sudo
 
-- name: 'Configure {{ printnanny_user }} user'
-  become: true
-  ansible.builtin.user:
-    state: present
-    shell: /bin/bash
-    comment: "PrintNanny service user"
-    name: '{{ printnanny_user }}'
-    groups: '{{ printnanny_groups }}'
-    append: true
-  tags:
-    - setup
-
 - name: Create {{ octoprint_user }} user
   become: true
   ansible.builtin.user:
@@ -29,6 +17,17 @@
     - setup
     - octoprint
 
+- name: 'Configure {{ printnanny_user }} user'
+  become: true
+  ansible.builtin.user:
+    state: present
+    shell: /bin/bash
+    comment: "PrintNanny service user"
+    name: '{{ printnanny_user }}'
+    groups: '{{ printnanny_groups }}'
+    append: true
+  tags:
+    - setup
 
 - name: Configure {{ janus_user }} user
   become: true
