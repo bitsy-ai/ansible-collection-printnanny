@@ -25,5 +25,5 @@ location ^~ {{ printnanny_cloud_proxy.base_path }} {
     proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header        X-Forwarded-Proto $scheme;
     rewrite                 ^{{ printnanny_cloud_proxy.base_path }}/(.*)$ /$1 break;
-    proxy_pass              {{ printnanny_api_url }}
+    proxy_pass              {{ printnanny_api_url }};
 }
