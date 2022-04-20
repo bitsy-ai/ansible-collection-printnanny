@@ -1,9 +1,4 @@
 ---
-- name: Stat janus binary
-  ansible.builtin.stat:
-    path: /opt/janus/bin/janus
-  register: janus_bin
-
 - name: Debug ansible_local
   ansible.builtin.debug:
     var: ansible_local
@@ -12,13 +7,13 @@
   ansible.builtin.debug:
     var: janus_version
 
-- name: Debug janus_intalled_version
+- name: Debug ansible_local.janus.version
   ansible.builtin.debug:
-    var: janus_installed_version
+    var: ansible_local.janus.version
 
 # all tasks requiring access to secrets must appear after this task
 - include_tasks: build/main.yml
-  when: janus_version != janus_installed_version
+  when: ansible_local.janus.version is not defined or (janus_version != ansible_local['janus']['version'])
 
 - include_tasks: configs.yml
 - include_tasks: factsd.yml
