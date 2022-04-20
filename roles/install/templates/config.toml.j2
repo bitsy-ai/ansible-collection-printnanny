@@ -1,10 +1,13 @@
 profile = "{{ printnanny_profile }}"
-firstboot_file = "{{ printnanny_firstboot_toml }}"
-install_dir = "{{ printnanny_profile_dir }}"
-data_dir = "{{ printnanny_data_dir }}"
-runtime_dir = "{{ printnanny_runtime_dir }}"
-events_socket = "{{ printnanny_runtime_dir }}/events.sock"
 edition = "{{ printnanny_edition }}"
+
+[paths]
+firstboot = "{{ printnanny_firstboot_toml }}"
+install = "{{ printnanny_profile_dir }}"
+data = "{{ printnanny_data_dir }}"
+runtime = "{{ printnanny_runtime_dir }}"
+events_socket = "{{ printnanny_runtime_dir }}/events.sock"
+octoprint = "{{ octoprint_dir }}"
 
 [printnanny_cloud_proxy]
 hostname = "{{ printnanny_cloud_proxy.hostname }}"
