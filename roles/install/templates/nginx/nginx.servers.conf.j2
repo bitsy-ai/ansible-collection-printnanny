@@ -1,6 +1,3 @@
-upstream cloud {
-    server {{ printnanny_api_domain }};
-}
 server {
     listen 80;
     listen [::]:80;
@@ -9,10 +6,10 @@ server {
     proxy_busy_buffers_size {{ nginx_proxy_busy_buffers_size }};
     proxy_buffers {{ nginx_proxy_buffers_num }} {{ nginx_proxy_busy_buffers_size }};
     proxy_buffer_size {{ nginx_buffer_size }};
-    error_log stderr;
+    error_log stderr info;
     {% if printnanny_nginx_log is defined %}
     access_log {{ printnanny_nginx_log }};
-    error_log {{ printnanny_nginx_log }}.error;
+    error_log {{ printnanny_nginx_log }}.error info;
     {% endif %}
     proxy_cookie_domain localhost $host;
 }
