@@ -1,3 +1,6 @@
+upstream cloud {
+    server {{ printnanny_api_domain }};
+}
 server {
     listen 80;
     listen [::]:80;

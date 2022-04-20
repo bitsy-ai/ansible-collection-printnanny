@@ -20,7 +20,8 @@ printnanny_os_version: '11.0.0'
 printnanny_profile: default
 printnanny_loglevel: info
 
-printnanny_api_url: https://live.printnanny.ai
+printnanny_api_domain: printnanny.ai
+printnanny_api_url: 'https://{{ printnanny_api_domain }}'
 printnanny_service_dir: /etc/systemd/printnanny.d
 printnanny_runtime_dir: /var/run/printnanny
 printnanny_env: '{{ printnanny_runtime_dir }}/env'
@@ -78,9 +79,9 @@ printnanny_ssl_key_type: DSA
 printnanny_systemd_restart_sec: 20
 
 printnanny_cloud_proxy:
-  hostname: "{{ inventory_hostname }}"
+  hostname: "{{ ansible_hostname }}"
   base_path: "/printnanny-cloud"
-  url: "http://{{ inventory_hostname }}/printnanny-cloud"
+  url: "http://{{ ansible_hostname }}/printnanny-cloud"
 
 ##
 # ansible_ vars
