@@ -20,7 +20,8 @@ printnanny_os_version: '11.0.0'
 printnanny_profile: default
 printnanny_loglevel: info
 
-printnanny_api_url: https://live.printnanny.ai
+printnanny_api_domain: printnanny.ai
+printnanny_api_url: 'https://{{ printnanny_api_domain }}'
 printnanny_service_dir: /etc/systemd/printnanny.d
 printnanny_runtime_dir: /var/run/printnanny
 printnanny_env: '{{ printnanny_runtime_dir }}/env'
