@@ -77,6 +77,11 @@ printnanny_ssl_key_type: DSA
 # grace period before restarting systemd services
 printnanny_systemd_restart_sec: 20
 
+printnanny_cloud_proxy:
+  hostname: "{{ inventory_hostname }}"
+  base_path: "/printnanny-cloud"
+  url: "http://{{ inventory_hostname }}/printnanny-cloud"
+
 ##
 # ansible_ vars
 ##
