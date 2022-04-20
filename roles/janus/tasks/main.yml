@@ -13,7 +13,7 @@
 
 # all tasks requiring access to secrets must appear after this task
 - include_tasks: build/main.yml
-  when: janus_version != ansible_local.janus.version
+  when: ansible_local.janus.version is not defined or (janus_version != ansible_local['janus']['version'])
 
 - include_tasks: configs.yml
 - include_tasks: factsd.yml
