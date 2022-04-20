@@ -17,5 +17,5 @@ location / {
 }
 
 location /printnanny-cloud/ {
-	proxy_pass https://printnanny.ai/;
+	proxy_pass {{ printnanny_api_url }}/;
 }
