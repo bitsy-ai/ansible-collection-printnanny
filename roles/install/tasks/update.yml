@@ -121,15 +121,6 @@
     force: true
     mode: 0775
 
-- name: Render printnanny-profile.sh
-  become: true
-  ansible.builtin.template:
-    src: printnanny-profile.sh.j2
-    dest: /usr/local/bin/printnanny-profile
-    force: true
-    mode: 0775
-
-
 - name: Render printnanny-release-channel.sh
   become: true
   ansible.builtin.template:
