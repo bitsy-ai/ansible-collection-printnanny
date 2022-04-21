@@ -17,5 +17,6 @@ location / {
 }
 
 location /printnanny-cloud/ {
-	proxy_pass {{ printnanny_api_url }}/;
+    resolver 8.8.8.8;
+    proxy_pass {{ printnanny_api_url }}/;
 }
