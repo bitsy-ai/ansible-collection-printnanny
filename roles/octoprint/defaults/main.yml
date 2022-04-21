@@ -15,7 +15,7 @@ octoprint_version: 'OctoPrint=={{ octoprint_git_tag }}'
 octoprint_repo: https://github.com/OctoPrint/OctoPrint
 octoprint_repo_dir: '/home/{{ octoprint_user }}/octoprint-src'
 octoprint_printnanny_plugin_repo: https://github.com/bitsy-ai/octoprint-nanny-plugin.git
-octoprint_printnanny_plugin_version: 0.10.0rc2
+octoprint_printnanny_plugin_version: 0.10.0rc3
 octoprint_printnanny_pip_install: 'octoprint-nanny=={{ octoprint_printnanny_plugin_version }}'
 # used to configure git in developer mode
 octoprint_plugin_git_repo: git@github.com:bitsy-ai/octoprint-nanny-plugin.git
