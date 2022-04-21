@@ -98,7 +98,6 @@
     apply:
       tags:
         - firstboot
-  when: octoprint_python_version is not defined
   tags:
     - firstboot
 
