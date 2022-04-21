@@ -1,3 +1,10 @@
+- name: Copy nginx.service to target
+  become: true
+  ansible.builtin.copy:
+    src: nginx.service
+    dest: /etc/systemd/system/nginx.service
+    mode: 0664
+
 - name: Install NGINX
   include_role:
     name: nginxinc.nginx_core.nginx
@@ -9,6 +16,7 @@
     nginx_logrotate_conf_enable: false
     nginx_modules:
       - njs
+    nginx_service_custom_file: /etc/systemd/system/nginx.service
 
 - name: Ensure log dir exists
   become: true
