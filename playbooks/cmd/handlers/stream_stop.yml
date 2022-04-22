@@ -1,0 +1,12 @@
+---
+- name: Assert printnanny_cmd is defined
+  ansible.builtin.assert:
+    that:
+      - printnanny_cmd is defined
+- name: Debug printnanny_cmd
+  ansible.builtin.debug:
+    var: printnanny_cmd
+- name: Stop monitor service
+  ansible.builtin.systemd:
+    name: printnanny-monitor
+    state: stopped
